@@ -110,6 +110,47 @@ function App() {
           </div>
         </div>
       </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-16">
+        <div className="grid gap-8 rounded-3xl bg-white p-8 shadow-xl shadow-sky-100 md:grid-cols-2">
+          <div>
+            <p className="text-sm font-bold text-sky-600">
+              Contact Us
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold text-blue-950">
+              Ready to start your IT journey?
+            </h2>
+            <p className="mt-4 leading-7 text-slate-600">
+              Reach out to Stellar Groupware Inc for training, job support,
+              career mentoring, or project guidance.
+            </p>
+          </div>
+
+          <div className="rounded-2xl bg-sky-50 p-6">
+            <p className="font-bold text-slate-800">
+              Email
+            </p>
+            <p className="mt-2 text-slate-600">
+              info@stellargroupware.com
+            </p>
+
+            <p className="mt-6 font-bold text-slate-800">
+              Services
+            </p>
+            <p className="mt-2 text-slate-600">
+              IT Training, Job Support, Resume Help, Interview Preparation
+            </p>
+
+            <button className="mt-6 rounded-lg bg-sky-500 px-6 py-3 font-bold text-white shadow-lg shadow-sky-200 hover:bg-sky-600">
+              Contact Now
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-white py-6 text-center text-sm font-semibold text-slate-500">
+        © 2026 Stellar Groupware Inc. All rights reserved.
+      </footer>
     </main>
   );
 }
