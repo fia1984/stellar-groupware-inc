@@ -11,6 +11,35 @@ describe("App", () => {
     ).toBeInTheDocument();
   });
 
+  it("renders header navigation links", () => {
+    render(<App />);
+
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute(
+      "href",
+      "#home"
+    );
+
+    expect(screen.getByRole("link", { name: "Training" })).toHaveAttribute(
+      "href",
+      "#training"
+    );
+
+    expect(screen.getByRole("link", { name: "Job Support" })).toHaveAttribute(
+      "href",
+      "#support"
+    );
+
+    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
+      "href",
+      "#contact"
+    );
+
+    expect(screen.getByRole("link", { name: "Get Started" })).toHaveAttribute(
+      "href",
+      "#contact"
+    );
+  });
+
   it("renders service cards from mock data", () => {
     render(<App />);
 
