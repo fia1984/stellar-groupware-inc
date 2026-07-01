@@ -1,4 +1,9 @@
 function App() {
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <main className="min-h-screen bg-blue-50 text-slate-900">
       <nav className="bg-white/90 shadow-sm">
@@ -14,7 +19,11 @@ function App() {
             <a href="#" className="hover:text-sky-600">Contact</a>
           </div>
 
-          <button className="rounded-lg bg-sky-500 px-5 py-2 text-sm font-bold text-white hover:bg-sky-600">
+          <button
+            type="button"
+            onClick={() => scrollToSection("contact")}
+            className="rounded-lg bg-sky-500 px-5 py-2 text-sm font-bold text-white hover:bg-sky-600"
+          >
             Get Started
           </button>
         </div>
@@ -38,11 +47,19 @@ function App() {
           </p>
 
           <div className="mt-7 flex flex-wrap justify-center gap-4 lg:justify-start">
-            <button className="rounded-lg bg-sky-500 px-7 py-3 font-bold text-white shadow-lg shadow-sky-200 hover:bg-sky-600">
+            <button
+              type="button"
+              onClick={() => scrollToSection("contact")}
+              className="rounded-lg bg-sky-500 px-7 py-3 font-bold text-white shadow-lg shadow-sky-200 hover:bg-sky-600"
+            >
               Book Free Consultation
             </button>
 
-            <button className="rounded-lg border border-sky-500 px-7 py-3 font-bold text-sky-600 hover:bg-sky-100">
+            <button
+              type="button"
+              onClick={() => scrollToSection("services")}
+              className="rounded-lg border border-sky-500 px-7 py-3 font-bold text-sky-600 hover:bg-sky-100"
+            >
               Explore Programs
             </button>
           </div>
@@ -73,7 +90,7 @@ function App() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-16">
+      <section id="services" className="mx-auto max-w-6xl px-6 pb-16">
         <h2 className="text-center text-3xl font-extrabold text-blue-950">
           Our Main Services
         </h2>
