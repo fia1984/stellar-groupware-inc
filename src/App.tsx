@@ -14,18 +14,17 @@ function App() {
 
           <div className="hidden items-center gap-8 text-sm font-semibold text-slate-700 md:flex">
             <a href="#" className="hover:text-sky-600">Home</a>
-            <a href="#" className="hover:text-sky-600">Training</a>
-            <a href="#" className="hover:text-sky-600">Job Support</a>
-            <a href="#" className="hover:text-sky-600">Contact</a>
+            <a href="#services" className="hover:text-sky-600">Training</a>
+            <a href="#services" className="hover:text-sky-600">Job Support</a>
+            <a href="#contact" className="hover:text-sky-600">Contact</a>
           </div>
 
-          <button
-            type="button"
-            onClick={() => scrollToSection("contact")}
+          <a
+            href="#contact"
             className="rounded-lg bg-sky-500 px-5 py-2 text-sm font-bold text-white hover:bg-sky-600"
           >
             Get Started
-          </button>
+          </a>
         </div>
       </nav>
 
@@ -128,12 +127,15 @@ function App() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-16">
+      <section id="contact" className="mx-auto max-w-6xl px-6 pb-16">
         <div className="grid gap-8 rounded-3xl bg-white p-8 shadow-xl shadow-sky-100 md:grid-cols-2">
           <div>
-            <p className="text-sm font-bold text-sky-600">
+            <a
+              href="mailto:fia@stellartms.com"
+              className="inline-block text-sm font-bold text-sky-600 hover:text-sky-800"
+            >
               Contact Us
-            </p>
+            </a>
             <h2 className="mt-3 text-3xl font-extrabold text-blue-950">
               Ready to start your IT journey?
             </h2>
@@ -158,9 +160,12 @@ function App() {
               IT Training, Job Support, Resume Help, Interview Preparation
             </p>
 
-            <button className="mt-6 rounded-lg bg-sky-500 px-6 py-3 font-bold text-white shadow-lg shadow-sky-200 hover:bg-sky-600">
-              Contact Now
-            </button>
+            <a
+                href="mailto:fia@stellartms.com"
+                className="inline-block rounded-lg bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-600"
+              >
+                Contact Now
+              </a>
           </div>
         </div>
       </section>
