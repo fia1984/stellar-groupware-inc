@@ -130,12 +130,15 @@ function App() {
       <section id="contact" className="mx-auto max-w-6xl px-6 pb-16">
         <div className="grid gap-8 rounded-3xl bg-white p-8 shadow-xl shadow-sky-100 md:grid-cols-2">
           <div>
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com"
-              className="inline-block rounded-lg bg-sky-500 px-5 py-2 text-sm font-bold text-white hover:bg-sky-600"
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com";
+              }}
+              className="rounded-lg bg-sky-500 px-5 py-2 text-sm font-bold text-white hover:bg-sky-600"
             >
               Contact Us
-            </a>
+            </button>
 
             <h2 className="mt-3 text-3xl font-extrabold text-blue-950">
               Ready to start your IT journey?
@@ -150,19 +153,27 @@ function App() {
           <div className="rounded-2xl bg-sky-50 p-6">
             <p className="font-bold text-blue-950">Email</p>
 
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com"
-              className="mt-2 block font-semibold text-sky-600 underline hover:text-sky-800"
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com";
+              }}
+              className="mt-2 font-semibold text-sky-600 underline hover:text-sky-800"
             >
               fia@stellartms.com
-            </a>
+            </button>
 
-            <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com"
-              className="mt-6 inline-block rounded-lg bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-600"
+            <br />
+
+            <button
+              type="button"
+              onClick={() => {
+                window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com";
+              }}
+              className="mt-6 rounded-lg bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-600"
             >
               Contact Now
-            </a>
+            </button>
           </div>
         </div>
       </section>
