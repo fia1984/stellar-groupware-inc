@@ -3,11 +3,11 @@ import { contactEmail, gmailComposeLink } from "../data/siteData";
 
 function Contact() {
   return (
-    <section id="contact" className="bg-sky-50 px-6 py-20">
-      <div className="mx-auto max-w-6xl rounded-3xl bg-white p-10 shadow-sm">
+    <section id="contact" className="bg-sky-50 px-6 py-12 sm:py-20">
+      <div className="mx-auto max-w-6xl rounded-3xl bg-white p-6 shadow-sm sm:p-10">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <h2 className="text-4xl font-extrabold text-slate-950">
+            <h2 className="text-3xl font-extrabold text-slate-950 sm:text-4xl">
               Ready to start?
             </h2>
             <p className="mt-4 max-w-xl leading-7 text-slate-600">

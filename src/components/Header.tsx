@@ -4,8 +4,8 @@ import { navButton } from "./buttonStyles";
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#home" className="text-xl font-bold text-slate-950">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
+        <a href="#home" className="max-w-[160px] text-lg font-bold leading-tight text-slate-950 sm:max-w-none sm:text-xl">
           Stellar Groupware Inc.
         </a>
 
