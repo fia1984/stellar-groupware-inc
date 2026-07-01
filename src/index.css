@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* Force softer pastel Stellar colors */
+.hero {
+  border-color: #314150 !important;
+  box-shadow: none !important;
+}
+
+.brand,
+.service h3 {
+  color: #b7ccd2 !important;
+}
+
+.primary-btn {
+  background: #b7ccd2 !important;
+  border-color: #b7ccd2 !important;
+  color: #071219 !important;
+}
