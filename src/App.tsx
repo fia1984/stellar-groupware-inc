@@ -131,7 +131,7 @@ function App() {
         <div className="grid gap-8 rounded-3xl bg-white p-8 shadow-xl shadow-sky-100 md:grid-cols-2">
           <div>
             <a
-              href="mailto:fia@stellartms.com"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com" target="_blank" rel="noreferrer"
               className="inline-block text-sm font-bold text-sky-600 hover:text-sky-800"
             >
               Contact Us
@@ -161,7 +161,7 @@ function App() {
             </p>
 
             <a
-                href="mailto:fia@stellartms.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com" target="_blank" rel="noreferrer"
                 className="inline-block rounded-lg bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-600"
               >
                 Contact Now
