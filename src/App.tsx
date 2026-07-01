@@ -131,14 +131,16 @@ function App() {
         <div className="grid gap-8 rounded-3xl bg-white p-8 shadow-xl shadow-sky-100 md:grid-cols-2">
           <div>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com" target="_blank" rel="noreferrer"
-              className="inline-block text-sm font-bold text-sky-600 hover:text-sky-800"
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com"
+              className="inline-block rounded-lg bg-sky-500 px-5 py-2 text-sm font-bold text-white hover:bg-sky-600"
             >
               Contact Us
             </a>
+
             <h2 className="mt-3 text-3xl font-extrabold text-blue-950">
               Ready to start your IT journey?
             </h2>
+
             <p className="mt-4 leading-7 text-slate-600">
               Reach out to Stellar Groupware Inc for training, job support,
               career mentoring, or project guidance.
@@ -146,26 +148,21 @@ function App() {
           </div>
 
           <div className="rounded-2xl bg-sky-50 p-6">
-            <p className="font-bold text-slate-800">
-              Email
-            </p>
-            <p className="mt-2 text-slate-600">
-              info@stellargroupware.com
-            </p>
-
-            <p className="mt-6 font-bold text-slate-800">
-              Services
-            </p>
-            <p className="mt-2 text-slate-600">
-              IT Training, Job Support, Resume Help, Interview Preparation
-            </p>
+            <p className="font-bold text-blue-950">Email</p>
 
             <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com" target="_blank" rel="noreferrer"
-                className="inline-block rounded-lg bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-600"
-              >
-                Contact Now
-              </a>
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com"
+              className="mt-2 block font-semibold text-sky-600 underline hover:text-sky-800"
+            >
+              fia@stellartms.com
+            </a>
+
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com"
+              className="mt-6 inline-block rounded-lg bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-600"
+            >
+              Contact Now
+            </a>
           </div>
         </div>
       </section>
