@@ -11,7 +11,7 @@ function Header() {
 
         <div className="hidden items-center gap-6 text-sm font-semibold text-slate-700 md:flex">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="hover:text-sky-600">
+            <a key={link.href} href={link.href} className="hover:text-emerald-600">
               {link.label}
             </a>
           ))}
