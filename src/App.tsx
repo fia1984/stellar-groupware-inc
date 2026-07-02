@@ -1,29 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 
 const slides = [
   {
     tag: "CAREER TRANSITION",
     title: "Switching from Non-IT to IT? Start with Stellar.",
-    subtitle: "Move into Canada's IT market with structure, confidence, and real project guidance.",
-    text: "Stellar Groupware Inc helps beginners and career changers understand IT support, business systems, training paths, and practical workplace skills.",
+    subtitle: "Transition into Canada's IT Market with Structure & Strategy",
+    text: "Many professionals want to move into IT but struggle with how and where to start. Stellar's training and mentoring help you become confident in IT.",
+    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80",
   },
   {
     tag: "IT TRAINING",
-    title: "Learn IT Skills with Practical Mentoring.",
-    subtitle: "Step-by-step support for people who want a clear start in technology.",
-    text: "We focus on simple explanations, guided practice, project work, and confidence-building so learners are not lost or confused.",
+    title: "Learn Practical IT Skills with Confidence.",
+    subtitle: "Training, mentoring, and real project guidance",
+    text: "We help beginners understand IT support, business systems, tools, workflows, and professional project practice step by step.",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=80",
   },
   {
-    tag: "GROUPWARE SOLUTIONS",
-    title: "Smart Support for Teams, Tools, and Workflows.",
-    subtitle: "Helping small businesses improve communication, systems, and digital processes.",
-    text: "From training to workflow guidance, Stellar Groupware Inc supports better collaboration and professional technology habits.",
+    tag: "BUSINESS SUPPORT",
+    title: "Smart Groupware Support for Modern Teams.",
+    subtitle: "Better communication, better systems, better workflow",
+    text: "Stellar Groupware Inc supports teams with practical technology guidance, collaboration tools, and digital process improvement.",
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=80",
   },
 ];
 
 function App() {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [flash, setFlash] = useState(false);
+
+  useEffect(() => {
+    setFlash(true);
+    const timer = setTimeout(() => setFlash(false), 900);
+    return () => clearTimeout(timer);
+  }, [activeSlide]);
+
+  useEffect(() => {
+    const auto = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % slides.length);
+    }, 4000);
+
+    return () => clearInterval(auto);
+  }, []);
 
   const nextSlide = () => {
     setActiveSlide((current) => (current + 1) % slides.length);
@@ -37,7 +55,16 @@ function App() {
 
   return (
     <main>
-      <section className="hero-section" id="home">
+      <section
+        id="home"
+        className={flash ? "hero-section flash-active" : "hero-section"}
+        style={{ backgroundImage: `url(${slide.image})` }}
+      >
+        <div className="dark-overlay"></div>
+        <div className="code-layer"></div>
+        <div className="globe-effect"></div>
+        <div className="slide-flash"></div>
+
         <nav className="navbar">
           <div className="brand">
             <div className="brand-icon">S</div>
@@ -59,15 +86,14 @@ function App() {
           </div>
         </nav>
 
-        <button className="slide-arrow left" onClick={previousSlide} aria-label="Previous slide">
-          ‹
-        </button>
+        <button className="slide-arrow left" onClick={previousSlide}>‹</button>
 
-        <div className="hero-content">
+        <div className="hero-content" key={activeSlide}>
           <p className="hero-tag">{slide.tag}</p>
           <h1>{slide.title}</h1>
+          <div className="green-line"></div>
           <h3>{slide.subtitle}</h3>
-          <p className="hero-text">{slide.text}</p>
+          <p>{slide.text}</p>
 
           <div className="hero-actions">
             <a className="primary-btn" href="mailto:info@stellartms.com">
@@ -79,9 +105,7 @@ function App() {
           </div>
         </div>
 
-        <button className="slide-arrow right" onClick={nextSlide} aria-label="Next slide">
-          ›
-        </button>
+        <button className="slide-arrow right" onClick={nextSlide}>›</button>
 
         <div className="dots">
           {slides.map((_, index) => (
@@ -89,7 +113,6 @@ function App() {
               key={index}
               className={activeSlide === index ? "dot active-dot" : "dot"}
               onClick={() => setActiveSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
@@ -120,49 +143,6 @@ function App() {
         </div>
       </section>
 
-      <section className="video-section">
-        <div>
-          <p className="section-label">LEARN WITH STRUCTURE</p>
-          <h2>Start with the right IT roadmap.</h2>
-          <p>
-            Many people want to enter IT but do not know where to begin. Stellar Groupware Inc gives learners
-            a simple path, practical support, and professional guidance.
-          </p>
-        </div>
-
-        <div className="video-card">
-          <iframe
-            src="https://www.youtube.com/embed/2ePf9rue1Ao"
-            title="IT training video"
-            allowFullScreen
-          ></iframe>
-        </div>
-      </section>
-
-      <section className="process-section" id="process">
-        <p className="section-label">OUR PROCESS</p>
-        <h2>Simple steps. Professional support.</h2>
-
-        <div className="process-list">
-          <div>
-            <strong>1. Consultation</strong>
-            <p>We understand your current background and goals.</p>
-          </div>
-          <div>
-            <strong>2. Training Plan</strong>
-            <p>We suggest a practical learning path based on your needs.</p>
-          </div>
-          <div>
-            <strong>3. Guided Practice</strong>
-            <p>You work on simple real-world tasks with support.</p>
-          </div>
-          <div>
-            <strong>4. Confidence Building</strong>
-            <p>You learn how to explain your work professionally.</p>
-          </div>
-        </div>
-      </section>
-
       <section className="contact-section" id="contact">
         <p className="section-label">CONTACT US</p>
         <h2>Ready to start your IT journey?</h2>
@@ -172,9 +152,7 @@ function App() {
         </a>
       </section>
 
-      <footer>
-        © 2026 Stellar Groupware Inc. All rights reserved.
-      </footer>
+      <footer>© 2026 Stellar Groupware Inc. All rights reserved.</footer>
     </main>
   );
 }
