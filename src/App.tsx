@@ -143,6 +143,173 @@ function App() {
         </div>
       </section>
 
+
+      <section className="pricing-section" id="pricing">
+        <p className="section-label">PRICING & PATHWAYS</p>
+        <h2>Choose Your Learning Path</h2>
+        <p className="pricing-intro">
+          Pick the pathway that matches where you are today. Each option is designed to help you build skills,
+          confidence, and job-readiness step by step.
+        </p>
+
+        <div className="pathway-box">
+          <div className="pathway-header">
+            <div>
+              <span className="pathway-number">1</span>
+              <div>
+                <h3>Pathway 1</h3>
+                <p>Training → Project Practice → Job Support</p>
+              </div>
+            </div>
+            <em>Best for beginners who want a complete guided start.</em>
+          </div>
+
+          <div className="pricing-grid">
+            <div className="price-card popular">
+              <span className="badge">MOST POPULAR</span>
+              <h3>Regular IT Training</h3>
+              <p className="small-text">Complete instructor-led learning support</p>
+              <h4>$1,500</h4>
+              <ul>
+                <li>Live guided training sessions</li>
+                <li>Frontend development basics</li>
+                <li>Backend and database support</li>
+                <li>Real-world practice tasks</li>
+                <li>Certificate of completion</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+            </div>
+
+            <div className="or-pill">OR</div>
+
+            <div className="price-card popular">
+              <span className="badge">MOST POPULAR</span>
+              <h3>AI + IT Training</h3>
+              <p className="small-text">Training support for modern AI tools and IT work</p>
+              <h4>$2,000</h4>
+              <ul>
+                <li>All regular training features</li>
+                <li>AI tool guidance</li>
+                <li>Prompting and workflow basics</li>
+                <li>Project mentorship</li>
+                <li>Career confidence building</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+            </div>
+
+            <div className="arrow-pill">→</div>
+
+            <div className="price-card">
+              <h3>Bootcamp Support</h3>
+              <p className="small-text">Add-on project and hands-on practice support</p>
+              <h4>$500</h4>
+              <ul>
+                <li>Project-based practice</li>
+                <li>Portfolio building</li>
+                <li>Technical task guidance</li>
+                <li>Interview preparation</li>
+                <li>Skill validation support</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
+            </div>
+
+            <div className="arrow-pill">→</div>
+
+            <div className="price-card popular">
+              <span className="badge">CAREER SUPPORT</span>
+              <h3>Marketing Support</h3>
+              <p className="small-text">Placement and career preparation support</p>
+              <h4>$500</h4>
+              <ul>
+                <li>Professional resume creation</li>
+                <li>LinkedIn optimization</li>
+                <li>Apply up to 10 jobs per day</li>
+                <li>Interview guidance</li>
+                <li>Placement support</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="pathway-box">
+          <div className="pathway-header">
+            <div>
+              <span className="pathway-number">2</span>
+              <div>
+                <h3>Pathway 2</h3>
+                <p>Bootcamp → Career Support</p>
+              </div>
+            </div>
+            <em>Already trained? Start with project practice and job preparation.</em>
+          </div>
+
+          <div className="pricing-grid two-card">
+            <div className="price-card">
+              <h3>Direct Bootcamp</h3>
+              <p className="small-text">Hands-on project and job-readiness support</p>
+              <h4>$1,000</h4>
+              <ul>
+                <li>Intensive project practice</li>
+                <li>Hands-on technical tasks</li>
+                <li>Portfolio support</li>
+                <li>Interview preparation</li>
+                <li>Workplace confidence building</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
+            </div>
+
+            <div className="arrow-pill">→</div>
+
+            <div className="price-card popular">
+              <span className="badge">NEXT STEP</span>
+              <h3>Career Marketing</h3>
+              <p className="small-text">Resume, LinkedIn, applications, and interview support</p>
+              <h4>$500</h4>
+              <ul>
+                <li>Professional resume creation</li>
+                <li>LinkedIn optimization</li>
+                <li>Job application support</li>
+                <li>Interview guidance</li>
+                <li>Placement support</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="pathway-box single-pathway">
+          <div className="pathway-header">
+            <div>
+              <span className="pathway-number">3</span>
+              <div>
+                <h3>Pathway 3</h3>
+                <p>Direct Placement Support</p>
+              </div>
+            </div>
+            <em>Experienced? Skip training and go straight to career support.</em>
+          </div>
+
+          <div className="pricing-grid single-card">
+            <div className="price-card">
+              <h3>Direct Marketing Program</h3>
+              <p className="small-text">Placement-only support for trained candidates</p>
+              <h4>$1,000</h4>
+              <ul>
+                <li>Professional resume creation</li>
+                <li>LinkedIn optimization</li>
+                <li>Job portal registrations</li>
+                <li>Apply up to 10 jobs per day</li>
+                <li>Interview guidance</li>
+                <li>Placement support</li>
+              </ul>
+              <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <section className="contact-section" id="contact">
         <p className="section-label">CONTACT US</p>
         <h2>Ready to start your IT journey?</h2>
