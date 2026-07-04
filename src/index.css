@@ -731,3 +731,330 @@ footer {
     font-size: 42px;
   }
 }
+
+/* Mobile responsive fixes */
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero-section {
+    min-height: auto;
+    padding-bottom: 90px;
+  }
+
+  .navbar {
+    width: 100%;
+    padding: 18px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .brand {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .brand h2 {
+    font-size: 26px;
+  }
+
+  .brand span {
+    font-size: 11px;
+  }
+
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 26px;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .nav-links a,
+  .book-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 44px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+
+  .hero-content {
+    width: calc(100% - 36px);
+    margin: 0 auto;
+    padding-top: 48px;
+    max-width: 100%;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    padding: 7px 14px;
+  }
+
+  .hero-content h1 {
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-content h3 {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    min-width: 100%;
+    height: 54px;
+  }
+
+  .slide-arrow {
+    display: none;
+  }
+
+  .dots {
+    bottom: 24px;
+  }
+
+  .globe-effect,
+  .hero-section::after {
+    display: none;
+  }
+
+  .services-section,
+  .contact-section,
+  .pricing-section {
+    width: calc(100% - 32px);
+    padding: 60px 0;
+  }
+
+  .services-section h2,
+  .contact-section h2,
+  .pricing-section h2 {
+    font-size: 36px;
+    line-height: 1.08;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 26px;
+  }
+
+  .pricing-intro {
+    font-size: 16px;
+    margin-bottom: 34px;
+  }
+
+  .pathway-box {
+    padding: 22px;
+    border-radius: 20px;
+  }
+
+  .pathway-header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .pathway-header > div {
+    align-items: flex-start;
+  }
+
+  .pathway-number {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    flex: 0 0 42px;
+  }
+
+  .pathway-header h3 {
+    font-size: 22px;
+  }
+
+  .pathway-header p {
+    font-size: 12px;
+  }
+
+  .pathway-header em {
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .pricing-grid,
+  .pricing-grid.two-card,
+  .pricing-grid.single-card {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 18px;
+  }
+
+  .price-card {
+    min-height: auto;
+    width: 100%;
+    padding: 28px 22px;
+  }
+
+  .price-card h3 {
+    font-size: 21px;
+  }
+
+  .price-card h4 {
+    font-size: 34px;
+  }
+
+  .price-card li {
+    font-size: 14px;
+  }
+
+  .or-pill,
+  .arrow-pill {
+    margin: 0 auto;
+    transform: rotate(90deg);
+  }
+
+  .contact-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 430px) {
+  .nav-links {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 34px;
+  }
+
+  .hero-content h3 {
+    font-size: 20px;
+  }
+
+  .pricing-section h2 {
+    font-size: 34px;
+  }
+
+  .pathway-box {
+    padding: 18px;
+  }
+
+  .price-card {
+    padding: 24px 18px;
+  }
+}
+
+/* Better phone navbar layout */
+
+@media (max-width: 768px) {
+  .navbar {
+    width: calc(100% - 28px) !important;
+    margin: 14px auto 0 !important;
+    padding: 16px !important;
+    border-radius: 18px !important;
+    background: rgba(5, 14, 23, 0.76) !important;
+    backdrop-filter: blur(12px) !important;
+    gap: 14px !important;
+  }
+
+  .brand {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .brand-icon {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 24px !important;
+  }
+
+  .brand h2 {
+    font-size: 24px !important;
+  }
+
+  .brand span {
+    font-size: 10px !important;
+  }
+
+  .nav-links {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 9px !important;
+  }
+
+  .nav-links a {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 40px !important;
+    padding: 0 8px !important;
+    font-size: 12px !important;
+    border-radius: 9px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .nav-links a:hover,
+  .nav-links .active {
+    background: #17a64a !important;
+  }
+
+  .nav-links .book-btn {
+    grid-column: 1 / -1 !important;
+    height: 44px !important;
+    background: #17a64a !important;
+  }
+
+  .hero-content {
+    padding-top: 44px !important;
+  }
+
+  .hero-content h1 {
+    font-size: 34px !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero-content h3 {
+    font-size: 20px !important;
+  }
+
+  .hero-content p {
+    font-size: 15px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .nav-links {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .nav-links a {
+    height: 38px !important;
+    font-size: 12px !important;
+  }
+
+  .nav-links .book-btn {
+    height: 42px !important;
+  }
+}
