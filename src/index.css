@@ -1368,3 +1368,111 @@ footer {
     padding: 26px 18px !important;
   }
 }
+
+/* Professional pricing user-experience cleanup */
+.pricing-section .or-pill,
+.pricing-section .arrow-pill {
+  display: none !important;
+}
+
+.pricing-section .pathway-box {
+  max-width: 1120px !important;
+  margin: 0 auto 56px !important;
+  padding: 42px !important;
+  border-radius: 28px !important;
+  background: #ffffff !important;
+}
+
+.pricing-section .pathway-header {
+  margin-bottom: 34px !important;
+}
+
+.pricing-section .pricing-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  align-items: stretch !important;
+}
+
+.pricing-section .pricing-grid.two-card {
+  grid-template-columns: repeat(2, minmax(260px, 360px)) !important;
+  justify-content: center !important;
+  gap: 36px !important;
+}
+
+.pricing-section .pricing-grid.single-card {
+  grid-template-columns: minmax(280px, 380px) !important;
+  justify-content: center !important;
+}
+
+.pricing-section .price-card {
+  width: 100% !important;
+  min-height: 520px !important;
+  padding: 34px 26px !important;
+  border-radius: 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 18px 45px rgba(15, 64, 48, 0.08) !important;
+}
+
+.pricing-section .pricing-grid.two-card .price-card,
+.pricing-section .pricing-grid.single-card .price-card {
+  min-height: 500px !important;
+}
+
+.pricing-section .price-card h3 {
+  min-height: 58px !important;
+}
+
+.pricing-section .price-card .small-text {
+  min-height: 52px !important;
+}
+
+.pricing-section .price-card ul {
+  flex: 1 !important;
+  margin-bottom: 28px !important;
+}
+
+.pricing-section .price-card li {
+  line-height: 1.45 !important;
+  margin-bottom: 12px !important;
+}
+
+.pricing-section .enroll-btn {
+  width: 100% !important;
+  margin-top: auto !important;
+  text-align: center !important;
+}
+
+@media (max-width: 1100px) {
+  .pricing-section .pricing-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+  }
+
+  .pricing-section .pricing-grid.two-card {
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .pricing-section .pathway-box {
+    padding: 28px 18px !important;
+  }
+
+  .pricing-section .pricing-grid,
+  .pricing-section .pricing-grid.two-card,
+  .pricing-section .pricing-grid.single-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pricing-section .price-card,
+  .pricing-section .pricing-grid.two-card .price-card,
+  .pricing-section .pricing-grid.single-card .price-card {
+    min-height: auto !important;
+  }
+
+  .pricing-section .price-card h3,
+  .pricing-section .price-card .small-text {
+    min-height: auto !important;
+  }
+}

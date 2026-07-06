@@ -180,8 +180,6 @@ function App() {
               <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
             </div>
 
-            <div className="or-pill">OR</div>
-
             <div className="price-card popular">
               <span className="badge">MOST POPULAR</span>
               <h3>AI + IT Training</h3>
@@ -197,8 +195,6 @@ function App() {
               <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
             </div>
 
-            <div className="arrow-pill">→</div>
-
             <div className="price-card">
               <h3>Bootcamp Support</h3>
               <p className="small-text">Add-on project and hands-on practice support</p>
@@ -212,8 +208,6 @@ function App() {
               </ul>
               <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
             </div>
-
-            <div className="arrow-pill">→</div>
 
             <div className="price-card popular">
               <span className="badge">CAREER SUPPORT</span>
@@ -258,8 +252,6 @@ function App() {
               </ul>
               <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
             </div>
-
-            <div className="arrow-pill">→</div>
 
             <div className="price-card popular">
               <span className="badge">NEXT STEP</span>
