@@ -1716,3 +1716,36 @@ footer {
     margin-top: 16px !important;
   }
 }
+
+/* Extra compact mobile hero menu */
+@media (max-width: 700px) {
+  .hero-card {
+    padding: 16px !important;
+    max-width: 330px !important;
+  }
+
+  .navbar {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .navbar a {
+    min-height: 38px !important;
+    padding: 8px 10px !important;
+    font-size: 0.78rem !important;
+  }
+
+  .book-btn {
+    min-height: 42px !important;
+    padding: 10px 14px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .hero-content {
+    padding-top: 36px !important;
+  }
+
+  .hero-content h2 {
+    font-size: 1.85rem !important;
+  }
+}
