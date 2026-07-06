@@ -2111,3 +2111,78 @@ footer {
     padding: 22px 18px !important;
   }
 }
+
+/* Consistent button system */
+.navbar a,
+.book-btn,
+.enroll-btn,
+.contact-btn,
+button {
+  min-height: 46px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.navbar a {
+  padding: 12px 18px;
+}
+
+.book-btn,
+.enroll-btn,
+.contact-btn {
+  padding: 14px 22px;
+}
+
+.navbar a:hover,
+.book-btn:hover,
+.enroll-btn:hover,
+.contact-btn:hover,
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(15, 159, 77, 0.22);
+}
+
+.enroll-btn,
+.book-btn,
+.contact-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: 1px solid #16a34a;
+}
+
+.enroll-btn.dark,
+.contact-btn.dark {
+  background: #12323a;
+  color: #ffffff;
+  border-color: #12323a;
+}
+
+@media (max-width: 700px) {
+  .navbar a,
+  .book-btn,
+  .enroll-btn,
+  .contact-btn,
+  button {
+    min-height: 42px;
+    border-radius: 9px;
+    font-size: 0.82rem;
+  }
+
+  .navbar a {
+    padding: 9px 10px;
+  }
+
+  .book-btn,
+  .enroll-btn,
+  .contact-btn {
+    width: 100%;
+    padding: 12px 14px;
+  }
+}
