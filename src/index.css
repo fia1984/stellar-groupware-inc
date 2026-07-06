@@ -2186,3 +2186,99 @@ button:hover {
     padding: 12px 14px;
   }
 }
+
+/* Fix account, appointment, and contact UI spacing */
+.account-section,
+.appointment-section,
+.contact-section {
+  padding: 80px 8% !important;
+  min-height: auto !important;
+}
+
+.account-section h2,
+.appointment-section h2,
+.contact-section h2 {
+  max-width: 820px !important;
+  margin: 0 auto 22px !important;
+  font-size: clamp(2.2rem, 4vw, 4rem) !important;
+  line-height: 1.08 !important;
+  text-align: center !important;
+}
+
+.account-section .section-intro,
+.appointment-section .section-intro,
+.contact-section .section-intro {
+  max-width: 760px !important;
+  margin: 0 auto 36px !important;
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  text-align: center !important;
+}
+
+/* Stop account button from stretching full width */
+.account-section .enroll-btn,
+.appointment-section .enroll-btn,
+.contact-section .contact-btn,
+.contact-section .enroll-btn {
+  width: auto !important;
+  max-width: 360px !important;
+  min-width: 240px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Appointment buttons layout */
+.appointment-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 18px !important;
+  flex-wrap: wrap !important;
+}
+
+/* Contact section should not look too empty */
+.contact-section {
+  background: #f7fbf8 !important;
+}
+
+.contact-section .contact-btn,
+.contact-section .enroll-btn {
+  display: inline-flex !important;
+}
+
+/* Mobile fixes for account, appointment, and contact */
+@media (max-width: 700px) {
+  .account-section,
+  .appointment-section,
+  .contact-section {
+    padding: 58px 18px !important;
+  }
+
+  .account-section h2,
+  .appointment-section h2,
+  .contact-section h2 {
+    font-size: 1.9rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .account-section .section-intro,
+  .appointment-section .section-intro,
+  .contact-section .section-intro {
+    font-size: 0.95rem !important;
+    margin-bottom: 28px !important;
+  }
+
+  .account-section .enroll-btn,
+  .appointment-section .enroll-btn,
+  .contact-section .contact-btn,
+  .contact-section .enroll-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+  }
+
+  .appointment-actions {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+}
