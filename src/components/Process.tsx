@@ -1,4 +1,4 @@
-import { processSteps } from "../data/siteData";
+import { processSteps } from "../mocks/siteData";
 
 function Process() {
   return (

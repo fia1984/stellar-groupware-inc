@@ -1,5 +1,5 @@
-import { navLinks } from "../data/siteData";
-import { navButton } from "./buttonStyles";
+import { navLinks } from "../mocks/siteData";
+import { navButton } from "../styles/buttonStyles";
 
 function Header() {
   return (

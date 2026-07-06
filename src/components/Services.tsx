@@ -1,4 +1,4 @@
-import { serviceCards } from "../data/siteData";
+import { serviceCards } from "../mocks/siteData";
 
 function Services() {
   return (

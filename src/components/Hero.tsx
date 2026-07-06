@@ -1,5 +1,5 @@
-import { stats } from "../data/siteData";
-import { heroButton, outlineButton } from "./buttonStyles";
+import { stats } from "../mocks/siteData";
+import { heroButton, outlineButton } from "../styles/buttonStyles";
 
 function Hero() {
   return (
