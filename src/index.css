@@ -1476,3 +1476,137 @@ footer {
     min-height: auto !important;
   }
 }
+
+/* Compact professional pricing layout */
+.pricing-section .pathway-box {
+  max-width: 1160px !important;
+  padding: 34px 32px !important;
+  margin: 0 auto 44px !important;
+}
+
+.pricing-section .pathway-header {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  margin-bottom: 28px !important;
+}
+
+.pricing-section .pathway-header h3 {
+  font-size: 1.45rem !important;
+  margin: 0 0 4px !important;
+}
+
+.pricing-section .pathway-header p {
+  font-size: 0.95rem !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 !important;
+}
+
+.pricing-section .pathway-header em {
+  font-size: 0.95rem !important;
+  line-height: 1.45 !important;
+  max-width: 360px !important;
+}
+
+.pricing-section .pathway-number {
+  width: 46px !important;
+  height: 46px !important;
+  font-size: 1.15rem !important;
+}
+
+.pricing-section .pricing-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 22px !important;
+}
+
+.pricing-section .pricing-grid.two-card {
+  grid-template-columns: repeat(2, minmax(260px, 340px)) !important;
+  justify-content: center !important;
+  gap: 34px !important;
+}
+
+.pricing-section .pricing-grid.single-card {
+  grid-template-columns: minmax(260px, 340px) !important;
+  justify-content: center !important;
+}
+
+.pricing-section .price-card,
+.pricing-section .pricing-grid.two-card .price-card,
+.pricing-section .pricing-grid.single-card .price-card {
+  min-height: auto !important;
+  padding: 26px 24px !important;
+  border-radius: 16px !important;
+}
+
+.pricing-section .price-card h3 {
+  min-height: auto !important;
+  font-size: 1.25rem !important;
+  line-height: 1.25 !important;
+  margin-bottom: 10px !important;
+}
+
+.pricing-section .price-card .small-text {
+  min-height: 44px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.45 !important;
+  margin-bottom: 18px !important;
+}
+
+.pricing-section .price-card h4 {
+  font-size: 1.9rem !important;
+  margin: 18px 0 20px !important;
+}
+
+.pricing-section .price-card ul {
+  margin: 0 0 22px !important;
+  padding: 0 !important;
+}
+
+.pricing-section .price-card li {
+  font-size: 0.92rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 10px !important;
+}
+
+.pricing-section .enroll-btn {
+  min-height: 48px !important;
+  padding: 13px 18px !important;
+  font-size: 0.95rem !important;
+  border-radius: 8px !important;
+}
+
+.pricing-section .badge {
+  font-size: 0.75rem !important;
+  padding: 7px 14px !important;
+}
+
+@media (max-width: 1100px) {
+  .pricing-section .pricing-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+  }
+
+  .pricing-section .pathway-header {
+    flex-direction: column !important;
+  }
+
+  .pricing-section .pathway-header em {
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .pricing-section .pathway-box {
+    padding: 24px 16px !important;
+  }
+
+  .pricing-section .pricing-grid,
+  .pricing-section .pricing-grid.two-card,
+  .pricing-section .pricing-grid.single-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pricing-section .price-card {
+    padding: 24px 20px !important;
+  }
+}
