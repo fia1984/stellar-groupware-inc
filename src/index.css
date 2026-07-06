@@ -1610,3 +1610,47 @@ footer {
     padding: 24px 20px !important;
   }
 }
+
+/* Mobile pricing spacing polish */
+@media (max-width: 700px) {
+  #pricing {
+    padding-top: 80px !important;
+  }
+
+  .pricing-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .pricing-section .pathway-box {
+    width: 100% !important;
+    padding: 28px 16px !important;
+    margin-bottom: 32px !important;
+  }
+
+  .pricing-section .pathway-header {
+    gap: 14px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .pricing-section .pathway-header > div {
+    align-items: flex-start !important;
+  }
+
+  .pricing-section .pathway-header h3 {
+    font-size: 1.35rem !important;
+  }
+
+  .pricing-section .pathway-header p {
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .pricing-section .pathway-header em {
+    font-size: 0.9rem !important;
+  }
+
+  .pricing-section .price-card {
+    width: 100% !important;
+  }
+}
