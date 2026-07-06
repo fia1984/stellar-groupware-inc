@@ -1190,3 +1190,131 @@ footer {
 .pricing-section:target {
   display: block;
 }
+
+/* Pricing pathway UI cleanup */
+.pricing-section {
+  background: #f7fbf8;
+}
+
+.pathway-box {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 42px;
+  border-radius: 28px;
+}
+
+.pathway-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 34px;
+}
+
+.pathway-header > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pathway-number {
+  flex-shrink: 0;
+}
+
+.pathway-header em {
+  max-width: 360px;
+  text-align: right;
+  color: #48616a;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(210px, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+.price-card {
+  position: relative;
+  min-height: 100%;
+  padding: 34px 28px;
+  border-radius: 18px;
+}
+
+.price-card h3 {
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.price-card h4 {
+  font-size: 2.1rem;
+  margin: 22px 0;
+}
+
+.price-card ul {
+  padding-left: 0;
+  margin: 0 0 26px;
+}
+
+.price-card li {
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+
+.price-card li::marker {
+  color: #0f9f4d;
+}
+
+.badge {
+  top: -1px;
+  right: 18px;
+  left: auto;
+  border-radius: 0 0 10px 10px;
+  padding: 8px 16px;
+}
+
+.or-pill,
+.arrow-pill {
+  display: none;
+}
+
+.enroll-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+
+  .pathway-header {
+    flex-direction: column;
+  }
+
+  .pathway-header em {
+    text-align: left;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .pathway-box {
+    padding: 28px 18px;
+    border-radius: 22px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .price-card {
+    padding: 30px 24px;
+  }
+
+  .price-card h4 {
+    font-size: 1.9rem;
+  }
+}
