@@ -1749,3 +1749,22 @@ footer {
     font-size: 1.85rem !important;
   }
 }
+
+/* Final fix: hide pricing/pathway from Home on desktop and mobile */
+.pricing-section:not(:target) {
+  display: none !important;
+}
+
+.pricing-section:target {
+  display: block !important;
+}
+
+@media (max-width: 700px) {
+  .pricing-section:not(:target) {
+    display: none !important;
+  }
+
+  .pricing-section:target {
+    display: block !important;
+  }
+}
