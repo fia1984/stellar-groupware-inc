@@ -2282,3 +2282,95 @@ button:hover {
     gap: 12px !important;
   }
 }
+
+/* Final hero cleanup: remove distracting slider UI and watermark */
+.hero-section .globe-effect,
+.hero-section .slide-flash,
+.hero-section .slide-arrow,
+.hero-section .dots,
+.hero-section .dot,
+.globe-effect,
+.slide-flash,
+.slide-arrow,
+.dots,
+.dot {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Make hero content cleaner */
+.hero-content {
+  max-width: 760px !important;
+}
+
+.hero-content h2 {
+  font-size: clamp(3rem, 5vw, 4.6rem) !important;
+  line-height: 1.05 !important;
+  max-width: 760px !important;
+}
+
+.hero-content h3 {
+  font-size: clamp(1.45rem, 2.2vw, 2rem) !important;
+  max-width: 640px !important;
+}
+
+.hero-content p {
+  max-width: 660px !important;
+}
+
+/* Make hero buttons professional and consistent */
+.hero-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+}
+
+.hero-actions a,
+.hero-actions .primary-btn,
+.hero-actions .secondary-btn {
+  min-width: 220px !important;
+  max-width: 260px !important;
+  min-height: 54px !important;
+  padding: 14px 24px !important;
+  border-radius: 10px !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+}
+
+/* Slightly reduce heavy dark overlay */
+.dark-overlay {
+  background: rgba(0, 0, 0, 0.52) !important;
+}
+
+@media (max-width: 700px) {
+  .hero-content {
+    max-width: 100% !important;
+  }
+
+  .hero-content h2 {
+    font-size: 1.9rem !important;
+    line-height: 1.12 !important;
+  }
+
+  .hero-content h3 {
+    font-size: 1.05rem !important;
+  }
+
+  .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .hero-actions a,
+  .hero-actions .primary-btn,
+  .hero-actions .secondary-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    min-height: 46px !important;
+    font-size: 0.86rem !important;
+  }
+}
