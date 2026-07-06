@@ -1768,3 +1768,131 @@ footer {
     display: block !important;
   }
 }
+
+/* Reviews, process, about, account, appointment sections */
+.reviews-section,
+.process-section,
+.about-section,
+.account-section,
+.appointment-section {
+  padding: 90px 8%;
+  background: #f7fbf8;
+}
+
+.reviews-section h2,
+.process-section h2,
+.about-section h2,
+.account-section h2,
+.appointment-section h2 {
+  max-width: 780px;
+  margin: 0 auto 18px;
+  text-align: center;
+  color: #12323a;
+}
+
+.section-intro {
+  max-width: 760px;
+  margin: 0 auto 42px;
+  text-align: center;
+  color: #526b73;
+  line-height: 1.7;
+}
+
+.review-grid,
+.process-grid,
+.about-box {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.review-card,
+.process-card,
+.about-box > div {
+  background: #ffffff;
+  border: 1px solid rgba(22, 163, 74, 0.18);
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: 0 18px 45px rgba(15, 64, 48, 0.08);
+}
+
+.review-card p,
+.process-card p,
+.about-box p {
+  color: #526b73;
+  line-height: 1.65;
+}
+
+.review-card strong {
+  display: block;
+  margin-top: 20px;
+  color: #12323a;
+}
+
+.review-card span {
+  display: block;
+  margin-top: 6px;
+  color: #0f9f4d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.process-card span {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+
+.process-card h3,
+.about-box h3 {
+  color: #12323a;
+  margin-bottom: 10px;
+}
+
+.about-box {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.account-section,
+.appointment-section {
+  text-align: center;
+}
+
+.account-section .enroll-btn,
+.appointment-section .enroll-btn {
+  display: inline-flex;
+  width: auto;
+  min-width: 240px;
+}
+
+.appointment-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .review-grid,
+  .process-grid,
+  .about-box {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-section,
+  .process-section,
+  .about-section,
+  .account-section,
+  .appointment-section {
+    padding: 64px 20px;
+  }
+}

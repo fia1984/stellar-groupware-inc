@@ -81,8 +81,8 @@ function App() {
             <a href="#training">Training</a>
             <a href="#process">Process</a>
             <a href="#about">About</a>
-            <a href="#contact">My Account</a>
-            <a className="book-btn" href="mailto:info@stellartms.com">Book Appointment</a>
+            <a href="#account">My Account</a>
+            <a className="book-btn" href="#appointment">Book Appointment</a>
           </div>
         </nav>
 
@@ -301,6 +301,106 @@ function App() {
         </div>
       </section>
 
+
+      <section className="reviews-section" id="reviews">
+        <p className="section-label">STUDENT REVIEWS</p>
+        <h2>What learners say about Stellar Groupware.</h2>
+        <p className="section-intro">
+          Realistic feedback from learners who needed guidance, structure, and confidence while moving into IT.
+        </p>
+
+        <div className="review-grid">
+          <div className="review-card">
+            <p>“The training was clear and step by step. I understood how projects work and felt more confident.”</p>
+            <strong>Beginner IT Learner</strong>
+            <span>Frontend practice support</span>
+          </div>
+
+          <div className="review-card">
+            <p>“The mentoring helped me organize my tasks, improve my resume, and prepare for technical work.”</p>
+            <strong>Career Transition Student</strong>
+            <span>Project and job-readiness guidance</span>
+          </div>
+
+          <div className="review-card">
+            <p>“I liked the practical approach. It was not only theory; we worked through real examples.”</p>
+            <strong>Bootcamp Support Learner</strong>
+            <span>Hands-on project practice</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="process-section" id="process">
+        <p className="section-label">OUR PROCESS</p>
+        <h2>Simple step-by-step support.</h2>
+
+        <div className="process-grid">
+          <div className="process-card">
+            <span>01</span>
+            <h3>Understand Your Goal</h3>
+            <p>We look at your current level, learning needs, and career direction.</p>
+          </div>
+
+          <div className="process-card">
+            <span>02</span>
+            <h3>Build Skills</h3>
+            <p>You get practical training, guided tasks, and project-based learning.</p>
+          </div>
+
+          <div className="process-card">
+            <span>03</span>
+            <h3>Prepare for Work</h3>
+            <p>We support resume, LinkedIn, interview practice, and job-readiness.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="about-section" id="about">
+        <p className="section-label">ABOUT STELLAR</p>
+        <h2>Training and mentoring built for real beginners.</h2>
+        <p className="section-intro">
+          Stellar Groupware Inc helps learners understand IT concepts, business systems, tools,
+          workflows, and project practice in a simple and structured way.
+        </p>
+
+        <div className="about-box">
+          <div>
+            <h3>What we focus on</h3>
+            <p>Clear explanations, practical tasks, project confidence, and career preparation.</p>
+          </div>
+
+          <div>
+            <h3>Who it is for</h3>
+            <p>Beginners, career changers, bootcamp learners, and students who need extra support.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="account-section" id="account">
+        <p className="section-label">MY ACCOUNT</p>
+        <h2>Student account access coming soon.</h2>
+        <p className="section-intro">
+          This area can later include student login, course progress, saved resources, and appointment history.
+        </p>
+        <a href="#appointment" className="enroll-btn">Request Account Help →</a>
+      </section>
+
+      <section className="appointment-section" id="appointment">
+        <p className="section-label">BOOK APPOINTMENT</p>
+        <h2>Book a consultation with Stellar Groupware.</h2>
+        <p className="section-intro">
+          Ready to discuss training, mentoring, project practice, or career support? Send us a message and we will follow up.
+        </p>
+
+        <div className="appointment-actions">
+          <a href="mailto:info@stellartms.com?subject=Book%20Appointment%20Request" className="enroll-btn">
+            Email to Book Appointment →
+          </a>
+          <a href="#contact" className="enroll-btn dark">
+            Go to Contact Section →
+          </a>
+        </div>
+      </section>
 
       <section className="contact-section" id="contact">
         <p className="section-label">CONTACT US</p>
