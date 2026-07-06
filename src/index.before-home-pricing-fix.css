@@ -1168,14 +1168,3 @@ footer {
     max-width: 100%;
   }
 }
-
-/* Make section navigation cleaner */
-#home {
-  scroll-margin-top: 0;
-  min-height: 100vh;
-}
-
-#pricing {
-  scroll-margin-top: 90px;
-  padding-top: 110px;
-}
