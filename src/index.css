@@ -1179,3 +1179,14 @@ footer {
   scroll-margin-top: 90px;
   padding-top: 110px;
 }
+
+
+/* Pricing should not show on the first/home page.
+   It should only show when user clicks Pricing in the header. */
+.pricing-section {
+  display: none;
+}
+
+.pricing-section:target {
+  display: block;
+}
