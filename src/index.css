@@ -1896,3 +1896,218 @@ footer {
     padding: 64px 20px;
   }
 }
+
+/* Full section UI polish for reviews, training, process, about, account, appointment */
+.reviews-section,
+.services-section,
+.process-section,
+.about-section,
+.account-section,
+.appointment-section,
+.contact-section {
+  scroll-margin-top: 95px;
+}
+
+.reviews-section,
+.process-section,
+.about-section,
+.account-section,
+.appointment-section {
+  background: linear-gradient(180deg, #f7fbf8 0%, #ffffff 100%);
+}
+
+.section-label {
+  display: block;
+  margin-bottom: 14px;
+  text-align: center;
+  color: #0f9f4d;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.reviews-section h2,
+.services-section h2,
+.process-section h2,
+.about-section h2,
+.account-section h2,
+.appointment-section h2,
+.contact-section h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+}
+
+.review-card,
+.service-card,
+.process-card,
+.about-box > div {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.review-card:hover,
+.service-card:hover,
+.process-card:hover,
+.about-box > div:hover {
+  transform: translateY(-6px);
+  border-color: rgba(15, 159, 77, 0.45);
+  box-shadow: 0 22px 55px rgba(15, 64, 48, 0.12);
+}
+
+.review-card p {
+  font-size: 1rem;
+}
+
+.review-card strong,
+.process-card h3,
+.about-box h3 {
+  font-size: 1.15rem;
+}
+
+.account-section,
+.appointment-section {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.appointment-actions .enroll-btn,
+.account-section .enroll-btn {
+  margin-top: 8px;
+}
+
+/* Make navbar clicks feel better */
+.navbar a,
+.book-btn {
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navbar a:hover,
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(15, 159, 77, 0.22);
+}
+
+/* Mobile UI polish */
+@media (max-width: 768px) {
+  .reviews-section,
+  .services-section,
+  .process-section,
+  .about-section,
+  .account-section,
+  .appointment-section,
+  .contact-section {
+    padding: 58px 18px !important;
+    scroll-margin-top: 70px;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+  }
+
+  .reviews-section h2,
+  .services-section h2,
+  .process-section h2,
+  .about-section h2,
+  .account-section h2,
+  .appointment-section h2,
+  .contact-section h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.15 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .section-intro {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 28px !important;
+  }
+
+  .review-grid,
+  .process-grid,
+  .about-box {
+    gap: 18px !important;
+  }
+
+  .review-card,
+  .service-card,
+  .process-card,
+  .about-box > div {
+    padding: 24px 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .review-card p,
+  .service-card p,
+  .process-card p,
+  .about-box p {
+    font-size: 0.94rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .review-card strong,
+  .process-card h3,
+  .about-box h3 {
+    font-size: 1.05rem !important;
+  }
+
+  .process-card span {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 0.85rem !important;
+    margin-bottom: 14px !important;
+  }
+
+  .appointment-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .appointment-actions .enroll-btn,
+  .account-section .enroll-btn {
+    width: 100% !important;
+    min-width: unset !important;
+    justify-content: center !important;
+  }
+
+  .account-section,
+  .appointment-section {
+    min-height: auto !important;
+  }
+}
+
+/* Very small mobile screens */
+@media (max-width: 430px) {
+  .reviews-section,
+  .services-section,
+  .process-section,
+  .about-section,
+  .account-section,
+  .appointment-section,
+  .contact-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .reviews-section h2,
+  .services-section h2,
+  .process-section h2,
+  .about-section h2,
+  .account-section h2,
+  .appointment-section h2,
+  .contact-section h2 {
+    font-size: 1.55rem !important;
+  }
+
+  .review-card,
+  .service-card,
+  .process-card,
+  .about-box > div {
+    padding: 22px 18px !important;
+  }
+}
