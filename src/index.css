@@ -3389,3 +3389,112 @@ body:not(.pricing-page) .navbar a[href="/pricing"]:not(:hover):not(.active) {
     font-size: 0.9rem !important;
   }
 }
+
+/* =========================================================
+   NCPL reference button style: simple, no effects
+   ========================================================= */
+
+/* Remove extra animation/effect from all buttons and links styled as buttons */
+button,
+a,
+.navbar a,
+.book-btn,
+.enroll-btn,
+.contact-btn,
+.consult-main-btn,
+.white-cta-btn,
+.hero-actions a,
+.hero-actions .primary-btn,
+.hero-actions .secondary-btn,
+.cookie-actions button,
+.site-footer button {
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep main CTA buttons simple green like NCPL */
+.book-btn,
+.enroll-btn,
+.contact-btn,
+.hero-actions a,
+.hero-actions .primary-btn,
+.hero-actions .secondary-btn {
+  background: #0fa447 !important;
+  color: #ffffff !important;
+  border: 1px solid #0fa447 !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+/* Simple hover only, no movement/glow */
+.book-btn:hover,
+.enroll-btn:hover,
+.contact-btn:hover,
+.hero-actions a:hover,
+.hero-actions .primary-btn:hover,
+.hero-actions .secondary-btn:hover {
+  background: #0b8f3d !important;
+  color: #ffffff !important;
+  border-color: #0b8f3d !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Navbar should follow NCPL style: simple green active/hover */
+.navbar a {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  background: #0fa447 !important;
+  color: #ffffff !important;
+  border: 1px solid #0fa447 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Book Appointment stays green like reference */
+.navbar .book-btn,
+.book-btn {
+  background: #0fa447 !important;
+  color: #ffffff !important;
+  border: 1px solid #0fa447 !important;
+  box-shadow: none !important;
+}
+
+/* Remove card jumping/extra hover effects too */
+.review-card:hover,
+.service-card:hover,
+.process-card:hover,
+.about-box > div:hover,
+.price-card:hover,
+.feature-card:hover,
+.who-card:hover,
+.offer-grid > div:hover,
+.struggle-grid > div:hover,
+.approach-card:hover,
+.why-grid div:hover,
+.consult-benefits div:hover {
+  transform: none !important;
+  box-shadow: inherit !important;
+}
+
+/* Footer region buttons: simple, no animated effect */
+.site-footer button:hover {
+  background: rgba(15, 164, 71, 0.25) !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Floating chat simple */
+.floating-chat-btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
