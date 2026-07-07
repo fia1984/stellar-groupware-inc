@@ -3498,3 +3498,90 @@ a,
   transform: none !important;
   box-shadow: none !important;
 }
+
+/* =========================================================
+   NCPL-style header buttons: dark pills, green active/hover
+   ========================================================= */
+
+/* Default header tabs: same dark button background like NCPL */
+.navbar a:not(.book-btn) {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #ffffff !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  padding: 14px 22px !important;
+  min-height: 48px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Simple NCPL-style hover */
+.navbar a:not(.book-btn):hover {
+  background: #0fa447 !important;
+  color: #ffffff !important;
+  border-color: #0fa447 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Reset old active styles first so two tabs do not stay green */
+.navbar a.active:not(.book-btn),
+.navbar a[aria-current="page"]:not(.book-btn) {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Only the real current route should be green */
+.route-home .navbar a[href="/"]:not(.book-btn),
+.route-reviews .navbar a[href="/reviews"]:not(.book-btn),
+.route-pricing .navbar a[href="/pricing"]:not(.book-btn),
+.route-training .navbar a[href="/training"]:not(.book-btn),
+.route-process .navbar a[href="/process"]:not(.book-btn),
+.route-about .navbar a[href="/about"]:not(.book-btn),
+.route-account .navbar a[href="/account"]:not(.book-btn),
+.route-contact .navbar a[href="/contact"]:not(.book-btn),
+.route-appointment .navbar a[href="/appointment"]:not(.book-btn) {
+  background: #0fa447 !important;
+  color: #ffffff !important;
+  border-color: #0fa447 !important;
+}
+
+/* Book Appointment always green like NCPL */
+.navbar .book-btn,
+.book-btn {
+  background: #0fa447 !important;
+  color: #ffffff !important;
+  border: 1px solid #0fa447 !important;
+  border-radius: 9px !important;
+  padding: 14px 24px !important;
+  min-height: 48px !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.navbar .book-btn:hover,
+.book-btn:hover {
+  background: #0b8f3d !important;
+  border-color: #0b8f3d !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Keep mobile header neat */
+@media (max-width: 768px) {
+  .navbar a:not(.book-btn),
+  .navbar .book-btn,
+  .book-btn {
+    width: 100% !important;
+    min-height: 42px !important;
+    padding: 10px 12px !important;
+    font-size: 0.82rem !important;
+  }
+}
