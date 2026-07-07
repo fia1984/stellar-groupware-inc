@@ -3205,3 +3205,83 @@ body:not(.pricing-page) .navbar a[href="/pricing"]:not(:hover):not(.active) {
   border-color: transparent !important;
   box-shadow: none !important;
 }
+
+/* Footer final UI polish */
+.site-footer {
+  padding: 56px 8% 26px !important;
+}
+
+.footer-grid {
+  align-items: start !important;
+  text-align: left !important;
+  gap: 54px !important;
+}
+
+.site-footer p {
+  text-align: left !important;
+  max-width: 310px !important;
+  line-height: 1.55 !important;
+  margin: 0 !important;
+}
+
+.footer-brand {
+  justify-content: flex-start !important;
+}
+
+.site-footer h4 {
+  text-align: left !important;
+  font-size: 1rem !important;
+  margin-bottom: 18px !important;
+}
+
+.site-footer a {
+  text-align: left !important;
+  width: fit-content !important;
+  font-size: 0.94rem !important;
+  line-height: 1.35 !important;
+}
+
+.site-footer button {
+  max-width: 280px !important;
+  min-height: 46px !important;
+  padding: 10px 14px !important;
+  font-size: 0.95rem !important;
+  border-radius: 9px !important;
+}
+
+.social-row {
+  justify-content: flex-start !important;
+}
+
+.footer-bottom {
+  align-items: center !important;
+}
+
+.footer-bottom div {
+  justify-content: flex-end !important;
+}
+
+@media (max-width: 900px) {
+  .site-footer {
+    padding: 44px 22px 24px !important;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  .site-footer p {
+    max-width: 100% !important;
+  }
+
+  .site-footer button {
+    max-width: 100% !important;
+  }
+
+  .footer-bottom,
+  .footer-bottom div {
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+  }
+}
