@@ -26,6 +26,20 @@ const slides = [
 ];
 
 function App() {
+  const routeMap: Record<string, string> = {
+    "/": "home",
+    "/reviews": "reviews",
+    "/pricing": "pricing",
+    "/training": "training",
+    "/process": "process",
+    "/about": "about",
+    "/account": "account",
+    "/appointment": "appointment",
+    "/contact": "contact",
+  };
+
+  const currentRoute = routeMap[window.location.pathname] || "home";
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [flash, setFlash] = useState(false);
 
@@ -54,7 +68,7 @@ function App() {
   const slide = slides[activeSlide];
 
   return (
-    <main>
+    <main className={`page-shell route-${currentRoute}`}>
       <section
         id="home"
         className={flash ? "hero-section flash-active" : "hero-section"}
@@ -76,13 +90,13 @@ function App() {
 
           <div className="nav-links">
             <a className="active" href="/">Home</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#training">Training</a>
-            <a href="#process">Process</a>
-            <a href="#about">About</a>
-            <a href="#account">My Account</a>
-            <a className="book-btn" href="#appointment">Book Appointment</a>
+            <a className={currentRoute === "reviews" ? "active" : ""} href="/reviews">Reviews</a>
+            <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
+            <a className={currentRoute === "training" ? "active" : ""} href="/training">Training</a>
+            <a className={currentRoute === "process" ? "active" : ""} href="/process">Process</a>
+            <a className={currentRoute === "about" ? "active" : ""} href="/about">About</a>
+            <a className={currentRoute === "account" ? "active" : ""} href="/account">My Account</a>
+            <a className="book-btn" href="/appointment">Book Appointment</a>
           </div>
         </nav>
 
@@ -99,7 +113,7 @@ function App() {
             <a className="primary-btn" href="mailto:info@stellartms.com">
               Book a Consultation →
             </a>
-            <a className="secondary-btn" href="#training">
+            <a className="secondary-btn" href="/training">
               Learn More
             </a>
           </div>
@@ -382,7 +396,7 @@ function App() {
         <p className="section-intro">
           This area can later include student login, course progress, saved resources, and appointment history.
         </p>
-        <a href="#appointment" className="enroll-btn">Request Account Help →</a>
+        <a href="/appointment" className="enroll-btn">Request Account Help →</a>
       </section>
 
       <section className="appointment-section" id="appointment">
@@ -396,7 +410,7 @@ function App() {
           <a href="mailto:info@stellartms.com?subject=Book%20Appointment%20Request" className="enroll-btn">
             Email to Book Appointment →
           </a>
-          <a href="#contact" className="enroll-btn dark">
+          <a href="/contact" className="enroll-btn dark">
             Go to Contact Section →
           </a>
         </div>
@@ -411,7 +425,87 @@ function App() {
         </a>
       </section>
 
-      <footer>© 2026 Stellar Groupware Inc. All rights reserved.</footer>
+
+      <div className="cookie-banner">
+        <div className="cookie-icon">🛡️</div>
+        <div className="cookie-copy">
+          <strong>We value your privacy</strong>
+          <p>
+            We use cookies to improve your experience and analyze website traffic.
+            By clicking “Accept All”, you consent to our use of analytics cookies.
+          </p>
+        </div>
+        <div className="cookie-actions">
+          <button type="button" onClick={() => document.querySelector('.cookie-banner')?.remove()}>
+            Accept All
+          </button>
+          <button type="button" className="decline-btn" onClick={() => document.querySelector('.cookie-banner')?.remove()}>
+            Decline
+          </button>
+        </div>
+      </div>
+
+
+      <footer className="site-footer">
+        <div className="footer-grid">
+          <div>
+            <div className="footer-brand">
+              <span>S</span>
+              <div>
+                <strong>Stellar</strong>
+                <small>GROUPWARE INC</small>
+              </div>
+            </div>
+            <p>
+              Helping beginners and professionals build practical IT skills,
+              project confidence, and career readiness.
+            </p>
+          </div>
+
+          <div>
+            <h4>Quick Links</h4>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/training">Training</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/reviews">Reviews</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+
+          <div>
+            <h4>Resources</h4>
+            <a href="/process">Our Process</a>
+            <a href="/account">My Account</a>
+            <a href="/appointment">Book Appointment</a>
+            <a href="/pricing">Courses</a>
+            <a href="/reviews">Student Reviews</a>
+            <a href="/contact">Support</a>
+          </div>
+
+          <div>
+            <h4>Select Region</h4>
+            <button type="button">🇨🇦 Canada</button>
+            <button type="button">🇬🇧 UK & EU</button>
+            <button type="button" className="active-region">🇮🇳 India</button>
+            <div className="social-row">
+              <span>f</span>
+              <span>in</span>
+              <span>◎</span>
+              <span>𝕏</span>
+              <span>▶</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <span>© 2026 Stellar Groupware Inc. All rights reserved.</span>
+          <div>
+            <a href="/contact">Privacy Policy</a>
+            <a href="/contact">Terms of Use</a>
+            <a href="/contact">Customer Support</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
