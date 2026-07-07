@@ -26,6 +26,29 @@ const slides = [
 ];
 
 function App() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const stellarCookieSaved = localStorage.getItem("stellar-cookie-choice") === "saved";
+
+    if (stellarCookieSaved) {
+      document.body.classList.add("cookies-saved");
+    }
+
+    const handleCookieClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const text = target.textContent?.trim().toLowerCase();
+
+      if (text === "accept all" || text === "decline") {
+        localStorage.setItem("stellar-cookie-choice", "saved");
+        document.body.classList.add("cookies-saved");
+      }
+    };
+
+    document.addEventListener("click", handleCookieClick);
+    return () => document.removeEventListener("click", handleCookieClick);
+  }, []);
+
   const routeMap: Record<string, string> = {
     "/": "home",
     "/reviews": "reviews",
@@ -69,6 +92,13 @@ function App() {
 
   return (
     <main className={`page-shell route-${currentRoute}`}>
+      {currentRoute !== "home" && (
+        <div className="breadcrumbs">
+          <a href="/">Home</a>
+          <span>›</span>
+          <strong>{currentRoute.replace("-", " ")}</strong>
+        </div>
+      )}
       <section
         id="home"
         className={flash ? "hero-section flash-active" : "hero-section"}
@@ -79,7 +109,15 @@ function App() {
         <div className="globe-effect"></div>
         <div className="slide-flash"></div>
 
-        <nav className="navbar">
+        <nav className={`navbar ${mobileMenuOpen ? "mobile-open" : ""}`}>
+            <button
+              type="button"
+              className="hamburger-btn"
+              aria-label="Open navigation menu"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              ☰
+            </button>
           <div className="brand">
             <div className="brand-icon">S</div>
             <div>
@@ -95,7 +133,7 @@ function App() {
             <a className={currentRoute === "training" ? "active" : ""} href="/training">Training</a>
             <a className={currentRoute === "process" ? "active" : ""} href="/process">Process</a>
             <a className={currentRoute === "about" ? "active" : ""} href="/about">About</a>
-            <a className={currentRoute === "account" ? "active" : ""} href="/account">My Account</a>
+            <a className={currentRoute === "account" ? "active" : ""} href="/account" target="_blank" rel="noreferrer">My Account</a>
             <a className="book-btn" href="/appointment">Book Appointment</a>
           </div>
         </nav>
@@ -393,10 +431,13 @@ function App() {
       <section className="account-section" id="account">
         <p className="section-label">MY ACCOUNT</p>
         <h2>Student account access coming soon.</h2>
-        <p className="section-intro">
-          This area can later include student login, course progress, saved resources, and appointment history.
+        <p>
+          This area can later include student login, course progress, saved resources,
+          appointment history, and support requests.
         </p>
-        <a href="/appointment" className="enroll-btn">Request Account Help →</a>
+        <a className="contact-btn account-help-btn" href="mailto:info@stellartms.com?subject=Student%20Account%20Help">
+          Request Account Help →
+        </a>
       </section>
 
       <section className="appointment-section" id="appointment">
@@ -475,7 +516,7 @@ function App() {
           <div>
             <h4>Resources</h4>
             <a href="/process">Our Process</a>
-            <a href="/account">My Account</a>
+            <a href="/account" target="_blank" rel="noreferrer">My Account</a>
             <a href="/appointment">Book Appointment</a>
             <a href="/pricing">Courses</a>
             <a href="/reviews">Student Reviews</a>
