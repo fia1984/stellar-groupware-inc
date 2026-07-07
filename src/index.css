@@ -3166,3 +3166,42 @@ button:hover {
     flex-direction: column;
   }
 }
+
+/* Final nav active/hover fix from PDF feedback */
+.navbar a {
+  background: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+}
+
+.navbar a:hover {
+  background: #16a34a !important;
+  color: #ffffff !important;
+  border: 1px solid #22c55e !important;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22), 0 12px 28px rgba(22, 163, 74, 0.25) !important;
+}
+
+/* Only real active route should be green */
+.navbar a.active {
+  background: #16a34a !important;
+  color: #ffffff !important;
+  border: 1px solid #22c55e !important;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.22), 0 12px 28px rgba(22, 163, 74, 0.25) !important;
+}
+
+/* Book Appointment is always CTA green, not a selected tab */
+.navbar .book-btn,
+.book-btn {
+  background: #16a34a !important;
+  color: #ffffff !important;
+  border: 1px solid #16a34a !important;
+  box-shadow: 0 12px 28px rgba(22, 163, 74, 0.25) !important;
+}
+
+/* Prevent old hash/target styles from making Pricing green on Home */
+body:not(.pricing-page) .navbar a[href="/pricing"]:not(:hover):not(.active) {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
