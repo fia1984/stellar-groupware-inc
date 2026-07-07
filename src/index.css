@@ -3285,3 +3285,17 @@ body:not(.pricing-page) .navbar a[href="/pricing"]:not(:hover):not(.active) {
     align-items: flex-start !important;
   }
 }
+
+/* Footer region buttons should look consistent */
+.site-footer .active-region {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.site-footer button {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.site-footer button:hover {
+  background: rgba(22, 163, 74, 0.35) !important;
+}

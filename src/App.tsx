@@ -486,7 +486,7 @@ function App() {
             <h4>Select Region</h4>
             <button type="button">🇨🇦 Canada</button>
             <button type="button">🇬🇧 UK & EU</button>
-            <button type="button" className="active-region">🇮🇳 India</button>
+            <button type="button">🇮🇳 India</button>
             <div className="social-row">
               <span>f</span>
               <span>in</span>
