@@ -3958,3 +3958,43 @@ a,
 .navbar {
   z-index: 10001 !important;
 }
+
+/* Feedback 5: Breadcrumbs under navbar on different routes */
+.breadcrumb-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px clamp(24px, 8vw, 160px);
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  color: #334155;
+  font-size: 0.95rem;
+  font-weight: 600;
+  position: sticky;
+  top: 86px;
+  z-index: 9999;
+}
+
+.breadcrumb-bar a {
+  color: #334155;
+  text-decoration: none;
+}
+
+.breadcrumb-bar a:hover {
+  color: #16a34a;
+}
+
+.breadcrumb-bar span:last-child {
+  color: #0f172a;
+}
+
+@media (max-width: 800px) {
+  .breadcrumb-bar {
+    top: 76px;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+}
+

@@ -40,6 +40,18 @@ function App() {
 
   const currentRoute = routeMap[window.location.pathname] || "home";
 
+  const breadcrumbLabels: Record<string, string> = {
+    home: "Home",
+    reviews: "Reviews",
+    pricing: "Pricing",
+    training: "Training",
+    process: "Process",
+    about: "About",
+    account: "My Account",
+  };
+
+  const breadcrumbLabel = breadcrumbLabels[currentRoute] || "Home";
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [flash, setFlash] = useState(false);
 
