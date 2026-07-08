@@ -50,8 +50,6 @@ function App() {
     account: "My Account",
   };
 
-  const breadcrumbLabel = breadcrumbLabels[currentRoute] || "Home";
-
   const [activeSlide, setActiveSlide] = useState(0);
   const [flash, setFlash] = useState(false);
 
