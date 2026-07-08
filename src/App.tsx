@@ -100,10 +100,10 @@ function App() {
           </div>
         </nav>
 
-        <div className="breadcrumb-bar">
-          <a href="/">Home</a>
-          {currentRoute !== "home" && <span>›</span>}
-          {currentRoute !== "home" && (
+        {currentRoute !== "home" && (
+          <div className="breadcrumb-bar">
+            <a href="/">Home</a>
+            <span>›</span>
             <span>
               {currentRoute === "reviews"
                 ? "Reviews"
@@ -119,11 +119,10 @@ function App() {
                 ? "My Account"
                 : "Home"}
             </span>
-          )}
-        </div>
+          </div>
+        )}
 
-
-        <button className="slide-arrow left" onClick={previousSlide}>‹</button>
+<button className="slide-arrow left" onClick={previousSlide}>‹</button>
 
         <div className="hero-content" key={activeSlide}>
           <p className="hero-tag">{slide.tag}</p>
