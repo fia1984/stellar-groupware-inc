@@ -3997,3 +3997,43 @@ a,
   }
 }
 
+/* Feedback 5: Breadcrumbs below navbar */
+.breadcrumb-bar {
+  width: fit-content;
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  margin: 12px auto 0;
+  padding: 9px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 999px;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 10002;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.breadcrumb-bar a {
+  color: #334155;
+  text-decoration: none;
+}
+
+.breadcrumb-bar a:hover {
+  color: #16a34a;
+}
+
+.breadcrumb-bar span:last-child {
+  color: #0f172a;
+}
+
+@media (max-width: 800px) {
+  .breadcrumb-bar {
+    margin-top: 10px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+

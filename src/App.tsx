@@ -100,6 +100,29 @@ function App() {
           </div>
         </nav>
 
+        <div className="breadcrumb-bar">
+          <a href="/">Home</a>
+          {currentRoute !== "home" && <span>›</span>}
+          {currentRoute !== "home" && (
+            <span>
+              {currentRoute === "reviews"
+                ? "Reviews"
+                : currentRoute === "pricing"
+                ? "Pricing"
+                : currentRoute === "training"
+                ? "Training"
+                : currentRoute === "process"
+                ? "Process"
+                : currentRoute === "about"
+                ? "About"
+                : currentRoute === "account"
+                ? "My Account"
+                : "Home"}
+            </span>
+          )}
+        </div>
+
+
         <button className="slide-arrow left" onClick={previousSlide}>‹</button>
 
         <div className="hero-content" key={activeSlide}>
