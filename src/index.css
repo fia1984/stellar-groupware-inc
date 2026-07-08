@@ -3667,3 +3667,58 @@ a,
 }
 /* CSS_FIX_END_FEEDBACK_2_SAFE_REPAIR_DO_NOT_DUPLICATE */
 
+/* Feedback 3: Hero pagination arrows like reference website */
+.route-home .hero-section {
+  position: relative !important;
+}
+
+.route-home .slide-arrow {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  background: rgba(0, 0, 0, 0.38) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 34px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  z-index: 35 !important;
+  box-shadow: none !important;
+}
+
+.route-home .slide-arrow-left {
+  left: 28px !important;
+}
+
+.route-home .slide-arrow-right {
+  right: 28px !important;
+}
+
+.route-home .slide-arrow:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-50%) !important;
+}
+
+@media (max-width: 700px) {
+  .route-home .slide-arrow {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 26px !important;
+  }
+
+  .route-home .slide-arrow-left {
+    left: 12px !important;
+  }
+
+  .route-home .slide-arrow-right {
+    right: 12px !important;
+  }
+}
+
