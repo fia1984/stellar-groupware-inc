@@ -3777,3 +3777,64 @@ a,
   }
 }
 
+/* Feedback 3 final: visible left/right pagination arrows like reference */
+.route-home .hero-section,
+.hero-section {
+  position: relative !important;
+}
+
+.hero-pagination-arrow {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 46px !important;
+  height: 46px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  background: rgba(0, 0, 0, 0.42) !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 38px !important;
+  font-weight: 300 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  z-index: 99999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  box-shadow: none !important;
+}
+
+.hero-pagination-left {
+  left: 26px !important;
+}
+
+.hero-pagination-right {
+  right: 26px !important;
+}
+
+.hero-pagination-arrow:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
+  transform: translateY(-50%) !important;
+}
+
+@media (max-width: 700px) {
+  .hero-pagination-arrow {
+    width: 54px !important;
+    height: 54px !important;
+    font-size: 42px !important;
+    top: 48% !important;
+  }
+
+  .hero-pagination-left {
+    left: 22px !important;
+  }
+
+  .hero-pagination-right {
+    right: 22px !important;
+  }
+}
+
