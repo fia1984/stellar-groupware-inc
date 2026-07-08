@@ -89,7 +89,7 @@ function App() {
           </div>
 
           <div className="nav-links">
-            <a className="active" href="/">Home</a>
+            <a className={currentRoute === "home" ? "active" : ""} href="/">Home</a>
             <a className={currentRoute === "reviews" ? "active" : ""} href="/reviews">Reviews</a>
             <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
             <a className={currentRoute === "training" ? "active" : ""} href="/training">Training</a>
