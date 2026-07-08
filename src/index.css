@@ -3585,3 +3585,30 @@ a,
     font-size: 0.82rem !important;
   }
 }
+
+/* Final fix: inactive header tabs should NOT turn green on hover.
+   Only active page tab stays green. Book Appointment stays green CTA. */
+.navbar a:not(.book-btn):hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.route-home .navbar a[href="/"]:not(.book-btn),
+.route-reviews .navbar a[href="/reviews"]:not(.book-btn),
+.route-pricing .navbar a[href="/pricing"]:not(.book-btn),
+.route-training .navbar a[href="/training"]:not(.book-btn),
+.route-process .navbar a[href="/process"]:not(.book-btn),
+.route-about .navbar a[href="/about"]:not(.book-btn),
+.route-account .navbar a[href="/account"]:not(.book-btn),
+.navbar a.active:not(.book-btn) {
+  background: #25d366 !important;
+  color: #ffffff !important;
+}
+
+.navbar .book-btn,
+.navbar .book-btn:hover {
+  background: #25d366 !important;
+  color: #ffffff !important;
+}
