@@ -3939,3 +3939,22 @@ a,
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* Feedback 4: Sticky top navbar on all routes */
+.hero-card {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10000 !important;
+  width: 100% !important;
+}
+
+.page-shell:not(.route-home) .hero-card,
+.route-home .hero-card {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10000 !important;
+}
+
+.navbar {
+  z-index: 10001 !important;
+}
