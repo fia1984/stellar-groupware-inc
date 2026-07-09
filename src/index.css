@@ -4011,3 +4011,59 @@ a,
   }
 }
 
+/* FINAL breadcrumb cleanup: only one reference-style row */
+.page-shell:not(.route-home) .hero-section::after,
+.page-shell.route-reviews .hero-section::after,
+.page-shell.route-pricing .hero-section::after,
+.page-shell.route-training .hero-section::after,
+.page-shell.route-process .hero-section::after,
+.page-shell.route-about .hero-section::after,
+.page-shell.route-account .hero-section::after,
+.hero-section::after {
+  content: none !important;
+  display: none !important;
+}
+
+.breadcrumb-bar {
+  display: none !important;
+}
+
+.route-home .breadcrumb-strip {
+  display: none !important;
+}
+
+.breadcrumb-strip + .breadcrumb-strip {
+  display: none !important;
+}
+
+.breadcrumb-strip {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 8px clamp(28px, 8vw, 180px) !important;
+  margin: 0 !important;
+  background: #ffffff !important;
+  border-top: 1px solid rgba(15, 23, 42, 0.06) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+  color: #334155 !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  position: relative !important;
+  z-index: 10005 !important;
+}
+
+.breadcrumb-strip a {
+  color: #334155 !important;
+  text-decoration: none !important;
+}
+
+.breadcrumb-strip a:hover {
+  color: #16a34a !important;
+}
+
+.breadcrumb-strip span:last-child {
+  color: #0f172a !important;
+}
+
