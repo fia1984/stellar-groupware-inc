@@ -103,6 +103,13 @@ function App() {
             </div>
           </div>
 
+          <input className="mobile-menu-toggle" id="mobile-menu-toggle" type="checkbox" />
+          <label className="mobile-menu-button" htmlFor="mobile-menu-toggle" aria-label="Open navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+
           <div className="nav-links">
             <a className={currentRoute === "home" ? "active" : ""} href="/">Home</a>
             <a className={currentRoute === "reviews" ? "active" : ""} href="/reviews">Reviews</a>
@@ -151,6 +158,7 @@ function App() {
 
         {currentRoute !== "home" && (
           <div className="breadcrumb-strip">
+            <span className="breadcrumb-stellar-icon">S</span>
             <a href="/">Home</a>
             <span>›</span>
             <span>{routeTitle}</span>
