@@ -107,10 +107,44 @@ function App() {
             <a className={currentRoute === "home" ? "active" : ""} href="/">Home</a>
             <a className={currentRoute === "reviews" ? "active" : ""} href="/reviews">Reviews</a>
             <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
-            <a className={currentRoute === "training" ? "active" : ""} href="/training">Training</a>
-            <a className={currentRoute === "process" ? "active" : ""} href="/process">Process</a>
-            <a className={currentRoute === "about" ? "active" : ""} href="/about">About</a>
-            <a className={currentRoute === "account" ? "active" : ""} href="/account">My Account</a>
+
+            <div className="nav-dropdown">
+              <a className={currentRoute === "training" ? "active" : ""} href="/training">
+                Training ▾
+              </a>
+              <div className="dropdown-menu">
+                <a href="/training">IT Training</a>
+                <a href="/training#job-support">Job Support</a>
+                <a href="/training#career-mentoring">Career Mentoring</a>
+              </div>
+            </div>
+
+            <div className="nav-dropdown">
+              <a className={currentRoute === "process" ? "active" : ""} href="/process">
+                Process ▾
+              </a>
+              <div className="dropdown-menu">
+                <a href="/process">How It Works</a>
+                <a href="/process#enrollment">Enrollment Steps</a>
+                <a href="/process#support">Support Process</a>
+              </div>
+            </div>
+
+            <div className="nav-dropdown">
+              <a className={currentRoute === "about" ? "active" : ""} href="/about">
+                About ▾
+              </a>
+              <div className="dropdown-menu">
+                <a href="/about">About Us</a>
+                <a href="/about#mission">Our Mission</a>
+                <a href="/about#team">Our Team</a>
+              </div>
+            </div>
+
+            <a href="/account-access.html" target="_blank" rel="noreferrer">
+              My Account
+            </a>
+
             <a className="book-btn" href="/appointment">Book Appointment</a>
           </div>
         </nav>
