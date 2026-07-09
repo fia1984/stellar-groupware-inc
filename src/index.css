@@ -3959,12 +3959,13 @@ a,
   z-index: 10001 !important;
 }
 
-
-
-
-/* Reference-style breadcrumbs: thin row under navbar */
+/* Final reference breadcrumb: one thin row under navbar */
 .hero-section::after {
   content: none !important;
+  display: none !important;
+}
+
+.breadcrumb-bar {
   display: none !important;
 }
 
@@ -4009,3 +4010,4 @@ a,
     font-size: 0.85rem !important;
   }
 }
+

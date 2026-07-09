@@ -124,6 +124,7 @@ function App() {
         )}
 
 
+
         {currentRoute !== "home" && (
           <div
             style={{
