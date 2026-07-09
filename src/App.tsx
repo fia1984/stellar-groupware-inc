@@ -116,6 +116,15 @@ function App() {
         </nav>
 
         {currentRoute !== "home" && (
+          <div className="breadcrumb-strip">
+            <a href="/">Home</a>
+            <span>›</span>
+            <span>{routeTitle}</span>
+          </div>
+        )}
+
+
+        {currentRoute !== "home" && (
           <div
             style={{
               width: "100%",
