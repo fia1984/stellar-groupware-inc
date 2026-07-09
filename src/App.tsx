@@ -116,12 +116,31 @@ function App() {
         </nav>
 
         {currentRoute !== "home" && (
-          <div className="breadcrumb-bar">
-            <a href="/">Home</a>
+          <div
+            style={{
+              width: "100%",
+              padding: "10px 40px",
+              background: "white",
+              color: "#334155",
+              fontSize: "15px",
+              fontWeight: 700,
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+              position: "relative",
+              zIndex: 999999,
+              borderTop: "1px solid rgba(15, 23, 42, 0.08)",
+              borderBottom: "1px solid rgba(15, 23, 42, 0.08)",
+            }}
+          >
+            <a href="/" style={{ color: "#334155", textDecoration: "none" }}>
+              Home
+            </a>
             <span>›</span>
             <span>{routeTitle}</span>
           </div>
         )}
+
 
 <button className="slide-arrow left" onClick={previousSlide}>‹</button>
 
