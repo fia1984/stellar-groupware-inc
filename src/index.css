@@ -3959,16 +3959,16 @@ a,
   z-index: 10001 !important;
 }
 
-/* Feedback 5 final: breadcrumbs on route pages only */
+/* Feedback 5 real fix: breadcrumbs below navbar on route pages */
 .route-home .breadcrumb-bar {
   display: none !important;
 }
 
-.page-shell:not(.route-home) .breadcrumb-bar {
+.breadcrumb-bar {
+  width: 100% !important;
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
-  width: 100% !important;
   padding: 10px clamp(24px, 8vw, 150px) !important;
   margin: 0 !important;
   background: #ffffff !important;
@@ -3996,7 +3996,7 @@ a,
 }
 
 @media (max-width: 800px) {
-  .page-shell:not(.route-home) .breadcrumb-bar {
+  .breadcrumb-bar {
     padding: 10px 22px !important;
     font-size: 0.9rem !important;
   }

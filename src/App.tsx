@@ -40,6 +40,21 @@ function App() {
 
   const currentRoute = routeMap[window.location.pathname] || "home";
 
+  const routeTitle =
+    currentRoute === "reviews"
+      ? "Reviews"
+      : currentRoute === "pricing"
+      ? "Pricing"
+      : currentRoute === "training"
+      ? "Training"
+      : currentRoute === "process"
+      ? "Process"
+      : currentRoute === "about"
+      ? "About"
+      : currentRoute === "account"
+      ? "My Account"
+      : "Home";
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [flash, setFlash] = useState(false);
 
@@ -99,28 +114,7 @@ function App() {
             <a className="book-btn" href="/appointment">Book Appointment</a>
           </div>
         </nav>
-
-        {currentRoute !== "home" && (
-          <div className="breadcrumb-bar">
-            <a href="/">Home</a>
-            <span>›</span>
-            <span>
-              {currentRoute === "reviews"
-                ? "Reviews"
-                : currentRoute === "pricing"
-                ? "Pricing"
-                : currentRoute === "training"
-                ? "Training"
-                : currentRoute === "process"
-                ? "Process"
-                : currentRoute === "about"
-                ? "About"
-                : currentRoute === "account"
-                ? "My Account"
-                : "Home"}
-            </span>
-          </div>
-        )}
+)}
 
 <button className="slide-arrow left" onClick={previousSlide}>‹</button>
 
@@ -153,6 +147,15 @@ function App() {
           ))}
         </div>
       </section>
+
+      {currentRoute !== "home" && (
+        <div className="breadcrumb-bar">
+          <a href="/">Home</a>
+          <span>›</span>
+          <span>{routeTitle}</span>
+        </div>
+      )}
+
 
       <section className="services-section" id="training">
         <p className="section-label">WHAT WE DO</p>
