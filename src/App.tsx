@@ -114,7 +114,14 @@ function App() {
             <a className="book-btn" href="/appointment">Book Appointment</a>
           </div>
         </nav>
-)}
+
+        {currentRoute !== "home" && (
+          <div className="breadcrumb-bar">
+            <a href="/">Home</a>
+            <span>›</span>
+            <span>{routeTitle}</span>
+          </div>
+        )}
 
 <button className="slide-arrow left" onClick={previousSlide}>‹</button>
 
@@ -147,17 +154,7 @@ function App() {
           ))}
         </div>
       </section>
-
-      {currentRoute !== "home" && (
-        <div className="breadcrumb-bar">
-          <a href="/">Home</a>
-          <span>›</span>
-          <span>{routeTitle}</span>
-        </div>
-      )}
-
-
-      <section className="services-section" id="training">
+<section className="services-section" id="training">
         <p className="section-label">WHAT WE DO</p>
         <h2>Training, mentoring, and IT support made simple.</h2>
 
