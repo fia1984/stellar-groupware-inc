@@ -4227,3 +4227,47 @@ a,
     overflow-x: auto !important;
   }
 }
+
+/* Remove unwanted white dropdown boxes from header navigation */
+.nav-dropdown .dropdown-menu,
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+  display: none !important;
+}
+
+/* Clickable footer region cards — preserve the existing design */
+.site-footer .region-link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Clickable social icons — preserve the existing circles */
+.social-row a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.social-row a:hover,
+.social-row a:focus-visible {
+  transform: translateY(-2px);
+}
+
+/* Preserve social-circle design when icons are links */
+.social-row a {
+  display: inline-flex;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 999px;
+}
+
+.social-row a:hover,
+.social-row a:focus-visible {
+  transform: translateY(-2px);
+}

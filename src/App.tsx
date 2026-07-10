@@ -551,16 +551,82 @@ function App() {
 
           <div>
             <h4>Select Region</h4>
-            <button type="button">🇨🇦 Canada</button>
-            <button type="button">🇬🇧 UK & EU</button>
-            <button type="button">🇮🇳 India</button>
-            <div className="social-row">
-              <span>f</span>
-              <span>in</span>
-              <span>◎</span>
-              <span>𝕏</span>
-              <span>▶</span>
-            </div>
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "/ca";
+                }}
+                aria-label="Open Canada website"
+              >
+                🇨🇦 Canada
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "/uk";
+                }}
+                aria-label="Open UK and EU website"
+              >
+                🇬🇧 UK &amp; EU
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = "/in";
+                }}
+                aria-label="Open India website"
+              >
+                🇮🇳 India
+              </button>
+
+              <div className="social-row">
+                <a
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Facebook"
+                >
+                  <span>f</span>
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open LinkedIn"
+                >
+                  <span>in</span>
+                </a>
+
+                <a
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open Instagram"
+                >
+                  <span>◎</span>
+                </a>
+
+                <a
+                  href="https://x.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open X"
+                >
+                  <span>𝕏</span>
+                </a>
+
+                <a
+                  href="https://www.youtube.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open YouTube"
+                >
+                  <span>▶</span>
+                </a>
+              </div>
           </div>
         </div>
 
