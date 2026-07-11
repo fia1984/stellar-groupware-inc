@@ -4443,3 +4443,251 @@ a,
     min-height: 0 !important;
   }
 }
+
+/* Match reference pricing typography */
+.page-shell.route-pricing #pricing,
+.page-shell.route-pricing #pricing * {
+  font-family: Inter, Arial, Helvetica, sans-serif !important;
+}
+
+.page-shell.route-pricing .pathway-header h3,
+.page-shell.route-pricing .price-card h3,
+.page-shell.route-pricing .price-card h4 {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.page-shell.route-pricing .pathway-header p {
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.page-shell.route-pricing .price-card .small-text,
+.page-shell.route-pricing .price-card li,
+.page-shell.route-pricing .pathway-header em {
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
+
+.page-shell.route-pricing .enroll-btn {
+  font-weight: 700 !important;
+}
+
+/* Final pricing spacing correction to match reference */
+.page-shell.route-pricing #pricing > h2 {
+  font-size: clamp(2.6rem, 4.2vw, 4.1rem) !important;
+  line-height: 1.05 !important;
+  margin-bottom: 22px !important;
+}
+
+.page-shell.route-pricing #pricing > .section-intro {
+  max-width: 860px !important;
+  margin-bottom: 42px !important;
+  font-size: 1.05rem !important;
+  line-height: 1.55 !important;
+}
+
+.page-shell.route-pricing .pathway-box {
+  min-height: 0 !important;
+  padding: 34px 38px 38px !important;
+}
+
+.page-shell.route-pricing .pathway-header {
+  grid-template-columns: auto minmax(420px, 1fr) minmax(360px, 520px) !important;
+  align-items: start !important;
+  margin-bottom: 28px !important;
+}
+
+.page-shell.route-pricing .pathway-header em {
+  width: 100% !important;
+  max-width: 520px !important;
+  white-space: normal !important;
+  text-align: right !important;
+  line-height: 1.45 !important;
+}
+
+.page-shell.route-pricing .pricing-grid,
+.page-shell.route-pricing .pricing-grid.two-card,
+.page-shell.route-pricing .pricing-grid.single-card {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .page-shell.route-pricing .pathway-header {
+    grid-template-columns: auto 1fr !important;
+  }
+
+  .page-shell.route-pricing .pathway-header em {
+    grid-column: 1 / -1 !important;
+    max-width: none !important;
+    text-align: left !important;
+  }
+}
+
+/* FINAL: compact NCPL-style pricing pathway alignment */
+.page-shell.route-pricing #pricing .pathway-box {
+  display: block !important;
+  width: 94% !important;
+  max-width: 1480px !important;
+  min-height: 0 !important;
+  margin: 0 auto 36px !important;
+  padding: 32px 34px 34px !important;
+  border-radius: 24px !important;
+}
+
+/* Keep number, title and note on one compact row */
+.page-shell.route-pricing #pricing .pathway-header {
+  display: grid !important;
+  grid-template-columns: 52px minmax(360px, 1fr) minmax(360px, 520px) !important;
+  align-items: start !important;
+  column-gap: 18px !important;
+  row-gap: 0 !important;
+  width: 100% !important;
+  margin: 0 0 28px !important;
+  padding: 0 !important;
+}
+
+.page-shell.route-pricing #pricing .pathway-number {
+  grid-column: 1 !important;
+  grid-row: 1 / span 2 !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  margin: 0 !important;
+  font-size: 1.2rem !important;
+}
+
+.page-shell.route-pricing #pricing .pathway-header > div {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  min-width: 0 !important;
+}
+
+.page-shell.route-pricing #pricing .pathway-header h3 {
+  margin: 0 0 5px !important;
+  font-size: 1.45rem !important;
+  line-height: 1.15 !important;
+}
+
+.page-shell.route-pricing #pricing .pathway-header p {
+  margin: 0 !important;
+  font-size: 0.94rem !important;
+  line-height: 1.35 !important;
+  white-space: nowrap !important;
+}
+
+/* Put description at the top-right, like the reference */
+.page-shell.route-pricing #pricing .pathway-header em {
+  grid-column: 3 !important;
+  grid-row: 1 !important;
+  justify-self: end !important;
+  align-self: start !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 3px 0 0 !important;
+  padding: 0 !important;
+  color: #53647d !important;
+  font-size: 0.92rem !important;
+  line-height: 1.4 !important;
+  text-align: right !important;
+  white-space: normal !important;
+}
+
+/* Remove the large empty area before cards */
+.page-shell.route-pricing #pricing .pricing-grid,
+.page-shell.route-pricing #pricing .pricing-grid.two-card,
+.page-shell.route-pricing #pricing .pricing-grid.single-card {
+  display: flex !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  gap: 28px !important;
+  width: 100% !important;
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+/* Match the reference card proportions */
+.page-shell.route-pricing #pricing .price-card,
+.page-shell.route-pricing #pricing .pricing-grid.two-card .price-card,
+.page-shell.route-pricing #pricing .pricing-grid.single-card .price-card {
+  flex: 0 1 285px !important;
+  width: 285px !important;
+  max-width: 285px !important;
+  min-height: 500px !important;
+  padding: 24px 22px 20px !important;
+  border-radius: 8px !important;
+}
+
+.page-shell.route-pricing #pricing .price-card h3 {
+  font-size: 1.22rem !important;
+  line-height: 1.35 !important;
+}
+
+.page-shell.route-pricing #pricing .price-card .small-text {
+  font-size: 0.82rem !important;
+  line-height: 1.45 !important;
+}
+
+.page-shell.route-pricing #pricing .price-card h4 {
+  font-size: 2rem !important;
+}
+
+.page-shell.route-pricing #pricing .price-card li {
+  font-size: 0.84rem !important;
+  line-height: 1.35 !important;
+}
+
+/* Smaller OR and arrow spacing */
+.page-shell.route-pricing #pricing .or-pill {
+  align-self: center !important;
+  min-width: 40px !important;
+  height: 36px !important;
+  margin: 0 -10px !important;
+}
+
+.page-shell.route-pricing #pricing .arrow-pill {
+  align-self: center !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  margin: 0 -8px !important;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .page-shell.route-pricing #pricing .pathway-header {
+    grid-template-columns: 46px 1fr !important;
+  }
+
+  .page-shell.route-pricing #pricing .pathway-header > div {
+    grid-column: 2 !important;
+  }
+
+  .page-shell.route-pricing #pricing .pathway-header em {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    justify-self: start !important;
+    margin-top: 14px !important;
+    max-width: none !important;
+    text-align: left !important;
+  }
+
+  .page-shell.route-pricing #pricing .pathway-header p {
+    white-space: normal !important;
+  }
+
+  .page-shell.route-pricing #pricing .pricing-grid,
+  .page-shell.route-pricing #pricing .pricing-grid.two-card,
+  .page-shell.route-pricing #pricing .pricing-grid.single-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .page-shell.route-pricing #pricing .price-card,
+  .page-shell.route-pricing #pricing .pricing-grid.two-card .price-card,
+  .page-shell.route-pricing #pricing .pricing-grid.single-card .price-card {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+  }
+}
