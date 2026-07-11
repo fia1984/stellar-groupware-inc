@@ -4691,3 +4691,73 @@ a,
     min-height: 0 !important;
   }
 }
+
+/* Pricing FAQ section — reference-style layout */
+.page-shell.route-pricing .pricing-faq {
+  width: 100% !important;
+  max-width: 1320px !important;
+  margin: 72px auto 0 !important;
+  padding: 0 !important;
+}
+
+.page-shell.route-pricing .pricing-faq h2 {
+  margin: 0 0 40px !important;
+  color: #17313a !important;
+  font-size: clamp(2rem, 3.5vw, 3.2rem) !important;
+  line-height: 1.1 !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  letter-spacing: -0.03em !important;
+}
+
+.page-shell.route-pricing .pricing-faq-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+}
+
+.page-shell.route-pricing .pricing-faq-card {
+  padding: 34px 38px !important;
+  background: #ffffff !important;
+  border: 1px solid #d9e2e8 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 3px 10px rgba(15, 45, 55, 0.06) !important;
+}
+
+.page-shell.route-pricing .pricing-faq-card h3 {
+  margin: 0 0 14px !important;
+  color: #17313a !important;
+  font-size: 1.35rem !important;
+  line-height: 1.35 !important;
+  font-weight: 800 !important;
+}
+
+.page-shell.route-pricing .pricing-faq-card p {
+  margin: 0 !important;
+  color: #53647d !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+}
+
+@media (max-width: 700px) {
+  .page-shell.route-pricing .pricing-faq {
+    margin-top: 48px !important;
+  }
+
+  .page-shell.route-pricing .pricing-faq h2 {
+    margin-bottom: 28px !important;
+    font-size: 2rem !important;
+  }
+
+  .page-shell.route-pricing .pricing-faq-card {
+    padding: 26px 22px !important;
+  }
+
+  .page-shell.route-pricing .pricing-faq-card h3 {
+    font-size: 1.15rem !important;
+  }
+
+  .page-shell.route-pricing .pricing-faq-card p {
+    font-size: 0.94rem !important;
+  }
+}

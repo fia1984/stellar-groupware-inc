@@ -380,6 +380,36 @@ function App() {
             </div>
           </div>
         </div>
+          <section className="pricing-faq" aria-labelledby="pricing-faq-title">
+            <h2 id="pricing-faq-title">Pricing questions, answered</h2>
+
+            <div className="pricing-faq-list">
+              <article className="pricing-faq-card">
+                <h3>What currency are Stellar prices listed in?</h3>
+                <p>
+                  Stellar prices are listed in Canadian dollars (CAD). Applicable
+                  taxes may be added depending on the service and location.
+                </p>
+              </article>
+
+              <article className="pricing-faq-card">
+                <h3>Can I choose only one service?</h3>
+                <p>
+                  Yes. You can choose training, bootcamp support, or career support
+                  separately, or follow a complete pathway based on your goals.
+                </p>
+              </article>
+
+              <article className="pricing-faq-card">
+                <h3>Are the programs available online?</h3>
+                <p>
+                  Yes. Most Stellar training, mentoring, project-support, and
+                  career-support sessions are available online.
+                </p>
+              </article>
+            </div>
+          </section>
+
       </section>
 
 
