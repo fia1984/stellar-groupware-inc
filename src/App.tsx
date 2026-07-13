@@ -58,6 +58,19 @@ function App() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [flash, setFlash] = useState(false);
 
+  const [appointmentStep, setAppointmentStep] = useState(1);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [appointmentName, setAppointmentName] = useState("");
+  const [appointmentPhone, setAppointmentPhone] = useState("");
+  const [appointmentEmail, setAppointmentEmail] = useState("");
+  const [appointmentCity, setAppointmentCity] = useState("");
+  const [appointmentCountry, setAppointmentCountry] = useState("Canada");
+  const [appointmentService, setAppointmentService] = useState("");
+  const [appointmentRequirement, setAppointmentRequirement] = useState("");
+  const [appointmentConsent, setAppointmentConsent] = useState(false);
+  const [appointmentBooked, setAppointmentBooked] = useState(false);
+
   useEffect(() => {
     setFlash(true);
     const timer = setTimeout(() => setFlash(false), 900);
@@ -410,6 +423,27 @@ function App() {
             </div>
           </section>
 
+          <section className="pricing-cta" aria-labelledby="pricing-cta-title">
+            <h2 id="pricing-cta-title">Not sure which pathway?</h2>
+            <p>
+              Book a free consultation and we’ll help you choose the right pathway
+              based on your experience, learning needs, and career goals.
+            </p>
+
+            <div className="pricing-cta-actions">
+              <a href="/reviews" className="pricing-cta-btn primary">
+                Testimonials
+              </a>
+
+              <a
+                href="/appointment"
+                className="pricing-cta-btn secondary"
+              >
+                Book Consultation
+              </a>
+            </div>
+          </section>
+
       </section>
 
 
@@ -496,22 +530,309 @@ function App() {
         <a href="/appointment" className="enroll-btn">Request Account Help →</a>
       </section>
 
-      <section className="appointment-section" id="appointment">
-        <p className="section-label">BOOK APPOINTMENT</p>
-        <h2>Book a consultation with Stellar Groupware.</h2>
-        <p className="section-intro">
-          Ready to discuss training, mentoring, project practice, or career support? Send us a message and we will follow up.
-        </p>
+        <section className="appointment-section" id="appointment">
+          <div className="appointment-layout">
+            <div className="appointment-main-card">
+              <p className="section-label">BOOK APPOINTMENT</p>
+              <h2>Schedule Your Consultation</h2>
+                {appointmentBooked ? (
+                  <div className="appointment-confirmation">
+                    <div className="appointment-confirmation-icon">✓</div>
 
-        <div className="appointment-actions">
-          <a href="mailto:info@stellartms.com?subject=Book%20Appointment%20Request" className="enroll-btn">
-            Email to Book Appointment →
-          </a>
-          <a href="/contact" className="enroll-btn dark">
-            Go to Contact Section →
-          </a>
-        </div>
-      </section>
+                    <h3>You’re booked!</h3>
+
+                    <p>
+                      Your appointment request has been prepared. Check Gmail for
+                      the completed message and meeting-request details.
+                    </p>
+
+                    <div className="appointment-confirmation-date">
+                      <span>▣</span>
+                      <div>
+                        <strong>{selectedDate} at {selectedTime}</strong>
+                        <small>Eastern Time — Canada</small>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="appointment-new-booking"
+                      onClick={() => {
+                        setAppointmentBooked(false);
+                        setAppointmentStep(1);
+                        setSelectedDate("");
+                        setSelectedTime("");
+                        setAppointmentConsent(false);
+                      }}
+                    >
+                      Book Another Appointment
+                    </button>
+                  </div>
+                ) : (
+                  <>
+
+              <h3>IT Training and Career Consultation — Canada</h3>
+              <p className="appointment-description">
+                This free consultation helps learners and professionals choose the
+                right IT training, project support, or career-support pathway.
+              </p>
+
+              <p className="appointment-meta">◷ 30 minutes · Online meeting</p>
+
+              <div className="appointment-steps">
+                <span className={appointmentStep >= 1 ? "active" : ""}>1</span>
+                <strong>Date</strong>
+                <span className={appointmentStep >= 2 ? "active" : ""}>2</span>
+                <strong>Time</strong>
+                <span className={appointmentStep >= 3 ? "active" : ""}>3</span>
+                <strong>Details</strong>
+              </div>
+
+              {appointmentStep === 1 && (
+                <div className="appointment-step-panel">
+                  <h4>Select a day</h4>
+
+                  <div className="appointment-date-grid">
+                    {[
+                      ["MON", "13", "JUL"],
+                      ["TUE", "14", "JUL"],
+                      ["WED", "15", "JUL"],
+                      ["THU", "16", "JUL"],
+                      ["FRI", "17", "JUL"],
+                      ["SAT", "18", "JUL"],
+                    ].map(([day, date, month]) => {
+                      const value = `${day}, ${month} ${date}`;
+
+                      return (
+                        <button
+                          key={value}
+                          type="button"
+                          className={selectedDate === value ? "selected" : ""}
+                          onClick={() => {
+                            setSelectedDate(value);
+                            setSelectedTime("");
+                            setAppointmentStep(2);
+                          }}
+                        >
+                          <small>{day}</small>
+                          <strong>{date}</strong>
+                          <span>{month}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {appointmentStep === 2 && (
+                <div className="appointment-step-panel">
+                  <div className="appointment-selection-summary">
+                    <strong>{selectedDate}</strong>
+                    <button type="button" onClick={() => setAppointmentStep(1)}>
+                      Change date
+                    </button>
+                  </div>
+
+                  <h4>Select a time</h4>
+
+                  <div className="appointment-time-grid">
+                    {[
+                      "9:00 AM",
+                      "10:00 AM",
+                      "11:30 AM",
+                      "1:00 PM",
+                      "3:30 PM",
+                      "5:00 PM",
+                    ].map((time) => (
+                      <button
+                        key={time}
+                        type="button"
+                        className={selectedTime === time ? "selected" : ""}
+                        onClick={() => {
+                          setSelectedTime(time);
+                          setAppointmentStep(3);
+                        }}
+                      >
+                        {time}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    className="appointment-back-btn"
+                    onClick={() => setAppointmentStep(1)}
+                  >
+                    ← Back to dates
+                  </button>
+                </div>
+              )}
+
+              {appointmentStep === 3 && (
+                <form
+                  className="appointment-details-form"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+
+                    setAppointmentBooked(true);
+                  }}
+                >
+                  <div className="appointment-selection-summary">
+                    <strong>{selectedDate} at {selectedTime}</strong>
+                    <button type="button" onClick={() => setAppointmentStep(1)}>
+                      Change
+                    </button>
+                  </div>
+
+                  <label>
+                    Full Name *
+                    <input
+                      required
+                      type="text"
+                      placeholder="Jane Doe"
+                      value={appointmentName}
+                      onChange={(event) => setAppointmentName(event.target.value)}
+                    />
+                  </label>
+
+                  <label>
+                    Mobile Number *
+                    <input
+                      required
+                      type="tel"
+                      placeholder="+1 416 555 0123"
+                      value={appointmentPhone}
+                      onChange={(event) => setAppointmentPhone(event.target.value)}
+                    />
+                  </label>
+
+                  <label>
+                    Email *
+                    <input
+                      required
+                      type="email"
+                      placeholder="jane@example.com"
+                      value={appointmentEmail}
+                      onChange={(event) => setAppointmentEmail(event.target.value)}
+                    />
+                  </label>
+
+                  <label>
+                    City *
+                    <input
+                      required
+                      type="text"
+                      placeholder="Toronto"
+                      value={appointmentCity}
+                      onChange={(event) => setAppointmentCity(event.target.value)}
+                    />
+                  </label>
+
+                  <label>
+                    Country *
+                    <select
+                      required
+                      value={appointmentCountry}
+                      onChange={(event) => setAppointmentCountry(event.target.value)}
+                    >
+                      <option value="Canada">Canada</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="India">India</option>
+                      <option value="United States">United States</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Service Interested *
+                    <select
+                      required
+                      value={appointmentService}
+                      onChange={(event) => setAppointmentService(event.target.value)}
+                    >
+                      <option value="">Select a service</option>
+                      <option>Regular IT Training</option>
+                      <option>AI + IT Training</option>
+                      <option>Bootcamp Support</option>
+                      <option>Career Support</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Requirement *
+                    <textarea
+                      required
+                      rows={5}
+                      placeholder="Mention your detailed requirement"
+                      value={appointmentRequirement}
+                      onChange={(event) =>
+                        setAppointmentRequirement(event.target.value)
+                      }
+                    />
+                  </label>
+
+                    <button
+                      type="button"
+                      className={`appointment-consent-toggle ${
+                        appointmentConsent ? "checked" : ""
+                      }`}
+                      aria-pressed={appointmentConsent}
+                      onClick={() =>
+                        setAppointmentConsent((current) => !current)
+                      }
+                    >
+                      <span className="appointment-consent-box" aria-hidden="true">
+                        {appointmentConsent ? "✓" : ""}
+                      </span>
+
+                      <span className="appointment-consent-copy">
+                        By checking this box, I consent to receive transactional
+                        messages related to services I have requested. These messages
+                        may include appointment reminders. Reply STOP to opt out.
+                      </span>
+                    </button>
+
+                  <div className="appointment-form-actions">
+                    <button
+                      type="submit"
+                      className="appointment-book-btn"
+                      disabled={!appointmentConsent}
+                    >
+                      ✈ Book Appointment
+                    </button>
+                  </div>
+                </form>
+              )}
+                  </>
+                )}
+            </div>
+
+            <aside className="appointment-sidebar">
+              <div className="appointment-info-card">
+                <h3>What to Expect</h3>
+                <ul>
+                  <li>30-minute consultation with a Stellar advisor</li>
+                  <li>Personalized learning and career assessment</li>
+                  <li>Training recommendations tailored to your goals</li>
+                  <li>Discussion of project and career-support options</li>
+                </ul>
+              </div>
+
+              <div className="appointment-hours-card">
+                <h3>◷ Available Hours</h3>
+                <p><span>Monday – Friday:</span><strong>9:00 AM – 6:00 PM ET</strong></p>
+                <p><span>Saturday:</span><strong>10:00 AM – 4:00 PM ET</strong></p>
+                <p><span>Sunday:</span><strong>Closed</strong></p>
+              </div>
+
+              <div className="appointment-info-card">
+                <h3>Need Help?</h3>
+                <p>If you have questions or need to reschedule, contact us:</p>
+                <a href="mailto:info@stellartms.com">✉ info@stellartms.com</a>
+              </div>
+            </aside>
+          </div>
+        </section>
 
       <section className="contact-section" id="contact">
         <p className="section-label">CONTACT US</p>
