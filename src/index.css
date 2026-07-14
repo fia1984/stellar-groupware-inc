@@ -5791,3 +5791,70 @@ button.appointment-consent-toggle:focus-visible
   font-weight: 800 !important;
   cursor: pointer !important;
 }
+
+/* FINAL POLISH: closer NCPL-style home hero */
+.route-home .hero-content {
+  margin-top: 18px !important;
+  margin-left: 18px !important;
+  max-width: 760px !important;
+}
+
+.route-home .hero-content h1 {
+  font-size: clamp(3rem, 5vw, 4.9rem) !important;
+  line-height: 1.03 !important;
+  max-width: 760px !important;
+}
+
+.route-home .hero-content h3 {
+  margin-top: 4px !important;
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem) !important;
+}
+
+.route-home .hero-section::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 8, 18, 0.94) 0%,
+      rgba(2, 8, 18, 0.78) 42%,
+      rgba(2, 8, 18, 0.40) 70%,
+      rgba(2, 8, 18, 0.18) 100%
+    ) !important;
+}
+
+.route-home .hero-actions {
+  margin-top: 30px !important;
+}
+
+.route-home .hero-actions .primary-btn,
+.route-home .hero-actions .secondary-btn {
+  min-height: 50px !important;
+  padding-left: 26px !important;
+  padding-right: 26px !important;
+}
+
+@media (max-width: 700px) {
+  .route-home .hero-content {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
+  }
+}
+
+/* Learn More hover only */
+.route-home .hero-actions .secondary-btn:hover,
+.route-home .hero-actions .secondary-btn:focus-visible {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #ffffff !important;
+}
+
+/* Learn More hover only */
+.route-home .hero-actions .secondary-btn:hover,
+.route-home .hero-actions .secondary-btn:focus-visible {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #ffffff !important;
+}
