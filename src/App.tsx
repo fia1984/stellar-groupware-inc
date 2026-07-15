@@ -1011,7 +1011,7 @@ function App() {
             <h4>Resources</h4>
             <a href="/process">Our Process</a>
             <a href="/account">My Account</a>
-            <a className="book-btn" href="/appointment">Book Appointment</a>
+            <a href="/appointment">Book Appointment</a>
             <a href="/pricing">Courses</a>
             <a href="/reviews">Student Reviews</a>
             <a href="/contact">Support</a>

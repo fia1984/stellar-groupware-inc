@@ -7550,3 +7550,80 @@ header {
     padding-inline: 10px !important;
   }
 }
+
+/* Lighten home hero overlay while keeping text readable */
+@media (min-width: 769px) {
+  .route-home .hero-section::before {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.68) 0%,
+      rgba(2, 10, 16, 0.52) 32%,
+      rgba(2, 10, 16, 0.28) 60%,
+      rgba(2, 10, 16, 0.10) 100%
+    ) !important;
+  }
+}
+
+/* Final lighter hero overlay */
+@media (min-width: 769px) {
+  .route-home .hero-section::before {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.48) 0%,
+      rgba(2, 10, 16, 0.34) 34%,
+      rgba(2, 10, 16, 0.16) 64%,
+      rgba(2, 10, 16, 0.04) 100%
+    ) !important;
+  }
+
+  .route-home .hero-content h1,
+  .route-home .hero-content h2,
+  .route-home .hero-content p {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.42) !important;
+  }
+}
+
+/* Final hero brightness fix: lighten the actual overlay layer */
+@media (min-width: 769px) {
+  .route-home .hero-section .dark-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.42) 0%,
+      rgba(2, 10, 16, 0.28) 36%,
+      rgba(2, 10, 16, 0.12) 68%,
+      rgba(2, 10, 16, 0.02) 100%
+    ) !important;
+  }
+
+  .route-home .hero-section::before,
+  .route-home .hero-section::after {
+    background: none !important;
+  }
+}
+
+/* Improve hero text readability without darkening the whole image */
+@media (min-width: 769px) {
+  .route-home .hero-content {
+    padding: 28px 30px !important;
+    background: rgba(3, 14, 20, 0.20) !important;
+    border-radius: 14px !important;
+    backdrop-filter: blur(1px) !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    color: rgba(255, 255, 255, 0.98) !important;
+    font-weight: 500 !important;
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.55) !important;
+  }
+
+  .route-home .hero-content h3 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .route-home .hero-actions .secondary-btn {
+    background: rgba(5, 20, 27, 0.48) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    color: #ffffff !important;
+  }
+}
