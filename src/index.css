@@ -5858,3 +5858,1235 @@ button.appointment-consent-toggle:focus-visible
   color: #0f172a !important;
   border-color: #ffffff !important;
 }
+
+/* Home statistics strip — first-page reference layout */
+.home-stats-section {
+  width: 100%;
+  padding: 30px 5%;
+  background: #ffffff;
+  border-bottom: 1px solid #e7ece9;
+}
+
+.home-stats-grid {
+  width: min(1250px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+
+.home-stat-item {
+  position: relative;
+  text-align: center;
+  padding: 4px 20px;
+}
+
+.home-stat-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  right: 0;
+  width: 1px;
+  height: 76%;
+  background: #e3e9e6;
+}
+
+.home-stat-item strong {
+  display: block;
+  color: #059669;
+  font-size: clamp(2.4rem, 3.6vw, 4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.home-stat-item span {
+  display: block;
+  margin-top: 10px;
+  color: #66736d;
+  font-size: clamp(0.88rem, 1.1vw, 1.05rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Three slider bars positioned like the reference page */
+.hero-section .dots {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+.hero-section .dot {
+  width: 30px;
+  height: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.hero-section .dot:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.hero-section .dot.active-dot {
+  width: 38px;
+  background: #10b981;
+}
+
+/* Floating chat bubble */
+.stellar-chat-bubble {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+  display: grid;
+  width: 62px;
+  height: 62px;
+  place-items: center;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.24);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.stellar-chat-bubble:hover {
+  background: #059669;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.stellar-chat-bubble svg {
+  width: 31px;
+  height: 31px;
+  fill: currentColor;
+}
+
+@media (max-width: 800px) {
+  .home-stats-section {
+    padding: 28px 20px;
+  }
+
+  .home-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 0;
+  }
+
+  .home-stat-item:nth-child(2)::after {
+    display: none;
+  }
+
+  .home-stat-item strong {
+    font-size: 2.8rem;
+  }
+
+  .hero-section .dots {
+    bottom: 18px;
+  }
+
+  .stellar-chat-bubble {
+    right: 16px;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+  }
+
+  .stellar-chat-bubble svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .home-stat-item:not(:last-child)::after {
+    top: auto;
+    right: 20%;
+    bottom: -12px;
+    width: 60%;
+    height: 1px;
+  }
+
+  .home-stat-item strong {
+    font-size: 2.6rem;
+  }
+}
+
+/* Final hero slider-bar correction */
+.hero-section {
+  position: relative !important;
+}
+
+.hero-section .dots {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 20px !important;
+  top: auto !important;
+  z-index: 50 !important;
+
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  width: auto !important;
+  height: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 9px !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translateX(-50%) !important;
+}
+
+.hero-section .dots .dot {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  flex: 0 0 34px !important;
+  width: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  height: 6px !important;
+  min-height: 6px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+
+  background: rgba(255, 255, 255, 0.72) !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  cursor: pointer !important;
+}
+
+.hero-section .dots .dot.active-dot {
+  flex-basis: 42px !important;
+  width: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  background: #10b981 !important;
+}
+
+/* Final clickable chat-bubble correction */
+.stellar-chat-bubble {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 99999 !important;
+
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 64px !important;
+  height: 64px !important;
+  place-items: center !important;
+
+  border: 3px solid #ffffff !important;
+  border-radius: 50% !important;
+  background: #10b981 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.28) !important;
+  cursor: pointer !important;
+}
+
+.stellar-chat-bubble:hover {
+  background: #059669 !important;
+  color: #ffffff !important;
+  transform: translateY(-3px) !important;
+}
+
+.stellar-chat-bubble svg {
+  display: block !important;
+  width: 32px !important;
+  height: 32px !important;
+  fill: currentColor !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 600px) {
+  .hero-section .dots {
+    bottom: 14px !important;
+  }
+
+  .hero-section .dots .dot {
+    flex-basis: 28px !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+  }
+
+  .hero-section .dots .dot.active-dot {
+    flex-basis: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+  }
+
+  .stellar-chat-bubble {
+    right: 16px !important;
+    bottom: 16px !important;
+    width: 58px !important;
+    height: 58px !important;
+  }
+}
+
+/* Ensure hero overlays cannot block slider controls */
+.hero-section::before,
+.hero-section::after {
+  pointer-events: none !important;
+}
+
+.hero-section > * {
+  position: relative;
+}
+
+.hero-section .hero-content {
+  z-index: 5;
+}
+
+.hero-section .slide-arrow {
+  z-index: 80 !important;
+  pointer-events: auto !important;
+}
+
+.hero-section .dots {
+  z-index: 100 !important;
+  pointer-events: auto !important;
+}
+
+.hero-section .dots .dot {
+  position: relative !important;
+  z-index: 101 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  cursor: pointer !important;
+}
+
+.hero-section .dots .dot::before,
+.hero-section .dots .dot::after {
+  pointer-events: none !important;
+}
+
+/* Keep all four hero bars visible and clickable */
+.hero-section .dots {
+  z-index: 500 !important;
+  pointer-events: auto !important;
+}
+
+.hero-section .dots .dot,
+.hero-section .dots .dot:nth-child(n + 4) {
+  position: relative !important;
+  z-index: 501 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+}
+
+.hero-section::before,
+.hero-section::after {
+  pointer-events: none !important;
+}
+
+/* Clean homepage hero typography — reference style */
+.route-home .hero-section .hero-content {
+  width: min(570px, calc(100% - 48px)) !important;
+  max-width: 570px !important;
+  margin-left: 18px !important;
+}
+
+.route-home .hero-section .hero-content h1 {
+  width: 100% !important;
+  max-width: 570px !important;
+  margin: 0 0 18px !important;
+  color: #f0f2ef !important;
+  font-size: clamp(2.7rem, 3.5vw, 3.75rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+  text-shadow: none !important;
+}
+
+.route-home .hero-section .hero-content h3 {
+  max-width: 520px !important;
+  margin-top: 4px !important;
+  color: #e0e5e1 !important;
+  font-size: clamp(1.12rem, 1.45vw, 1.42rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  text-shadow: none !important;
+}
+
+.route-home .hero-section .hero-content > p:not(.hero-tag) {
+  max-width: 510px !important;
+  color: #c9d1cb !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  text-shadow: none !important;
+}
+
+.route-home .hero-section .hero-tag {
+  color: #4ade80 !important;
+}
+
+/* Darken the real image overlay */
+.route-home .hero-section .dark-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 8, 15, 0.96) 0%,
+      rgba(4, 12, 20, 0.86) 40%,
+      rgba(4, 12, 20, 0.48) 68%,
+      rgba(4, 12, 20, 0.17) 100%
+    ),
+    radial-gradient(
+      circle at 72% 52%,
+      rgba(42, 190, 93, 0.12),
+      transparent 28%
+    ) !important;
+}
+
+/* Keep decorative hero words intact */
+.route-home .hero-section::after {
+  background: none !important;
+}
+
+@media (max-width: 700px) {
+  .route-home .hero-section .hero-content {
+    width: calc(100% - 36px) !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+  }
+
+  .route-home .hero-section .hero-content h1 {
+    font-size: clamp(2.25rem, 10vw, 3.15rem) !important;
+  }
+
+  .route-home .hero-section .hero-content h3 {
+    font-size: 1.15rem !important;
+  }
+}
+
+/* Final homepage layout corrections */
+.route-home .navbar {
+  width: min(1420px, calc(100% - 32px)) !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  gap: 14px !important;
+}
+
+.route-home .brand {
+  min-width: 270px !important;
+  flex-shrink: 0 !important;
+}
+
+.route-home .nav-links {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  gap: 6px !important;
+  justify-content: flex-end !important;
+}
+
+.route-home .nav-links > a,
+.route-home .nav-dropdown > a {
+  min-width: auto !important;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  white-space: nowrap !important;
+}
+
+.route-home .nav-links .book-btn {
+  min-width: 176px !important;
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Move hero content slightly left and higher */
+.route-home .hero-section .hero-content {
+  margin-left: 0 !important;
+  margin-top: -20px !important;
+  transform: translateX(-18px) !important;
+}
+
+/* Reference-style hero button sizing */
+.route-home .hero-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 18px !important;
+  margin-top: 26px !important;
+}
+
+.route-home .hero-actions .primary-btn,
+.route-home .hero-actions .secondary-btn {
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  min-height: 52px !important;
+  padding: 0 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+/* Improve readability over bright parts of the image */
+.route-home .hero-section .hero-content h3,
+.route-home .hero-section .hero-content > p:not(.hero-tag) {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.route-home .hero-section .hero-content > p:not(.hero-tag) {
+  padding: 8px 12px !important;
+  margin-left: -12px !important;
+  border-radius: 8px !important;
+  background: rgba(2, 8, 15, 0.28) !important;
+  backdrop-filter: blur(2px) !important;
+}
+
+/* Desktop adjustment before mobile menu activates */
+@media (max-width: 1250px) and (min-width: 901px) {
+  .route-home .navbar {
+    width: calc(100% - 20px) !important;
+  }
+
+  .route-home .brand {
+    min-width: 225px !important;
+  }
+
+  .route-home .brand h2 {
+    font-size: 27px !important;
+  }
+
+  .route-home .brand span {
+    font-size: 11px !important;
+  }
+
+  .route-home .nav-links > a,
+  .route-home .nav-dropdown > a {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+    font-size: 13px !important;
+  }
+
+  .route-home .nav-links .book-btn {
+    min-width: 155px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .route-home .hero-section .hero-content {
+    margin-top: 0 !important;
+    transform: none !important;
+  }
+
+  .route-home .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .route-home .hero-actions .primary-btn,
+  .route-home .hero-actions .secondary-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+}
+
+/* CLICKABLE HERO CONTROLS — FINAL */
+
+/* Decorative hero layers must never block buttons or links */
+.route-home .hero-section::before,
+.route-home .hero-section::after,
+.route-home .dark-overlay,
+.route-home .code-layer,
+.route-home .globe-effect {
+  pointer-events: none !important;
+}
+
+/* Exactly four visible and clickable slider strips */
+.route-home .hero-section .dots {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 22px !important;
+  top: auto !important;
+  z-index: 10000 !important;
+
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: auto !important;
+  height: 18px !important;
+  margin: 0 !important;
+  padding: 5px !important;
+  gap: 9px !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translateX(-50%) !important;
+}
+
+.route-home .hero-section .dots .dot,
+.route-home .hero-section .dots .dot:nth-child(n + 4) {
+  position: relative !important;
+  z-index: 10001 !important;
+
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+
+  flex: 0 0 36px !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  height: 6px !important;
+  min-height: 6px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+
+  background: rgba(255, 255, 255, 0.68) !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  cursor: pointer !important;
+  transition:
+    width 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+.route-home .hero-section .dots .dot:hover,
+.route-home .hero-section .dots .dot:focus-visible {
+  background: #ffffff !important;
+  transform: translateY(-1px) !important;
+  outline: 2px solid rgba(34, 197, 94, 0.75) !important;
+  outline-offset: 3px !important;
+}
+
+.route-home .hero-section .dots .dot.active-dot {
+  flex-basis: 46px !important;
+  width: 46px !important;
+  min-width: 46px !important;
+  max-width: 46px !important;
+  background: #16a34a !important;
+}
+
+/* Clickable floating contact bubble */
+.stellar-chat-bubble {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 2147483647 !important;
+
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+
+  width: 64px !important;
+  height: 64px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  place-items: center !important;
+  border: 3px solid #ffffff !important;
+  border-radius: 50% !important;
+  background: #16a34a !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.3) !important;
+  cursor: pointer !important;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease !important;
+}
+
+.stellar-chat-bubble:hover,
+.stellar-chat-bubble:focus-visible {
+  background: #15803d !important;
+  color: #ffffff !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.36) !important;
+  outline: 3px solid rgba(255, 255, 255, 0.8) !important;
+  outline-offset: 3px !important;
+}
+
+.stellar-chat-bubble svg {
+  display: block !important;
+  width: 32px !important;
+  height: 32px !important;
+  fill: currentColor !important;
+  pointer-events: none !important;
+}
+
+/* Preserve uniform responsive controls */
+@media (max-width: 700px) {
+  .route-home .hero-section .dots {
+    bottom: 15px !important;
+    gap: 7px !important;
+  }
+
+  .route-home .hero-section .dots .dot,
+  .route-home .hero-section .dots .dot:nth-child(n + 4) {
+    flex-basis: 28px !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    max-width: 28px !important;
+  }
+
+  .route-home .hero-section .dots .dot.active-dot {
+    flex-basis: 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+  }
+
+  .stellar-chat-bubble {
+    right: 16px !important;
+    bottom: 16px !important;
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .stellar-chat-bubble svg {
+    width: 29px !important;
+    height: 29px !important;
+  }
+}
+
+/* END CLICKABLE HERO CONTROLS */
+
+/* Color scheme only — match dark green/teal reference */
+:root {
+  --stellar-green: #18c96e;
+  --stellar-green-dark: #0faa5b;
+  --stellar-teal: #073f3e;
+  --stellar-teal-deep: #043534;
+  --stellar-charcoal: #11181c;
+  --stellar-nav-gray: rgba(255, 255, 255, 0.12);
+  --stellar-text: #f7f8f6;
+  --stellar-muted: #b8c5c2;
+}
+
+/* Hero tone only */
+.route-home .hero-section .dark-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 14, 18, 0.9) 0%,
+      rgba(10, 17, 21, 0.78) 42%,
+      rgba(10, 17, 21, 0.46) 72%,
+      rgba(10, 17, 21, 0.28) 100%
+    ) !important;
+}
+
+.route-home .hero-section {
+  border-bottom: 4px solid var(--stellar-green) !important;
+}
+
+/* Navigation colors only */
+.route-home .nav-links > a,
+.route-home .nav-dropdown > a {
+  background: var(--stellar-nav-gray) !important;
+  color: var(--stellar-text) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.route-home .nav-links > a:hover,
+.route-home .nav-dropdown > a:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+.route-home .nav-links > a.active,
+.route-home .nav-links > a[aria-current="page"],
+.route-home .nav-links .book-btn {
+  background: var(--stellar-green) !important;
+  color: #ffffff !important;
+  border-color: var(--stellar-green-dark) !important;
+}
+
+.route-home .nav-links > a.active:hover,
+.route-home .nav-links > a[aria-current="page"]:hover,
+.route-home .nav-links .book-btn:hover {
+  background: var(--stellar-green-dark) !important;
+}
+
+/* Brand colors only */
+.route-home .brand-icon {
+  background: linear-gradient(
+    135deg,
+    var(--stellar-green),
+    #20b9c6
+  ) !important;
+}
+
+.route-home .brand h2 {
+  color: #ffffff !important;
+}
+
+.route-home .brand span {
+  color: #8bd9d2 !important;
+}
+
+/* Hero text colors only */
+.route-home .hero-content h1 {
+  color: var(--stellar-text) !important;
+}
+
+.route-home .hero-content h3 {
+  color: #e8edeb !important;
+}
+
+.route-home .hero-content > p:not(.hero-tag) {
+  color: var(--stellar-muted) !important;
+}
+
+.route-home .hero-tag {
+  color: var(--stellar-green) !important;
+  border-color: var(--stellar-green) !important;
+}
+
+/* Hero action colors only */
+.route-home .hero-actions .primary-btn {
+  background: var(--stellar-green) !important;
+  border-color: var(--stellar-green-dark) !important;
+  color: #ffffff !important;
+}
+
+.route-home .hero-actions .primary-btn:hover {
+  background: var(--stellar-green-dark) !important;
+}
+
+.route-home .hero-actions .secondary-btn {
+  background: transparent !important;
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  color: #ffffff !important;
+}
+
+.route-home .hero-actions .secondary-btn:hover {
+  background: #ffffff !important;
+  color: var(--stellar-charcoal) !important;
+}
+
+/* Slider strip colors only */
+.route-home .hero-section .dots .dot {
+  background: rgba(255, 255, 255, 0.55) !important;
+}
+
+.route-home .hero-section .dots .dot.active-dot {
+  background: var(--stellar-green) !important;
+}
+
+/* Floating bubble colors only */
+.stellar-chat-bubble {
+  background: var(--stellar-green) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+.stellar-chat-bubble:hover {
+  background: var(--stellar-green-dark) !important;
+}
+
+/* Footer colors only */
+footer,
+.site-footer,
+.footer {
+  background: var(--stellar-teal) !important;
+  color: var(--stellar-text) !important;
+  border-top-color: var(--stellar-green) !important;
+}
+
+footer h2,
+footer h3,
+footer h4,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4,
+.footer h2,
+.footer h3,
+.footer h4 {
+  color: #ffffff !important;
+}
+
+footer p,
+footer a,
+.site-footer p,
+.site-footer a,
+.footer p,
+.footer a {
+  color: var(--stellar-muted) !important;
+}
+
+footer a:hover,
+.site-footer a:hover,
+.footer a:hover {
+  color: var(--stellar-green) !important;
+}
+
+footer .region-link,
+.site-footer .region-link,
+.footer .region-link {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+footer .region-link:hover,
+.site-footer .region-link:hover,
+.footer .region-link:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+}
+
+/* REFERENCE HERO LAYOUT FINAL START */
+
+/* Full-screen hero like the reference */
+.route-home .hero-section {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  padding: 0 0 110px !important;
+  overflow: hidden !important;
+  border-bottom: 4px solid #18c96e !important;
+}
+
+/* Keep the dark reference-style image treatment */
+.route-home .hero-section .dark-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 10, 15, 0.94) 0%,
+      rgba(5, 12, 18, 0.82) 38%,
+      rgba(5, 12, 18, 0.42) 68%,
+      rgba(5, 12, 18, 0.16) 100%
+    ) !important;
+  pointer-events: none !important;
+}
+
+/* Left-aligned hero content */
+.route-home .hero-section .hero-content {
+  position: relative !important;
+  z-index: 20 !important;
+
+  width: min(620px, calc(100% - 48px)) !important;
+  max-width: 620px !important;
+
+  margin: 105px 0 0 clamp(38px, 14vw, 235px) !important;
+  padding: 0 !important;
+
+  transform: none !important;
+  text-align: left !important;
+}
+
+/* Reference-style heading size */
+.route-home .hero-section .hero-content h1 {
+  width: 100% !important;
+  max-width: 620px !important;
+  margin: 14px 0 16px !important;
+
+  color: #f7f8f6 !important;
+  font-size: clamp(3rem, 4.1vw, 4.4rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.03 !important;
+  letter-spacing: -0.04em !important;
+  text-shadow: none !important;
+}
+
+.route-home .hero-section .hero-content h3 {
+  max-width: 600px !important;
+  margin: 22px 0 14px !important;
+
+  color: #f1f3f0 !important;
+  font-size: clamp(1.25rem, 1.7vw, 1.75rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  text-shadow: none !important;
+}
+
+.route-home .hero-section .hero-content > p:not(.hero-tag) {
+  max-width: 580px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #d8ded9 !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+
+  font-size: clamp(1rem, 1.15vw, 1.15rem) !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  text-shadow: none !important;
+}
+
+.route-home .hero-section .hero-tag {
+  display: inline-flex !important;
+  width: fit-content !important;
+  color: #36df80 !important;
+  border-color: #20c96b !important;
+}
+
+/* Restore the two hero buttons */
+.route-home .hero-section .hero-actions {
+  position: relative !important;
+  z-index: 50 !important;
+
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+
+  margin: 30px 0 0 !important;
+  gap: 16px !important;
+}
+
+.route-home .hero-section .hero-actions .primary-btn,
+.route-home .hero-section .hero-actions .secondary-btn {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  height: 54px !important;
+  min-height: 54px !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 20px !important;
+
+  border-radius: 7px !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+}
+
+.route-home .hero-section .hero-actions .primary-btn {
+  background: #18c96e !important;
+  border-color: #18c96e !important;
+  color: #ffffff !important;
+}
+
+.route-home .hero-section .hero-actions .secondary-btn {
+  background: rgba(15, 23, 32, 0.35) !important;
+  border: 2px solid #ffffff !important;
+  color: #ffffff !important;
+}
+
+.route-home .hero-section .hero-actions .secondary-btn:hover {
+  background: #ffffff !important;
+  color: #11181c !important;
+}
+
+/* Four visible and clickable slider strips */
+.route-home .hero-section .dots {
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 28px !important;
+  z-index: 500 !important;
+
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: auto !important;
+  height: 24px !important;
+  margin: 0 !important;
+  padding: 7px !important;
+  gap: 10px !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+  transform: translateX(-50%) !important;
+}
+
+.route-home .hero-section .dots .dot,
+.route-home .hero-section .dots .dot:nth-child(4) {
+  position: relative !important;
+  z-index: 501 !important;
+
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  flex: 0 0 30px !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  max-width: 30px !important;
+  height: 6px !important;
+  min-height: 6px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+
+  appearance: none !important;
+  background: rgba(255, 255, 255, 0.58) !important;
+}
+
+.route-home .hero-section .dots .dot.active-dot {
+  flex-basis: 43px !important;
+  width: 43px !important;
+  min-width: 43px !important;
+  max-width: 43px !important;
+  background: #18c96e !important;
+}
+
+.route-home .hero-section .dots .dot:hover,
+.route-home .hero-section .dots .dot:focus-visible {
+  background: #ffffff !important;
+  outline: 2px solid #18c96e !important;
+  outline-offset: 3px !important;
+}
+
+/* Keep the chat bubble visible and clickable */
+a.stellar-chat-bubble {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 2147483647 !important;
+
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 58px !important;
+  height: 58px !important;
+  place-items: center !important;
+
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: #18c96e !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28) !important;
+  cursor: pointer !important;
+}
+
+a.stellar-chat-bubble:hover,
+a.stellar-chat-bubble:focus-visible {
+  background: #0faa5b !important;
+  transform: translateY(-3px) !important;
+  outline: 3px solid rgba(255, 255, 255, 0.8) !important;
+  outline-offset: 3px !important;
+}
+
+a.stellar-chat-bubble svg {
+  width: 29px !important;
+  height: 29px !important;
+  fill: currentColor !important;
+  pointer-events: none !important;
+}
+
+/* Footer must begin after the complete hero */
+.route-home .hero-section + .home-stats-section,
+.route-home .hero-section ~ footer {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+@media (max-width: 900px) {
+  .route-home .hero-section {
+    min-height: 820px !important;
+    padding-bottom: 100px !important;
+  }
+
+  .route-home .hero-section .hero-content {
+    width: calc(100% - 48px) !important;
+    max-width: 620px !important;
+    margin: 100px 24px 0 !important;
+  }
+
+  .route-home .hero-section .hero-content h1 {
+    font-size: clamp(2.6rem, 8vw, 3.8rem) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .route-home .hero-section {
+    min-height: 880px !important;
+  }
+
+  .route-home .hero-section .hero-content {
+    width: calc(100% - 36px) !important;
+    margin: 92px 18px 0 !important;
+  }
+
+  .route-home .hero-section .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .route-home .hero-section .hero-actions .primary-btn,
+  .route-home .hero-section .hero-actions .secondary-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  .route-home .hero-section .dots {
+    bottom: 18px !important;
+  }
+
+  a.stellar-chat-bubble {
+    right: 16px !important;
+    bottom: 16px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+}
+
+/* REFERENCE HERO LAYOUT FINAL END */

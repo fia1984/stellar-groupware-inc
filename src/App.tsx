@@ -23,6 +23,13 @@ const slides = [
     text: "Stellar Groupware Inc supports teams with practical technology guidance, collaboration tools, and digital process improvement.",
     image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=80",
   },
+  {
+    tag: "CAREER SUPPORT",
+    title: "Build Your IT Career with Practical Support.",
+    subtitle: "Mentoring, project practice, and job preparation",
+    text: "Get structured guidance to strengthen your technical skills, practise real workplace scenarios, and prepare confidently for IT opportunities.",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=80",
+  },
 ];
 
 function App() {
@@ -202,16 +209,65 @@ function App() {
 
         <button className="slide-arrow right" onClick={nextSlide}>›</button>
 
-        <div className="dots">
-          {slides.map((_, index) => (
+        <div
+          className="dots"
+          role="group"
+          aria-label="Hero slide navigation"
+        >
+          {slides.slice(0, 4).map((_, index) => (
             <button
+              type="button"
               key={index}
               className={activeSlide === index ? "dot active-dot" : "dot"}
+              aria-label={`Show hero slide ${index + 1}`}
+              aria-pressed={activeSlide === index}
               onClick={() => setActiveSlide(index)}
             />
           ))}
         </div>
       </section>
+
+      <section className="home-stats-section" aria-label="Stellar statistics">
+        <div className="home-stats-grid">
+          <div className="home-stat-item">
+            <strong>2,870</strong>
+            <span>Successful Stories</span>
+          </div>
+
+          <div className="home-stat-item">
+            <strong>2,075</strong>
+            <span>Active Mentees</span>
+          </div>
+
+          <div className="home-stat-item">
+            <strong>186</strong>
+            <span>Team Members</span>
+          </div>
+
+          <div className="home-stat-item">
+            <strong>55</strong>
+            <span>Trainers</span>
+          </div>
+        </div>
+      </section>
+
+      <a
+        className="stellar-chat-bubble"
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=info@stellartms.com&su=Stellar%20Groupware%20Inquiry"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contact Stellar Groupware"
+        title="Contact Stellar Groupware"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M12 3.25c-4.83 0-8.75 3.55-8.75 7.93 0 1.75.63 3.37 1.7 4.68L3.8 20.75l5.03-1.68c.98.34 2.05.53 3.17.53 4.83 0 8.75-3.55 8.75-7.92S16.83 3.25 12 3.25Zm0 14.6c-1.02 0-1.99-.18-2.87-.51l-.43-.16-2.59.87.61-2.54-.3-.38A6.11 6.11 0 0 1 5 11.18C5 7.76 8.14 5 12 5s7 2.76 7 6.18-3.14 6.67-7 6.67Z" />
+        </svg>
+      </a>
+
 <section className="services-section" id="training">
         <p className="section-label">WHAT WE DO</p>
         <h2>Training, mentoring, and IT support made simple.</h2>
