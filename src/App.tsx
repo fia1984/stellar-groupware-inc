@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./index.css";
 
 const slides = [
@@ -31,6 +31,67 @@ const slides = [
     image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=80",
   },
 ];
+
+
+type AnimatedCounterProps = {
+  end: number;
+  duration?: number;
+};
+
+function AnimatedCounter({ end, duration = 1800 }: AnimatedCounterProps) {
+  const [count, setCount] = useState(0);
+  const counterRef = useRef<HTMLElement | null>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    const element = counterRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated.current) {
+          return;
+        }
+
+        hasAnimated.current = true;
+        const startTime = performance.now();
+
+        const animate = (currentTime: number) => {
+          const progress = Math.min(
+            (currentTime - startTime) / duration,
+            1
+          );
+
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+          setCount(Math.round(end * easedProgress));
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        };
+
+        requestAnimationFrame(animate);
+        observer.disconnect();
+      },
+      {
+        threshold: 0.35,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return (
+    <strong ref={counterRef}>
+      {count.toLocaleString()}
+    </strong>
+  );
+}
 
 function App() {
   const routeMap: Record<string, string> = {
@@ -131,7 +192,7 @@ function App() {
           </label>
 
           <div className="nav-links">
-            <a className={currentRoute === "home" ? "active" : ""} href="/">Home</a>
+            <a id="home-nav-link" className="home-link" href="/">Home</a>
             <a className={currentRoute === "reviews" ? "active" : ""} href="/reviews">Reviews</a>
             <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
 
@@ -172,7 +233,7 @@ function App() {
               My Account
             </a>
 
-            <a className="book-btn" href="/appointment">Book Appointment</a>
+            <a id="book-appointment-nav" className="book-btn" href="/appointment">Book Appointment</a>
           </div>
         </nav>
 
@@ -230,22 +291,22 @@ function App() {
       <section className="home-stats-section" aria-label="Stellar statistics">
         <div className="home-stats-grid">
           <div className="home-stat-item">
-            <strong>2,870</strong>
+            <AnimatedCounter end={2870} />
             <span>Successful Stories</span>
           </div>
 
           <div className="home-stat-item">
-            <strong>2,075</strong>
+            <AnimatedCounter end={2075} />
             <span>Active Mentees</span>
           </div>
 
           <div className="home-stat-item">
-            <strong>186</strong>
+            <AnimatedCounter end={186} />
             <span>Team Members</span>
           </div>
 
           <div className="home-stat-item">
-            <strong>55</strong>
+            <AnimatedCounter end={55} />
             <span>Trainers</span>
           </div>
         </div>
@@ -950,7 +1011,7 @@ function App() {
             <h4>Resources</h4>
             <a href="/process">Our Process</a>
             <a href="/account">My Account</a>
-            <a href="/appointment">Book Appointment</a>
+            <a className="book-btn" href="/appointment">Book Appointment</a>
             <a href="/pricing">Courses</a>
             <a href="/reviews">Student Reviews</a>
             <a href="/contact">Support</a>

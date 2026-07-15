@@ -6634,19 +6634,9 @@ button.appointment-consent-toggle:focus-visible
   color: #ffffff !important;
 }
 
-.route-home .nav-links > a.active,
-.route-home .nav-links > a[aria-current="page"],
-.route-home .nav-links .book-btn {
-  background: var(--stellar-green) !important;
-  color: #ffffff !important;
-  border-color: var(--stellar-green-dark) !important;
-}
 
-.route-home .nav-links > a.active:hover,
-.route-home .nav-links > a[aria-current="page"]:hover,
-.route-home .nav-links .book-btn:hover {
-  background: var(--stellar-green-dark) !important;
-}
+
+
 
 /* Brand colors only */
 .route-home .brand-icon {
@@ -7090,3 +7080,473 @@ a.stellar-chat-bubble svg {
 }
 
 /* REFERENCE HERO LAYOUT FINAL END */
+
+/* =========================================================
+   FINAL STELLAR / SAMMY REFERENCE STYLES
+   ========================================================= */
+
+/* Header and dropdown layering */
+.site-header,
+.main-header,
+header {
+  position: relative;
+  z-index: 5000;
+  overflow: visible;
+}
+
+.header-inner,
+.navbar,
+.nav-menu,
+.nav-links {
+  overflow: visible;
+}
+
+@media (min-width: 769px) {
+  /* Regular navigation links */
+  .nav-links > a:not(#book-appointment-nav),
+  .nav-dropdown > a,
+  #home-nav-link,
+  .nav-links > a.active:not(#book-appointment-nav),
+  .nav-dropdown > a.active {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Forest-green hover only */
+  .nav-links > a:not(#book-appointment-nav):hover,
+  .nav-links > a:not(#book-appointment-nav):focus,
+  .nav-dropdown:hover > a,
+  .nav-dropdown:focus-within > a {
+    background: #0b3d24 !important;
+    color: #ffffff !important;
+    border-color: #0b3d24 !important;
+    box-shadow: none !important;
+  }
+
+  /* Only Book Appointment stays bright green */
+  #book-appointment-nav,
+  #book-appointment-nav.active,
+  #book-appointment-nav[aria-current="page"] {
+    background: #16c963 !important;
+    color: #ffffff !important;
+    border: 1px solid #0ca94c !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  #book-appointment-nav:hover,
+  #book-appointment-nav:focus {
+    background: #0fb653 !important;
+    color: #ffffff !important;
+  }
+
+  /* Smooth dropdown access */
+  .nav-dropdown {
+    position: relative !important;
+    z-index: 5100 !important;
+    padding-bottom: 7px;
+    margin-bottom: -7px;
+    overflow: visible !important;
+  }
+
+  .nav-dropdown .dropdown-menu {
+    display: block !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: max-content !important;
+    min-width: 205px !important;
+    margin: 0 !important;
+    padding: 6px !important;
+    background: #ffffff !important;
+    border: 1px solid #d7e0dc !important;
+    border-radius: 7px !important;
+    box-shadow: 0 12px 28px rgba(10, 35, 39, 0.2) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(6px) !important;
+    transition:
+      opacity 0.16s ease,
+      visibility 0.16s ease,
+      transform 0.16s ease !important;
+    z-index: 99999 !important;
+  }
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .nav-dropdown .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    height: 8px;
+  }
+
+  .nav-dropdown .dropdown-menu a {
+    display: block !important;
+    width: 100% !important;
+    padding: 11px 13px !important;
+    color: #102f35 !important;
+    background: #ffffff !important;
+    border: 0 !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+  }
+
+  .nav-dropdown .dropdown-menu a:hover,
+  .nav-dropdown .dropdown-menu a:focus,
+  .nav-dropdown .dropdown-menu a.active {
+    color: #ffffff !important;
+    background: #0b3d24 !important;
+  }
+
+  /* Keep dropdowns above breadcrumbs and page content */
+  .breadcrumb-strip,
+  .route-breadcrumbs,
+  .breadcrumbs,
+  .breadcrumb,
+  main,
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Cleaner and brighter hero */
+.route-home .hero-section::before {
+  background: linear-gradient(
+    90deg,
+    rgba(3, 14, 20, 0.66) 0%,
+    rgba(3, 14, 20, 0.46) 42%,
+    rgba(3, 14, 20, 0.2) 72%,
+    rgba(3, 14, 20, 0.1) 100%
+  ) !important;
+}
+
+.route-home .hero-content,
+.route-home .hero-content * {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+.route-home .hero-content {
+  position: relative !important;
+  z-index: 5 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  opacity: 1 !important;
+  animation: stellar-clean-fade 0.45s ease both !important;
+}
+
+.route-home .hero-content h1 {
+  max-width: 720px !important;
+  margin: 0 0 18px !important;
+  color: #ffffff !important;
+  font-size: clamp(3rem, 5vw, 5rem) !important;
+  line-height: 1.04 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.035em !important;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.32) !important;
+}
+
+.route-home .hero-content h2 {
+  max-width: 680px !important;
+  color: #ffffff !important;
+  line-height: 1.3 !important;
+  text-shadow: 0 2px 9px rgba(0, 0, 0, 0.28) !important;
+}
+
+.route-home .hero-content p {
+  max-width: 650px !important;
+  color: rgba(255, 255, 255, 0.93) !important;
+  line-height: 1.6 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+@keyframes stellar-clean-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Compact reference-style statistics */
+.route-home .home-stats-section {
+  display: block !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 30px 40px !important;
+  background: #ffffff !important;
+  border-top: 4px solid #16c963 !important;
+  border-bottom: 1px solid rgba(15, 47, 53, 0.1) !important;
+}
+
+.route-home .home-stats-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  width: min(1200px, 100%) !important;
+  margin: 0 auto !important;
+  gap: 0 !important;
+}
+
+.route-home .home-stat-item {
+  position: relative !important;
+  display: flex !important;
+  min-height: 100px !important;
+  padding: 12px 24px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-align: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.route-home .home-stat-item:not(:last-child)::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 15% !important;
+  right: 0 !important;
+  width: 1px !important;
+  height: 70% !important;
+  background: rgba(15, 47, 53, 0.15) !important;
+}
+
+.route-home .home-stat-item strong {
+  margin: 0 !important;
+  color: #07963d !important;
+  font-size: clamp(2.6rem, 4vw, 3.7rem) !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.route-home .home-stat-item span {
+  color: #53666c !important;
+  font-size: 1rem !important;
+  line-height: 1.25 !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 768px) {
+  .route-home .hero-content h1 {
+    font-size: clamp(2.3rem, 10vw, 3.4rem) !important;
+  }
+
+  .route-home .home-stats-section {
+    padding: 22px 16px !important;
+  }
+
+  .route-home .home-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .route-home .home-stat-item {
+    min-height: 105px !important;
+    padding: 16px 8px !important;
+  }
+
+  .route-home .home-stat-item:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(15, 47, 53, 0.12) !important;
+  }
+
+  .route-home .home-stat-item:nth-child(2)::after {
+    display: none !important;
+  }
+
+  .route-home .home-stat-item strong {
+    font-size: 2.35rem !important;
+  }
+}
+
+/* =========================================================
+   95% NCPL REFERENCE POLISH
+   ========================================================= */
+
+@media (min-width: 769px) {
+  /* Cleaner header spacing */
+  .route-home .header-inner,
+  .route-home .navbar,
+  .route-home header > div {
+    width: min(1240px, calc(100% - 48px)) !important;
+    margin-inline: auto !important;
+  }
+
+  .route-home .nav-links {
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  /* Regular links are plain text until hovered */
+  .route-home .nav-links > a:not(#book-appointment-nav),
+  .route-home .nav-dropdown > a,
+  .route-home #home-nav-link,
+  .route-home .nav-links > a.active:not(#book-appointment-nav),
+  .route-home .nav-dropdown > a.active {
+    min-height: 44px !important;
+    padding: 0 15px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  /* Forest green only while hovering */
+  .route-home .nav-links > a:not(#book-appointment-nav):hover,
+  .route-home .nav-links > a:not(#book-appointment-nav):focus,
+  .route-home .nav-dropdown:hover > a,
+  .route-home .nav-dropdown:focus-within > a {
+    background: #0b3d24 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Book Appointment remains green */
+  .route-home #book-appointment-nav {
+    min-height: 44px !important;
+    padding: 0 22px !important;
+    background: #0ca943 !important;
+    color: #ffffff !important;
+    border: 1px solid #088d37 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  .route-home #book-appointment-nav:hover,
+  .route-home #book-appointment-nav:focus {
+    background: #098f39 !important;
+  }
+
+  /* Slightly smaller Stellar branding */
+  .route-home .brand {
+    gap: 10px !important;
+  }
+
+  .route-home .brand-icon {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 11px !important;
+  }
+
+  .route-home .brand h2 {
+    font-size: 1.65rem !important;
+    line-height: 1 !important;
+  }
+
+  .route-home .brand span {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  /* NCPL-style dropdown sizing */
+  .route-home .nav-dropdown .dropdown-menu {
+    min-width: 175px !important;
+    padding: 5px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  .route-home .nav-dropdown .dropdown-menu a {
+    padding: 9px 10px !important;
+    font-size: 0.9rem !important;
+    border-radius: 4px !important;
+  }
+
+  /* Position hero content closer to the reference */
+  .route-home .hero-content {
+    width: min(620px, 48vw) !important;
+    margin-left: clamp(145px, 14vw, 230px) !important;
+    margin-right: auto !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .route-home .hero-content h1 {
+    max-width: 610px !important;
+    margin-bottom: 16px !important;
+    font-size: clamp(3rem, 4.25vw, 4.35rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .route-home .hero-content h2 {
+    max-width: 590px !important;
+    margin-bottom: 14px !important;
+    font-size: clamp(1.3rem, 1.8vw, 1.75rem) !important;
+    line-height: 1.3 !important;
+  }
+
+  .route-home .hero-content p {
+    max-width: 580px !important;
+    margin-bottom: 22px !important;
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-home .hero-tag {
+    margin-bottom: 22px !important;
+    padding: 8px 18px !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Slightly darker left side while keeping image visible */
+  .route-home .hero-section::before {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.79) 0%,
+      rgba(2, 10, 16, 0.64) 32%,
+      rgba(2, 10, 16, 0.39) 59%,
+      rgba(2, 10, 16, 0.17) 100%
+    ) !important;
+  }
+
+  /* Uniform hero buttons */
+  .route-home .hero-actions {
+    gap: 12px !important;
+  }
+
+  .route-home .hero-actions a,
+  .route-home .hero-actions button {
+    width: 190px !important;
+    min-height: 50px !important;
+    padding: 0 20px !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+  .route-home .hero-content {
+    width: min(590px, 58vw) !important;
+    margin-left: 90px !important;
+  }
+
+  .route-home .nav-links > a:not(#book-appointment-nav),
+  .route-home .nav-dropdown > a {
+    padding-inline: 10px !important;
+  }
+}
