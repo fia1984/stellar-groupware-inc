@@ -1,3 +1,16 @@
+import { vi } from "vitest";
+
+class MockIntersectionObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return [];
+  }
+}
+
+vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
+
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import App from '../App';
