@@ -8386,3 +8386,102 @@ header {
   outline: 3px solid rgba(8, 168, 63, 0.35) !important;
   outline-offset: 4px !important;
 }
+
+/* Reviews and Pricing navigation states only */
+@media (min-width: 1050px) {
+  /* Normal Reviews and Pricing buttons */
+  body .page-shell .nav-links > a[href="/reviews"],
+  body .page-shell .nav-links > a[href="/pricing"] {
+    color: #16323a !important;
+    background: transparent !important;
+    border-radius: 10px !important;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease !important;
+  }
+
+  /* Soft pastel green when hovering */
+  body .page-shell .nav-links > a[href="/reviews"]:hover,
+  body .page-shell .nav-links > a[href="/pricing"]:hover {
+    color: #16323a !important;
+    background: #dcefdc !important;
+    box-shadow: none !important;
+  }
+
+  /* Reviews is bright green only on the Reviews page */
+  body .route-reviews .nav-links > a[href="/reviews"] {
+    color: #ffffff !important;
+    background: #08a83f !important;
+    box-shadow: 0 4px 10px rgba(8, 168, 63, 0.24) !important;
+  }
+
+  /* Pricing is bright green only on the Pricing page */
+  body .route-pricing .nav-links > a[href="/pricing"] {
+    color: #ffffff !important;
+    background: #08a83f !important;
+    box-shadow: 0 4px 10px rgba(8, 168, 63, 0.24) !important;
+  }
+
+  /* Keep selected Reviews or Pricing bright while pointing */
+  body .route-reviews .nav-links > a[href="/reviews"]:hover,
+  body .route-pricing .nav-links > a[href="/pricing"]:hover {
+    color: #ffffff !important;
+    background: #08a83f !important;
+  }
+
+  /* Book Appointment always stays parrot green */
+  body .page-shell #book-appointment-nav {
+    color: #ffffff !important;
+    background: #08a83f !important;
+    box-shadow: 0 4px 10px rgba(8, 168, 63, 0.24) !important;
+  }
+
+  body .page-shell #book-appointment-nav:hover {
+    color: #ffffff !important;
+    background: #079537 !important;
+  }
+}
+
+/* Keep the home banner stable while slides change */
+@media (min-width: 769px) {
+  .route-home .hero-section {
+    min-height: 760px !important;
+    height: 760px !important;
+    overflow: hidden !important;
+  }
+
+  .route-home .hero-content {
+    min-height: 460px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    transform: none !important;
+    top: auto !important;
+    margin-top: 0 !important;
+  }
+
+  .route-home .hero-content h1 {
+    min-height: 2.25em !important;
+  }
+
+  .route-home .hero-content h3 {
+    min-height: 2.8em !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    min-height: 4.8em !important;
+  }
+
+  .route-home .flash-active .hero-content,
+  .route-home .hero-content[style] {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .route-home .hero-content {
+    transform: none !important;
+  }
+}
+
