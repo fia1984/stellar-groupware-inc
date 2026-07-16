@@ -356,11 +356,20 @@ function App() {
           <h3>{slide.subtitle}</h3>
           <p>{slide.text}</p>
 
-          <div className="hero-actions">
-            <a className="primary-btn" href="mailto:info@stellartms.com">
-              Book a Consultation →
+          <div className="hero-actions" id="hero-action-buttons">
+            <a
+              id="hero-book-appointment"
+              className="primary-btn"
+              href="/appointment"
+            >
+              Book Appointment →
             </a>
-            <a className="secondary-btn" href="/training">
+
+            <a
+              id="hero-learn-more"
+              className="secondary-btn"
+              href="/training"
+            >
               Learn More
             </a>
           </div>
@@ -1193,7 +1202,15 @@ function App() {
               <div className="appointment-info-card">
                 <h3>Need Help?</h3>
                 <p>If you have questions or need to reschedule, contact us:</p>
-                <a href="mailto:info@stellartms.com">✉ info@stellartms.com</a>
+                <a
+                  id="appointment-help-email"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=info@stellartms.com&su=Stellar%20Appointment%20Help"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Email Stellar appointment support"
+                >
+                  ✉ info@stellartms.com
+                </a>
               </div>
             </aside>
           </div>
