@@ -8179,3 +8179,210 @@ header {
 .route-reviews .reviews-heading p {
   margin-top: 20px !important;
 }
+
+/* Clickable Reviews platform card */
+.route-reviews .review-platform-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.route-reviews .review-platform-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(15, 23, 42, 0.14);
+}
+
+.route-reviews .review-platform-link:focus-visible {
+  outline: 3px solid #08a83f;
+  outline-offset: 3px;
+}
+
+/* Reviews page: final functional carousel and spacing polish */
+.route-reviews .reviews-reference-page {
+  padding: 0 24px 72px !important;
+  overflow: visible !important;
+}
+
+.route-reviews .reviews-heading {
+  padding: 72px 20px 42px !important;
+}
+
+.route-reviews .reviews-heading h2 {
+  margin: 0 !important;
+  line-height: 1.15 !important;
+}
+
+.route-reviews .reviews-heading p {
+  margin-top: 16px !important;
+}
+
+.route-reviews .review-platform-grid,
+.route-reviews .testimonial-column-grid {
+  gap: 28px !important;
+}
+
+.route-reviews .testimonial-column-grid {
+  margin-top: 32px !important;
+  align-items: stretch !important;
+}
+
+.route-reviews .large-testimonial-card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  padding: 38px !important;
+  overflow: hidden !important;
+}
+
+.route-reviews .large-testimonial-card header p {
+  margin-bottom: 28px !important;
+}
+
+.route-reviews .testimonial-feature {
+  min-height: 215px !important;
+  padding: 0 12px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.route-reviews .testimonial-feature h4 {
+  margin-bottom: 12px !important;
+  font-size: 1.12rem !important;
+}
+
+.route-reviews .testimonial-feature p {
+  min-height: 82px !important;
+  margin-bottom: 18px !important;
+}
+
+.route-reviews .testimonial-controls {
+  position: relative !important;
+  z-index: 5 !important;
+  display: grid !important;
+  grid-template-columns: 48px 1fr 48px !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-top: auto !important;
+  padding: 14px 0 !important;
+  border-top: 1px solid #dbe3e8 !important;
+  border-bottom: 1px solid #dbe3e8 !important;
+}
+
+.route-reviews .testimonial-controls button {
+  position: relative !important;
+  z-index: 10 !important;
+  width: 44px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #526071 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  font-size: 2rem !important;
+  line-height: 1 !important;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease !important;
+}
+
+.route-reviews .testimonial-controls button:first-child {
+  justify-self: start !important;
+}
+
+.route-reviews .testimonial-controls button:last-child {
+  justify-self: end !important;
+}
+
+.route-reviews .testimonial-controls button:hover {
+  color: #ffffff !important;
+  background: #087328 !important;
+  transform: scale(1.05) !important;
+}
+
+.route-reviews .testimonial-controls button:focus-visible {
+  outline: 3px solid rgba(8, 168, 63, 0.3) !important;
+  outline-offset: 2px !important;
+}
+
+.route-reviews .testimonial-controls span {
+  justify-self: center !important;
+  font-weight: 600 !important;
+}
+
+.route-reviews .testimonial-visual {
+  min-height: 220px !important;
+  margin-top: 20px !important;
+}
+
+@media (max-width: 850px) {
+  .route-reviews .reviews-reference-page {
+    padding-inline: 18px !important;
+  }
+
+  .route-reviews .reviews-heading {
+    padding: 52px 12px 32px !important;
+  }
+
+  .route-reviews .large-testimonial-card {
+    padding: 30px 22px !important;
+  }
+
+  .route-reviews .testimonial-feature {
+    min-height: 0 !important;
+    padding-inline: 0 !important;
+  }
+
+  .route-reviews .testimonial-feature p {
+    min-height: 0 !important;
+  }
+
+  .route-reviews .testimonial-visual {
+    min-height: 190px !important;
+    padding: 18px !important;
+  }
+}
+
+/* Reviews page: make external review cards fully clickable */
+.route-reviews .review-platform-link {
+  position: relative !important;
+  z-index: 3 !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+.route-reviews .review-platform-link::before,
+.route-reviews .review-platform-link::after {
+  pointer-events: none !important;
+}
+
+.route-reviews .review-platform-link > * {
+  pointer-events: none !important;
+}
+
+.route-reviews .linkedin-review-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: none !important;
+}
+
+.route-reviews .review-platform-link:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.13) !important;
+}
+
+.route-reviews .review-platform-link:focus-visible {
+  outline: 3px solid rgba(8, 168, 63, 0.35) !important;
+  outline-offset: 4px !important;
+}

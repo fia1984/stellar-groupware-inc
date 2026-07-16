@@ -33,6 +33,74 @@ const slides = [
 ];
 
 
+type ReviewItem = {
+  title: string;
+  quote: string;
+  name: string;
+  detail: string;
+  message: string;
+};
+
+const trainingReviews: ReviewItem[] = [
+  {
+    title: "Clear Training and Practical Support",
+    quote:
+      "The training was clear and step by step. I understood how projects work and felt more confident.",
+    name: "Beginner IT Learner",
+    detail: "Frontend practice support",
+    message:
+      "Thank you for the clear explanations, patient mentoring, and practical project guidance.",
+  },
+  {
+    title: "Supportive AWS Learning Journey",
+    quote:
+      "The guidance made difficult AWS concepts easier to understand and apply during practical exercises.",
+    name: "AWS Training Learner",
+    detail: "Cloud training support",
+    message:
+      "The sessions were structured, practical, and easy to follow. I gained confidence with every lesson.",
+  },
+  {
+    title: "Confidence Through Real Practice",
+    quote:
+      "Working through realistic tasks helped me understand what is expected on an actual IT project.",
+    name: "Stellar Training Student",
+    detail: "Project-based learning",
+    message:
+      "The practical exercises and patient feedback helped me improve my technical and professional skills.",
+  },
+];
+
+const careerReviews: ReviewItem[] = [
+  {
+    title: "Career Transition Journey",
+    quote:
+      "The mentoring helped me organize my tasks, improve my resume, and prepare for technical work.",
+    name: "Career Transition Student",
+    detail: "Project and job-readiness guidance",
+    message:
+      "The support helped me build confidence, improve my resume, and understand real workplace expectations.",
+  },
+  {
+    title: "Clear Job-Readiness Guidance",
+    quote:
+      "I received structured advice for my resume, LinkedIn profile, interviews, and career planning.",
+    name: "Career Support Learner",
+    detail: "Resume and interview preparation",
+    message:
+      "The mentoring gave me a clearer direction and helped me present my experience more professionally.",
+  },
+  {
+    title: "Professional Mentoring Support",
+    quote:
+      "The sessions helped me identify my strengths and prepare more confidently for new opportunities.",
+    name: "Stellar Mentee",
+    detail: "Career mentoring",
+    message:
+      "I appreciated the honest feedback, practical suggestions, and consistent support throughout the process.",
+  },
+];
+
 type AnimatedCounterProps = {
   end: number;
   duration?: number;
@@ -125,6 +193,8 @@ function App() {
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [flash, setFlash] = useState(false);
+  const [trainingReviewIndex, setTrainingReviewIndex] = useState(0);
+  const [careerReviewIndex, setCareerReviewIndex] = useState(0);
 
   const [appointmentStep, setAppointmentStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
@@ -162,6 +232,34 @@ function App() {
   };
 
   const slide = slides[activeSlide];
+  const trainingReview = trainingReviews[trainingReviewIndex];
+  const careerReview = careerReviews[careerReviewIndex];
+
+  const showPreviousTrainingReview = () => {
+    setTrainingReviewIndex(
+      (current) =>
+        (current - 1 + trainingReviews.length) % trainingReviews.length
+    );
+  };
+
+  const showNextTrainingReview = () => {
+    setTrainingReviewIndex(
+      (current) => (current + 1) % trainingReviews.length
+    );
+  };
+
+  const showPreviousCareerReview = () => {
+    setCareerReviewIndex(
+      (current) =>
+        (current - 1 + careerReviews.length) % careerReviews.length
+    );
+  };
+
+  const showNextCareerReview = () => {
+    setCareerReviewIndex(
+      (current) => (current + 1) % careerReviews.length
+    );
+  };
 
   return (
     <main className={`page-shell route-${currentRoute}`}>
@@ -574,7 +672,13 @@ function App() {
         </div>
 
         <div className="review-platform-grid">
-          <article className="review-platform-card">
+          <a
+            className="review-platform-card review-platform-link"
+            href="https://www.google.com/search?q=Stellar+Groupware+Inc+reviews"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Stellar Groupware Google Reviews"
+          >
             <div className="review-platform-icon google-review-icon">G</div>
             <div>
               <h3>Google Reviews</h3>
@@ -583,23 +687,26 @@ function App() {
                 ★★★★★ <strong>5</strong>
               </div>
             </div>
-          </article>
+          </a>
 
-          <article className="review-platform-card">
+          <a
+            className="review-platform-card review-platform-link linkedin-platform-card"
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Stellar Groupware LinkedIn recommendations"
+          >
             <div className="review-platform-icon linkedin-review-icon">in</div>
+
             <div>
               <h3>LinkedIn Recommendations</h3>
               <p>Professional recommendations</p>
-              <a
-                href="https://www.linkedin.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="linkedin-review-button"
-              >
+
+              <span className="linkedin-review-button">
                 View on LinkedIn
-              </a>
+              </span>
             </div>
-          </article>
+          </a>
         </div>
 
         <div className="testimonial-column-grid">
@@ -609,31 +716,45 @@ function App() {
               <p>Feedback from our training participants</p>
             </header>
 
-            <div className="testimonial-feature">
-              <h4>Clear Training and Practical Support</h4>
-              <p>
-                “The training was clear and step by step. I understood how
-                projects work and felt more confident.”
-              </p>
-              <strong>Beginner IT Learner</strong>
-              <span>Frontend practice support</span>
+            <div
+              className="testimonial-feature"
+              key={`training-${trainingReviewIndex}`}
+              aria-live="polite"
+            >
+              <h4>{trainingReview.title}</h4>
+              <p>“{trainingReview.quote}”</p>
+              <strong>{trainingReview.name}</strong>
+              <span>{trainingReview.detail}</span>
             </div>
 
             <div className="testimonial-controls">
-              <button type="button" aria-label="Previous training review">‹</button>
-              <span>1 / 3</span>
-              <button type="button" aria-label="Next training review">›</button>
+              <button
+                type="button"
+                onClick={showPreviousTrainingReview}
+                aria-label="Previous training review"
+              >
+                ‹
+              </button>
+
+              <span>
+                {trainingReviewIndex + 1} / {trainingReviews.length}
+              </span>
+
+              <button
+                type="button"
+                onClick={showNextTrainingReview}
+                aria-label="Next training review"
+              >
+                ›
+              </button>
             </div>
 
             <div className="testimonial-visual">
               <div className="testimonial-message">
                 <span className="testimonial-avatar">S</span>
                 <div>
-                  <strong>Stellar Learner</strong>
-                  <p>
-                    Thank you for the clear explanations, patient mentoring,
-                    and practical project guidance.
-                  </p>
+                  <strong>{trainingReview.name}</strong>
+                  <p>{trainingReview.message}</p>
                 </div>
               </div>
             </div>
@@ -645,31 +766,45 @@ function App() {
               <p>Feedback from our mentoring and career-support learners</p>
             </header>
 
-            <div className="testimonial-feature">
-              <h4>Career Transition Journey</h4>
-              <p>
-                “The mentoring helped me organize my tasks, improve my resume,
-                and prepare for technical work.”
-              </p>
-              <strong>Career Transition Student</strong>
-              <span>Project and job-readiness guidance</span>
+            <div
+              className="testimonial-feature"
+              key={`career-${careerReviewIndex}`}
+              aria-live="polite"
+            >
+              <h4>{careerReview.title}</h4>
+              <p>“{careerReview.quote}”</p>
+              <strong>{careerReview.name}</strong>
+              <span>{careerReview.detail}</span>
             </div>
 
             <div className="testimonial-controls">
-              <button type="button" aria-label="Previous career review">‹</button>
-              <span>1 / 3</span>
-              <button type="button" aria-label="Next career review">›</button>
+              <button
+                type="button"
+                onClick={showPreviousCareerReview}
+                aria-label="Previous career review"
+              >
+                ‹
+              </button>
+
+              <span>
+                {careerReviewIndex + 1} / {careerReviews.length}
+              </span>
+
+              <button
+                type="button"
+                onClick={showNextCareerReview}
+                aria-label="Next career review"
+              >
+                ›
+              </button>
             </div>
 
             <div className="testimonial-visual">
               <div className="testimonial-message">
                 <span className="testimonial-avatar">S</span>
                 <div>
-                  <strong>Stellar Mentee</strong>
-                  <p>
-                    The support helped me build confidence, improve my resume,
-                    and understand real workplace expectations.
-                  </p>
+                  <strong>{careerReview.name}</strong>
+                  <p>{careerReview.message}</p>
                 </div>
               </div>
             </div>
