@@ -564,32 +564,145 @@ function App() {
       </section>
 
 
-      <section className="reviews-section" id="reviews">
-        <p className="section-label">STUDENT REVIEWS</p>
-        <h2>What learners say about Stellar Groupware.</h2>
-        <p className="section-intro">
-          Realistic feedback from learners who needed guidance, structure, and confidence while moving into IT.
-        </p>
-
-        <div className="review-grid">
-          <div className="review-card">
-            <p>“The training was clear and step by step. I understood how projects work and felt more confident.”</p>
-            <strong>Beginner IT Learner</strong>
-            <span>Frontend practice support</span>
-          </div>
-
-          <div className="review-card">
-            <p>“The mentoring helped me organize my tasks, improve my resume, and prepare for technical work.”</p>
-            <strong>Career Transition Student</strong>
-            <span>Project and job-readiness guidance</span>
-          </div>
-
-          <div className="review-card">
-            <p>“I liked the practical approach. It was not only theory; we worked through real examples.”</p>
-            <strong>Bootcamp Support Learner</strong>
-            <span>Hands-on project practice</span>
-          </div>
+      <section className="reviews-section reviews-reference-page" id="reviews">
+        <div className="reviews-heading">
+          <h2>What Our Clients Say</h2>
+          <p>
+            Real feedback from learners who strengthened their IT skills,
+            project confidence, and career readiness with Stellar.
+          </p>
         </div>
+
+        <div className="review-platform-grid">
+          <article className="review-platform-card">
+            <div className="review-platform-icon google-review-icon">G</div>
+            <div>
+              <h3>Google Reviews</h3>
+              <p>See what our learners say</p>
+              <div className="review-stars" aria-label="Five-star reviews">
+                ★★★★★ <strong>5</strong>
+              </div>
+            </div>
+          </article>
+
+          <article className="review-platform-card">
+            <div className="review-platform-icon linkedin-review-icon">in</div>
+            <div>
+              <h3>LinkedIn Recommendations</h3>
+              <p>Professional recommendations</p>
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="linkedin-review-button"
+              >
+                View on LinkedIn
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div className="testimonial-column-grid">
+          <article className="large-testimonial-card">
+            <header>
+              <h3>Training Program Testimonials</h3>
+              <p>Feedback from our training participants</p>
+            </header>
+
+            <div className="testimonial-feature">
+              <h4>Clear Training and Practical Support</h4>
+              <p>
+                “The training was clear and step by step. I understood how
+                projects work and felt more confident.”
+              </p>
+              <strong>Beginner IT Learner</strong>
+              <span>Frontend practice support</span>
+            </div>
+
+            <div className="testimonial-controls">
+              <button type="button" aria-label="Previous training review">‹</button>
+              <span>1 / 3</span>
+              <button type="button" aria-label="Next training review">›</button>
+            </div>
+
+            <div className="testimonial-visual">
+              <div className="testimonial-message">
+                <span className="testimonial-avatar">S</span>
+                <div>
+                  <strong>Stellar Learner</strong>
+                  <p>
+                    Thank you for the clear explanations, patient mentoring,
+                    and practical project guidance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article className="large-testimonial-card">
+            <header>
+              <h3>Career Support Testimonials</h3>
+              <p>Feedback from our mentoring and career-support learners</p>
+            </header>
+
+            <div className="testimonial-feature">
+              <h4>Career Transition Journey</h4>
+              <p>
+                “The mentoring helped me organize my tasks, improve my resume,
+                and prepare for technical work.”
+              </p>
+              <strong>Career Transition Student</strong>
+              <span>Project and job-readiness guidance</span>
+            </div>
+
+            <div className="testimonial-controls">
+              <button type="button" aria-label="Previous career review">‹</button>
+              <span>1 / 3</span>
+              <button type="button" aria-label="Next career review">›</button>
+            </div>
+
+            <div className="testimonial-visual">
+              <div className="testimonial-message">
+                <span className="testimonial-avatar">S</span>
+                <div>
+                  <strong>Stellar Mentee</strong>
+                  <p>
+                    The support helped me build confidence, improve my resume,
+                    and understand real workplace expectations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <section className="share-success-section">
+          <h2>Share Your Success Story</h2>
+          <p>
+            Have you completed a training or mentoring program with us?
+            We’d love to hear about your experience!
+          </p>
+
+          <div className="share-success-actions">
+            <a
+              href="https://www.google.com/search?q=Stellar+Groupware+Inc+reviews"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>G</span>
+              Leave a Google Review
+            </a>
+
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>in</span>
+              Give LinkedIn Recommendation
+            </a>
+          </div>
+        </section>
       </section>
 
       <section className="process-section" id="process">
