@@ -436,28 +436,87 @@ function App() {
         </svg>
       </a>
 
-<section className="services-section" id="training">
-        <p className="section-label">WHAT WE DO</p>
-        <h2>Training, mentoring, and IT support made simple.</h2>
+<section
+        className="services-section home-services-reference"
+        id="training"
+        aria-labelledby="home-services-title"
+      >
+        <div className="home-services-heading">
+          <h2 id="home-services-title">Our Services</h2>
+          <p>Comprehensive solutions to advance your IT career</p>
+        </div>
 
-        <div className="service-grid">
-          <div className="service-card">
-            <span>01</span>
-            <h3>IT Career Guidance</h3>
-            <p>Clear direction for beginners who want to move into IT without feeling overwhelmed.</p>
-          </div>
+        <div className="home-services-grid">
+          <article className="home-service-card">
+            <span className="home-service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16Z" />
+                <path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z" />
+              </svg>
+            </span>
+            <h3>Professional Training</h3>
+            <p>
+              Instructor-led IT training and practical bootcamps designed by
+              experienced industry professionals.
+            </p>
+          </article>
 
-          <div className="service-card">
-            <span>02</span>
-            <h3>Practical Training</h3>
-            <p>Step-by-step learning using real examples, simple tools, and professional project practice.</p>
-          </div>
+          <article className="home-service-card">
+            <span className="home-service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="9" cy="8" r="3" />
+                <path d="M3.5 20v-2.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V20" />
+                <path d="M16 5.5a3 3 0 0 1 0 5.5M17 13.5a4 4 0 0 1 3.5 4V20" />
+              </svg>
+            </span>
+            <h3>Career Mentoring</h3>
+            <p>
+              Personalized one-on-one guidance to strengthen your skills,
+              confidence, and career direction.
+            </p>
+          </article>
 
-          <div className="service-card">
-            <span>03</span>
-            <h3>Business Workflow Support</h3>
-            <p>Helping teams use technology, communication tools, and digital systems more effectively.</p>
-          </div>
+          <article className="home-service-card">
+            <span className="home-service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 3h8l4 4v14H6V3Z" />
+                <path d="M14 3v5h5M9 12h6M9 16h6" />
+              </svg>
+            </span>
+            <h3>Resume Marketing</h3>
+            <p>
+              Professional resume preparation, LinkedIn optimization, and
+              strategic career marketing support.
+            </p>
+          </article>
+
+          <article className="home-service-card">
+            <span className="home-service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="m4 17 5-5 3 3 7-8" />
+                <path d="M14 7h5v5" />
+              </svg>
+            </span>
+            <h3>Intensive Bootcamps</h3>
+            <p>
+              Hands-on project practice, workplace scenarios, and focused
+              technical guidance for rapid skill development.
+            </p>
+          </article>
+
+          <article className="home-service-card">
+            <span className="home-service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="m3 9 9-5 9 5-9 5-9-5Z" />
+                <path d="M7 12.5V17c2.8 2.2 7.2 2.2 10 0v-4.5M21 9v6" />
+              </svg>
+            </span>
+            <h3>Self-Learning Guidance</h3>
+            <p>
+              Structured self-paced learning plans, resources, and mentoring
+              to help you build new skills independently.
+            </p>
+          </article>
         </div>
       </section>
 

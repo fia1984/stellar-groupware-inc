@@ -8775,3 +8775,161 @@ header {
   outline: 3px solid rgba(8, 168, 63, 0.3) !important;
   outline-offset: 4px !important;
 }
+
+/* Home services — reference-inspired five-card layout */
+.route-home .home-services-reference {
+  padding: 76px max(5%, 32px) 92px !important;
+  background: #ffffff !important;
+}
+
+.route-home .home-services-heading {
+  margin: 0 auto 52px !important;
+  text-align: center !important;
+}
+
+.route-home .home-services-heading h2 {
+  margin: 0 !important;
+  color: #111827 !important;
+  font-size: clamp(2rem, 3vw, 2.75rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+}
+
+.route-home .home-services-heading p {
+  margin: 18px auto 0 !important;
+  color: #526071 !important;
+  font-size: 1.08rem !important;
+  line-height: 1.6 !important;
+}
+
+.route-home .home-services-grid {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: min(1500px, 100%) !important;
+  margin: 0 auto !important;
+}
+
+.route-home .home-service-card {
+  min-width: 0 !important;
+  min-height: 400px !important;
+  padding: 30px 28px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+
+  background: #ffffff !important;
+  border: 2px solid #d5dce3 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04) !important;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease !important;
+}
+
+.route-home .home-service-card:hover {
+  transform: translateY(-5px) !important;
+  border-color: #08a83f !important;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.1) !important;
+}
+
+.route-home .home-service-icon {
+  width: 66px !important;
+  height: 66px !important;
+  margin-bottom: 24px !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  color: #08a83f !important;
+  background: #effaf3 !important;
+  border-radius: 12px !important;
+}
+
+.route-home .home-service-icon svg {
+  width: 34px !important;
+  height: 34px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.8 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+.route-home .home-service-card h3 {
+  margin: 0 0 16px !important;
+  color: #111827 !important;
+  font-size: 1.28rem !important;
+  font-weight: 800 !important;
+  line-height: 1.3 !important;
+}
+
+.route-home .home-service-card p {
+  margin: 0 !important;
+  color: #526071 !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+}
+
+@media (max-width: 1250px) {
+  .route-home .home-services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .route-home .home-services-reference {
+    padding: 58px 20px 68px !important;
+  }
+
+  .route-home .home-services-heading {
+    margin-bottom: 36px !important;
+  }
+
+  .route-home .home-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+  }
+
+  .route-home .home-service-card {
+    min-height: 340px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .route-home .home-services-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-home .home-service-card {
+    min-height: 0 !important;
+  }
+}
+
+/* Sammy feedback: align home hero content with the header brand */
+@media (min-width: 1050px) {
+  .route-home .navbar {
+    width: min(1500px, calc(100% - 80px)) !important;
+    margin-inline: auto !important;
+  }
+
+  .route-home .hero-section .hero-content {
+    left: max(calc((100% - 1500px) / 2), 40px) !important;
+    width: min(680px, 48vw) !important;
+    max-width: 680px !important;
+  }
+
+  .route-home .hero-section .hero-content h1 {
+    max-width: 650px !important;
+    font-size: clamp(3rem, 4vw, 4.25rem) !important;
+    line-height: 1.06 !important;
+  }
+
+  .route-home .hero-section .hero-tag {
+    margin-bottom: 18px !important;
+  }
+}
