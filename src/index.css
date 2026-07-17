@@ -9755,6 +9755,67 @@ header {
   }
 }
 
+/* FINAL TABLET HERO FIX — keep 601–1050px content inside the viewport */
+@media (min-width: 601px) and (max-width: 1050px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    inset: auto !important;
+    width: calc(100% - 128px) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 82px 64px 0 !important;
+    padding: 0 0 92px !important;
+    transform: none !important;
+    text-align: left !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    font-size: clamp(2.35rem, 6vw, 3.25rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .route-home .hero-content h3,
+  .route-home .hero-content > p:not(.hero-tag) {
+    max-width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .route-home #hero-action-buttons {
+    width: 100% !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .route-home #hero-book-appointment,
+  .route-home #hero-learn-more {
+    width: 186px !important;
+    min-width: 186px !important;
+  }
+
+  .route-home .slide-arrow.left {
+    left: 10px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 10px !important;
+  }
+}
+
 
 /* STELLAR QA FINAL OVERRIDES — SAMMY SHEET
    One controlled layer for hero, navigation, dropdowns and Reviews.
@@ -11181,5 +11242,253 @@ header {
   .route-home .hero-content {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* FINAL TABLET HERO FIX — this last rule overrides conflicting legacy queries */
+@media (min-width: 601px) and (max-width: 1050px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    inset: auto !important;
+    width: calc(100% - 128px) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 82px 64px 0 !important;
+    padding: 0 0 92px !important;
+    transform: none !important;
+    text-align: left !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    font-size: clamp(2.35rem, 6vw, 3.25rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .route-home .hero-content h3,
+  .route-home .hero-content > p:not(.hero-tag) {
+    max-width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .route-home #hero-action-buttons {
+    width: 100% !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .route-home #hero-book-appointment,
+  .route-home #hero-learn-more {
+    width: 186px !important;
+    min-width: 186px !important;
+  }
+
+  .route-home .slide-arrow.left {
+    left: 10px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 10px !important;
+  }
+}
+
+/* FINAL HOME HERO FEEDBACK FIX:
+   1. Remove unexpected black shadow behind text
+   2. Center hero text vertically across screen sizes
+   3. Improve headline/text spacing and sizing
+   4. Use smooth fade instead of blink/flash
+*/
+
+.route-home .hero-section {
+  position: relative !important;
+  min-height: 720px !important;
+  overflow: hidden !important;
+}
+
+/* Smooth background fade */
+.route-home .hero-backgrounds {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+}
+
+.route-home .hero-background {
+  position: absolute !important;
+  inset: 0 !important;
+  opacity: 0 !important;
+  transition: opacity 900ms ease-in-out !important;
+  animation: none !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.route-home .hero-background.active {
+  opacity: 1 !important;
+}
+
+/* Remove blinking/flash overlay */
+.route-home .slide-flash {
+  display: none !important;
+  opacity: 0 !important;
+  animation: none !important;
+}
+
+/* Keep overlay blended with background, not a black box behind text */
+.route-home .dark-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.52) 0%,
+    rgba(0, 0, 0, 0.34) 44%,
+    rgba(0, 0, 0, 0.18) 100%
+  ) !important;
+}
+
+/* Remove heavy black text shadow/background effect */
+.route-home .hero-content,
+.route-home .hero-content h1,
+.route-home .hero-content h2,
+.route-home .hero-content h3,
+.route-home .hero-content p {
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.route-home .hero-content h1,
+.route-home .hero-content h3,
+.route-home .hero-content > p:not(.hero-tag) {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Desktop centered hero content */
+.route-home .hero-content {
+  position: absolute !important;
+  top: 50% !important;
+  left: clamp(260px, 24vw, 500px) !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+  width: min(620px, 52vw) !important;
+  max-width: 620px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  z-index: 20 !important;
+  animation: none !important;
+}
+
+.route-home .flash-active .hero-content {
+  transform: translateY(-50%) !important;
+}
+
+/* Better headline sizing and spacing */
+.route-home .hero-content h1 {
+  font-size: clamp(2.55rem, 4.15vw, 4.45rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.04em !important;
+  margin: 0 !important;
+  max-width: 620px !important;
+  min-height: 0 !important;
+}
+
+.route-home .green-line {
+  width: 86px !important;
+  height: 4px !important;
+  margin: 22px 0 24px !important;
+}
+
+.route-home .hero-content h3 {
+  font-size: clamp(1.15rem, 1.55vw, 1.55rem) !important;
+  line-height: 1.28 !important;
+  margin: 0 0 18px !important;
+  max-width: 560px !important;
+  min-height: 0 !important;
+}
+
+.route-home .hero-content > p:not(.hero-tag) {
+  font-size: clamp(0.92rem, 1vw, 1rem) !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  max-width: 560px !important;
+  min-height: 0 !important;
+}
+
+.route-home .hero-tag {
+  margin-bottom: 26px !important;
+}
+
+/* Tablet responsiveness */
+@media (min-width: 701px) and (max-width: 1050px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+  }
+
+  .route-home .hero-content {
+    position: absolute !important;
+    top: 52% !important;
+    left: 64px !important;
+    width: calc(100% - 128px) !important;
+    max-width: 640px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: translateY(-50%) !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.25rem, 6vw, 3.4rem) !important;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 700px) {
+  .route-home .hero-section {
+    min-height: 780px !important;
+    padding-bottom: 92px !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: calc(100% - 40px) !important;
+    max-width: none !important;
+    margin: 100px 20px 0 !important;
+    padding: 0 !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2rem, 10vw, 2.85rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .route-home .hero-content h3 {
+    font-size: 1.05rem !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    font-size: 0.92rem !important;
   }
 }
