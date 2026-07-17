@@ -8933,3 +8933,1733 @@ header {
     margin-bottom: 18px !important;
   }
 }
+
+/* STELLAR QA FINAL OVERRIDES — SAMMY SHEET
+   One controlled layer for hero, navigation, dropdowns and Reviews.
+*/
+
+/* 1. Remove the unexpected black text box/shadow */
+.route-home .hero-content,
+.route-home .hero-content h1,
+.route-home .hero-content h2,
+.route-home .hero-content h3,
+.route-home .hero-content p {
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Keep one smooth overlay merged with the image */
+.route-home .dark-overlay {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 10, 16, 0.62) 0%,
+    rgba(3, 10, 16, 0.43) 40%,
+    rgba(3, 10, 16, 0.20) 72%,
+    rgba(3, 10, 16, 0.08) 100%
+  ) !important;
+}
+
+/* Remove decorative layers that made the image look dirty */
+.route-home .code-layer,
+.route-home .globe-effect,
+.route-home .hero-section::before,
+.route-home .hero-section::after {
+  display: none !important;
+}
+
+/* 2–3. Stable responsive hero alignment, spacing and headline sizing */
+.route-home .hero-section {
+  position: relative !important;
+  min-height: 760px !important;
+  height: min(820px, 100vh) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  transition: none !important;
+}
+
+.route-home .hero-content {
+  position: absolute !important;
+  z-index: 20 !important;
+  left: max(40px, calc((100vw - 1500px) / 2)) !important;
+  top: 52% !important;
+  transform: translateY(-45%) !important;
+
+  width: min(650px, calc(100% - 120px)) !important;
+  max-width: 650px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  animation: none !important;
+}
+
+.route-home .hero-tag {
+  margin: 0 0 18px !important;
+  padding: 10px 20px !important;
+  font-size: 0.82rem !important;
+  line-height: 1 !important;
+}
+
+.route-home .hero-content h1 {
+  width: 100% !important;
+  max-width: 650px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+
+  font-size: clamp(3rem, 4.15vw, 4.45rem) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.045em !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.route-home .green-line {
+  width: 96px !important;
+  height: 4px !important;
+  margin: 24px 0 24px !important;
+}
+
+.route-home .hero-content h3 {
+  max-width: 620px !important;
+  min-height: 0 !important;
+  margin: 0 0 18px !important;
+
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem) !important;
+  line-height: 1.3 !important;
+}
+
+.route-home .hero-content > p:not(.hero-tag) {
+  max-width: 610px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+
+  font-size: 1rem !important;
+  line-height: 1.55 !important;
+}
+
+.route-home .hero-actions {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin: 24px 0 0 !important;
+}
+
+.route-home .hero-actions a {
+  width: 186px !important;
+  min-width: 186px !important;
+  max-width: none !important;
+  min-height: 52px !important;
+  padding: 13px 18px !important;
+}
+
+/* 4. Reference-style quick blink instead of stretched movement */
+.route-home .slide-flash {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 7 !important;
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+
+  opacity: 0 !important;
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.17) !important;
+}
+
+.route-home .flash-active .slide-flash {
+  animation: stellarQaBlink 420ms ease-out !important;
+}
+
+.route-home .flash-active .hero-content {
+  transform: translateY(-45%) !important;
+  animation: stellarQaContentFade 420ms ease-out !important;
+}
+
+@keyframes stellarQaBlink {
+  0%   { opacity: 0; }
+  35%  { opacity: 0.42; }
+  100% { opacity: 0; }
+}
+
+@keyframes stellarQaContentFade {
+  0%   { opacity: 0.72; }
+  100% { opacity: 1; }
+}
+
+/* 5. Reference-sized left and right arrows */
+.route-home .slide-arrow {
+  position: absolute !important;
+  z-index: 30 !important;
+  top: 54% !important;
+
+  display: grid !important;
+  place-items: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 46px !important;
+  height: 46px !important;
+  padding: 0 0 4px !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 50% !important;
+  background: rgba(5, 12, 18, 0.46) !important;
+  color: #ffffff !important;
+
+  font-size: 2.1rem !important;
+  font-weight: 300 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+
+  transform: translateY(-50%) !important;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+.route-home .slide-arrow.left {
+  left: 20px !important;
+}
+
+.route-home .slide-arrow.right {
+  right: 20px !important;
+}
+
+.route-home .slide-arrow:hover {
+  background: #07963a !important;
+  border-color: #12c85a !important;
+  transform: translateY(-50%) scale(1.04) !important;
+}
+
+/* Four slider strips */
+.route-home .dots {
+  position: absolute !important;
+  z-index: 30 !important;
+  left: 50% !important;
+  bottom: 28px !important;
+
+  display: flex !important;
+  gap: 9px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  transform: translateX(-50%) !important;
+}
+
+.route-home .dot {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 6px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.58) !important;
+  cursor: pointer !important;
+}
+
+.route-home .dot.active-dot {
+  width: 50px !important;
+  min-width: 50px !important;
+  background: #0bc653 !important;
+}
+
+/* 6 and 8. Home/Reviews links enabled and active */
+.route-home #home-nav-link.active,
+.route-reviews .nav-links > a[href="/reviews"].active {
+  background: #075f35 !important;
+  border-color: #0d7a43 !important;
+  color: #ffffff !important;
+  transform: none !important;
+}
+
+.route-home #home-nav-link,
+.route-reviews .nav-links > a[href="/reviews"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Header container and desktop spacing */
+.route-home .navbar,
+.page-shell:not(.route-home) .navbar {
+  width: min(1500px, calc(100% - 80px)) !important;
+  max-width: 1500px !important;
+  min-height: 88px !important;
+  margin: 0 auto !important;
+  padding: 18px 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 30px !important;
+
+  overflow: visible !important;
+}
+
+.navbar .brand {
+  flex: 0 0 auto !important;
+  min-width: 280px !important;
+  margin: 0 !important;
+}
+
+/* Stable star animation; logo box itself never moves */
+.brand-icon {
+  position: relative !important;
+  flex: 0 0 52px !important;
+  width: 52px !important;
+  height: 52px !important;
+  overflow: hidden !important;
+
+  color: transparent !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.brand-icon::before,
+.brand-icon::after {
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  pointer-events: none !important;
+  backface-visibility: hidden !important;
+  will-change: transform, opacity !important;
+}
+
+.brand-icon::before {
+  content: "S";
+  color: #ffffff !important;
+  font-size: 31px !important;
+  font-weight: 900 !important;
+
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition:
+    transform 360ms ease,
+    opacity 220ms ease !important;
+}
+
+.brand-icon::after {
+  content: "★";
+  color: #ffffff !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+
+  opacity: 0 !important;
+  transform: translate3d(-125%, 0, 0) rotate(-120deg) !important;
+  transition:
+    transform 440ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease !important;
+}
+
+.brand:hover .brand-icon::before {
+  opacity: 0 !important;
+  transform: translate3d(125%, 0, 0) !important;
+}
+
+.brand:hover .brand-icon::after {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) rotate(360deg) !important;
+}
+
+/* 7. Dropdown spacing like reference */
+.nav-links {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  overflow: visible !important;
+}
+
+.nav-dropdown {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  padding-bottom: 10px !important;
+  margin-bottom: -10px !important;
+}
+
+.nav-dropdown > a {
+  min-width: 96px !important;
+}
+
+.dropdown-menu {
+  position: absolute !important;
+  z-index: 9999 !important;
+  top: calc(100% + 2px) !important;
+  left: 0 !important;
+
+  width: 205px !important;
+  min-width: 205px !important;
+  padding: 7px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+
+  background: #ffffff !important;
+  border: 1px solid #dce5e0 !important;
+  border-radius: 9px !important;
+  box-shadow: 0 14px 34px rgba(12, 32, 25, 0.18) !important;
+}
+
+.dropdown-menu a {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 43px !important;
+  padding: 11px 13px !important;
+
+  justify-content: flex-start !important;
+  border-radius: 6px !important;
+  color: #18352c !important;
+  background: #ffffff !important;
+  font-size: 0.88rem !important;
+  text-align: left !important;
+}
+
+.dropdown-menu a:hover {
+  color: #ffffff !important;
+  background: #075f35 !important;
+  transform: none !important;
+}
+
+/* 9. Prevent Stellar logo distortion on Reviews and other pages */
+.page-shell:not(.route-home) .brand {
+  min-width: 280px !important;
+  transform: none !important;
+}
+
+.page-shell:not(.route-home) .brand-icon {
+  flex-basis: 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 10px !important;
+}
+
+.page-shell:not(.route-home) .brand-icon::before {
+  font-size: 25px !important;
+}
+
+.page-shell:not(.route-home) .brand h2 {
+  margin: 0 !important;
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.page-shell:not(.route-home) .brand span {
+  margin-top: 4px !important;
+  font-size: 0.66rem !important;
+  letter-spacing: 0.13em !important;
+  white-space: nowrap !important;
+}
+
+/* 10. Reviews responsiveness */
+.route-reviews {
+  overflow-x: hidden !important;
+}
+
+.route-reviews .reviews-reference-page {
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 28px 72px !important;
+}
+
+.route-reviews .review-platform-grid,
+.route-reviews .testimonial-column-grid {
+  width: 100% !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+.route-reviews .review-platform-card,
+.route-reviews .large-testimonial-card {
+  min-width: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Laptop width */
+@media (max-width: 1250px) {
+  .route-home .navbar,
+  .page-shell:not(.route-home) .navbar {
+    width: calc(100% - 44px) !important;
+    gap: 16px !important;
+  }
+
+  .navbar .brand {
+    min-width: 230px !important;
+  }
+
+  .nav-links {
+    gap: 3px !important;
+  }
+
+  .nav-links > a,
+  .nav-dropdown > a {
+    min-width: 0 !important;
+    padding-inline: 10px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .book-btn {
+    min-width: 150px !important;
+  }
+
+  .route-home .hero-content {
+    left: 58px !important;
+    width: min(610px, calc(100% - 130px)) !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.8rem, 4.6vw, 4rem) !important;
+  }
+}
+
+/* Tablet/mobile navigation */
+@media (max-width: 1050px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+    height: auto !important;
+  }
+
+  .route-home .navbar,
+  .page-shell:not(.route-home) .navbar {
+    position: relative !important;
+    width: calc(100% - 32px) !important;
+    min-height: 74px !important;
+    margin: 12px auto 0 !important;
+    padding: 12px 14px !important;
+
+    flex-direction: row !important;
+    align-items: center !important;
+
+    border-radius: 14px !important;
+  }
+
+  .navbar .brand,
+  .page-shell:not(.route-home) .brand {
+    min-width: 0 !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  .mobile-menu-button {
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    height: 46px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 5px !important;
+
+    cursor: pointer !important;
+  }
+
+  .mobile-menu-button span {
+    display: block !important;
+    width: 24px !important;
+    height: 2px !important;
+    margin-inline: auto !important;
+    background: currentColor !important;
+  }
+
+  .nav-links {
+    position: absolute !important;
+    z-index: 10000 !important;
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    display: none !important;
+    width: 100% !important;
+    padding: 12px !important;
+
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 7px !important;
+
+    background: #ffffff !important;
+    border: 1px solid #dce5e0 !important;
+    border-radius: 13px !important;
+    box-shadow: 0 18px 40px rgba(12, 32, 25, 0.2) !important;
+  }
+
+  #mobile-menu-toggle:checked ~ .nav-links {
+    display: flex !important;
+  }
+
+  .nav-links > a,
+  .nav-dropdown,
+  .nav-dropdown > a,
+  .book-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .nav-links > a,
+  .nav-dropdown > a {
+    min-height: 44px !important;
+    justify-content: flex-start !important;
+    color: #17382d !important;
+    background: transparent !important;
+  }
+
+  .nav-links > a.active,
+  .nav-dropdown > a.active,
+  .book-btn {
+    color: #ffffff !important;
+    background: #075f35 !important;
+  }
+
+  .nav-dropdown {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 4px !important;
+    padding: 5px 0 5px 14px !important;
+
+    display: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: #f5faf7 !important;
+  }
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    display: flex !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+
+    width: calc(100% - 72px) !important;
+    max-width: 610px !important;
+    margin: 110px 36px 0 !important;
+    padding: 0 0 100px !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.65rem, 7vw, 3.7rem) !important;
+  }
+
+  .route-home .slide-arrow {
+    top: 56% !important;
+  }
+
+  .route-home .slide-arrow.left {
+    left: 12px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 12px !important;
+  }
+
+  .route-reviews .review-platform-grid,
+  .route-reviews .testimonial-column-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+  }
+
+  .brand-icon {
+    flex-basis: 42px !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .brand-icon::before {
+    font-size: 25px !important;
+  }
+
+  .brand-icon::after {
+    font-size: 23px !important;
+  }
+
+  .brand h2,
+  .page-shell:not(.route-home) .brand h2 {
+    font-size: 1.28rem !important;
+  }
+
+  .brand span,
+  .page-shell:not(.route-home) .brand span {
+    font-size: 0.58rem !important;
+  }
+
+  .route-home .hero-content {
+    width: calc(100% - 48px) !important;
+    margin: 88px 24px 0 !important;
+    padding-bottom: 96px !important;
+  }
+
+  .route-home .hero-tag {
+    margin-bottom: 16px !important;
+    padding: 8px 14px !important;
+    font-size: 0.69rem !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.15rem, 11vw, 3rem) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .route-home .green-line {
+    width: 74px !important;
+    margin: 18px 0 !important;
+  }
+
+  .route-home .hero-content h3 {
+    margin-bottom: 14px !important;
+    font-size: 1.05rem !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .route-home .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+  }
+
+  .route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+  }
+
+  .route-home .slide-arrow {
+    display: none !important;
+  }
+
+  .route-home .dots {
+    bottom: 20px !important;
+  }
+
+  .route-reviews .reviews-reference-page {
+    padding: 0 14px 56px !important;
+  }
+
+  .route-reviews .reviews-heading {
+    padding: 34px 8px 26px !important;
+  }
+
+  .route-reviews .reviews-heading h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .route-reviews .reviews-heading p {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-reviews .review-platform-card {
+    min-height: 0 !important;
+    padding: 18px !important;
+    gap: 14px !important;
+  }
+
+  .route-reviews .review-platform-icon {
+    flex: 0 0 54px !important;
+    width: 54px !important;
+    height: 54px !important;
+    font-size: 1.35rem !important;
+  }
+
+  .route-reviews .large-testimonial-card {
+    padding: 18px !important;
+    border-radius: 12px !important;
+  }
+
+  .route-reviews .testimonial-feature {
+    padding: 20px 8px !important;
+  }
+
+  .route-reviews .testimonial-feature h4 {
+    font-size: 1rem !important;
+  }
+
+  .route-reviews .testimonial-feature p {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-reviews .testimonial-controls {
+    min-height: 48px !important;
+  }
+
+  .route-reviews .testimonial-visual {
+    min-height: 180px !important;
+    padding: 18px 10px !important;
+  }
+
+  .route-reviews .testimonial-message {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .route-reviews .share-success-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-home .slide-flash,
+  .route-home .hero-content,
+  .brand-icon::before,
+  .brand-icon::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* STELLAR QA FINAL OVERRIDES — SAMMY SHEET
+   One controlled layer for hero, navigation, dropdowns and Reviews.
+*/
+
+/* 1. Remove the unexpected black text box/shadow */
+.route-home .hero-content,
+.route-home .hero-content h1,
+.route-home .hero-content h2,
+.route-home .hero-content h3,
+.route-home .hero-content p {
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Keep one smooth overlay merged with the image */
+.route-home .dark-overlay {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 10, 16, 0.62) 0%,
+    rgba(3, 10, 16, 0.43) 40%,
+    rgba(3, 10, 16, 0.20) 72%,
+    rgba(3, 10, 16, 0.08) 100%
+  ) !important;
+}
+
+/* Remove decorative layers that made the image look dirty */
+.route-home .code-layer,
+.route-home .globe-effect,
+.route-home .hero-section::before,
+.route-home .hero-section::after {
+  display: none !important;
+}
+
+/* 2–3. Stable responsive hero alignment, spacing and headline sizing */
+.route-home .hero-section {
+  position: relative !important;
+  min-height: 760px !important;
+  height: min(820px, 100vh) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  transition: none !important;
+}
+
+.route-home .hero-content {
+  position: absolute !important;
+  z-index: 20 !important;
+  left: max(40px, calc((100vw - 1500px) / 2)) !important;
+  top: 52% !important;
+  transform: translateY(-45%) !important;
+
+  width: min(650px, calc(100% - 120px)) !important;
+  max-width: 650px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  animation: none !important;
+}
+
+.route-home .hero-tag {
+  margin: 0 0 18px !important;
+  padding: 10px 20px !important;
+  font-size: 0.82rem !important;
+  line-height: 1 !important;
+}
+
+.route-home .hero-content h1 {
+  width: 100% !important;
+  max-width: 650px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+
+  font-size: clamp(3rem, 4.15vw, 4.45rem) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.045em !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.route-home .green-line {
+  width: 96px !important;
+  height: 4px !important;
+  margin: 24px 0 24px !important;
+}
+
+.route-home .hero-content h3 {
+  max-width: 620px !important;
+  min-height: 0 !important;
+  margin: 0 0 18px !important;
+
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem) !important;
+  line-height: 1.3 !important;
+}
+
+.route-home .hero-content > p:not(.hero-tag) {
+  max-width: 610px !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+
+  font-size: 1rem !important;
+  line-height: 1.55 !important;
+}
+
+.route-home .hero-actions {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin: 24px 0 0 !important;
+}
+
+.route-home .hero-actions a {
+  width: 186px !important;
+  min-width: 186px !important;
+  max-width: none !important;
+  min-height: 52px !important;
+  padding: 13px 18px !important;
+}
+
+/* 4. Reference-style quick blink instead of stretched movement */
+.route-home .slide-flash {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 7 !important;
+  display: block !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+
+  opacity: 0 !important;
+  transform: none !important;
+  background: rgba(255, 255, 255, 0.17) !important;
+}
+
+.route-home .flash-active .slide-flash {
+  animation: stellarQaBlink 420ms ease-out !important;
+}
+
+.route-home .flash-active .hero-content {
+  transform: translateY(-45%) !important;
+  animation: stellarQaContentFade 420ms ease-out !important;
+}
+
+@keyframes stellarQaBlink {
+  0%   { opacity: 0; }
+  35%  { opacity: 0.42; }
+  100% { opacity: 0; }
+}
+
+@keyframes stellarQaContentFade {
+  0%   { opacity: 0.72; }
+  100% { opacity: 1; }
+}
+
+/* 5. Reference-sized left and right arrows */
+.route-home .slide-arrow {
+  position: absolute !important;
+  z-index: 30 !important;
+  top: 54% !important;
+
+  display: grid !important;
+  place-items: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 46px !important;
+  height: 46px !important;
+  padding: 0 0 4px !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 50% !important;
+  background: rgba(5, 12, 18, 0.46) !important;
+  color: #ffffff !important;
+
+  font-size: 2.1rem !important;
+  font-weight: 300 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+
+  transform: translateY(-50%) !important;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease !important;
+}
+
+.route-home .slide-arrow.left {
+  left: 20px !important;
+}
+
+.route-home .slide-arrow.right {
+  right: 20px !important;
+}
+
+.route-home .slide-arrow:hover {
+  background: #07963a !important;
+  border-color: #12c85a !important;
+  transform: translateY(-50%) scale(1.04) !important;
+}
+
+/* Four slider strips */
+.route-home .dots {
+  position: absolute !important;
+  z-index: 30 !important;
+  left: 50% !important;
+  bottom: 28px !important;
+
+  display: flex !important;
+  gap: 9px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  transform: translateX(-50%) !important;
+}
+
+.route-home .dot {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 6px !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.58) !important;
+  cursor: pointer !important;
+}
+
+.route-home .dot.active-dot {
+  width: 50px !important;
+  min-width: 50px !important;
+  background: #0bc653 !important;
+}
+
+/* 6 and 8. Home/Reviews links enabled and active */
+.route-home #home-nav-link.active,
+.route-reviews .nav-links > a[href="/reviews"].active {
+  background: #075f35 !important;
+  border-color: #0d7a43 !important;
+  color: #ffffff !important;
+  transform: none !important;
+}
+
+.route-home #home-nav-link,
+.route-reviews .nav-links > a[href="/reviews"] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Header container and desktop spacing */
+.route-home .navbar,
+.page-shell:not(.route-home) .navbar {
+  width: min(1500px, calc(100% - 80px)) !important;
+  max-width: 1500px !important;
+  min-height: 88px !important;
+  margin: 0 auto !important;
+  padding: 18px 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 30px !important;
+
+  overflow: visible !important;
+}
+
+.navbar .brand {
+  flex: 0 0 auto !important;
+  min-width: 280px !important;
+  margin: 0 !important;
+}
+
+/* Stable star animation; logo box itself never moves */
+.brand-icon {
+  position: relative !important;
+  flex: 0 0 52px !important;
+  width: 52px !important;
+  height: 52px !important;
+  overflow: hidden !important;
+
+  color: transparent !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.brand-icon::before,
+.brand-icon::after {
+  position: absolute !important;
+  inset: 0 !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  pointer-events: none !important;
+  backface-visibility: hidden !important;
+  will-change: transform, opacity !important;
+}
+
+.brand-icon::before {
+  content: "S";
+  color: #ffffff !important;
+  font-size: 31px !important;
+  font-weight: 900 !important;
+
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition:
+    transform 360ms ease,
+    opacity 220ms ease !important;
+}
+
+.brand-icon::after {
+  content: "★";
+  color: #ffffff !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+
+  opacity: 0 !important;
+  transform: translate3d(-125%, 0, 0) rotate(-120deg) !important;
+  transition:
+    transform 440ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease !important;
+}
+
+.brand:hover .brand-icon::before {
+  opacity: 0 !important;
+  transform: translate3d(125%, 0, 0) !important;
+}
+
+.brand:hover .brand-icon::after {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) rotate(360deg) !important;
+}
+
+/* 7. Dropdown spacing like reference */
+.nav-links {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 8px !important;
+  overflow: visible !important;
+}
+
+.nav-dropdown {
+  position: relative !important;
+  flex: 0 0 auto !important;
+  padding-bottom: 10px !important;
+  margin-bottom: -10px !important;
+}
+
+.nav-dropdown > a {
+  min-width: 96px !important;
+}
+
+.dropdown-menu {
+  position: absolute !important;
+  z-index: 9999 !important;
+  top: calc(100% + 2px) !important;
+  left: 0 !important;
+
+  width: 205px !important;
+  min-width: 205px !important;
+  padding: 7px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+
+  background: #ffffff !important;
+  border: 1px solid #dce5e0 !important;
+  border-radius: 9px !important;
+  box-shadow: 0 14px 34px rgba(12, 32, 25, 0.18) !important;
+}
+
+.dropdown-menu a {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 43px !important;
+  padding: 11px 13px !important;
+
+  justify-content: flex-start !important;
+  border-radius: 6px !important;
+  color: #18352c !important;
+  background: #ffffff !important;
+  font-size: 0.88rem !important;
+  text-align: left !important;
+}
+
+.dropdown-menu a:hover {
+  color: #ffffff !important;
+  background: #075f35 !important;
+  transform: none !important;
+}
+
+/* 9. Prevent Stellar logo distortion on Reviews and other pages */
+.page-shell:not(.route-home) .brand {
+  min-width: 280px !important;
+  transform: none !important;
+}
+
+.page-shell:not(.route-home) .brand-icon {
+  flex-basis: 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 10px !important;
+}
+
+.page-shell:not(.route-home) .brand-icon::before {
+  font-size: 25px !important;
+}
+
+.page-shell:not(.route-home) .brand h2 {
+  margin: 0 !important;
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+.page-shell:not(.route-home) .brand span {
+  margin-top: 4px !important;
+  font-size: 0.66rem !important;
+  letter-spacing: 0.13em !important;
+  white-space: nowrap !important;
+}
+
+/* 10. Reviews responsiveness */
+.route-reviews {
+  overflow-x: hidden !important;
+}
+
+.route-reviews .reviews-reference-page {
+  width: 100% !important;
+  max-width: 1240px !important;
+  margin: 0 auto !important;
+  padding: 0 28px 72px !important;
+}
+
+.route-reviews .review-platform-grid,
+.route-reviews .testimonial-column-grid {
+  width: 100% !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+
+.route-reviews .review-platform-card,
+.route-reviews .large-testimonial-card {
+  min-width: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Laptop width */
+@media (max-width: 1250px) {
+  .route-home .navbar,
+  .page-shell:not(.route-home) .navbar {
+    width: calc(100% - 44px) !important;
+    gap: 16px !important;
+  }
+
+  .navbar .brand {
+    min-width: 230px !important;
+  }
+
+  .nav-links {
+    gap: 3px !important;
+  }
+
+  .nav-links > a,
+  .nav-dropdown > a {
+    min-width: 0 !important;
+    padding-inline: 10px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .book-btn {
+    min-width: 150px !important;
+  }
+
+  .route-home .hero-content {
+    left: 58px !important;
+    width: min(610px, calc(100% - 130px)) !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.8rem, 4.6vw, 4rem) !important;
+  }
+}
+
+/* Tablet/mobile navigation */
+@media (max-width: 1050px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+    height: auto !important;
+  }
+
+  .route-home .navbar,
+  .page-shell:not(.route-home) .navbar {
+    position: relative !important;
+    width: calc(100% - 32px) !important;
+    min-height: 74px !important;
+    margin: 12px auto 0 !important;
+    padding: 12px 14px !important;
+
+    flex-direction: row !important;
+    align-items: center !important;
+
+    border-radius: 14px !important;
+  }
+
+  .navbar .brand,
+  .page-shell:not(.route-home) .brand {
+    min-width: 0 !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  .mobile-menu-button {
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    height: 46px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 5px !important;
+
+    cursor: pointer !important;
+  }
+
+  .mobile-menu-button span {
+    display: block !important;
+    width: 24px !important;
+    height: 2px !important;
+    margin-inline: auto !important;
+    background: currentColor !important;
+  }
+
+  .nav-links {
+    position: absolute !important;
+    z-index: 10000 !important;
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    display: none !important;
+    width: 100% !important;
+    padding: 12px !important;
+
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 7px !important;
+
+    background: #ffffff !important;
+    border: 1px solid #dce5e0 !important;
+    border-radius: 13px !important;
+    box-shadow: 0 18px 40px rgba(12, 32, 25, 0.2) !important;
+  }
+
+  #mobile-menu-toggle:checked ~ .nav-links {
+    display: flex !important;
+  }
+
+  .nav-links > a,
+  .nav-dropdown,
+  .nav-dropdown > a,
+  .book-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .nav-links > a,
+  .nav-dropdown > a {
+    min-height: 44px !important;
+    justify-content: flex-start !important;
+    color: #17382d !important;
+    background: transparent !important;
+  }
+
+  .nav-links > a.active,
+  .nav-dropdown > a.active,
+  .book-btn {
+    color: #ffffff !important;
+    background: #075f35 !important;
+  }
+
+  .nav-dropdown {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 4px !important;
+    padding: 5px 0 5px 14px !important;
+
+    display: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: #f5faf7 !important;
+  }
+
+  .nav-dropdown:hover .dropdown-menu,
+  .nav-dropdown:focus-within .dropdown-menu {
+    display: flex !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+
+    width: calc(100% - 72px) !important;
+    max-width: 610px !important;
+    margin: 110px 36px 0 !important;
+    padding: 0 0 100px !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.65rem, 7vw, 3.7rem) !important;
+  }
+
+  .route-home .slide-arrow {
+    top: 56% !important;
+  }
+
+  .route-home .slide-arrow.left {
+    left: 12px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 12px !important;
+  }
+
+  .route-reviews .review-platform-grid,
+  .route-reviews .testimonial-column-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .route-home .hero-section {
+    min-height: 720px !important;
+  }
+
+  .brand-icon {
+    flex-basis: 42px !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .brand-icon::before {
+    font-size: 25px !important;
+  }
+
+  .brand-icon::after {
+    font-size: 23px !important;
+  }
+
+  .brand h2,
+  .page-shell:not(.route-home) .brand h2 {
+    font-size: 1.28rem !important;
+  }
+
+  .brand span,
+  .page-shell:not(.route-home) .brand span {
+    font-size: 0.58rem !important;
+  }
+
+  .route-home .hero-content {
+    width: calc(100% - 48px) !important;
+    margin: 88px 24px 0 !important;
+    padding-bottom: 96px !important;
+  }
+
+  .route-home .hero-tag {
+    margin-bottom: 16px !important;
+    padding: 8px 14px !important;
+    font-size: 0.69rem !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.15rem, 11vw, 3rem) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .route-home .green-line {
+    width: 74px !important;
+    margin: 18px 0 !important;
+  }
+
+  .route-home .hero-content h3 {
+    margin-bottom: 14px !important;
+    font-size: 1.05rem !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .route-home .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    margin-top: 20px !important;
+  }
+
+  .route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+  }
+
+  .route-home .slide-arrow {
+    display: none !important;
+  }
+
+  .route-home .dots {
+    bottom: 20px !important;
+  }
+
+  .route-reviews .reviews-reference-page {
+    padding: 0 14px 56px !important;
+  }
+
+  .route-reviews .reviews-heading {
+    padding: 34px 8px 26px !important;
+  }
+
+  .route-reviews .reviews-heading h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .route-reviews .reviews-heading p {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-reviews .review-platform-card {
+    min-height: 0 !important;
+    padding: 18px !important;
+    gap: 14px !important;
+  }
+
+  .route-reviews .review-platform-icon {
+    flex: 0 0 54px !important;
+    width: 54px !important;
+    height: 54px !important;
+    font-size: 1.35rem !important;
+  }
+
+  .route-reviews .large-testimonial-card {
+    padding: 18px !important;
+    border-radius: 12px !important;
+  }
+
+  .route-reviews .testimonial-feature {
+    padding: 20px 8px !important;
+  }
+
+  .route-reviews .testimonial-feature h4 {
+    font-size: 1rem !important;
+  }
+
+  .route-reviews .testimonial-feature p {
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-reviews .testimonial-controls {
+    min-height: 48px !important;
+  }
+
+  .route-reviews .testimonial-visual {
+    min-height: 180px !important;
+    padding: 18px 10px !important;
+  }
+
+  .route-reviews .testimonial-message {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .route-reviews .share-success-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-home .slide-flash,
+  .route-home .hero-content,
+  .brand-icon::before,
+  .brand-icon::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* STELLAR QA — FIX HERO TEXT JUMP */
+
+/* Keep every desktop slide anchored at exactly the same position */
+@media (min-width: 1051px) {
+  .route-home .hero-content {
+    top: 168px !important;
+    transform: none !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  /* Reserve equal space when slide headings have different line counts */
+  .route-home .hero-content h1 {
+    min-height: 3.12em !important;
+  }
+
+  .route-home .hero-content h3 {
+    min-height: 2.6em !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    min-height: 3.1em !important;
+  }
+}
+
+/* Laptop */
+@media (min-width: 701px) and (max-width: 1050px) {
+  .route-home .hero-content {
+    position: relative !important;
+    top: auto !important;
+    transform: none !important;
+    margin-top: 92px !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    min-height: 3.12em !important;
+  }
+
+  .route-home .hero-content h3 {
+    min-height: 2.6em !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    min-height: 4.7em !important;
+  }
+}
+
+/* Phones remain naturally sized without vertical centering */
+@media (max-width: 700px) {
+  .route-home .hero-content {
+    top: auto !important;
+    transform: none !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1,
+  .route-home .hero-content h3,
+  .route-home .hero-content > p:not(.hero-tag) {
+    min-height: 0 !important;
+  }
+}
+
+/* Final hero QA polish */
+@media (min-width: 1051px) {
+  .route-home .slide-arrow.left {
+    left: 24px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 24px !important;
+  }
+
+  .route-home .hero-content {
+    top: 150px !important;
+  }
+}

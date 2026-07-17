@@ -290,8 +290,21 @@ function App() {
           </label>
 
           <div className="nav-links">
-            <a id="home-nav-link" className="home-link" href="/">Home</a>
-            <a className={currentRoute === "reviews" ? "active" : ""} href="/reviews">Reviews</a>
+            <a
+              id="home-nav-link"
+              className={currentRoute === "home" ? "home-link active" : "home-link"}
+              href="/"
+              aria-current={currentRoute === "home" ? "page" : undefined}
+            >
+              Home
+            </a>
+            <a
+              className={currentRoute === "reviews" ? "active" : ""}
+              href="/reviews"
+              aria-current={currentRoute === "reviews" ? "page" : undefined}
+            >
+              Reviews
+            </a>
             <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
 
             <div className="nav-dropdown">
@@ -347,7 +360,14 @@ function App() {
 
 
 
-<button className="slide-arrow left" onClick={previousSlide}>‹</button>
+<button
+          type="button"
+          className="slide-arrow left"
+          onClick={previousSlide}
+          aria-label="Previous hero slide"
+        >
+          ‹
+        </button>
 
         <div className="hero-content" key={activeSlide}>
           <p className="hero-tag">{slide.tag}</p>
@@ -375,7 +395,14 @@ function App() {
           </div>
         </div>
 
-        <button className="slide-arrow right" onClick={nextSlide}>›</button>
+        <button
+          type="button"
+          className="slide-arrow right"
+          onClick={nextSlide}
+          aria-label="Next hero slide"
+        >
+          ›
+        </button>
 
         <div
           className="dots"
