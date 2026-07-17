@@ -192,7 +192,6 @@ function App() {
       : "Home";
 
   const [activeSlide, setActiveSlide] = useState(0);
-  const [flash, setFlash] = useState(false);
   const [trainingReviewIndex, setTrainingReviewIndex] = useState(0);
   const [careerReviewIndex, setCareerReviewIndex] = useState(0);
 
@@ -209,11 +208,6 @@ function App() {
   const [appointmentConsent, setAppointmentConsent] = useState(false);
   const [appointmentBooked, setAppointmentBooked] = useState(false);
 
-  useEffect(() => {
-    setFlash(true);
-    const timer = setTimeout(() => setFlash(false), 900);
-    return () => clearTimeout(timer);
-  }, [activeSlide]);
 
   useEffect(() => {
     const auto = setInterval(() => {
@@ -265,13 +259,24 @@ function App() {
     <main className={`page-shell route-${currentRoute}`}>
       <section
         id="home"
-        className={flash ? "hero-section flash-active" : "hero-section"}
-        style={{ backgroundImage: `url(${slide.image})` }}
+        className="hero-section"
       >
+        <div className="hero-backgrounds" aria-hidden="true">
+          {slides.map((item, index) => (
+            <div
+              key={item.image}
+              className={
+                activeSlide === index
+                  ? "hero-background active"
+                  : "hero-background"
+              }
+              style={{ backgroundImage: `url(${item.image})` }}
+            />
+          ))}
+        </div>
         <div className="dark-overlay"></div>
         <div className="code-layer"></div>
         <div className="globe-effect"></div>
-        <div className="slide-flash"></div>
 
         <nav className="navbar">
           <div className="brand">
