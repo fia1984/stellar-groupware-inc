@@ -10663,3 +10663,523 @@ header {
     top: 150px !important;
   }
 }
+
+
+/* FINAL MOBILE HERO RESPONSIVENESS FIX */
+@media (max-width: 600px) {
+  html,
+  body,
+  #root,
+  .page-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .route-home .hero-section {
+    width: 100% !important;
+    min-height: 760px !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 0 92px !important;
+    overflow: hidden !important;
+    background-size: cover !important;
+    background-position: 58% center !important;
+  }
+
+  .route-home .navbar {
+    width: calc(100% - 24px) !important;
+    max-width: none !important;
+    min-height: 72px !important;
+    margin: 12px auto 0 !important;
+    padding: 11px 13px !important;
+    gap: 10px !important;
+  }
+
+  .route-home .brand {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 58px) !important;
+    margin: 0 !important;
+  }
+
+  .route-home .brand-icon {
+    flex: 0 0 42px !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .route-home .brand h2 {
+    font-size: 1.25rem !important;
+    white-space: nowrap !important;
+  }
+
+  .route-home .brand span {
+    font-size: 0.56rem !important;
+    letter-spacing: 0.11em !important;
+    white-space: nowrap !important;
+  }
+
+  .route-home .mobile-menu-button {
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    margin: 104px 20px 0 !important;
+    padding: 0 0 42px !important;
+
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  .route-home .flash-active .hero-content {
+    transform: none !important;
+  }
+
+  .route-home .hero-tag {
+    max-width: 100% !important;
+    margin: 0 0 26px !important;
+    padding: 9px 14px !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em !important;
+    white-space: normal !important;
+  }
+
+  .route-home .hero-content h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+
+    font-size: clamp(2.15rem, 10.2vw, 2.75rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.035em !important;
+
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+
+  .route-home .green-line {
+    width: 72px !important;
+    height: 4px !important;
+    margin: 22px 0 !important;
+  }
+
+  .route-home .hero-content h3 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 0 16px !important;
+    font-size: 1.08rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-home .hero-actions {
+    width: 100% !important;
+    margin-top: 24px !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 11px !important;
+  }
+
+  .route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 50px !important;
+    margin: 0 !important;
+  }
+
+  .route-home .dots {
+    bottom: 20px !important;
+  }
+
+  .route-home .chat-bubble,
+  .route-home .floating-chat,
+  .route-home a[aria-label*="Contact"],
+  .route-home a[title*="Contact"] {
+    right: 14px !important;
+    bottom: 14px !important;
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .route-home .hero-content {
+    margin-inline: 16px !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: 2rem !important;
+  }
+
+  .route-home .hero-content h3 {
+    font-size: 1rem !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    font-size: 0.87rem !important;
+  }
+}
+
+
+/* FINAL SAMMY QA PASS — FADE AND RESPONSIVENESS */
+
+/* True cross-fade background slideshow */
+.route-home .hero-section {
+  position: relative !important;
+  isolation: isolate !important;
+  background-image: none !important;
+}
+
+.route-home .hero-backgrounds,
+.route-home .hero-background {
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+.route-home .hero-backgrounds {
+  z-index: 0 !important;
+  overflow: hidden !important;
+  background: #07120d !important;
+}
+
+.route-home .hero-background {
+  opacity: 0 !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  transform: scale(1.01) !important;
+  transition:
+    opacity 900ms ease-in-out,
+    transform 1200ms ease-in-out !important;
+  will-change: opacity, transform !important;
+}
+
+.route-home .hero-background.active {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Overlay must merge with the photograph, never form a text box */
+.route-home .dark-overlay {
+  z-index: 1 !important;
+  background: linear-gradient(
+    90deg,
+    rgba(3, 10, 16, 0.61) 0%,
+    rgba(3, 10, 16, 0.43) 40%,
+    rgba(3, 10, 16, 0.19) 72%,
+    rgba(3, 10, 16, 0.07) 100%
+  ) !important;
+}
+
+.route-home .hero-content,
+.route-home .hero-content h1,
+.route-home .hero-content h3,
+.route-home .hero-content p {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.route-home .hero-content h1,
+.route-home .hero-content h3,
+.route-home .hero-content > p:not(.hero-tag) {
+  text-shadow: 0 2px 9px rgba(0, 0, 0, 0.38) !important;
+}
+
+/* Disable all previous blink/flash rules */
+.route-home .slide-flash {
+  display: none !important;
+}
+
+.route-home .hero-content {
+  animation: stellarContentFade 650ms ease both !important;
+}
+
+@keyframes stellarContentFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop hero alignment and consistent spacing */
+@media (min-width: 1051px) {
+  .route-home .hero-section {
+    min-height: 760px !important;
+    height: min(820px, 100vh) !important;
+  }
+
+  .route-home .hero-content {
+    position: absolute !important;
+    z-index: 20 !important;
+    top: 150px !important;
+    left: max(40px, calc((100vw - 1500px) / 2)) !important;
+
+    width: min(650px, calc(100% - 120px)) !important;
+    max-width: 650px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .route-home .hero-content h1 {
+    min-height: 3.12em !important;
+    margin: 0 !important;
+    font-size: clamp(3rem, 4.15vw, 4.45rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  .route-home .hero-content h3 {
+    min-height: 2.6em !important;
+    margin: 0 0 18px !important;
+    font-size: clamp(1.25rem, 1.7vw, 1.55rem) !important;
+    line-height: 1.3 !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    min-height: 3.1em !important;
+    margin: 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+}
+
+/* Active Home and Reviews tabs */
+.route-home #home-nav-link.active,
+.route-reviews .nav-links > a[href="/reviews"].active {
+  color: #ffffff !important;
+  background: #08753b !important;
+  transform: none !important;
+}
+
+/* Dropdown spacing */
+.nav-dropdown {
+  position: relative !important;
+  padding-bottom: 10px !important;
+  margin-bottom: -10px !important;
+}
+
+.dropdown-menu {
+  top: calc(100% + 2px) !important;
+  min-width: 205px !important;
+  padding: 7px !important;
+  gap: 4px !important;
+}
+
+/* Keep the logo box stable on Reviews */
+.route-reviews .brand,
+.route-reviews .brand-icon,
+.route-reviews .brand h2,
+.route-reviews .brand span {
+  transform: none !important;
+}
+
+.route-reviews .brand {
+  flex-shrink: 0 !important;
+  min-width: 245px !important;
+}
+
+.route-reviews .brand-icon {
+  flex: 0 0 44px !important;
+  width: 44px !important;
+  height: 44px !important;
+  animation: none !important;
+}
+
+/* Mobile Home */
+@media (max-width: 600px) {
+  html,
+  body,
+  #root,
+  .page-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .route-home .hero-section {
+    width: 100% !important;
+    min-height: 780px !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 0 96px !important;
+    overflow: hidden !important;
+  }
+
+  .route-home .hero-background {
+    background-position: 58% center !important;
+  }
+
+  .route-home .navbar {
+    width: calc(100% - 24px) !important;
+    min-height: 72px !important;
+    margin: 12px auto 0 !important;
+    padding: 11px 13px !important;
+  }
+
+  .route-home .hero-content {
+    position: relative !important;
+    inset: auto !important;
+
+    width: calc(100% - 40px) !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    margin: 104px 20px 0 !important;
+    padding: 0 0 44px !important;
+
+    transform: none !important;
+    animation: stellarContentFadeMobile 550ms ease both !important;
+  }
+
+  @keyframes stellarContentFadeMobile {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .route-home .hero-tag {
+    margin: 0 0 24px !important;
+    padding: 9px 14px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .route-home .hero-content h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+
+    font-size: clamp(2.05rem, 9.8vw, 2.65rem) !important;
+    line-height: 1.08 !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .route-home .green-line {
+    width: 72px !important;
+    margin: 20px 0 !important;
+  }
+
+  .route-home .hero-content h3 {
+    min-height: 0 !important;
+    margin-bottom: 14px !important;
+    font-size: 1.05rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    min-height: 0 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.52 !important;
+  }
+
+  .route-home .hero-actions {
+    width: 100% !important;
+    margin-top: 22px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 50px !important;
+  }
+
+  .route-home .slide-arrow {
+    display: none !important;
+  }
+
+  .route-home .dots {
+    bottom: 18px !important;
+  }
+}
+
+/* Mobile Reviews */
+@media (max-width: 850px) {
+  .route-reviews {
+    overflow-x: hidden !important;
+  }
+
+  .route-reviews .reviews-reference-page {
+    width: 100% !important;
+    padding: 0 18px 64px !important;
+  }
+
+  .route-reviews .review-platform-grid,
+  .route-reviews .testimonial-column-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .route-reviews .review-platform-card,
+  .route-reviews .large-testimonial-card {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .route-reviews .reviews-reference-page {
+    padding-inline: 14px !important;
+  }
+
+  .route-reviews .reviews-heading {
+    padding: 34px 6px 26px !important;
+  }
+
+  .route-reviews .reviews-heading h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .route-reviews .review-platform-card,
+  .route-reviews .large-testimonial-card {
+    padding: 18px !important;
+  }
+
+  .route-reviews .share-success-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-home .hero-background,
+  .route-home .hero-content {
+    animation: none !important;
+    transition: none !important;
+  }
+}
