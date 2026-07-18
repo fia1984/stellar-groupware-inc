@@ -11492,3 +11492,28 @@ header {
     font-size: 0.92rem !important;
   }
 }
+
+/* STEP 2: Active nav tab fix for Home, Reviews, and all routes */
+.navbar a:not(.book-btn) {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+.navbar a:not(.book-btn):hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+.navbar a.active:not(.book-btn),
+.navbar a[aria-current="page"]:not(.book-btn) {
+  background: #16a34a !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(22, 163, 74, 0.28) !important;
+}
+
+.navbar .book-btn,
+.navbar .book-btn:hover {
+  background: #16a34a !important;
+  color: #ffffff !important;
+}
+
