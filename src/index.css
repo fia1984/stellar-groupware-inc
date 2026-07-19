@@ -10316,7 +10316,7 @@ header {
     min-height: 720px !important;
   }
 
-  .route-home .hero-content {
+  .route-home .hero-section .hero-content {
     position: relative !important;
     inset: auto !important;
     width: calc(100% - 128px) !important;
