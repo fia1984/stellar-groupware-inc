@@ -10372,6 +10372,10 @@ header {
 }
 
 /* REVIEWS — FINAL NCPL REFERENCE REPLICA */
+.route-reviews .reviews-reference-page > .reviews-heading {
+  padding-top: 52px !important;
+}
+
 .route-reviews .breadcrumb-stellar-icon,
 .route-reviews .reviews-eyebrow {
   display: none !important;
@@ -10728,6 +10732,10 @@ header {
 }
 
 @media (max-width: 520px) {
+  .route-reviews .reviews-reference-page > .reviews-heading {
+    padding-top: 42px !important;
+  }
+
   .route-reviews .hero-section {
     min-height: 0 !important;
     height: auto !important;
