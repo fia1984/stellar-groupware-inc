@@ -764,6 +764,7 @@ function App() {
 
       <section className="reviews-section reviews-reference-page" id="reviews">
         <div className="reviews-heading">
+          <span className="reviews-eyebrow">CLIENT SUCCESS STORIES</span>
           <h2>What Our Clients Say</h2>
           <p>
             Real feedback from learners who strengthened their IT skills,
@@ -797,14 +798,10 @@ function App() {
             aria-label="View Stellar Groupware LinkedIn recommendations"
           >
             <div className="review-platform-icon linkedin-review-icon">in</div>
-
             <div>
               <h3>LinkedIn Recommendations</h3>
               <p>Professional recommendations</p>
-
-              <span className="linkedin-review-button">
-                View on LinkedIn
-              </span>
+              <span className="linkedin-review-button">View on LinkedIn</span>
             </div>
           </a>
         </div>
@@ -816,15 +813,9 @@ function App() {
               <p>Feedback from our training participants</p>
             </header>
 
-            <div
-              className="testimonial-feature"
-              key={`training-${trainingReviewIndex}`}
-              aria-live="polite"
-            >
+            <div className="testimonial-feature" aria-live="polite">
               <h4>{trainingReview.title}</h4>
-              <p>“{trainingReview.quote}”</p>
-              <strong>{trainingReview.name}</strong>
-              <span>{trainingReview.detail}</span>
+              <p>{trainingReview.quote}</p>
             </div>
 
             <div className="testimonial-controls">
@@ -835,11 +826,7 @@ function App() {
               >
                 ‹
               </button>
-
-              <span>
-                {trainingReviewIndex + 1} / {trainingReviews.length}
-              </span>
-
+              <span>{trainingReviewIndex + 1} / {trainingReviews.length}</span>
               <button
                 type="button"
                 onClick={showNextTrainingReview}
@@ -850,12 +837,19 @@ function App() {
             </div>
 
             <div className="testimonial-visual">
-              <div className="testimonial-message">
-                <span className="testimonial-avatar">S</span>
-                <div>
-                  <strong>{trainingReview.name}</strong>
-                  <p>{trainingReview.message}</p>
+              <div className="testimonial-phone">
+                <div className="testimonial-phone-header">
+                  <span className="testimonial-avatar">S</span>
+                  <div>
+                    <strong>{trainingReview.name}</strong>
+                    <span>{trainingReview.detail}</span>
+                  </div>
                 </div>
+                <div className="testimonial-chat-bubble">
+                  <p>{trainingReview.message}</p>
+                  <small>Stellar learner feedback ✓✓</small>
+                </div>
+                <div className="testimonial-phone-input">Message</div>
               </div>
             </div>
           </article>
@@ -866,15 +860,9 @@ function App() {
               <p>Feedback from our mentoring and career-support learners</p>
             </header>
 
-            <div
-              className="testimonial-feature"
-              key={`career-${careerReviewIndex}`}
-              aria-live="polite"
-            >
+            <div className="testimonial-feature" aria-live="polite">
               <h4>{careerReview.title}</h4>
-              <p>“{careerReview.quote}”</p>
-              <strong>{careerReview.name}</strong>
-              <span>{careerReview.detail}</span>
+              <p>{careerReview.quote}</p>
             </div>
 
             <div className="testimonial-controls">
@@ -885,11 +873,7 @@ function App() {
               >
                 ‹
               </button>
-
-              <span>
-                {careerReviewIndex + 1} / {careerReviews.length}
-              </span>
-
+              <span>{careerReviewIndex + 1} / {careerReviews.length}</span>
               <button
                 type="button"
                 onClick={showNextCareerReview}
@@ -900,12 +884,19 @@ function App() {
             </div>
 
             <div className="testimonial-visual">
-              <div className="testimonial-message">
-                <span className="testimonial-avatar">S</span>
-                <div>
-                  <strong>{careerReview.name}</strong>
-                  <p>{careerReview.message}</p>
+              <div className="testimonial-phone linkedin-phone">
+                <div className="testimonial-phone-header">
+                  <span className="testimonial-avatar">S</span>
+                  <div>
+                    <strong>{careerReview.name}</strong>
+                    <span>{careerReview.detail}</span>
+                  </div>
                 </div>
+                <div className="testimonial-chat-bubble">
+                  <p>{careerReview.message}</p>
+                  <small>Stellar career feedback ✓✓</small>
+                </div>
+                <div className="testimonial-phone-input">Message</div>
               </div>
             </div>
           </article>
@@ -938,6 +929,7 @@ function App() {
             </a>
           </div>
         </section>
+
       </section>
 
       <section className="process-section" id="process">
