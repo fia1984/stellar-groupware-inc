@@ -300,6 +300,12 @@ function App() {
               className={currentRoute === "home" ? "home-link active" : "home-link"}
               href="/"
               aria-current={currentRoute === "home" ? "page" : undefined}
+              onClick={(event) => {
+                if (currentRoute === "home") {
+                  event.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }}
             >
               Home
             </a>

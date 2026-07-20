@@ -10033,7 +10033,7 @@ header {
 .route-home .hero-content h1,
 .route-home .hero-content h3,
 .route-home .hero-content > p:not(.hero-tag) {
-  text-shadow: 0 2px 9px rgba(0, 0, 0, 0.38) !important;
+  text-shadow: none !important;
 }
 
 /* Disable all previous blink/flash rules */
