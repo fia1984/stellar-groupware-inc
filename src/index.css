@@ -11604,3 +11604,78 @@ header {
     height: 48px !important;
   }
 }
+
+
+/* Fix: hide the mobile appointment button on desktop */
+body .page-shell .mobile-header-appointment {
+  display: none !important;
+}
+
+/* Show it only when the collapsed navbar is active */
+@media (max-width: 1050px) {
+  body .page-shell .mobile-header-appointment {
+    display: inline-flex !important;
+  }
+}
+
+/* NCPL-style appointment date picker section */
+.appointment-date-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+.appointment-date-grid button {
+  min-height: 86px !important;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease !important;
+}
+
+.appointment-date-grid button:hover:not(:disabled) {
+  border-color: #16a34a !important;
+  background: #f0fdf4 !important;
+  box-shadow: 0 5px 14px rgba(22, 163, 74, 0.14) !important;
+  transform: translateY(-2px) !important;
+}
+
+.appointment-date-grid button:focus-visible {
+  border-color: #16a34a !important;
+  outline: 3px solid rgba(22, 163, 74, 0.24) !important;
+  outline-offset: 2px !important;
+}
+
+.appointment-date-grid button:disabled,
+.appointment-date-grid button:disabled:hover {
+  border-color: #e2e8f0 !important;
+  background: #f8fafc !important;
+  color: #a7b0be !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.appointment-date-grid button:disabled small,
+.appointment-date-grid button:disabled span {
+  color: #a7b0be !important;
+}
+
+.appointment-date-grid button.selected {
+  border-color: #16a34a !important;
+  background: #f0fdf4 !important;
+  color: #123c25 !important;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.12) !important;
+}
+
+@media (max-width: 850px) {
+  .appointment-date-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .appointment-date-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+

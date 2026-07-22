@@ -66,4 +66,22 @@ describe('App', () => {
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.getByRole('button', { name: 'Open navigation menu' })).toBeTruthy();
   });
+
+  it('selects an available appointment date and keeps Sunday unavailable', () => {
+    window.history.pushState({}, '', '/appointment');
+    render(<App />);
+
+    const dateButtons = screen.getAllByRole('button', { name: /^(MON|TUE|WED|THU|FRI|SAT|SUN),/ });
+    const availableDate = dateButtons.find((button) => !button.hasAttribute('disabled'));
+    const sunday = dateButtons.find((button) => button.getAttribute('aria-label')?.startsWith('SUN,'));
+
+    expect(availableDate).toBeTruthy();
+    expect(sunday?.hasAttribute('disabled')).toBe(true);
+
+    fireEvent.click(availableDate!);
+
+    expect(availableDate?.classList.contains('selected')).toBe(true);
+    expect(availableDate?.getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByText('Select a day')).toBeTruthy();
+  });
 });

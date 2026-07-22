@@ -32,6 +32,24 @@ const slides = [
   },
 ];
 
+const appointmentDates = Array.from({ length: 10 }, (_, index) => {
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  date.setDate(date.getDate() + index);
+
+  const day = date.toLocaleDateString("en-CA", { weekday: "short" }).toUpperCase();
+  const month = date.toLocaleDateString("en-CA", { month: "short" }).toUpperCase();
+  const dateNumber = date.getDate().toString();
+
+  return {
+    day,
+    date: dateNumber,
+    month,
+    value: `${day}, ${month} ${dateNumber}`,
+    disabled: date.getDay() === 0,
+  };
+});
+
 
 type ReviewItem = {
   title: string;
@@ -1408,25 +1426,18 @@ function App() {
                   <h4>Select a day</h4>
 
                   <div className="appointment-date-grid">
-                    {[
-                      ["MON", "13", "JUL"],
-                      ["TUE", "14", "JUL"],
-                      ["WED", "15", "JUL"],
-                      ["THU", "16", "JUL"],
-                      ["FRI", "17", "JUL"],
-                      ["SAT", "18", "JUL"],
-                    ].map(([day, date, month]) => {
-                      const value = `${day}, ${month} ${date}`;
-
+                    {appointmentDates.map(({ day, date, month, value, disabled }) => {
                       return (
                         <button
                           key={value}
                           type="button"
                           className={selectedDate === value ? "selected" : ""}
+                          aria-pressed={selectedDate === value}
+                          aria-label={`${value}${disabled ? ", unavailable" : ""}`}
+                          disabled={disabled}
                           onClick={() => {
                             setSelectedDate(value);
                             setSelectedTime("");
-                            setAppointmentStep(2);
                           }}
                         >
                           <small>{day}</small>
