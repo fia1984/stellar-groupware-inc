@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, type ReactNode } from "react";
 import "./index.css";
 
 const slides = [
@@ -101,6 +101,112 @@ const careerReviews: ReviewItem[] = [
   },
 ];
 
+const homePathways = [
+  {
+    title: "Training Pathway",
+    tone: "blue",
+    description: "Structured learning for people building practical technical skills.",
+    steps: ["Free consultation", "Instructor-led training", "One-on-one mentoring", "Career preparation"],
+  },
+  {
+    title: "Self-Learning Pathway",
+    tone: "green",
+    description: "Flexible guidance for independent learners who want a clear roadmap.",
+    steps: ["Skills assessment", "Learning plan", "Mentor check-ins", "Portfolio guidance"],
+  },
+  {
+    title: "Career Support Pathway",
+    tone: "mint",
+    description: "Professional positioning support for learners preparing for opportunities.",
+    steps: ["Career strategy", "Resume preparation", "LinkedIn optimization", "Interview practice"],
+  },
+  {
+    title: "Bootcamp Pathway",
+    tone: "amber",
+    description: "Focused project-based practice with hands-on technical guidance.",
+    steps: ["Free consultation", "Intensive bootcamp", "Project portfolio", "Job readiness"],
+  },
+];
+
+type CareerIconName =
+  | "award"
+  | "briefcase"
+  | "calendar"
+  | "code"
+  | "file"
+  | "globe"
+  | "graduation"
+  | "growth"
+  | "mentor"
+  | "shield"
+  | "target"
+  | "transition"
+  | "video"
+  | "clock";
+
+type HomeInfoCard = {
+  icon: CareerIconName;
+  title: string;
+  description: string;
+};
+
+type HomeAudienceCard = HomeInfoCard & {
+  benefits: string[];
+};
+
+const homeOffers: HomeInfoCard[] = [
+  { icon: "graduation", title: "Training", description: "Practical instructor-led courses designed around real workplace skills." },
+  { icon: "code", title: "Bootcamps", description: "Focused learning programs with hands-on exercises and guided projects." },
+  { icon: "mentor", title: "Self-Learning Guidance", description: "Structured resources and mentoring for independent learning paths." },
+  { icon: "code", title: "Hands-On Practice", description: "Realistic labs and exercises that strengthen practical confidence." },
+  { icon: "award", title: "Certification Guidance", description: "A clear study plan for recognized technology certifications." },
+  { icon: "calendar", title: "Progress Check-Ins", description: "Regular mentor check-ins to review progress and resolve challenges." },
+  { icon: "file", title: "Resume Preparation", description: "Professional resumes tailored to target roles and Canadian employers." },
+  { icon: "mentor", title: "LinkedIn Optimization", description: "Profile improvements that communicate skills and attract recruiters." },
+  { icon: "growth", title: "Career Marketing", description: "Strategic guidance for presenting your experience to employers." },
+];
+
+const homeAudiences: HomeAudienceCard[] = [
+  { icon: "graduation", title: "Recent Graduates", description: "Start your IT career with a structured foundation and practical guidance.", benefits: ["Build workplace-ready skills", "Develop project confidence", "Learn from experienced mentors"] },
+  { icon: "transition", title: "Career Changers", description: "Move into technology with a focused plan that builds on your experience.", benefits: ["Identify transferable skills", "Learn in-demand tools", "Prepare for a confident transition"] },
+  { icon: "code", title: "Non-IT to IT Professionals", description: "Break into IT through beginner-friendly training and mentoring.", benefits: ["Build technical skills from scratch", "Practice realistic tasks", "Prepare for entry-level opportunities"] },
+  { icon: "growth", title: "IT Professionals", description: "Strengthen your expertise and prepare for your next professional step.", benefits: ["Expand modern technical skills", "Improve professional positioning", "Prepare for senior responsibilities"] },
+];
+
+const seekerChallenges: HomeInfoCard[] = [
+  { icon: "target", title: "Targeting the Wrong Role", description: "Choosing roles without matching your strengths or current market demand limits results." },
+  { icon: "code", title: "No Focused Upskilling", description: "Outdated skills make it harder to demonstrate readiness for current technology roles." },
+  { icon: "calendar", title: "Inconsistent Applications", description: "An irregular job-search routine reduces opportunities and makes progress difficult to track." },
+  { icon: "briefcase", title: "Applying Before You Are Ready", description: "Candidates need practical skills and interview preparation before entering the market." },
+  { icon: "file", title: "Weak Resume Positioning", description: "Unclear structure and missing role-specific keywords can prevent a resume from being noticed." },
+  { icon: "transition", title: "Targeting Too Many Roles", description: "A focused role strategy creates a clearer professional profile for recruiters." },
+];
+
+function CareerIcon({ name }: { name: CareerIconName }) {
+  const paths: Record<CareerIconName, ReactNode> = {
+    award: <><circle cx="12" cy="8" r="5" /><path d="M8.5 12 7 21l5-3 5 3-1.5-9" /></>,
+    briefcase: <><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2" /></>,
+    calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M8 3v4M16 3v4M3 10h18M8 15l2 2 5-5" /></>,
+    code: <><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" /></>,
+    file: <><path d="M6 2h8l4 4v16H6V2Z" /><path d="M14 2v5h5M9 12h6M9 16h6" /></>,
+    globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></>,
+    graduation: <><path d="m3 9 9-5 9 5-9 5-9-5Z" /><path d="M7 12.5V17c2.8 2.2 7.2 2.2 10 0v-4.5M21 9v6" /></>,
+    growth: <><path d="M4 18 10 12l4 4 6-8" /><path d="M15 8h5v5" /></>,
+    mentor: <><circle cx="9" cy="8" r="3" /><path d="M3.5 20v-2.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V20M16 5.5a3 3 0 0 1 0 5.5M17 13.5a4 4 0 0 1 3.5 4V20" /></>,
+    shield: <path d="M12 3 4.5 6v5.5c0 4.6 3 8.1 7.5 9.5 4.5-1.4 7.5-4.9 7.5-9.5V6L12 3Z" />,
+    target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.5" /></>,
+    transition: <><path d="M4 7h13l-3-3M20 17H7l3 3M17 4l3 3-3 3M7 14l-3 3 3 3" /></>,
+    video: <><rect x="3" y="6" width="13" height="12" rx="2" /><path d="m16 10 5-3v10l-5-3v-4Z" /></>,
+    clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+  };
+
+  return (
+    <svg className="home-semantic-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      {paths[name]}
+    </svg>
+  );
+}
+
 type AnimatedCounterProps = {
   end: number;
   duration?: number;
@@ -192,6 +298,8 @@ function App() {
       : "Home";
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<"training" | "process" | "about" | null>(null);
   const [trainingReviewIndex, setTrainingReviewIndex] = useState(0);
   const [careerReviewIndex, setCareerReviewIndex] = useState(0);
 
@@ -216,6 +324,22 @@ function App() {
 
     return () => clearInterval(auto);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        setMobileSubmenuOpen(null);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [mobileMenuOpen]);
 
   const nextSlide = () => {
     setActiveSlide((current) => (current + 1) % slides.length);
@@ -287,14 +411,41 @@ function App() {
             </div>
           </div>
 
-          <input className="mobile-menu-toggle" id="mobile-menu-toggle" type="checkbox" />
-          <label className="mobile-menu-button" htmlFor="mobile-menu-toggle" aria-label="Open navigation menu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </label>
+          <a className="mobile-header-appointment" href="/appointment">
+            Book Appointment
+          </a>
 
-          <div className="nav-links">
+          <button
+            className="mobile-menu-button"
+            type="button"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => {
+              setMobileMenuOpen((open) => !open);
+              if (mobileMenuOpen) {
+                setMobileSubmenuOpen(null);
+              }
+            }}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <div
+            id="primary-navigation"
+            className={mobileMenuOpen ? "nav-links menu-open" : "nav-links"}
+            onClick={(event) => {
+              const clickedLink = (event.target as HTMLElement).closest("a");
+              const isMobileDropdownTrigger = clickedLink?.parentElement?.classList.contains("nav-dropdown");
+
+              if (clickedLink && !isMobileDropdownTrigger) {
+                setMobileMenuOpen(false);
+                setMobileSubmenuOpen(null);
+              }
+            }}
+          >
             <a
               id="home-nav-link"
               className={currentRoute === "home" ? "home-link active" : "home-link"}
@@ -318,8 +469,18 @@ function App() {
             </a>
             <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
 
-            <div className="nav-dropdown">
-              <a className={currentRoute === "training" ? "active" : ""} href="/training">
+            <div className={mobileSubmenuOpen === "training" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
+              <a
+                className={currentRoute === "training" ? "active" : ""}
+                href="/training"
+                aria-expanded={mobileSubmenuOpen === "training"}
+                onClick={(event) => {
+                  if (window.matchMedia("(max-width: 1050px)").matches) {
+                    event.preventDefault();
+                    setMobileSubmenuOpen((open) => open === "training" ? null : "training");
+                  }
+                }}
+              >
                 Training ▾
               </a>
               <div className="dropdown-menu">
@@ -329,8 +490,18 @@ function App() {
               </div>
             </div>
 
-            <div className="nav-dropdown">
-              <a className={currentRoute === "process" ? "active" : ""} href="/process">
+            <div className={mobileSubmenuOpen === "process" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
+              <a
+                className={currentRoute === "process" ? "active" : ""}
+                href="/process"
+                aria-expanded={mobileSubmenuOpen === "process"}
+                onClick={(event) => {
+                  if (window.matchMedia("(max-width: 1050px)").matches) {
+                    event.preventDefault();
+                    setMobileSubmenuOpen((open) => open === "process" ? null : "process");
+                  }
+                }}
+              >
                 Process ▾
               </a>
               <div className="dropdown-menu">
@@ -340,8 +511,18 @@ function App() {
               </div>
             </div>
 
-            <div className="nav-dropdown">
-              <a className={currentRoute === "about" ? "active" : ""} href="/about">
+            <div className={mobileSubmenuOpen === "about" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
+              <a
+                className={currentRoute === "about" ? "active" : ""}
+                href="/about"
+                aria-expanded={mobileSubmenuOpen === "about"}
+                onClick={(event) => {
+                  if (window.matchMedia("(max-width: 1050px)").matches) {
+                    event.preventDefault();
+                    setMobileSubmenuOpen((open) => open === "about" ? null : "about");
+                  }
+                }}
+              >
                 About ▾
               </a>
               <div className="dropdown-menu">
@@ -556,6 +737,177 @@ function App() {
             </p>
           </article>
         </div>
+      </section>
+
+
+      <section className="home-reference-section home-video-showcase" aria-labelledby="home-video-title">
+        <div className="home-section-heading">
+          <h2 id="home-video-title">Watch How We Help You Succeed</h2>
+          <p>See how Stellar training and mentoring can support your IT career.</p>
+        </div>
+        <div className="home-video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/XoZdIzjFIFE"
+            title="How Stellar training and mentoring support career growth"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            loading="lazy"
+            allowFullScreen
+          />
+        </div>
+      </section>
+
+      <section className="home-reference-section home-approach-section" aria-labelledby="home-approach-title">
+        <div className="home-section-heading">
+          <h2 id="home-approach-title">Our Approach</h2>
+          <p>Four flexible pathways designed to support practical IT career growth.</p>
+        </div>
+        <div className="home-pathway-grid">
+          {homePathways.map((pathway) => (
+            <article className={`home-pathway-card ${pathway.tone}`} key={pathway.title}>
+              <h3>{pathway.title}</h3>
+              <p>{pathway.description}</p>
+              <ol>
+                {pathway.steps.map((step, index) => (
+                  <li key={step}><span>{index + 1}</span><strong>{step}</strong></li>
+                ))}
+              </ol>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-reference-section home-path-cta" aria-labelledby="home-path-title">
+        <h2 id="home-path-title">Choose Your Path to Success</h2>
+        <p>Whether you are building new skills or strengthening existing experience, Stellar has a pathway for you.</p>
+        <a href="/appointment">Book Free Consultation</a>
+      </section>
+
+      <section className="home-reference-section home-offer-section" aria-labelledby="home-offer-title">
+        <div className="home-section-heading">
+          <h2 id="home-offer-title">What We Offer</h2>
+          <p>Comprehensive support designed for your IT career success.</p>
+        </div>
+        <div className="home-offer-grid">
+          {homeOffers.map(({ icon, title, description }) => (
+            <article key={title}>
+              <span aria-hidden="true"><CareerIcon name={icon} /></span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-reference-section home-audience-section" aria-labelledby="home-audience-title">
+        <div className="home-section-heading">
+          <h2 id="home-audience-title">Who We Help</h2>
+          <p>Support for every stage of your IT learning and career journey.</p>
+        </div>
+        <div className="home-audience-grid">
+          {homeAudiences.map(({ icon, title, description, benefits }) => (
+            <article key={title} tabIndex={0}>
+              <span className="home-audience-icon" aria-hidden="true"><CareerIcon name={icon} /></span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <ul>
+                {benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-reference-section home-canada-section" aria-labelledby="home-canada-title">
+        <div className="home-section-heading">
+          <h2 id="home-canada-title">Why Stellar in Canada</h2>
+        </div>
+        <div className="home-canada-grid">
+          <article><span>✓</span><p>Training focused on practical skills used by Canadian and North American employers.</p></article>
+          <article><span>✓</span><p>Online mentoring and one-on-one guidance scheduled for Eastern Time.</p></article>
+          <article><span>✓</span><p>Canadian-format resume, LinkedIn, interview, and career-readiness support.</p></article>
+        </div>
+      </section>
+
+      <section className="home-reference-section home-struggle-section" aria-labelledby="home-struggle-title">
+        <div className="home-section-heading light">
+          <h2 id="home-struggle-title">Why Job Seekers Struggle</h2>
+          <p>Many qualified candidates miss a few important success factors.</p>
+        </div>
+        <div className="home-struggle-grid">
+          {seekerChallenges.map(({ icon, title, description }) => (
+            <article key={title}>
+              <span aria-hidden="true"><CareerIcon name={icon} /></span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-reference-section home-mentoring-section" aria-labelledby="home-mentoring-title">
+        <div className="home-mentoring-image" role="img" aria-label="Professionals meeting for career mentoring" />
+        <div className="home-mentoring-copy">
+          <h2 id="home-mentoring-title">Personalized Career Mentoring</h2>
+          <p>Get practical guidance from experienced IT professionals who understand your goals, challenges, and schedule.</p>
+          <div className="home-mentoring-grid">
+            <article><span><CareerIcon name="globe" /></span><h3>Completely Remote &amp; Online</h3><p>Attend from anywhere with reliable internet access.</p></article>
+            <article><span><CareerIcon name="video" /></span><h3>Live Guidance</h3><p>Ask questions and receive feedback in real time.</p></article>
+            <article><span><CareerIcon name="clock" /></span><h3>Flexible Scheduling</h3><p>Choose sessions that work with your availability.</p></article>
+            <article><span><CareerIcon name="briefcase" /></span><h3>Learn While You Work</h3><p>Build skills without putting your current responsibilities on hold.</p></article>
+          </div>
+          <a href="/appointment">Schedule a Free Consultation</a>
+        </div>
+      </section>
+
+      <section className="home-reference-section home-expert-section" aria-labelledby="home-expert-title">
+        <div className="home-section-heading">
+          <h2 id="home-expert-title">Learn From Industry Experts</h2>
+          <p>Practical support from professionals who understand modern IT workplaces.</p>
+        </div>
+        <div className="home-expert-card">
+          <div className="home-expert-image" role="img" aria-label="Technology mentor supporting a learner" />
+          <div>
+            <span>STELLAR MENTORING TEAM</span>
+            <h3>Guidance Built Around Your Goals</h3>
+            <p>Stellar mentors combine technical knowledge with practical project and career guidance. Sessions focus on clear explanations, useful feedback, and realistic next steps.</p>
+            <ul>
+              <li>Practical IT industry experience</li>
+              <li>Beginner-friendly mentoring</li>
+              <li>Project and career-readiness guidance</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-reference-section home-guarantee-section" aria-labelledby="home-guarantee-title">
+        <div className="home-section-heading">
+          <h2 id="home-guarantee-title">Our Commitment</h2>
+          <p>Your learning progress is our priority.</p>
+        </div>
+        <div className="home-guarantee-grid">
+          <article><span><CareerIcon name="award" /></span><h3>Quality Training</h3><p>Clear learning materials and practical instruction delivered with professional standards.</p></article>
+          <article><span><CareerIcon name="mentor" /></span><h3>Personal Attention</h3><p>Focused mentoring and feedback designed around individual learning needs.</p></article>
+          <article><span><CareerIcon name="growth" /></span><h3>Progress Focused</h3><p>Structured milestones that help learners track improvement and prepare for next steps.</p></article>
+        </div>
+      </section>
+
+      <section className="home-reference-section home-consultation-section" aria-labelledby="home-consultation-title">
+        <span><CareerIcon name="calendar" /> Free 30-Minute Strategy Call</span>
+        <h2 id="home-consultation-title">Book Your Free Consultation</h2>
+        <p>Talk one-on-one with a Stellar mentor and receive a personalized learning and career roadmap.</p>
+        <div className="home-consultation-benefits">
+          <article><strong><CareerIcon name="target" /></strong><h3>Personalized Roadmap</h3><p>Built around your background and goals.</p></article>
+          <article><strong><CareerIcon name="mentor" /></strong><h3>One-on-One Guidance</h3><p>Speak with an experienced professional.</p></article>
+          <article><strong><CareerIcon name="shield" /></strong><h3>No Obligation</h3><p>A helpful first conversation at no cost.</p></article>
+        </div>
+        <a href="/appointment">Book Free Consultation</a>
+        <small>Start with a clear conversation about your goals.</small>
+      </section>
+
+      <section className="home-reference-section home-final-cta" aria-labelledby="home-final-cta-title">
+        <h2 id="home-final-cta-title">Ready to Transform Your IT Career?</h2>
+        <p>Book a free consultation and start building your personalized pathway today.</p>
+        <a href="/appointment">Schedule Your Free Consultation</a>
       </section>
 
 
