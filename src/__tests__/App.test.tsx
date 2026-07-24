@@ -12,7 +12,7 @@ class MockIntersectionObserver {
 vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
 
 import { describe, expect, it } from 'vitest';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
 
 describe('App', () => {
@@ -67,21 +67,67 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: 'Open navigation menu' })).toBeTruthy();
   });
 
-  it('selects an available appointment date and keeps Sunday unavailable', () => {
+  it('completes the simplified appointment flow and clears confirmation', () => {
+    vi.useFakeTimers();
     window.history.pushState({}, '', '/appointment');
     render(<App />);
 
-    const dateButtons = screen.getAllByRole('button', { name: /^(MON|TUE|WED|THU|FRI|SAT|SUN),/ });
+    const dateButtons = screen.getAllByRole('button', {
+      name: /^(MON|TUE|WED|THU|FRI|SAT|SUN),/,
+    });
     const availableDate = dateButtons.find((button) => !button.hasAttribute('disabled'));
-    const sunday = dateButtons.find((button) => button.getAttribute('aria-label')?.startsWith('SUN,'));
+    const sunday = dateButtons.find((button) =>
+      button.getAttribute('aria-label')?.startsWith('SUN,')
+    );
 
+    expect(dateButtons).toHaveLength(7);
     expect(availableDate).toBeTruthy();
     expect(sunday?.hasAttribute('disabled')).toBe(true);
 
     fireEvent.click(availableDate!);
 
-    expect(availableDate?.classList.contains('selected')).toBe(true);
-    expect(availableDate?.getAttribute('aria-pressed')).toBe('true');
+    const detailsForm = document.querySelector(
+      '.appointment-details-form'
+    ) as HTMLElement;
+    const appointmentForm = within(detailsForm);
+    const nameInput = appointmentForm.getByLabelText(/Full Name/);
+
+    expect(nameInput).toBeTruthy();
+    expect(nameInput.getAttribute('pattern')).toContain('A-Za-z');
+
+    const bookButton = screen.getByRole('button', { name: /Book Appointment/ });
+    expect(bookButton.hasAttribute('disabled')).toBe(true);
+
+    fireEvent.change(nameInput, { target: { value: 'Jane Doe' } });
+    fireEvent.change(appointmentForm.getByLabelText(/Mobile Number/), {
+      target: { value: '+1 416 555 0123' },
+    });
+    fireEvent.change(appointmentForm.getByLabelText(/Email/), {
+      target: { value: 'jane@example.com' },
+    });
+    fireEvent.change(appointmentForm.getByLabelText(/City/), {
+      target: { value: 'Toronto' },
+    });
+    fireEvent.change(appointmentForm.getByLabelText(/Service Interested/), {
+      target: { value: 'Regular IT Training' },
+    });
+    fireEvent.change(appointmentForm.getByLabelText(/Requirement/), {
+      target: { value: 'I need help choosing an IT training pathway.' },
+    });
+    fireEvent.click(
+      screen.getByRole('button', { name: /By checking this box/ })
+    );
+
+    expect(bookButton.hasAttribute('disabled')).toBe(false);
+    fireEvent.click(bookButton);
+    expect(screen.getByText('You’re booked!')).toBeTruthy();
+
+    act(() => {
+      vi.advanceTimersByTime(15000);
+    });
+
+    expect(screen.queryByText('You’re booked!')).toBeNull();
     expect(screen.getByText('Select a day')).toBeTruthy();
+    vi.useRealTimers();
   });
 });

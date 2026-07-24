@@ -32,7 +32,7 @@ const slides = [
   },
 ];
 
-const appointmentDates = Array.from({ length: 10 }, (_, index) => {
+const appointmentDates = Array.from({ length: 7 }, (_, index) => {
   const date = new Date();
   date.setHours(12, 0, 0, 0);
   date.setDate(date.getDate() + index);
@@ -313,6 +313,8 @@ function App() {
       ? "About"
       : currentRoute === "account"
       ? "My Account"
+      : currentRoute === "appointment"
+      ? "Book Appointment"
       : "Home";
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -333,6 +335,30 @@ function App() {
   const [appointmentRequirement, setAppointmentRequirement] = useState("");
   const [appointmentConsent, setAppointmentConsent] = useState(false);
   const [appointmentBooked, setAppointmentBooked] = useState(false);
+
+  // Automatically reset the booking confirmation after 15 seconds.
+  useEffect(() => {
+    if (!appointmentBooked) {
+      return;
+    }
+
+    const confirmationTimer = window.setTimeout(() => {
+      setAppointmentBooked(false);
+      setAppointmentStep(1);
+      setSelectedDate("");
+      setSelectedTime("");
+      setAppointmentName("");
+      setAppointmentPhone("");
+      setAppointmentEmail("");
+      setAppointmentCity("");
+      setAppointmentCountry("Canada");
+      setAppointmentService("");
+      setAppointmentRequirement("");
+      setAppointmentConsent(false);
+    }, 15000);
+
+    return () => window.clearTimeout(confirmationTimer);
+  }, [appointmentBooked]);
 
 
   useEffect(() => {
@@ -1364,6 +1390,24 @@ function App() {
       </section>
 
         <section className="appointment-section" id="appointment">
+          <div className="appointment-page-intro">
+            <div>
+              <p className="appointment-intro-label">FREE CAREER CONSULTATION</p>
+              <h1>Plan your next step in IT.</h1>
+              <p>
+                Choose a date and time that works for you. A Stellar advisor
+                will help you understand your training, project-support, and
+                career options.
+              </p>
+            </div>
+
+            <div className="appointment-intro-benefits" aria-label="Appointment benefits">
+              <span>✓ 30-minute online meeting</span>
+              <span>✓ Clear recommendations</span>
+              <span>✓ No booking fee</span>
+            </div>
+          </div>
+
           <div className="appointment-layout">
             <div className="appointment-main-card">
               <p className="section-label">BOOK APPOINTMENT</p>
@@ -1382,7 +1426,7 @@ function App() {
                     <div className="appointment-confirmation-date">
                       <span>▣</span>
                       <div>
-                        <strong>{selectedDate} at {selectedTime}</strong>
+                        <strong>{selectedDate}</strong>
                         <small>Eastern Time — Canada</small>
                       </div>
                     </div>
@@ -1412,12 +1456,10 @@ function App() {
 
               <p className="appointment-meta">◷ 30 minutes · Online meeting</p>
 
-              <div className="appointment-steps">
+              <div className="appointment-steps appointment-steps-simple">
                 <span className={appointmentStep >= 1 ? "active" : ""}>1</span>
                 <strong>Date</strong>
-                <span className={appointmentStep >= 2 ? "active" : ""}>2</span>
-                <strong>Time</strong>
-                <span className={appointmentStep >= 3 ? "active" : ""}>3</span>
+                <span className={appointmentStep >= 3 ? "active" : ""}>2</span>
                 <strong>Details</strong>
               </div>
 
@@ -1438,6 +1480,7 @@ function App() {
                           onClick={() => {
                             setSelectedDate(value);
                             setSelectedTime("");
+                            setAppointmentStep(3);
                           }}
                         >
                           <small>{day}</small>
@@ -1514,6 +1557,11 @@ function App() {
                     Full Name *
                     <input
                       required
+                      minLength={2}
+                      maxLength={80}
+                      pattern="[A-Za-zÀ-ÿ' -]{2,80}"
+                      title="Enter at least 2 letters. Numbers are not allowed."
+                      autoComplete="name"
                       type="text"
                       placeholder="Jane Doe"
                       value={appointmentName}
@@ -1525,6 +1573,12 @@ function App() {
                     Mobile Number *
                     <input
                       required
+                      minLength={10}
+                      maxLength={20}
+                      pattern="[0-9+() -]{10,20}"
+                      title="Enter a valid phone number using 10 to 20 digits and symbols."
+                      inputMode="tel"
+                      autoComplete="tel"
                       type="tel"
                       placeholder="+1 416 555 0123"
                       value={appointmentPhone}
@@ -1536,6 +1590,9 @@ function App() {
                     Email *
                     <input
                       required
+                      maxLength={120}
+                      title="Enter a valid email address."
+                      autoComplete="email"
                       type="email"
                       placeholder="jane@example.com"
                       value={appointmentEmail}
@@ -1547,6 +1604,11 @@ function App() {
                     City *
                     <input
                       required
+                      minLength={2}
+                      maxLength={80}
+                      pattern="[A-Za-zÀ-ÿ' .-]{2,80}"
+                      title="Enter a valid city name using at least 2 letters."
+                      autoComplete="address-level2"
                       type="text"
                       placeholder="Toronto"
                       value={appointmentCity}
@@ -1588,7 +1650,10 @@ function App() {
                     Requirement *
                     <textarea
                       required
+                      minLength={10}
+                      maxLength={1000}
                       rows={5}
+                      title="Please provide at least 10 characters."
                       placeholder="Mention your detailed requirement"
                       value={appointmentRequirement}
                       onChange={(event) =>
