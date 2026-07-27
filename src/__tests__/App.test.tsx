@@ -118,9 +118,17 @@ describe('App', () => {
     fireEvent.change(appointmentForm.getByLabelText(/Mobile Number/), {
       target: { value: '+1 416 555 0123' },
     });
-    fireEvent.change(appointmentForm.getByLabelText(/Email/), {
+    const emailInput = appointmentForm.getByLabelText(/Email/);
+
+    fireEvent.change(emailInput, {
       target: { value: 'jane@example.com' },
     });
+    fireEvent.blur(emailInput);
+
+    expect(
+      screen.queryByText('Enter a valid email address.')
+    ).toBeNull();
+
     fireEvent.change(appointmentForm.getByLabelText(/City/), {
       target: { value: 'Toronto' },
     });

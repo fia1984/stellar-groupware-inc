@@ -358,7 +358,7 @@ function App() {
 
     if (
       field === "email" &&
-      !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(appointmentEmail.trim())
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(appointmentEmail.trim())
     ) {
       error = "Enter a valid email address.";
     }
