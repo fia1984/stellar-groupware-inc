@@ -335,6 +335,96 @@ function App() {
   const [appointmentRequirement, setAppointmentRequirement] = useState("");
   const [appointmentConsent, setAppointmentConsent] = useState(false);
   const [appointmentBooked, setAppointmentBooked] = useState(false);
+  const [appointmentErrors, setAppointmentErrors] = useState<Record<string, string>>({});
+
+  const validateAppointmentField = (
+    field: "name" | "phone" | "email" | "city" | "service" | "requirement"
+  ) => {
+    let error = "";
+
+    if (
+      field === "name" &&
+      !/^[A-Za-zÀ-ÿ' -]{2,80}$/.test(appointmentName.trim())
+    ) {
+      error = "Enter your full name using at least 2 letters.";
+    }
+
+    if (
+      field === "phone" &&
+      !/^[0-9+() -]{10,20}$/.test(appointmentPhone.trim())
+    ) {
+      error = "Enter a valid phone number.";
+    }
+
+    if (
+      field === "email" &&
+      !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(appointmentEmail.trim())
+    ) {
+      error = "Enter a valid email address.";
+    }
+
+    if (
+      field === "city" &&
+      !/^[A-Za-zÀ-ÿ' .-]{2,80}$/.test(appointmentCity.trim())
+    ) {
+      error = "Enter a valid city name.";
+    }
+
+    if (field === "service" && !appointmentService) {
+      error = "Select a service.";
+    }
+
+    if (
+      field === "requirement" &&
+      appointmentRequirement.trim().length < 10
+    ) {
+      error = "Add at least 10 characters.";
+    }
+
+    setAppointmentErrors((current) => ({
+      ...current,
+      [field]: error,
+    }));
+  };
+
+  const validateAppointmentForm = () => {
+    const errors: Record<string, string> = {};
+    const namePattern = /^[A-Za-zÀ-ÿ' -]{2,80}$/;
+    const phonePattern = /^[0-9+() -]{10,20}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const cityPattern = /^[A-Za-zÀ-ÿ' .-]{2,80}$/;
+
+    if (!namePattern.test(appointmentName.trim())) {
+      errors.name = "Please enter a valid full name using at least 2 letters.";
+    }
+
+    if (!phonePattern.test(appointmentPhone.trim())) {
+      errors.phone = "Please enter a valid phone number using 10 to 20 characters.";
+    }
+
+    if (!emailPattern.test(appointmentEmail.trim())) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!cityPattern.test(appointmentCity.trim())) {
+      errors.city = "Please enter a valid city name using at least 2 letters.";
+    }
+
+    if (!appointmentCountry) {
+      errors.country = "Please select your country.";
+    }
+
+    if (!appointmentService) {
+      errors.service = "Please select a service.";
+    }
+
+    if (appointmentRequirement.trim().length < 10) {
+      errors.requirement = "Please provide at least 10 characters.";
+    }
+
+    setAppointmentErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   // Automatically reset the booking confirmation after 15 seconds.
   useEffect(() => {
@@ -1416,17 +1506,18 @@ function App() {
                   <div className="appointment-confirmation">
                     <div className="appointment-confirmation-icon">✓</div>
 
-                    <h3>You’re booked!</h3>
+                    <h3>Request prepared!</h3>
 
                     <p>
-                      Your appointment request has been prepared. Check Gmail for
-                      the completed message and meeting-request details.
+                      Your appointment details passed validation. Email confirmation
+                      is not connected yet, so please contact Stellar to complete
+                      the booking.
                     </p>
 
                     <div className="appointment-confirmation-date">
                       <span>▣</span>
                       <div>
-                        <strong>{selectedDate}</strong>
+                        <strong>{selectedDate} at {selectedTime}</strong>
                         <small>Eastern Time — Canada</small>
                       </div>
                     </div>
@@ -1480,7 +1571,7 @@ function App() {
                           onClick={() => {
                             setSelectedDate(value);
                             setSelectedTime("");
-                            setAppointmentStep(3);
+                            setAppointmentStep(2);
                           }}
                         >
                           <small>{day}</small>
@@ -1540,8 +1631,13 @@ function App() {
               {appointmentStep === 3 && (
                 <form
                   className="appointment-details-form"
+                  noValidate
                   onSubmit={(event) => {
                     event.preventDefault();
+
+                    if (!validateAppointmentForm()) {
+                      return;
+                    }
 
                     setAppointmentBooked(true);
                   }}
@@ -1556,64 +1652,133 @@ function App() {
                   <label>
                     Full Name *
                     <input
-                      required
                       minLength={2}
                       maxLength={80}
-                      pattern="[A-Za-zÀ-ÿ' -]{2,80}"
-                      title="Enter at least 2 letters. Numbers are not allowed."
                       autoComplete="name"
                       type="text"
                       placeholder="Jane Doe"
                       value={appointmentName}
-                      onChange={(event) => setAppointmentName(event.target.value)}
+                      aria-invalid={Boolean(appointmentErrors.name)}
+                      aria-describedby={
+                        appointmentErrors.name ? "appointment-name-error" : undefined
+                      }
+                      onBlur={() => validateAppointmentField("name")}
+                      onChange={(event) => {
+                        setAppointmentName(event.target.value);
+                        setAppointmentErrors((current) => ({
+                          ...current,
+                          name: "",
+                        }));
+                      }}
                     />
+                    {appointmentErrors.name && (
+                      <span
+                        id="appointment-name-error"
+                        className="appointment-field-error"
+                        role="alert"
+                      >
+                        {appointmentErrors.name}
+                      </span>
+                    )}
                   </label>
 
                   <label>
                     Mobile Number *
                     <input
-                      required
                       minLength={10}
                       maxLength={20}
-                      pattern="[0-9+() -]{10,20}"
-                      title="Enter a valid phone number using 10 to 20 digits and symbols."
                       inputMode="tel"
                       autoComplete="tel"
                       type="tel"
                       placeholder="+1 416 555 0123"
                       value={appointmentPhone}
-                      onChange={(event) => setAppointmentPhone(event.target.value)}
+                      aria-invalid={Boolean(appointmentErrors.phone)}
+                      aria-describedby={
+                        appointmentErrors.phone ? "appointment-phone-error" : undefined
+                      }
+                      onBlur={() => validateAppointmentField("phone")}
+                      onChange={(event) => {
+                        setAppointmentPhone(event.target.value);
+                        setAppointmentErrors((current) => ({
+                          ...current,
+                          phone: "",
+                        }));
+                      }}
                     />
+                    {appointmentErrors.phone && (
+                      <span
+                        id="appointment-phone-error"
+                        className="appointment-field-error"
+                        role="alert"
+                      >
+                        {appointmentErrors.phone}
+                      </span>
+                    )}
                   </label>
 
                   <label>
                     Email *
                     <input
-                      required
                       maxLength={120}
-                      title="Enter a valid email address."
                       autoComplete="email"
                       type="email"
                       placeholder="jane@example.com"
                       value={appointmentEmail}
-                      onChange={(event) => setAppointmentEmail(event.target.value)}
+                      aria-invalid={Boolean(appointmentErrors.email)}
+                      aria-describedby={
+                        appointmentErrors.email ? "appointment-email-error" : undefined
+                      }
+                      onBlur={() => validateAppointmentField("email")}
+                      onChange={(event) => {
+                        setAppointmentEmail(event.target.value);
+                        setAppointmentErrors((current) => ({
+                          ...current,
+                          email: "",
+                        }));
+                      }}
                     />
+                    {appointmentErrors.email && (
+                      <span
+                        id="appointment-email-error"
+                        className="appointment-field-error"
+                        role="alert"
+                      >
+                        {appointmentErrors.email}
+                      </span>
+                    )}
                   </label>
 
                   <label>
                     City *
                     <input
-                      required
                       minLength={2}
                       maxLength={80}
-                      pattern="[A-Za-zÀ-ÿ' .-]{2,80}"
-                      title="Enter a valid city name using at least 2 letters."
                       autoComplete="address-level2"
                       type="text"
                       placeholder="Toronto"
                       value={appointmentCity}
-                      onChange={(event) => setAppointmentCity(event.target.value)}
+                      aria-invalid={Boolean(appointmentErrors.city)}
+                      aria-describedby={
+                        appointmentErrors.city ? "appointment-city-error" : undefined
+                      }
+                      onBlur={() => validateAppointmentField("city")}
+                      onChange={(event) => {
+                        setAppointmentCity(event.target.value);
+                        setAppointmentErrors((current) => ({
+                          ...current,
+                          city: "",
+                        }));
+                      }}
                     />
+                    {appointmentErrors.city && (
+                      <span
+                        id="appointment-city-error"
+                        className="appointment-field-error"
+                        role="alert"
+                      >
+                        {appointmentErrors.city}
+                      </span>
+                    )}
                   </label>
 
                   <label>
@@ -1634,9 +1799,21 @@ function App() {
                   <label>
                     Service Interested *
                     <select
-                      required
                       value={appointmentService}
-                      onChange={(event) => setAppointmentService(event.target.value)}
+                      aria-invalid={Boolean(appointmentErrors.service)}
+                      aria-describedby={
+                        appointmentErrors.service
+                          ? "appointment-service-error"
+                          : undefined
+                      }
+                      onBlur={() => validateAppointmentField("service")}
+                      onChange={(event) => {
+                        setAppointmentService(event.target.value);
+                        setAppointmentErrors((current) => ({
+                          ...current,
+                          service: "",
+                        }));
+                      }}
                     >
                       <option value="">Select a service</option>
                       <option>Regular IT Training</option>
@@ -1644,22 +1821,49 @@ function App() {
                       <option>Bootcamp Support</option>
                       <option>Career Support</option>
                     </select>
+                    {appointmentErrors.service && (
+                      <span
+                        id="appointment-service-error"
+                        className="appointment-field-error"
+                        role="alert"
+                      >
+                        {appointmentErrors.service}
+                      </span>
+                    )}
                   </label>
 
                   <label>
                     Requirement *
                     <textarea
-                      required
                       minLength={10}
                       maxLength={1000}
                       rows={5}
-                      title="Please provide at least 10 characters."
                       placeholder="Mention your detailed requirement"
                       value={appointmentRequirement}
-                      onChange={(event) =>
-                        setAppointmentRequirement(event.target.value)
+                      aria-invalid={Boolean(appointmentErrors.requirement)}
+                      aria-describedby={
+                        appointmentErrors.requirement
+                          ? "appointment-requirement-error"
+                          : undefined
                       }
+                      onBlur={() => validateAppointmentField("requirement")}
+                      onChange={(event) => {
+                        setAppointmentRequirement(event.target.value);
+                        setAppointmentErrors((current) => ({
+                          ...current,
+                          requirement: "",
+                        }));
+                      }}
                     />
+                    {appointmentErrors.requirement && (
+                      <span
+                        id="appointment-requirement-error"
+                        className="appointment-field-error"
+                        role="alert"
+                      >
+                        {appointmentErrors.requirement}
+                      </span>
+                    )}
                   </label>
 
                     <button

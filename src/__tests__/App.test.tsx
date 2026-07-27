@@ -67,7 +67,7 @@ describe('App', () => {
     expect(screen.getByRole('button', { name: 'Open navigation menu' })).toBeTruthy();
   });
 
-  it('completes the simplified appointment flow and clears confirmation', () => {
+  it('uses inline validation and completes the appointment flow', () => {
     vi.useFakeTimers();
     window.history.pushState({}, '', '/appointment');
     render(<App />);
@@ -75,7 +75,9 @@ describe('App', () => {
     const dateButtons = screen.getAllByRole('button', {
       name: /^(MON|TUE|WED|THU|FRI|SAT|SUN),/,
     });
-    const availableDate = dateButtons.find((button) => !button.hasAttribute('disabled'));
+    const availableDate = dateButtons.find(
+      (button) => !button.hasAttribute('disabled')
+    );
     const sunday = dateButtons.find((button) =>
       button.getAttribute('aria-label')?.startsWith('SUN,')
     );
@@ -85,20 +87,34 @@ describe('App', () => {
     expect(sunday?.hasAttribute('disabled')).toBe(true);
 
     fireEvent.click(availableDate!);
+    fireEvent.click(screen.getByRole('button', { name: '9:00 AM' }));
 
     const detailsForm = document.querySelector(
       '.appointment-details-form'
     ) as HTMLElement;
     const appointmentForm = within(detailsForm);
-    const nameInput = appointmentForm.getByLabelText(/Full Name/);
+    const consentButton = screen.getByRole('button', {
+      name: /By checking this box/,
+    });
+    const bookButton = screen.getByRole('button', {
+      name: /Book Appointment/,
+    });
 
-    expect(nameInput).toBeTruthy();
-    expect(nameInput.getAttribute('pattern')).toContain('A-Za-z');
-
-    const bookButton = screen.getByRole('button', { name: /Book Appointment/ });
     expect(bookButton.hasAttribute('disabled')).toBe(true);
 
-    fireEvent.change(nameInput, { target: { value: 'Jane Doe' } });
+    fireEvent.click(consentButton);
+    fireEvent.click(bookButton);
+
+    expect(
+      screen.getByText('Please enter a valid email address.')
+    ).toBeTruthy();
+    expect(
+      appointmentForm.getByLabelText(/Email/).getAttribute('aria-invalid')
+    ).toBe('true');
+
+    fireEvent.change(appointmentForm.getByLabelText(/Full Name/), {
+      target: { value: 'Jane Doe' },
+    });
     fireEvent.change(appointmentForm.getByLabelText(/Mobile Number/), {
       target: { value: '+1 416 555 0123' },
     });
@@ -114,20 +130,18 @@ describe('App', () => {
     fireEvent.change(appointmentForm.getByLabelText(/Requirement/), {
       target: { value: 'I need help choosing an IT training pathway.' },
     });
-    fireEvent.click(
-      screen.getByRole('button', { name: /By checking this box/ })
-    );
 
-    expect(bookButton.hasAttribute('disabled')).toBe(false);
     fireEvent.click(bookButton);
-    expect(screen.getByText('You’re booked!')).toBeTruthy();
+    expect(screen.getByText('Request prepared!')).toBeTruthy();
+    expect(screen.getAllByText(/9:00 AM/).length).toBeGreaterThan(0);
 
     act(() => {
       vi.advanceTimersByTime(15000);
     });
 
-    expect(screen.queryByText('You’re booked!')).toBeNull();
+    expect(screen.queryByText('Request prepared!')).toBeNull();
     expect(screen.getByText('Select a day')).toBeTruthy();
     vi.useRealTimers();
   });
+
 });
