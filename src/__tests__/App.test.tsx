@@ -152,4 +152,78 @@ describe('App', () => {
     vi.useRealTimers();
   });
 
+
+  it('connects every pricing enrollment button to a selected program', () => {
+    window.history.pushState({}, '', '/pricing');
+    render(<App />);
+
+    const enrollmentLinks = screen.getAllByRole('link', {
+      name: /Enroll Now/,
+    });
+
+    expect(enrollmentLinks).toHaveLength(7);
+    expect(enrollmentLinks[0].getAttribute('href')).toBe(
+      '/enroll?program=Regular%20IT%20Training'
+    );
+    expect(enrollmentLinks[6].getAttribute('href')).toBe(
+      '/enroll?program=Direct%20Marketing%20Program'
+    );
+  });
+
+  it('validates and completes the three-step enrollment frontend flow', () => {
+    window.history.pushState(
+      {},
+      '',
+      '/enroll?program=AI%20%2B%20IT%20Training'
+    );
+    render(<App />);
+
+    expect(screen.getByText('Enter your email')).toBeTruthy();
+
+    const enrollmentPage = document.querySelector(
+      '.enrollment-page'
+    ) as HTMLElement;
+
+    expect(
+      within(enrollmentPage).getByText('AI + IT Training')
+    ).toBeTruthy();
+
+    fireEvent.click(screen.getByRole('button', { name: /Continue/ }));
+    expect(screen.getByText('Enter a valid email address.')).toBeTruthy();
+
+    fireEvent.change(screen.getByLabelText('Email address'), {
+      target: { value: 'learner@example.com' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /Continue/ }));
+
+    expect(screen.getByText('Tell us about yourself')).toBeTruthy();
+
+    fireEvent.change(screen.getByLabelText('Full name'), {
+      target: { value: 'Jane Doe' },
+    });
+    fireEvent.change(screen.getByLabelText('Mobile number'), {
+      target: { value: '+1 416 555 0123' },
+    });
+    fireEvent.change(screen.getByLabelText('City'), {
+      target: { value: 'Toronto' },
+    });
+    fireEvent.change(
+      screen.getByLabelText('Your learning or career goal'),
+      {
+        target: {
+          value: 'I want to build practical IT skills for a new career.',
+        },
+      }
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: /Review/ }));
+    expect(screen.getByText('Confirm your details')).toBeTruthy();
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Confirm request' })
+    );
+
+    expect(screen.getByText('Request prepared')).toBeTruthy();
+  });
+
 });
