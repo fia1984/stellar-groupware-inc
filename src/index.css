@@ -13191,3 +13191,26 @@ body main.page-shell nav.navbar
     background: #08a83f !important;
   }
 }
+
+
+/* Final enrollment mobile breadcrumb gap correction */
+@media (max-width: 760px) {
+  .page-shell.route-enroll #enroll {
+    margin-top: -92px !important;
+  }
+}
+
+
+/* Final mobile appointment page QA fixes */
+@media (max-width: 760px) {
+  .page-shell.route-appointment #appointment {
+    margin-top: -92px !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links > #book-appointment-nav {
+    display: none !important;
+  }
+}
