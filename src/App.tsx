@@ -295,6 +295,7 @@ function App() {
     "/about": "about",
     "/account": "account",
     "/appointment": "appointment",
+    "/enroll": "enroll",
     "/contact": "contact",
   };
 
@@ -315,6 +316,8 @@ function App() {
       ? "My Account"
       : currentRoute === "appointment"
       ? "Book Appointment"
+      : currentRoute === "enroll"
+      ? "Enrollment"
       : "Home";
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -322,6 +325,21 @@ function App() {
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<"training" | "process" | "about" | null>(null);
   const [trainingReviewIndex, setTrainingReviewIndex] = useState(0);
   const [careerReviewIndex, setCareerReviewIndex] = useState(0);
+
+  const enrollmentProgram =
+    new URLSearchParams(window.location.search).get("program") ||
+    "Regular IT Training";
+  const [enrollmentStep, setEnrollmentStep] = useState(1);
+  const [enrollmentEmail, setEnrollmentEmail] = useState("");
+  const [enrollmentName, setEnrollmentName] = useState("");
+  const [enrollmentPhone, setEnrollmentPhone] = useState("");
+  const [enrollmentCity, setEnrollmentCity] = useState("");
+  const [enrollmentCountry, setEnrollmentCountry] = useState("Canada");
+  const [enrollmentGoal, setEnrollmentGoal] = useState("");
+  const [enrollmentErrors, setEnrollmentErrors] = useState<
+    Record<string, string>
+  >({});
+  const [enrollmentComplete, setEnrollmentComplete] = useState(false);
 
   const [appointmentStep, setAppointmentStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
@@ -336,6 +354,45 @@ function App() {
   const [appointmentConsent, setAppointmentConsent] = useState(false);
   const [appointmentBooked, setAppointmentBooked] = useState(false);
   const [appointmentErrors, setAppointmentErrors] = useState<Record<string, string>>({});
+
+  const validateEnrollmentStep = (step: number) => {
+    const errors: Record<string, string> = {};
+
+    if (
+      step === 1 &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enrollmentEmail.trim())
+    ) {
+      errors.email = "Enter a valid email address.";
+    }
+
+    if (step === 2) {
+      if (!/^[A-Za-zÀ-ÿ' -]{2,80}$/.test(enrollmentName.trim())) {
+        errors.name = "Enter your full name using at least 2 letters.";
+      }
+
+      if (!/^[0-9+() -]{10,20}$/.test(enrollmentPhone.trim())) {
+        errors.phone = "Enter a valid phone number.";
+      }
+
+      if (!/^[A-Za-zÀ-ÿ' .-]{2,80}$/.test(enrollmentCity.trim())) {
+        errors.city = "Enter a valid city name.";
+      }
+
+      if (enrollmentGoal.trim().length < 10) {
+        errors.goal = "Tell us about your goal using at least 10 characters.";
+      }
+    }
+
+    setEnrollmentErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const clearEnrollmentError = (field: string) => {
+    setEnrollmentErrors((current) => ({
+      ...current,
+      [field]: "",
+    }));
+  };
 
   const validateAppointmentField = (
     field: "name" | "phone" | "email" | "city" | "service" | "requirement"
@@ -1045,6 +1102,286 @@ function App() {
       </section>
 
 
+      <section
+        className="enrollment-page"
+        id="enroll"
+        aria-labelledby="enrollment-title"
+      >
+        <aside className="enrollment-brand-panel">
+          <div className="enrollment-brand-name">
+            <span>S</span>
+            <strong>STELLAR GROUPWARE INC</strong>
+          </div>
+
+          <div className="enrollment-brand-content">
+            <p className="enrollment-eyebrow">YOUR STELLAR PATHWAY</p>
+            <h1>Your IT career, supported from learning to work.</h1>
+            <p>
+              Training, mentoring, project practice, and career support—all
+              organized around your selected pathway.
+            </p>
+
+            <ul>
+              <li>Expert-led, beginner-friendly training</li>
+              <li>Mentoring and project support</li>
+              <li>Clear learning and career next steps</li>
+            </ul>
+          </div>
+
+          <small>© 2026 Stellar Groupware Inc.</small>
+        </aside>
+
+        <div className="enrollment-form-panel">
+          <div className="enrollment-form-wrap">
+            <div className="enrollment-logo">
+              <span>S</span>
+              <strong>Stellar</strong>
+            </div>
+
+            <div
+              className="enrollment-progress"
+              aria-label={`Step ${enrollmentStep} of 3`}
+            >
+              {[1, 2, 3].map((step) => (
+                <span
+                  key={step}
+                  className={enrollmentStep >= step ? "active" : ""}
+                  aria-hidden="true"
+                />
+              ))}
+              <small>Step {enrollmentStep} of 3</small>
+            </div>
+
+            {enrollmentStep === 1 ? (
+              <form
+                className="enrollment-form"
+                noValidate
+                onSubmit={(event) => {
+                  event.preventDefault();
+
+                  if (validateEnrollmentStep(1)) {
+                    setEnrollmentStep(2);
+                  }
+                }}
+              >
+                <p className="enrollment-eyebrow">START YOUR ENROLLMENT</p>
+                <h1 id="enrollment-title">Enter your email</h1>
+                <p>
+                  Start your request for the selected Stellar program.
+                </p>
+
+                <div className="enrollment-program-summary">
+                  <small>Selected program</small>
+                  <strong>{enrollmentProgram}</strong>
+                </div>
+
+                <label htmlFor="enrollment-email">Email address</label>
+                <input
+                  id="enrollment-email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@example.com"
+                  value={enrollmentEmail}
+                  aria-invalid={Boolean(enrollmentErrors.email)}
+                  onChange={(event) => {
+                    setEnrollmentEmail(event.target.value);
+                    clearEnrollmentError("email");
+                  }}
+                />
+
+                {enrollmentErrors.email && (
+                  <span className="enrollment-error" role="alert">
+                    {enrollmentErrors.email}
+                  </span>
+                )}
+
+                <button type="submit" className="enrollment-primary-btn">
+                  Continue →
+                </button>
+
+                <a href="/pricing" className="enrollment-back-link">
+                  ← Back to programs and pricing
+                </a>
+              </form>
+            ) : enrollmentStep === 2 ? (
+              <form
+                className="enrollment-form"
+                noValidate
+                onSubmit={(event) => {
+                  event.preventDefault();
+
+                  if (validateEnrollmentStep(2)) {
+                    setEnrollmentStep(3);
+                  }
+                }}
+              >
+                <p className="enrollment-eyebrow">YOUR DETAILS</p>
+                <h1>Tell us about yourself</h1>
+                <p>Complete the details for your selected Stellar pathway.</p>
+
+                <label htmlFor="enrollment-name">Full name</label>
+                <input
+                  id="enrollment-name"
+                  type="text"
+                  autoComplete="name"
+                  value={enrollmentName}
+                  aria-invalid={Boolean(enrollmentErrors.name)}
+                  onChange={(event) => {
+                    setEnrollmentName(event.target.value);
+                    clearEnrollmentError("name");
+                  }}
+                />
+                {enrollmentErrors.name && (
+                  <span className="enrollment-error" role="alert">
+                    {enrollmentErrors.name}
+                  </span>
+                )}
+
+                <label htmlFor="enrollment-phone">Mobile number</label>
+                <input
+                  id="enrollment-phone"
+                  type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  value={enrollmentPhone}
+                  aria-invalid={Boolean(enrollmentErrors.phone)}
+                  onChange={(event) => {
+                    setEnrollmentPhone(event.target.value);
+                    clearEnrollmentError("phone");
+                  }}
+                />
+                {enrollmentErrors.phone && (
+                  <span className="enrollment-error" role="alert">
+                    {enrollmentErrors.phone}
+                  </span>
+                )}
+
+                <div className="enrollment-field-row">
+                  <div>
+                    <label htmlFor="enrollment-city">City</label>
+                    <input
+                      id="enrollment-city"
+                      type="text"
+                      autoComplete="address-level2"
+                      value={enrollmentCity}
+                      aria-invalid={Boolean(enrollmentErrors.city)}
+                      onChange={(event) => {
+                        setEnrollmentCity(event.target.value);
+                        clearEnrollmentError("city");
+                      }}
+                    />
+                    {enrollmentErrors.city && (
+                      <span className="enrollment-error" role="alert">
+                        {enrollmentErrors.city}
+                      </span>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="enrollment-country">Country</label>
+                    <select
+                      id="enrollment-country"
+                      value={enrollmentCountry}
+                      onChange={(event) =>
+                        setEnrollmentCountry(event.target.value)
+                      }
+                    >
+                      <option>Canada</option>
+                      <option>United States</option>
+                      <option>United Kingdom</option>
+                      <option>India</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <label htmlFor="enrollment-goal">
+                  Your learning or career goal
+                </label>
+                <textarea
+                  id="enrollment-goal"
+                  rows={4}
+                  value={enrollmentGoal}
+                  aria-invalid={Boolean(enrollmentErrors.goal)}
+                  onChange={(event) => {
+                    setEnrollmentGoal(event.target.value);
+                    clearEnrollmentError("goal");
+                  }}
+                />
+                {enrollmentErrors.goal && (
+                  <span className="enrollment-error" role="alert">
+                    {enrollmentErrors.goal}
+                  </span>
+                )}
+
+                <div className="enrollment-form-actions">
+                  <button
+                    type="button"
+                    className="enrollment-secondary-btn"
+                    onClick={() => setEnrollmentStep(1)}
+                  >
+                    Back
+                  </button>
+                  <button type="submit" className="enrollment-primary-btn">
+                    Review →
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="enrollment-review">
+                {enrollmentComplete ? (
+                  <>
+                    <span className="enrollment-success-icon">✓</span>
+                    <h1>Request prepared</h1>
+                    <p>
+                      Your frontend request for <strong>{enrollmentProgram}</strong>{" "}
+                      has been prepared.
+                    </p>
+                    <a href="/pricing">Back to programs and pricing</a>
+                  </>
+                ) : (
+                  <>
+                    <p className="enrollment-eyebrow">REVIEW</p>
+                    <h1>Confirm your details</h1>
+
+                    <dl>
+                      <div><dt>Program</dt><dd>{enrollmentProgram}</dd></div>
+                      <div><dt>Email</dt><dd>{enrollmentEmail}</dd></div>
+                      <div><dt>Name</dt><dd>{enrollmentName}</dd></div>
+                      <div><dt>Phone</dt><dd>{enrollmentPhone}</dd></div>
+                      <div><dt>Location</dt><dd>{enrollmentCity}, {enrollmentCountry}</dd></div>
+                      <div><dt>Goal</dt><dd>{enrollmentGoal}</dd></div>
+                    </dl>
+
+                    <p className="enrollment-notice">
+                      Frontend demonstration only. No payment is collected and
+                      no information is sent to a backend.
+                    </p>
+
+                    <div className="enrollment-form-actions">
+                      <button
+                        type="button"
+                        className="enrollment-secondary-btn"
+                        onClick={() => setEnrollmentStep(2)}
+                      >
+                        Edit details
+                      </button>
+                      <button
+                        type="button"
+                        className="enrollment-primary-btn"
+                        onClick={() => setEnrollmentComplete(true)}
+                      >
+                        Confirm request
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       <section className="pricing-section" id="pricing">
         <p className="section-label">PRICING & PATHWAYS</p>
         <h2>Choose Your Learning Path</h2>
@@ -1078,7 +1415,7 @@ function App() {
                 <li>Real-world practice tasks</li>
                 <li>Certificate of completion</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=Regular%20IT%20Training" className="enroll-btn">Enroll Now →</a>
             </div>
 
             <div className="price-card popular">
@@ -1093,7 +1430,7 @@ function App() {
                 <li>Project mentorship</li>
                 <li>Career confidence building</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=AI%20%2B%20IT%20Training" className="enroll-btn">Enroll Now →</a>
             </div>
 
             <div className="price-card">
@@ -1107,7 +1444,7 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Skill validation support</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
+              <a href="/enroll?program=Bootcamp%20Support" className="enroll-btn dark">Enroll Now →</a>
             </div>
 
             <div className="price-card popular">
@@ -1122,7 +1459,7 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=Marketing%20Support" className="enroll-btn">Enroll Now →</a>
             </div>
           </div>
         </div>
@@ -1151,7 +1488,7 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Workplace confidence building</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
+              <a href="/enroll?program=Direct%20Bootcamp" className="enroll-btn dark">Enroll Now →</a>
             </div>
 
             <div className="price-card popular">
@@ -1166,7 +1503,7 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=Career%20Marketing" className="enroll-btn">Enroll Now →</a>
             </div>
           </div>
         </div>
@@ -1196,7 +1533,7 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="mailto:info@stellartms.com" className="enroll-btn dark">Enroll Now →</a>
+              <a href="/enroll?program=Direct%20Marketing%20Program" className="enroll-btn dark">Enroll Now →</a>
             </div>
           </div>
         </div>
