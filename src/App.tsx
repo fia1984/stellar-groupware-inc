@@ -285,12 +285,86 @@ function AnimatedCounter({ end, duration = 1800 }: AnimatedCounterProps) {
   );
 }
 
+
+const stellarTrainingCategories = [
+  "All Programs",
+  "AI & Automation",
+  "Cloud & DevOps",
+  "Data & Analytics",
+  "Software Development",
+  "Security & Support",
+];
+
+const stellarTrainingCourses = [
+  {
+    title: "AI & Automation Foundations",
+    category: "AI & Automation",
+    visual: "AI",
+    tone: "mint",
+    duration: "50 hours live training",
+    description:
+      "Build practical AI skills, understand modern automation, and create guided portfolio projects.",
+    topics: ["AI fundamentals", "Prompt design", "Workflow automation", "Portfolio project"],
+  },
+  {
+    title: "Azure Cloud & DevOps",
+    category: "Cloud & DevOps",
+    visual: "AZ",
+    tone: "blue",
+    duration: "60 hours live training",
+    description:
+      "Learn cloud foundations, Azure services, Git, CI/CD, containers, and deployment workflows.",
+    topics: ["Azure fundamentals", "Git and GitHub", "CI/CD pipelines", "Docker deployment"],
+  },
+  {
+    title: "Data Analytics with Power BI",
+    category: "Data & Analytics",
+    visual: "BI",
+    tone: "gold",
+    duration: "50 hours live training",
+    description:
+      "Turn raw data into clear reports using Excel, SQL, Power BI, and practical business scenarios.",
+    topics: ["Excel analysis", "SQL foundations", "Power BI dashboards", "Capstone report"],
+  },
+  {
+    title: "Full Stack Web Development",
+    category: "Software Development",
+    visual: "</>",
+    tone: "violet",
+    duration: "70 hours live training",
+    description:
+      "Create responsive applications with modern frontend, backend, database, and deployment skills.",
+    topics: ["HTML, CSS and TypeScript", "React development", "API integration", "Cloud deployment"],
+  },
+  {
+    title: "Cybersecurity & IT Support",
+    category: "Security & Support",
+    visual: "SEC",
+    tone: "navy",
+    duration: "50 hours live training",
+    description:
+      "Develop troubleshooting, networking, system support, and security-awareness skills for IT roles.",
+    topics: ["IT troubleshooting", "Networking basics", "Security operations", "Support simulations"],
+  },
+  {
+    title: "QA & Test Automation",
+    category: "Software Development",
+    visual: "QA",
+    tone: "coral",
+    duration: "45 hours live training",
+    description:
+      "Learn manual testing, test planning, API checks, and browser automation through real scenarios.",
+    topics: ["Testing fundamentals", "Test cases and defects", "API testing", "UI automation"],
+  },
+];
+
 function App() {
   const routeMap: Record<string, string> = {
     "/": "home",
     "/reviews": "reviews",
     "/pricing": "pricing",
     "/training": "training",
+    "/course": "course",
     "/process": "process",
     "/about": "about",
     "/account": "account",
@@ -308,6 +382,8 @@ function App() {
       ? "Pricing"
       : currentRoute === "training"
       ? "Training"
+      : currentRoute === "course"
+      ? "Course Curriculum"
       : currentRoute === "process"
       ? "Process"
       : currentRoute === "about"
@@ -325,6 +401,28 @@ function App() {
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<"training" | "process" | "about" | null>(null);
   const [trainingReviewIndex, setTrainingReviewIndex] = useState(0);
   const [careerReviewIndex, setCareerReviewIndex] = useState(0);
+  const [trainingSearch, setTrainingSearch] = useState("");
+  const [trainingCategory, setTrainingCategory] = useState("All Programs");
+
+  const filteredTrainingCourses = stellarTrainingCourses.filter((course) => {
+    const matchesCategory =
+      trainingCategory === "All Programs" || course.category === trainingCategory;
+    const searchText = trainingSearch.trim().toLowerCase();
+    const matchesSearch =
+      !searchText ||
+      course.title.toLowerCase().includes(searchText) ||
+      course.category.toLowerCase().includes(searchText) ||
+      course.description.toLowerCase().includes(searchText);
+
+    return matchesCategory && matchesSearch;
+  });
+
+  const selectedCourseName =
+    new URLSearchParams(window.location.search).get("program") ||
+    stellarTrainingCourses[0].title;
+  const selectedTrainingCourse =
+    stellarTrainingCourses.find((course) => course.title === selectedCourseName) ||
+    stellarTrainingCourses[0];
 
   const enrollmentProgram =
     new URLSearchParams(window.location.search).get("program") ||
@@ -674,10 +772,19 @@ function App() {
               >
                 Training ▾
               </a>
-              <div className="dropdown-menu">
-                <a href="/training">IT Training</a>
-                <a href="/training#job-support">Job Support</a>
-                <a href="/training#career-mentoring">Career Mentoring</a>
+              <div className="dropdown-menu training-dropdown-menu">
+                <a href="/training">
+                  <span className="training-dropdown-icon" aria-hidden="true">IT</span>
+                  <span><strong>IT Training</strong><small>Browse practical programs</small></span>
+                </a>
+                <a href="/training#job-support">
+                  <span className="training-dropdown-icon" aria-hidden="true">JOB</span>
+                  <span><strong>Job Support</strong><small>Build workplace confidence</small></span>
+                </a>
+                <a href="/training#career-mentoring">
+                  <span className="training-dropdown-icon" aria-hidden="true">CAREER</span>
+                  <span><strong>Career Mentoring</strong><small>Plan your next career move</small></span>
+                </a>
               </div>
             </div>
 
@@ -831,7 +938,7 @@ function App() {
 
       <a
         className="stellar-chat-bubble"
-        href="https://mail.google.com/mail/?view=cm&fs=1&to=info@stellartms.com&su=Stellar%20Groupware%20Inquiry"
+        href="mailto:info@stellargroupware.com?subject=Stellar%20Groupware%20Inquiry"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact Stellar Groupware"
@@ -848,7 +955,7 @@ function App() {
 
 <section
         className="services-section home-services-reference"
-        id="training"
+        id="home-services"
         aria-labelledby="home-services-title"
       >
         <div className="home-services-heading">
@@ -1101,6 +1208,244 @@ function App() {
         <a href="/appointment">Schedule Your Free Consultation</a>
       </section>
 
+
+
+      <section
+        className="training-catalog-page"
+        id="training"
+        aria-labelledby="training-page-title"
+      >
+        <header className="training-page-hero">
+          <div>
+            <span className="training-page-kicker">STELLAR LEARNING STUDIO</span>
+            <h1 id="training-page-title">Build skills that work in the real world.</h1>
+            <p>
+              Instructor-led IT programs with practical projects, supportive
+              mentoring, and a clear path from learning to career readiness.
+            </p>
+          </div>
+          <div className="training-hero-strips" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </header>
+
+        <div className="training-catalog-inner">
+          <div className="training-intro">
+            <span>EXPLORE PROGRAMS</span>
+            <h2>Find the right training path</h2>
+            <p>Search by skill or choose a category to see programs designed for Stellar learners.</p>
+          </div>
+
+          <label className="training-search">
+            <span aria-hidden="true">⌕</span>
+            <span className="sr-only">Search training programs</span>
+            <input
+              type="search"
+              value={trainingSearch}
+              onChange={(event) => setTrainingSearch(event.target.value)}
+              placeholder="Search programs, skills, or categories..."
+            />
+          </label>
+
+          <div className="training-category-strip" role="group" aria-label="Filter training programs">
+            {stellarTrainingCategories.map((category, index) => (
+              <button
+                type="button"
+                key={category}
+                className={trainingCategory === category ? "active" : ""}
+                aria-pressed={trainingCategory === category}
+                onClick={() => setTrainingCategory(category)}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                {category}
+              </button>
+            ))}
+          </div>
+
+          <div className="training-results-heading">
+            <h2>Stellar training programs</h2>
+            <span>{filteredTrainingCourses.length} programs</span>
+          </div>
+
+          {filteredTrainingCourses.length > 0 ? (
+            <div className="training-course-grid">
+              {filteredTrainingCourses.map((course) => (
+                <article className="training-course-card" key={course.title}>
+                  <div className={`training-course-visual ${course.tone}`}>
+                    <span>{course.visual}</span>
+                    <small>STELLAR LAB</small>
+                  </div>
+                  <div className="training-course-body">
+                    <span className="training-course-category">{course.category}</span>
+                    <h3>{course.title}</h3>
+                    <p>{course.description}</p>
+                    <div className="training-course-meta">
+                      <span>◷ {course.duration}</span>
+                      <span>♢ Certificate</span>
+                    </div>
+                    <a
+                      className="training-view-curriculum"
+                      href={`/course?program=${encodeURIComponent(course.title)}`}
+                    >
+                      View Curriculum <span>→</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="training-empty-state">
+              <strong>No programs found</strong>
+              <p>Try another keyword or select All Programs.</p>
+              <button type="button" onClick={() => {
+                setTrainingSearch("");
+                setTrainingCategory("All Programs");
+              }}>
+                Clear filters
+              </button>
+            </div>
+          )}
+
+          <section className="training-support-panel" id="job-support">
+            <div>
+              <span>JOB SUPPORT</span>
+              <h2>Learning continues after the course.</h2>
+              <p>Get practical guidance for projects, workplace questions, interviews, and career preparation.</p>
+            </div>
+            <a href="/appointment">Talk to a Stellar mentor →</a>
+          </section>
+
+          <section className="training-mentoring-panel" id="career-mentoring">
+            <div>
+              <span>CAREER MENTORING</span>
+              <h2>A clearer route toward your next role.</h2>
+            </div>
+            <ul>
+              <li>Personal learning roadmap</li>
+              <li>Resume and LinkedIn guidance</li>
+              <li>Interview preparation</li>
+              <li>Canadian career-readiness support</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+
+
+      <section
+        className="training-course-detail-page"
+        id="course"
+        aria-labelledby="course-detail-title"
+      >
+        <header className="course-detail-hero">
+          <div>
+            <a href="/training">‹ All training programs</a>
+            <span>STELLAR COURSE CURRICULUM</span>
+            <h1 id="course-detail-title">
+              {selectedTrainingCourse.title} Course &amp; Curriculum
+            </h1>
+            <p>
+              Practical, instructor-led training with guided projects,
+              certification preparation, mentoring, and career-readiness support.
+            </p>
+          </div>
+        </header>
+
+        <div className="course-detail-inner">
+          <div className="course-detail-facts" aria-label="Course highlights">
+            <article>
+              <span aria-hidden="true">CERT</span>
+              <strong>Industry-Focused Certificate</strong>
+              <p>Credentials that support your portfolio</p>
+            </article>
+            <article>
+              <span aria-hidden="true">HRS</span>
+              <strong>{selectedTrainingCourse.duration}</strong>
+              <p>Interactive instructor-led sessions</p>
+            </article>
+            <article>
+              <span aria-hidden="true">LAB</span>
+              <strong>Hands-On Projects</strong>
+              <p>Practice based on workplace scenarios</p>
+            </article>
+            <article>
+              <span aria-hidden="true">MOD</span>
+              <strong>4 Learning Modules</strong>
+              <p>Structured from foundations to practice</p>
+            </article>
+          </div>
+
+          <div className="course-curriculum-heading">
+            <span>YOUR LEARNING ROADMAP</span>
+            <h2>Course curriculum</h2>
+          </div>
+
+          <article className="course-module-card course-module-open">
+            <div className="course-module-title">
+              <span>Module 1</span>
+              <h3>{selectedTrainingCourse.title} Foundations</h3>
+            </div>
+            <p>
+              Build the core knowledge and practical confidence required for
+              the rest of this Stellar program.
+            </p>
+            <div className="course-topic-grid">
+              {selectedTrainingCourse.topics.map((topic) => (
+                <div key={topic}><span>✓</span>{topic}</div>
+              ))}
+              <div><span>✓</span>Guided workplace scenario</div>
+              <div><span>✓</span>Instructor feedback session</div>
+              <div><span>✓</span>Practical knowledge check</div>
+              <div><span>✓</span>Portfolio planning</div>
+            </div>
+          </article>
+
+          <div className="course-locked-modules" aria-hidden="true">
+            <article className="course-module-card">
+              <div className="course-module-title">
+                <span>Module 2</span>
+                <h3>Core Tools &amp; Applied Workflows</h3>
+              </div>
+              <p>Develop practical skills using the tools and processes used in modern workplaces.</p>
+              <div className="course-topic-grid">
+                <div><span>✓</span>Core technical workflow</div>
+                <div><span>✓</span>Guided practice lab</div>
+                <div><span>✓</span>Tool configuration</div>
+                <div><span>✓</span>Applied troubleshooting</div>
+              </div>
+            </article>
+            <article className="course-module-card">
+              <div className="course-module-title">
+                <span>Module 3</span>
+                <h3>Projects &amp; Workplace Practice</h3>
+              </div>
+              <p>Complete realistic activities with structured mentor feedback.</p>
+            </article>
+            <article className="course-module-card">
+              <div className="course-module-title">
+                <span>Module 4</span>
+                <h3>Career Readiness &amp; Final Project</h3>
+              </div>
+              <p>Bring your skills together and prepare to explain your work confidently.</p>
+            </article>
+          </div>
+
+          <aside className="course-unlock-card">
+            <span className="course-lock-icon" aria-hidden="true">▢</span>
+            <h2>See the full module-by-module breakdown</h2>
+            <p>
+              Start your Stellar enrollment to unlock every module, the complete
+              topic list, project details, mentoring options, and current program information.
+            </p>
+            <a href={`/enroll?program=${encodeURIComponent(selectedTrainingCourse.title)}`}>
+              Unlock the Full Curriculum <span>→</span>
+            </a>
+            <small>No payment is required to start your request.</small>
+          </aside>
+        </div>
+      </section>
 
       <section
         className="enrollment-page"
@@ -2262,12 +2607,12 @@ function App() {
                 <p>If you have questions or need to reschedule, contact us:</p>
                 <a
                   id="appointment-help-email"
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=info@stellartms.com&su=Stellar%20Appointment%20Help"
+                  href="mailto:info@stellargroupware.com?subject=Stellar%20Appointment%20Help"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Email Stellar appointment support"
                 >
-                  ✉ info@stellartms.com
+                  ✉ info@stellargroupware.com
                 </a>
               </div>
             </aside>
@@ -2278,7 +2623,7 @@ function App() {
         <p className="section-label">CONTACT US</p>
         <h2>Ready to start your IT journey?</h2>
         <p>Email us and we will help you choose the right next step.</p>
-        <a className="primary-btn" href="mailto:info@stellartms.com">
+        <a className="primary-btn" href="mailto:info@stellargroupware.com">
           Contact Now
         </a>
       </section>

@@ -75,7 +75,7 @@ export const processSteps = [
   },
 ];
 
-export const contactEmail = "fia@stellartms.com";
+export const contactEmail = "info@stellargroupware.com";
 
 export const gmailComposeLink =
-  "https://mail.google.com/mail/?view=cm&fs=1&to=fia@stellartms.com";
+  "mailto:info@stellargroupware.com?";

@@ -5,7 +5,7 @@ const quickLinks = [
   { label: "Pricing", href: "/pricing" },
   { label: "Reviews", href: "/reviews" },
   { label: "Process", href: "/process" },
-  { label: "Contact Us", href: "mailto:info@stellartms.com" },
+  { label: "Contact Us", href: "mailto:info@stellargroupware.com" },
 ]
 
 const resources = [
@@ -14,7 +14,7 @@ const resources = [
   { label: "Career Mentoring", href: "/training" },
   { label: "Videos", href: "/training" },
   { label: "FAQs", href: "/process" },
-  { label: "Customer Support", href: "mailto:info@stellartms.com" },
+  { label: "Customer Support", href: "mailto:info@stellargroupware.com" },
 ]
 
 const socialLinks = ["f", "in", "◎", "𝕏", "▶", "♪", "⌖"]
@@ -123,7 +123,7 @@ export default function Footer() {
               <span className="text-slate-600">|</span>
               <a href="/" className="hover:text-sky-300">Sitemap</a>
               <span className="text-slate-600">|</span>
-              <a href="mailto:info@stellartms.com" className="hover:text-sky-300">
+              <a href="mailto:info@stellargroupware.com" className="hover:text-sky-300">
                 Customer Support
               </a>
             </div>
