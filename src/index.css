@@ -15101,3 +15101,325 @@ body main.page-shell.route-course #course {
   }
 }
 
+/* PRICING BREADCRUMB RESPONSIVE QA FIX */
+.page-shell.route-pricing .breadcrumb-strip {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  margin: 0 !important;
+  z-index: 1000 !important;
+}
+
+.page-shell.route-pricing section.pricing-section#pricing {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding-top: clamp(36px, 5vw, 64px) !important;
+}
+
+.page-shell.route-pricing #pricing .section-label,
+.page-shell.route-pricing #pricing > h2 {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+}
+
+@media (min-width: 1051px) {
+  .page-shell.route-pricing nav.navbar {
+    position: sticky !important;
+    top: 0 !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .page-shell.route-pricing .breadcrumb-strip {
+    padding: 10px 18px !important;
+    overflow-x: auto !important;
+  }
+
+  .page-shell.route-pricing section.pricing-section#pricing {
+    padding-top: 32px !important;
+  }
+
+  .page-shell.route-pricing nav.navbar .mobile-header-appointment {
+    color: #ffffff !important;
+    background: #08a83f !important;
+    border-color: #08a83f !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-shell.route-pricing section.pricing-section#pricing {
+    padding: 28px 14px 64px !important;
+  }
+}
+
+/* MOBILE DROPDOWN ONE-TAP SMOOTH FIX */
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links > .nav-dropdown {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links > .nav-dropdown > a {
+    width: 100% !important;
+    cursor: pointer !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown
+    > .dropdown-menu,
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown
+    > .training-dropdown-menu {
+    position: static !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-6px) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transition:
+      max-height 0.32s ease,
+      opacity 0.22s ease,
+      transform 0.26s ease,
+      padding 0.26s ease,
+      margin 0.26s ease,
+      visibility 0s linear 0.32s !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown.mobile-submenu-open
+    > .dropdown-menu,
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown.mobile-submenu-open
+    > .training-dropdown-menu {
+    max-height: 430px !important;
+    margin: 6px 0 10px !important;
+    padding: 10px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+    transition:
+      max-height 0.34s ease,
+      opacity 0.22s ease,
+      transform 0.26s ease,
+      padding 0.26s ease,
+      margin 0.26s ease,
+      visibility 0s !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a {
+    min-height: 58px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body main.page-shell nav.navbar
+    #primary-navigation .dropdown-menu {
+    transition: none !important;
+  }
+}
+
+/* MOBILE TRAINING DROPDOWN CONTRAST FIX */
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu {
+    background: #f4faf7 !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a {
+    color: #17313a !important;
+    background: transparent !important;
+    text-decoration: none !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a strong {
+    display: block !important;
+    color: #17313a !important;
+    opacity: 1 !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a small {
+    display: block !important;
+    color: #526b73 !important;
+    opacity: 1 !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:hover,
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:focus-visible {
+    background: #e2f5eb !important;
+    color: #075f35 !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-icon {
+    color: #ffffff !important;
+    background: #079b5e !important;
+    opacity: 1 !important;
+  }
+}
+
+/* MOBILE NAVIGATION NO-OVERLAP FIX */
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    order: 10 !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 8px 0 0 !important;
+    border-radius: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links:not(.menu-open) {
+    display: none !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links.menu-open {
+    display: flex !important;
+    animation: stellar-mobile-menu-enter 0.24s ease both;
+  }
+}
+
+@keyframes stellar-mobile-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links.menu-open {
+    animation: none !important;
+  }
+}
+
+/* MOBILE TRAINING OPTION VISUAL BALANCE */
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: 58px minmax(0, 1fr) !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-height: 62px !important;
+    padding: 9px 10px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 14px !important;
+    bottom: 14px !important;
+    left: 0 !important;
+    width: 3px !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:hover,
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:focus,
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:focus-visible {
+    border: 0 !important;
+    outline: 0 !important;
+    background: #e8f7ef !important;
+    box-shadow: none !important;
+    transform: translateX(2px) !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:hover::before,
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:focus::before,
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a:focus-visible::before {
+    background: #08a83f !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body main.page-shell nav.navbar
+    #primary-navigation
+    .training-dropdown-menu > a {
+    transition: none !important;
+  }
+}
+
