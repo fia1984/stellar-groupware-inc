@@ -15725,3 +15725,86 @@ body main.page-shell .social-row a span {
     width: min(100%, 280px) !important;
   }
 }
+
+/* SECOND RESPONSIVE QA — icons, CTA and stable slideshow controls */
+.calendar-icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.social-row a svg {
+  width: 20px !important;
+  height: 20px !important;
+  overflow: visible !important;
+  fill: currentColor;
+  stroke: none;
+}
+
+.social-row a[aria-label="Open Instagram"] svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+}
+
+.social-row a[aria-label="Open Instagram"] .social-icon-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.social-row a[aria-label="Open YouTube"] .social-icon-play {
+  fill: #07101a;
+}
+
+.site-footer button[aria-label^="Open"][aria-label$="website"] {
+  min-width: 104px;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.34) !important;
+  border-radius: 999px !important;
+}
+
+.slide-arrow {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slide-arrow:active {
+  transform: scale(0.94) !important;
+}
+
+@media (max-width: 1050px) {
+  body main.page-shell .mobile-header-appointment,
+  body main.page-shell #book-appointment-nav,
+  body main.page-shell #hero-book-appointment {
+    gap: 6px !important;
+  }
+
+  body main.page-shell #book-appointment-nav {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body main.page-shell #book-appointment-nav {
+    min-height: 52px !important;
+    padding-inline: 12px !important;
+    text-align: center !important;
+  }
+
+  body main.page-shell #hero-book-appointment {
+    min-height: 56px !important;
+    padding-inline: 12px !important;
+  }
+
+  body main.page-shell .site-footer .social-row {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+}

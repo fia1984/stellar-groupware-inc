@@ -1,6 +1,35 @@
 import { useEffect, useState, useRef, type ReactNode } from "react";
 import "./index.css";
 
+function CalendarIcon() {
+  return (
+    <svg className="calendar-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M7 2v3M17 2v3M3.5 9h17M5.5 4h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+      <path d="M8 13h3v3H8z" />
+    </svg>
+  );
+}
+
+function SocialIcon({ name }: { name: "facebook" | "linkedin" | "instagram" | "x" | "youtube" }) {
+  if (name === "facebook") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-8h2.8l.4-3h-3.2V8.1c0-.9.3-1.5 1.6-1.5H17V3.9c-.8-.1-1.6-.2-2.4-.2-2.4 0-4.1 1.5-4.1 4.2V10H8v3h2.5v8h3.1Z" /></svg>;
+  }
+
+  if (name === "linkedin") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.4 8.2H3.2V21h3.2V8.2ZM4.8 3A1.9 1.9 0 1 0 4.8 6.8 1.9 1.9 0 0 0 4.8 3ZM20.8 13.7c0-3.8-2-5.7-4.7-5.7-2.2 0-3.1 1.2-3.7 2V8.2H9.2V21h3.2v-7.1c0-1.9.4-3.7 2.7-3.7 2.3 0 2.3 2.1 2.3 3.8v7h3.4v-7.3Z" /></svg>;
+  }
+
+  if (name === "instagram") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4" /><circle className="social-icon-dot" cx="17.7" cy="6.4" r="1" /></svg>;
+  }
+
+  if (name === "youtube") {
+    return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7.2a2.7 2.7 0 0 0-1.9-1.9C17.4 4.8 12 4.8 12 4.8s-5.4 0-7.1.5A2.7 2.7 0 0 0 3 7.2c-.5 1.7-.5 4.8-.5 4.8s0 3.1.5 4.8a2.7 2.7 0 0 0 1.9 1.9c1.7.5 7.1.5 7.1.5s5.4 0 7.1-.5a2.7 2.7 0 0 0 1.9-1.9c.5-1.7.5-4.8.5-4.8s0-3.1-.5-4.8Z" /><path className="social-icon-play" d="m10 15.5 5-3.5-5-3.5v7Z" /></svg>;
+  }
+
+  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4.1l4.7 6.3L18.3 4H21l-6.9 8.2L21.5 20h-4.1l-5.2-6.8L6.3 20H3.5l7.4-8.8L4 4Zm3 2 11.4 12h.9L7.9 6H7Z" /></svg>;
+}
+
 const slides = [
   {
     tag: "CAREER TRANSITION",
@@ -620,12 +649,12 @@ function App() {
 
 
   useEffect(() => {
-    const auto = setInterval(() => {
+    const auto = window.setTimeout(() => {
       setActiveSlide((current) => (current + 1) % slides.length);
     }, 4000);
 
-    return () => clearInterval(auto);
-  }, []);
+    return () => window.clearTimeout(auto);
+  }, [activeSlide]);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -714,7 +743,8 @@ function App() {
           </div>
 
           <a className="mobile-header-appointment" href="/appointment">
-            Book Appointment
+            <CalendarIcon />
+            Book Free Consultation
           </a>
 
           <button
@@ -843,7 +873,7 @@ function App() {
                   }
                 }}
               >
-                About ▾
+                About Us ▾
               </a>
               <div className="dropdown-menu">
                 <a href="/about">About Us</a>
@@ -862,7 +892,8 @@ function App() {
               href="/appointment"
               aria-current={currentRoute === "appointment" ? "page" : undefined}
             >
-              Book Appointment
+              <CalendarIcon />
+              Book Free Consultation
             </a>
           </div>
 
@@ -913,7 +944,8 @@ function App() {
               className="primary-btn"
               href="/appointment"
             >
-              Book Appointment →
+              <CalendarIcon />
+              Book Free Consultation
             </a>
 
             <a
@@ -2735,7 +2767,7 @@ function App() {
                 }}
                 aria-label="Open Canada website"
               >
-                🇨🇦 Canada
+                Canada
               </button>
 
               <button
@@ -2745,7 +2777,7 @@ function App() {
                 }}
                 aria-label="Open UK and EU website"
               >
-                🇬🇧 UK &amp; EU
+                UK &amp; EU
               </button>
 
               <button
@@ -2755,7 +2787,7 @@ function App() {
                 }}
                 aria-label="Open India website"
               >
-                🇮🇳 India
+                India
               </button>
 
               <div className="social-row">
@@ -2765,7 +2797,7 @@ function App() {
                   rel="noopener noreferrer"
                   aria-label="Open Facebook"
                 >
-                  <span>f</span>
+                  <SocialIcon name="facebook" />
                 </a>
 
                 <a
@@ -2774,7 +2806,7 @@ function App() {
                   rel="noopener noreferrer"
                   aria-label="Open LinkedIn"
                 >
-                  <span>in</span>
+                  <SocialIcon name="linkedin" />
                 </a>
 
                 <a
@@ -2783,7 +2815,7 @@ function App() {
                   rel="noopener noreferrer"
                   aria-label="Open Instagram"
                 >
-                  <span>◎</span>
+                  <SocialIcon name="instagram" />
                 </a>
 
                 <a
@@ -2792,7 +2824,7 @@ function App() {
                   rel="noopener noreferrer"
                   aria-label="Open X"
                 >
-                  <span>𝕏</span>
+                  <SocialIcon name="x" />
                 </a>
 
                 <a
@@ -2801,7 +2833,7 @@ function App() {
                   rel="noopener noreferrer"
                   aria-label="Open YouTube"
                 >
-                  <span>▶</span>
+                  <SocialIcon name="youtube" />
                 </a>
               </div>
           </div>
