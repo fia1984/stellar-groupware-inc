@@ -404,6 +404,19 @@ function App() {
   const [trainingSearch, setTrainingSearch] = useState("");
   const [trainingCategory, setTrainingCategory] = useState("All Programs");
 
+  useEffect(() => {
+    if (!mobileMenuOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const filteredTrainingCourses = stellarTrainingCourses.filter((course) => {
     const matchesCategory =
       trainingCategory === "All Programs" || course.category === trainingCategory;
@@ -756,12 +769,19 @@ function App() {
             >
               Reviews
             </a>
-            <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
+            <a
+              className={currentRoute === "pricing" ? "active" : ""}
+              href="/pricing"
+              aria-current={currentRoute === "pricing" ? "page" : undefined}
+            >
+              Pricing
+            </a>
 
             <div className={mobileSubmenuOpen === "training" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
               <a
-                className={currentRoute === "training" ? "active" : ""}
+                className={currentRoute === "training" || currentRoute === "course" ? "active" : ""}
                 href="/training"
+                aria-current={currentRoute === "training" || currentRoute === "course" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "training"}
                 onClick={(event) => {
                   if (window.matchMedia("(max-width: 1050px)").matches) {
@@ -792,6 +812,7 @@ function App() {
               <a
                 className={currentRoute === "process" ? "active" : ""}
                 href="/process"
+                aria-current={currentRoute === "process" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "process"}
                 onClick={(event) => {
                   if (window.matchMedia("(max-width: 1050px)").matches) {
@@ -813,6 +834,7 @@ function App() {
               <a
                 className={currentRoute === "about" ? "active" : ""}
                 href="/about"
+                aria-current={currentRoute === "about" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "about"}
                 onClick={(event) => {
                   if (window.matchMedia("(max-width: 1050px)").matches) {
@@ -834,8 +856,27 @@ function App() {
               My Account
             </a>
 
-            <a id="book-appointment-nav" className="book-btn" href="/appointment">Book Appointment</a>
+            <a
+              id="book-appointment-nav"
+              className={currentRoute === "appointment" ? "book-btn active" : "book-btn"}
+              href="/appointment"
+              aria-current={currentRoute === "appointment" ? "page" : undefined}
+            >
+              Book Appointment
+            </a>
           </div>
+
+          {mobileMenuOpen && (
+            <button
+              type="button"
+              className="mobile-nav-backdrop"
+              aria-label="Dismiss navigation backdrop"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setMobileSubmenuOpen(null);
+              }}
+            />
+          )}
         </nav>
 
         {currentRoute !== "home" && (
@@ -1760,7 +1801,7 @@ function App() {
                 <li>Real-world practice tasks</li>
                 <li>Certificate of completion</li>
               </ul>
-              <a href="/enroll?program=Regular%20IT%20Training" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=Regular%20IT%20Training" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
 
             <div className="price-card popular">
@@ -1775,7 +1816,7 @@ function App() {
                 <li>Project mentorship</li>
                 <li>Career confidence building</li>
               </ul>
-              <a href="/enroll?program=AI%20%2B%20IT%20Training" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=AI%20%2B%20IT%20Training" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
 
             <div className="price-card">
@@ -1789,7 +1830,7 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Skill validation support</li>
               </ul>
-              <a href="/enroll?program=Bootcamp%20Support" className="enroll-btn dark">Enroll Now →</a>
+              <a href="/enroll?program=Bootcamp%20Support" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
 
             <div className="price-card popular">
@@ -1804,7 +1845,7 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Marketing%20Support" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=Marketing%20Support" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
           </div>
         </div>
@@ -1833,7 +1874,7 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Workplace confidence building</li>
               </ul>
-              <a href="/enroll?program=Direct%20Bootcamp" className="enroll-btn dark">Enroll Now →</a>
+              <a href="/enroll?program=Direct%20Bootcamp" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
 
             <div className="price-card popular">
@@ -1848,7 +1889,7 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Career%20Marketing" className="enroll-btn">Enroll Now →</a>
+              <a href="/enroll?program=Career%20Marketing" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
           </div>
         </div>
@@ -1878,7 +1919,7 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Direct%20Marketing%20Program" className="enroll-btn dark">Enroll Now →</a>
+              <a href="/enroll?program=Direct%20Marketing%20Program" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
             </div>
           </div>
         </div>

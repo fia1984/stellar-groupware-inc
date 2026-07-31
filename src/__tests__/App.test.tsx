@@ -168,6 +168,10 @@ describe('App', () => {
     expect(enrollmentLinks[6].getAttribute('href')).toBe(
       '/enroll?program=Direct%20Marketing%20Program'
     );
+    enrollmentLinks.forEach((link) => {
+      expect(link.getAttribute('target')).toBe('_blank');
+      expect(link.getAttribute('rel')).toContain('noopener');
+    });
   });
 
   it('validates and completes the three-step enrollment frontend flow', () => {

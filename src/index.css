@@ -15423,3 +15423,305 @@ body main.page-shell.route-course #course {
   }
 }
 
+/* SHARED RESPONSIVE QA — overlay navigation and route consistency */
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body main.page-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+body main.page-shell > .site-footer {
+  width: 100%;
+  margin-top: auto !important;
+  flex-shrink: 0;
+}
+
+body main.page-shell .brand,
+body main.page-shell .footer-brand {
+  overflow: visible !important;
+}
+
+body main.page-shell .brand-icon,
+body main.page-shell .breadcrumb-stellar-icon,
+body main.page-shell .footer-brand > span {
+  flex: 0 0 auto !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+  aspect-ratio: 1 !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.94) !important;
+  background: linear-gradient(135deg, #159a58, #5ebdd4) !important;
+  box-shadow: 0 6px 16px rgba(7, 65, 56, 0.2) !important;
+  font-family: Arial, sans-serif !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+body main.page-shell .breadcrumb-strip {
+  min-height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding-inline: max(18px, calc((100% - 1180px) / 2)) !important;
+}
+
+body main.page-shell .breadcrumb-stellar-icon {
+  width: 28px !important;
+  height: 28px !important;
+  min-width: 28px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+}
+
+body main.page-shell .nav-links a.active,
+body main.page-shell .nav-dropdown > a.active,
+body main.page-shell #home-nav-link.active {
+  color: #ffffff !important;
+  background: #08a83f !important;
+  box-shadow: 0 7px 18px rgba(8, 168, 63, 0.25) !important;
+}
+
+body main.page-shell .review-platform-icon {
+  flex: 0 0 58px !important;
+  width: 58px !important;
+  height: 58px !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: visible !important;
+  color: #ffffff !important;
+  border: 3px solid #ffffff !important;
+  box-shadow: 0 5px 16px rgba(15, 38, 49, 0.22) !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+body main.page-shell .google-review-icon {
+  background: linear-gradient(135deg, #4285f4 0 45%, #34a853 45% 68%, #fbbc05 68% 84%, #ea4335 84%) !important;
+}
+
+body main.page-shell .linkedin-review-icon {
+  background: #0a66c2 !important;
+}
+
+body main.page-shell .social-row a {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.22) !important;
+}
+
+body main.page-shell .social-row a span {
+  display: block !important;
+  color: inherit !important;
+  font-size: 17px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+.route-home .hero-section {
+  min-height: 100vh !important;
+  min-height: 100svh !important;
+}
+
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar {
+    position: relative !important;
+    z-index: 20000 !important;
+    flex-wrap: nowrap !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links {
+    position: absolute !important;
+    z-index: 20002 !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    bottom: auto !important;
+    left: 0 !important;
+    order: initial !important;
+    width: 100% !important;
+    max-height: calc(100dvh - 96px) !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    border-radius: 14px !important;
+    box-shadow: 0 24px 60px rgba(4, 20, 28, 0.34) !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links.menu-open {
+    display: flex !important;
+  }
+
+  body main.page-shell .mobile-nav-backdrop {
+    position: fixed !important;
+    z-index: 20000 !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: rgba(4, 18, 25, 0.46) !important;
+    backdrop-filter: blur(2px) !important;
+    -webkit-backdrop-filter: blur(2px) !important;
+    cursor: default !important;
+  }
+
+  body main.page-shell .brand,
+  body main.page-shell .brand > div:last-child {
+    min-width: 0 !important;
+  }
+
+  body main.page-shell .brand-icon {
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px !important;
+    border-radius: 12px !important;
+    font-size: 27px !important;
+    animation: none !important;
+  }
+
+  body main.page-shell .breadcrumb-strip {
+    width: 100% !important;
+    min-height: 48px !important;
+    padding: 9px 18px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body main.page-shell .review-platform-grid,
+  body main.page-shell .pricing-grid,
+  body main.page-shell .testimonial-column-grid {
+    justify-items: center !important;
+  }
+
+  body main.page-shell .review-platform-card,
+  body main.page-shell .price-card,
+  body main.page-shell .large-testimonial-card,
+  body main.page-shell .appointment-card,
+  body main.page-shell .contact-card {
+    width: min(100%, 560px) !important;
+    margin-inline: auto !important;
+  }
+
+  .route-home .hero-content {
+    min-height: calc(100svh - 150px) !important;
+    margin: 0 auto !important;
+    padding: 50px 24px 100px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .route-home .hero-content .green-line {
+    margin-inline: auto !important;
+  }
+
+  .route-home .hero-content > p {
+    margin-inline: auto !important;
+  }
+
+  .route-home .hero-actions {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body main.page-shell .navbar {
+    width: calc(100% - 24px) !important;
+    padding: 14px 0 !important;
+    gap: 8px !important;
+  }
+
+  body main.page-shell .brand {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    gap: 8px !important;
+  }
+
+  body main.page-shell .brand h2 {
+    display: block !important;
+    margin: 0 !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+  }
+
+  body main.page-shell .brand span {
+    display: block !important;
+    margin-top: 4px !important;
+    font-size: 9px !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  body main.page-shell .brand-icon {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    font-size: 24px !important;
+  }
+
+  body main.page-shell .mobile-header-appointment {
+    display: none !important;
+  }
+
+  body main.page-shell .mobile-menu-button {
+    flex: 0 0 42px !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+  }
+
+  body main.page-shell .breadcrumb-strip {
+    justify-content: flex-start !important;
+    padding-inline: 14px !important;
+    font-size: 0.86rem !important;
+  }
+
+  body main.page-shell .review-platform-card {
+    grid-template-columns: 58px minmax(0, 1fr) !important;
+    text-align: left !important;
+  }
+
+  .route-home .hero-content {
+    min-height: calc(100svh - 118px) !important;
+    padding: 34px 24px 90px !important;
+  }
+
+  .route-home .hero-content h1 {
+    font-size: clamp(2.2rem, 11vw, 3.4rem) !important;
+  }
+
+  .route-home .hero-actions {
+    width: 100% !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .route-home .hero-actions a {
+    width: min(100%, 280px) !important;
+  }
+}
