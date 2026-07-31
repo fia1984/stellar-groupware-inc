@@ -423,6 +423,8 @@ function App() {
       ? "Book Appointment"
       : currentRoute === "enroll"
       ? "Enrollment"
+      : currentRoute === "contact"
+      ? "Contact Us"
       : "Home";
 
   const [activeSlide, setActiveSlide] = useState(0);
@@ -2745,7 +2747,13 @@ function App() {
             <a href="/training">Training</a>
             <a href="/pricing">Pricing</a>
             <a href="/reviews">Reviews</a>
-            <a href="/contact">Contact Us</a>
+            <a
+              className={currentRoute === "contact" ? "active" : ""}
+              href="/contact"
+              aria-current={currentRoute === "contact" ? "page" : undefined}
+            >
+              Contact Us
+            </a>
           </div>
 
           <div>

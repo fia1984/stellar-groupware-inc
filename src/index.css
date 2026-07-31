@@ -15808,3 +15808,136 @@ body main.page-shell .social-row a span {
     flex-wrap: wrap !important;
   }
 }
+
+/* FINAL CONTACT, APPOINTMENT AND MOBILE FLOW QA */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body main.page-shell {
+  width: 100%;
+  max-width: 100%;
+}
+
+.route-contact .contact-section {
+  flex: 1 0 auto;
+  width: 100%;
+  min-height: clamp(420px, 62vh, 680px) !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(64px, 9vw, 110px) max(20px, 8%) !important;
+  text-align: center;
+}
+
+.contact-section > p:not(.section-label) {
+  width: min(100%, 680px);
+  margin: 0 auto 28px;
+  color: #53656f;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.contact-section .primary-btn {
+  width: auto !important;
+  min-width: 220px !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  padding-inline: 28px !important;
+}
+
+.route-appointment .appointment-layout,
+.route-appointment .appointment-main-card,
+.route-appointment .appointment-sidebar,
+.route-appointment .appointment-info-card,
+.route-appointment .appointment-hours-card {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  body main.page-shell:not(.route-home) .hero-section {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  body main.page-shell:not(.route-home) .breadcrumb-strip,
+  body main.page-shell.route-contact .breadcrumb-strip,
+  body main.page-shell.route-appointment .breadcrumb-strip {
+    position: relative !important;
+    top: auto !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    margin: 0 !important;
+    padding: 10px 16px !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  body main.page-shell.route-appointment section.appointment-section#appointment {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 22px 14px 64px !important;
+  }
+
+  body main.page-shell.route-appointment .appointment-layout {
+    width: min(100%, 600px) !important;
+    margin: 0 auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  body main.page-shell.route-appointment .appointment-page-intro,
+  body main.page-shell.route-appointment .appointment-main-card,
+  body main.page-shell.route-appointment .appointment-sidebar,
+  body main.page-shell.route-appointment .appointment-info-card,
+  body main.page-shell.route-appointment .appointment-hours-card {
+    width: min(100%, 600px) !important;
+    max-width: 600px !important;
+    min-width: 0 !important;
+    margin-inline: auto !important;
+  }
+
+  body main.page-shell.route-appointment .appointment-main-card,
+  body main.page-shell.route-appointment .appointment-info-card,
+  body main.page-shell.route-appointment .appointment-hours-card {
+    padding: 22px 18px !important;
+    overflow: hidden !important;
+  }
+
+  body main.page-shell.route-contact .contact-section {
+    min-height: 520px !important;
+    padding: 58px 20px !important;
+  }
+
+  body main.page-shell .contact-section .primary-btn {
+    width: min(100%, 320px) !important;
+    min-width: 0 !important;
+    min-height: 54px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body main.page-shell.route-appointment .appointment-date-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body main.page-shell.route-appointment .appointment-time-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body main.page-shell.route-appointment .appointment-details-form input,
+  body main.page-shell.route-appointment .appointment-details-form select,
+  body main.page-shell.route-appointment .appointment-details-form textarea {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    font-size: 16px !important;
+  }
+}
