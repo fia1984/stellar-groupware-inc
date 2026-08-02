@@ -16041,3 +16041,14 @@ main.page-shell.route-home {
     padding-top: 48px !important;
   }
 }
+
+/* Final Process heading clearance */
+.route-process .process-section {
+  padding-top: 160px !important;
+}
+
+@media (max-width: 760px) {
+  .route-process .process-section {
+    padding-top: 96px !important;
+  }
+}
