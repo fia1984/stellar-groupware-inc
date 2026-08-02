@@ -1881,6 +1881,261 @@ footer {
   }
 }
 
+/* STELLAR TESTING 2 — focused QA corrections */
+
+/* 1. Keep hero button text inside its rectangle and arrows clear of copy. */
+.route-home .hero-actions a {
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: 210px !important;
+  max-width: 100% !important;
+  min-height: 54px !important;
+  height: auto !important;
+  padding: 13px 22px !important;
+  line-height: 1.25 !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+
+/* 2 and 4. Use the same stable S logo on every route. */
+.page-shell .brand-icon {
+  flex: 0 0 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 11px !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.page-shell .brand-icon::before {
+  content: "S" !important;
+  display: grid !important;
+  color: #ffffff !important;
+  font-size: 28px !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.page-shell .brand-icon::after {
+  content: none !important;
+  display: none !important;
+}
+
+.page-shell .brand:hover .brand-icon::before {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.page-shell:not(.route-home) .brand {
+  min-width: 245px !important;
+}
+
+.page-shell:not(.route-home) .brand h2,
+.page-shell:not(.route-home) .brand span {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* 5. Make the current top-level route unmistakably active. */
+.route-home #primary-navigation > a[href="/"],
+.route-reviews #primary-navigation > a[href="/reviews"],
+.route-pricing #primary-navigation > a[href="/pricing"],
+.route-training #primary-navigation > .nav-dropdown > a[href="/training"],
+.route-process #primary-navigation > .nav-dropdown > a[href="/process"],
+.route-about #primary-navigation > .nav-dropdown > a[href="/about"] {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border-color: #08753b !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* 6. Give the Google and LinkedIn marks a visible branded container. */
+.route-reviews .review-platform-icon,
+.route-reviews .share-success-actions a > span {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  color: #ffffff !important;
+  font-size: 0.92rem !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  opacity: 1 !important;
+}
+
+.route-reviews .google-review-icon,
+.route-reviews .share-success-actions a:first-child > span {
+  background: #4285f4 !important;
+}
+
+.route-reviews .linkedin-review-icon,
+.route-reviews .share-success-actions a:last-child > span {
+  background: #0a66c2 !important;
+}
+
+.route-reviews .share-success-actions a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  min-height: 56px !important;
+  padding: 9px 18px !important;
+}
+
+/* 7. Keep CAREER comfortably inside the training-dropdown icon. */
+body main.page-shell nav.navbar #primary-navigation .training-dropdown-icon {
+  box-sizing: border-box !important;
+  width: 58px !important;
+  min-width: 58px !important;
+  height: 38px !important;
+  padding: 0 8px !important;
+  overflow: hidden !important;
+  font-size: 0.58rem !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+body main.page-shell nav.navbar #primary-navigation .training-dropdown-menu > a {
+  grid-template-columns: 58px minmax(0, 1fr) !important;
+  column-gap: 14px !important;
+  padding: 13px 14px !important;
+}
+
+/* 3. Switch to the compact menu before desktop navigation can collide. */
+@media (min-width: 1051px) and (max-width: 1250px) {
+  body main.page-shell nav.navbar {
+    flex-wrap: wrap !important;
+    width: calc(100% - 32px) !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-menu-button {
+    display: inline-flex !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    left: auto !important;
+    display: none !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: min(390px, calc(100vw - 32px)) !important;
+    padding: 12px !important;
+    color: #17313a !important;
+    background: #ffffff !important;
+    border: 1px solid #dce8e2 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 18px 42px rgba(15, 45, 55, 0.2) !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links.menu-open {
+    display: flex !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links > a,
+  body main.page-shell nav.navbar #primary-navigation.nav-links > .nav-dropdown,
+  body main.page-shell nav.navbar #primary-navigation.nav-links > .nav-dropdown > a {
+    width: 100% !important;
+    color: #17313a !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation .dropdown-menu {
+    position: static !important;
+    display: none !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation .mobile-submenu-open > .dropdown-menu {
+    display: flex !important;
+  }
+
+  .route-home .hero-content {
+    left: 72px !important;
+    width: min(650px, calc(100% - 144px)) !important;
+  }
+
+  .route-home .slide-arrow.left {
+    left: 12px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 12px !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  .route-home .hero-content {
+    box-sizing: border-box !important;
+    width: calc(100% - 128px) !important;
+    max-width: none !important;
+    margin-inline: 64px !important;
+  }
+
+  .route-home .slide-arrow.left {
+    left: 10px !important;
+  }
+
+  .route-home .slide-arrow.right {
+    right: 10px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .route-home .hero-content {
+    width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  .route-home .slide-arrow {
+    display: none !important;
+  }
+
+  .route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Final desktop header verification: brand name and selected tab */
+body main.page-shell:not(.route-home) nav.navbar .brand h2 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: auto !important;
+  height: auto !important;
+  color: #17313a !important;
+}
+
+body main.page-shell.route-home nav.navbar
+  #primary-navigation > a[href="/"],
+body main.page-shell.route-reviews nav.navbar
+  #primary-navigation > a[href="/reviews"],
+body main.page-shell.route-pricing nav.navbar
+  #primary-navigation > a[href="/pricing"],
+body main.page-shell.route-training nav.navbar
+  #primary-navigation > .nav-dropdown > a[href="/training"],
+body main.page-shell.route-process nav.navbar
+  #primary-navigation > .nav-dropdown > a[href="/process"],
+body main.page-shell.route-about nav.navbar
+  #primary-navigation > .nav-dropdown > a[href="/about"] {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border-color: #08753b !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
 @media (max-width: 640px) {
   header,
   nav {
@@ -15423,521 +15678,355 @@ body main.page-shell.route-course #course {
   }
 }
 
-/* SHARED RESPONSIVE QA — overlay navigation and route consistency */
-html,
-body,
-#root {
-  min-height: 100%;
-  margin: 0;
+/* Pricing manager feedback: center the section and all pricing copy */
+.page-shell.route-pricing section.pricing-section#pricing {
+  width: 100% !important;
+  max-width: none !important;
+  margin-inline: auto !important;
+  box-sizing: border-box !important;
+  text-align: center !important;
 }
 
-body main.page-shell {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  overflow-x: clip;
+.page-shell.route-pricing #pricing > .pricing-intro {
+  max-width: 820px !important;
+  margin-inline: auto !important;
+  text-align: center !important;
 }
 
-body main.page-shell > .site-footer {
-  width: 100%;
-  margin-top: auto !important;
-  flex-shrink: 0;
+.page-shell.route-pricing #pricing .pathway-box {
+  margin-inline: auto !important;
+  text-align: center !important;
 }
 
-body main.page-shell .brand,
-body main.page-shell .footer-brand {
-  overflow: visible !important;
-}
-
-body main.page-shell .brand-icon,
-body main.page-shell .breadcrumb-stellar-icon,
-body main.page-shell .footer-brand > span {
-  flex: 0 0 auto !important;
-  display: grid !important;
-  place-items: center !important;
-  overflow: visible !important;
-  aspect-ratio: 1 !important;
-  color: #ffffff !important;
-  border: 2px solid rgba(255, 255, 255, 0.94) !important;
-  background: linear-gradient(135deg, #159a58, #5ebdd4) !important;
-  box-shadow: 0 6px 16px rgba(7, 65, 56, 0.2) !important;
-  font-family: Arial, sans-serif !important;
-  font-weight: 900 !important;
-  line-height: 1 !important;
-}
-
-body main.page-shell .breadcrumb-strip {
-  min-height: 50px !important;
+.page-shell.route-pricing #pricing .pathway-header {
   display: flex !important;
+  flex-direction: column !important;
   align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  text-align: center !important;
+}
+
+.page-shell.route-pricing #pricing .pathway-header > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 10px !important;
-  padding-inline: max(18px, calc((100% - 1180px) / 2)) !important;
 }
 
-body main.page-shell .breadcrumb-stellar-icon {
-  width: 28px !important;
-  height: 28px !important;
-  min-width: 28px !important;
-  border-radius: 8px !important;
-  font-size: 16px !important;
+.page-shell.route-pricing #pricing .pathway-header em {
+  width: auto !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
 }
 
-body main.page-shell .nav-links a.active,
-body main.page-shell .nav-dropdown > a.active,
-body main.page-shell #home-nav-link.active {
-  color: #ffffff !important;
-  background: #08a83f !important;
-  box-shadow: 0 7px 18px rgba(8, 168, 63, 0.25) !important;
+.page-shell.route-pricing #pricing .price-card {
+  align-items: center !important;
+  text-align: center !important;
 }
 
-body main.page-shell .review-platform-icon {
-  flex: 0 0 58px !important;
-  width: 58px !important;
-  height: 58px !important;
+.page-shell.route-pricing #pricing .price-card h3,
+.page-shell.route-pricing #pricing .price-card .small-text,
+.page-shell.route-pricing #pricing .price-card h4 {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.page-shell.route-pricing #pricing .price-card ul {
+  width: 100% !important;
+  padding-left: 0 !important;
+  text-align: center !important;
+}
+
+.page-shell.route-pricing #pricing .price-card li {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+@media (max-width: 900px) {
+  .page-shell.route-pricing #pricing .pathway-header,
+  .page-shell.route-pricing #pricing .pathway-header > div {
+    display: flex !important;
+  }
+
+  .page-shell.route-pricing #pricing .pathway-header em {
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+}
+
+/* FINAL STELLAR TESTING 2 OVERRIDES — keep this last */
+.page-shell .brand-icon {
+  flex: 0 0 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 11px !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+.page-shell .brand-icon::before {
+  content: "S" !important;
   display: grid !important;
-  place-items: center !important;
-  overflow: visible !important;
-  color: #ffffff !important;
-  border: 3px solid #ffffff !important;
-  box-shadow: 0 5px 16px rgba(15, 38, 49, 0.22) !important;
+  color: #fff !important;
+  font-size: 28px !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.page-shell .brand-icon::after {
+  content: none !important;
+  display: none !important;
+}
+
+.page-shell .brand:hover .brand-icon::before {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.page-shell:not(.route-home) .brand {
+  min-width: 245px !important;
+}
+
+.page-shell:not(.route-home) .brand h2,
+.page-shell:not(.route-home) .brand span {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.route-home .hero-actions a {
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: 210px !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 54px !important;
+  padding: 13px 22px !important;
+  line-height: 1.25 !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+
+.route-home #primary-navigation > a[href="/"],
+.route-reviews #primary-navigation > a[href="/reviews"],
+.route-pricing #primary-navigation > a[href="/pricing"],
+.route-training #primary-navigation > .nav-dropdown > a[href="/training"],
+.route-process #primary-navigation > .nav-dropdown > a[href="/process"],
+.route-about #primary-navigation > .nav-dropdown > a[href="/about"] {
+  color: #fff !important;
+  background: #08753b !important;
+  border-color: #08753b !important;
+  transform: none !important;
+}
+
+.route-reviews .review-platform-icon,
+.route-reviews .share-success-actions a > span {
+  display: inline-flex !important;
+  flex: 0 0 38px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  color: #fff !important;
+  font-size: .92rem !important;
   font-weight: 900 !important;
   line-height: 1 !important;
+  opacity: 1 !important;
 }
 
-body main.page-shell .google-review-icon {
-  background: linear-gradient(135deg, #4285f4 0 45%, #34a853 45% 68%, #fbbc05 68% 84%, #ea4335 84%) !important;
+.route-reviews .google-review-icon,
+.route-reviews .share-success-actions a:first-child > span {
+  background: #4285f4 !important;
 }
 
-body main.page-shell .linkedin-review-icon {
+.route-reviews .linkedin-review-icon,
+.route-reviews .share-success-actions a:last-child > span {
   background: #0a66c2 !important;
 }
 
-body main.page-shell .social-row a {
-  display: inline-grid !important;
-  place-items: center !important;
-  width: 42px !important;
-  height: 42px !important;
-  padding: 0 !important;
-  overflow: visible !important;
-  color: #ffffff !important;
-  border: 2px solid #ffffff !important;
-  border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.22) !important;
+.route-reviews .share-success-actions a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  min-height: 56px !important;
+  padding: 9px 18px !important;
 }
 
-body main.page-shell .social-row a span {
-  display: block !important;
-  color: inherit !important;
-  font-size: 17px !important;
-  font-weight: 900 !important;
+body main.page-shell nav.navbar #primary-navigation .training-dropdown-icon {
+  box-sizing: border-box !important;
+  width: 58px !important;
+  min-width: 58px !important;
+  height: 38px !important;
+  padding: 0 8px !important;
+  overflow: hidden !important;
+  font-size: .58rem !important;
   line-height: 1 !important;
+  white-space: nowrap !important;
 }
 
-.route-home .hero-section {
-  min-height: 100vh !important;
-  min-height: 100svh !important;
+body main.page-shell nav.navbar #primary-navigation .training-dropdown-menu > a {
+  grid-template-columns: 58px minmax(0, 1fr) !important;
+  column-gap: 14px !important;
+  padding: 13px 14px !important;
 }
 
-@media (max-width: 1050px) {
+@media (min-width: 1051px) and (max-width: 1250px) {
   body main.page-shell nav.navbar {
-    position: relative !important;
-    z-index: 20000 !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
+    width: calc(100% - 32px) !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-menu-button {
+    display: inline-flex !important;
   }
 
   body main.page-shell nav.navbar #primary-navigation.nav-links {
     position: absolute !important;
-    z-index: 20002 !important;
     top: calc(100% + 8px) !important;
     right: 0 !important;
-    bottom: auto !important;
-    left: 0 !important;
-    order: initial !important;
-    width: 100% !important;
-    max-height: calc(100dvh - 96px) !important;
-    margin: 0 !important;
-    overflow-y: auto !important;
+    left: auto !important;
+    display: none !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: min(390px, calc(100vw - 32px)) !important;
+    padding: 12px !important;
+    background: #fff !important;
+    border: 1px solid #dce8e2 !important;
     border-radius: 14px !important;
-    box-shadow: 0 24px 60px rgba(4, 20, 28, 0.34) !important;
+    box-shadow: 0 18px 42px rgba(15,45,55,.2) !important;
   }
 
   body main.page-shell nav.navbar #primary-navigation.nav-links.menu-open {
     display: flex !important;
   }
 
-  body main.page-shell .mobile-nav-backdrop {
-    position: fixed !important;
-    z-index: 20000 !important;
-    inset: 0 !important;
-    display: block !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    padding: 0 !important;
-    border: 0 !important;
-    background: rgba(4, 18, 25, 0.46) !important;
-    backdrop-filter: blur(2px) !important;
-    -webkit-backdrop-filter: blur(2px) !important;
-    cursor: default !important;
-  }
-
-  body main.page-shell .brand,
-  body main.page-shell .brand > div:last-child {
-    min-width: 0 !important;
-  }
-
-  body main.page-shell .brand-icon {
-    width: 46px !important;
-    height: 46px !important;
-    min-width: 46px !important;
-    border-radius: 12px !important;
-    font-size: 27px !important;
-    animation: none !important;
-  }
-
-  body main.page-shell .breadcrumb-strip {
+  body main.page-shell nav.navbar #primary-navigation.nav-links > a,
+  body main.page-shell nav.navbar #primary-navigation.nav-links > .nav-dropdown,
+  body main.page-shell nav.navbar #primary-navigation.nav-links > .nav-dropdown > a {
     width: 100% !important;
-    min-height: 48px !important;
-    padding: 9px 18px !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
+    color: #17313a !important;
   }
 
-  body main.page-shell .review-platform-grid,
-  body main.page-shell .pricing-grid,
-  body main.page-shell .testimonial-column-grid {
-    justify-items: center !important;
-  }
-
-  body main.page-shell .review-platform-card,
-  body main.page-shell .price-card,
-  body main.page-shell .large-testimonial-card,
-  body main.page-shell .appointment-card,
-  body main.page-shell .contact-card {
-    width: min(100%, 560px) !important;
-    margin-inline: auto !important;
-  }
-
-  .route-home .hero-content {
-    min-height: calc(100svh - 150px) !important;
-    margin: 0 auto !important;
-    padding: 50px 24px 100px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    text-align: center !important;
-  }
-
-  .route-home .hero-content .green-line {
-    margin-inline: auto !important;
-  }
-
-  .route-home .hero-content > p {
-    margin-inline: auto !important;
-  }
-
-  .route-home .hero-actions {
-    justify-content: center !important;
-  }
-}
-
-@media (max-width: 600px) {
-  body main.page-shell .navbar {
-    width: calc(100% - 24px) !important;
-    padding: 14px 0 !important;
-    gap: 8px !important;
-  }
-
-  body main.page-shell .brand {
-    flex: 1 1 auto !important;
-    width: auto !important;
-    gap: 8px !important;
-  }
-
-  body main.page-shell .brand h2 {
-    display: block !important;
-    margin: 0 !important;
-    font-size: 22px !important;
-    line-height: 1 !important;
-  }
-
-  body main.page-shell .brand span {
-    display: block !important;
-    margin-top: 4px !important;
-    font-size: 9px !important;
-    letter-spacing: 0.08em !important;
-  }
-
-  body main.page-shell .brand-icon {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-    font-size: 24px !important;
-  }
-
-  body main.page-shell .mobile-header-appointment {
+  body main.page-shell nav.navbar #primary-navigation .dropdown-menu {
+    position: static !important;
     display: none !important;
-  }
-
-  body main.page-shell .mobile-menu-button {
-    flex: 0 0 42px !important;
-    width: 42px !important;
-    height: 42px !important;
-    min-height: 42px !important;
-  }
-
-  body main.page-shell nav.navbar #primary-navigation.nav-links {
-    left: 0 !important;
-    right: 0 !important;
     width: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
 
-  body main.page-shell .breadcrumb-strip {
-    justify-content: flex-start !important;
-    padding-inline: 14px !important;
-    font-size: 0.86rem !important;
-  }
-
-  body main.page-shell .review-platform-card {
-    grid-template-columns: 58px minmax(0, 1fr) !important;
-    text-align: left !important;
+  body main.page-shell nav.navbar #primary-navigation .mobile-submenu-open > .dropdown-menu {
+    display: flex !important;
   }
 
   .route-home .hero-content {
-    min-height: calc(100svh - 118px) !important;
-    padding: 34px 24px 90px !important;
+    left: 72px !important;
+    width: min(650px, calc(100% - 144px)) !important;
   }
-
-  .route-home .hero-content h1 {
-    font-size: clamp(2.2rem, 11vw, 3.4rem) !important;
-  }
-
-  .route-home .hero-actions {
-    width: 100% !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 12px !important;
-  }
-
-  .route-home .hero-actions a {
-    width: min(100%, 280px) !important;
-  }
-}
-
-/* SECOND RESPONSIVE QA — icons, CTA and stable slideshow controls */
-.calendar-icon {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.social-row a svg {
-  width: 20px !important;
-  height: 20px !important;
-  overflow: visible !important;
-  fill: currentColor;
-  stroke: none;
-}
-
-.social-row a[aria-label="Open Instagram"] svg {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-}
-
-.social-row a[aria-label="Open Instagram"] .social-icon-dot {
-  fill: currentColor;
-  stroke: none;
-}
-
-.social-row a[aria-label="Open YouTube"] .social-icon-play {
-  fill: #07101a;
-}
-
-.site-footer button[aria-label^="Open"][aria-label$="website"] {
-  min-width: 104px;
-  justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.34) !important;
-  border-radius: 999px !important;
-}
-
-.slide-arrow {
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.slide-arrow:active {
-  transform: scale(0.94) !important;
 }
 
 @media (max-width: 1050px) {
-  body main.page-shell .mobile-header-appointment,
-  body main.page-shell #book-appointment-nav,
-  body main.page-shell #hero-book-appointment {
-    gap: 6px !important;
+  .route-home .hero-content {
+    box-sizing: border-box !important;
+    width: calc(100% - 128px) !important;
+    max-width: none !important;
+    margin-inline: 64px !important;
   }
 
-  body main.page-shell #book-appointment-nav {
-    justify-content: center !important;
-  }
+  .route-home .slide-arrow.left { left: 10px !important; }
+  .route-home .slide-arrow.right { right: 10px !important; }
 }
 
 @media (max-width: 600px) {
-  body main.page-shell #book-appointment-nav {
-    min-height: 52px !important;
-    padding-inline: 12px !important;
-    text-align: center !important;
+  .route-home .hero-content {
+    width: 100% !important;
+    margin-inline: 0 !important;
   }
 
-  body main.page-shell #hero-book-appointment {
-    min-height: 56px !important;
-    padding-inline: 12px !important;
-  }
+  .route-home .slide-arrow { display: none !important; }
 
-  body main.page-shell .site-footer .social-row {
-    justify-content: center !important;
-    flex-wrap: wrap !important;
+  .route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
   }
 }
 
-/* FINAL CONTACT, APPOINTMENT AND MOBILE FLOW QA */
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-body main.page-shell {
-  width: 100%;
-  max-width: 100%;
-}
-
-.route-contact .contact-section {
-  flex: 1 0 auto;
-  width: 100%;
-  min-height: clamp(420px, 62vh, 680px) !important;
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(64px, 9vw, 110px) max(20px, 8%) !important;
-  text-align: center;
-}
-
-.contact-section > p:not(.section-label) {
-  width: min(100%, 680px);
-  margin: 0 auto 28px;
-  color: #53656f;
-  font-size: clamp(1rem, 1.5vw, 1.12rem);
-  line-height: 1.7;
-  text-align: center;
-}
-
-.contact-section .primary-btn {
+/* Final desktop header verification: brand name and selected tab */
+body main.page-shell:not(.route-home) nav.navbar .brand h2 {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   width: auto !important;
-  min-width: 220px !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  padding-inline: 28px !important;
+  height: auto !important;
+  color: #17313a !important;
 }
 
-.route-appointment .appointment-layout,
-.route-appointment .appointment-main-card,
-.route-appointment .appointment-sidebar,
-.route-appointment .appointment-info-card,
-.route-appointment .appointment-hours-card {
-  min-width: 0;
+body main.page-shell.route-home nav.navbar #primary-navigation > a[href="/"],
+body main.page-shell.route-reviews nav.navbar #primary-navigation > a[href="/reviews"],
+body main.page-shell.route-pricing nav.navbar #primary-navigation > a[href="/pricing"],
+body main.page-shell.route-training nav.navbar #primary-navigation > .nav-dropdown > a[href="/training"],
+body main.page-shell.route-process nav.navbar #primary-navigation > .nav-dropdown > a[href="/process"],
+body main.page-shell.route-about nav.navbar #primary-navigation > .nav-dropdown > a[href="/about"] {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border-color: #08753b !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Final Pricing active-tab highlight */
+body main.page-shell.route-pricing nav.navbar div#primary-navigation.nav-links > a.active[href="/pricing"] {
+  color: #ffffff !important;
+  background-color: #08753b !important;
+  border-radius: 9px !important;
+}
+
+/* Force Pricing highlight on Pricing route */
+html body #root main.page-shell.route-pricing nav.navbar div#primary-navigation.nav-links > a[href="/pricing"] {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border: 1px solid #08753b !important;
+  border-radius: 9px !important;
+  padding-inline: 16px !important;
+}
+
+/* Force Home active-tab highlight */
+html body #root main.page-shell.route-home nav.navbar div#primary-navigation.nav-links > a[href="/"] {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border: 1px solid #08753b !important;
+  border-radius: 9px !important;
+  padding-inline: 16px !important;
+}
+
+/* Prevent Home page horizontal shifting during responsive inspection */
+html,
+body,
+#root,
+main.page-shell.route-home {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: clip !important;
+}
+
+.route-home .hero-section .hero-content {
+  left: max(calc((100% - 1500px) / 2), 72px) !important;
+  right: auto !important;
+  width: min(680px, calc(100% - 144px)) !important;
+  max-width: 680px !important;
+  margin: 0 !important;
 }
 
 @media (max-width: 760px) {
-  body main.page-shell:not(.route-home) .hero-section {
-    height: auto !important;
-    min-height: 0 !important;
-  }
-
-  body main.page-shell:not(.route-home) .breadcrumb-strip,
-  body main.page-shell.route-contact .breadcrumb-strip,
-  body main.page-shell.route-appointment .breadcrumb-strip {
-    position: relative !important;
-    top: auto !important;
-    width: 100% !important;
-    min-height: 48px !important;
-    margin: 0 !important;
-    padding: 10px 16px !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-  }
-
-  body main.page-shell.route-appointment section.appointment-section#appointment {
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 22px 14px 64px !important;
-  }
-
-  body main.page-shell.route-appointment .appointment-layout {
-    width: min(100%, 600px) !important;
-    margin: 0 auto !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    gap: 20px !important;
-  }
-
-  body main.page-shell.route-appointment .appointment-page-intro,
-  body main.page-shell.route-appointment .appointment-main-card,
-  body main.page-shell.route-appointment .appointment-sidebar,
-  body main.page-shell.route-appointment .appointment-info-card,
-  body main.page-shell.route-appointment .appointment-hours-card {
-    width: min(100%, 600px) !important;
-    max-width: 600px !important;
-    min-width: 0 !important;
-    margin-inline: auto !important;
-  }
-
-  body main.page-shell.route-appointment .appointment-main-card,
-  body main.page-shell.route-appointment .appointment-info-card,
-  body main.page-shell.route-appointment .appointment-hours-card {
-    padding: 22px 18px !important;
-    overflow: hidden !important;
-  }
-
-  body main.page-shell.route-contact .contact-section {
-    min-height: 520px !important;
-    padding: 58px 20px !important;
-  }
-
-  body main.page-shell .contact-section .primary-btn {
-    width: min(100%, 320px) !important;
-    min-width: 0 !important;
-    min-height: 54px !important;
-  }
-}
-
-@media (max-width: 430px) {
-  body main.page-shell.route-appointment .appointment-date-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  body main.page-shell.route-appointment .appointment-time-grid {
-    grid-template-columns: minmax(0, 1fr) !important;
-  }
-
-  body main.page-shell.route-appointment .appointment-details-form input,
-  body main.page-shell.route-appointment .appointment-details-form select,
-  body main.page-shell.route-appointment .appointment-details-form textarea {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    font-size: 16px !important;
+  .route-home .hero-section .hero-content {
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
   }
 }
