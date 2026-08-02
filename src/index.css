@@ -16030,3 +16030,14 @@ main.page-shell.route-home {
     width: calc(100% - 40px) !important;
   }
 }
+
+/* Process page breadcrumb clearance */
+.route-process .process-section {
+  padding-top: 72px !important;
+}
+
+@media (max-width: 760px) {
+  .route-process .process-section {
+    padding-top: 48px !important;
+  }
+}
