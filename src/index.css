@@ -15981,74 +15981,1119 @@ body main.page-shell.route-about nav.navbar #primary-navigation > .nav-dropdown 
   transform: none !important;
 }
 
-/* Final Pricing active-tab highlight */
-body main.page-shell.route-pricing nav.navbar div#primary-navigation.nav-links > a.active[href="/pricing"] {
-  color: #ffffff !important;
-  background-color: #08753b !important;
-  border-radius: 9px !important;
-}
-
-/* Force Pricing highlight on Pricing route */
-html body #root main.page-shell.route-pricing nav.navbar div#primary-navigation.nav-links > a[href="/pricing"] {
-  color: #ffffff !important;
-  background: #08753b !important;
-  border: 1px solid #08753b !important;
-  border-radius: 9px !important;
-  padding-inline: 16px !important;
-}
-
-/* Force Home active-tab highlight */
-html body #root main.page-shell.route-home nav.navbar div#primary-navigation.nav-links > a[href="/"] {
-  color: #ffffff !important;
-  background: #08753b !important;
-  border: 1px solid #08753b !important;
-  border-radius: 9px !important;
-  padding-inline: 16px !important;
-}
-
-/* Prevent Home page horizontal shifting during responsive inspection */
-html,
-body,
-#root,
-main.page-shell.route-home {
+/* Process page — NCPL-inspired journey, adapted for Stellar */
+.route-process,
+.route-process .process-section {
   width: 100% !important;
   max-width: 100% !important;
   overflow-x: clip !important;
 }
 
-.route-home .hero-section .hero-content {
-  left: max(calc((100% - 1500px) / 2), 72px) !important;
-  right: auto !important;
-  width: min(680px, calc(100% - 144px)) !important;
-  max-width: 680px !important;
+.route-process .process-section {
+  padding: 0 !important;
+  background: #fff !important;
+  text-align: left !important;
+}
+
+.route-process .process-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, .75fr);
+  align-items: center;
+  gap: clamp(42px, 7vw, 110px);
+  min-height: 650px;
+  padding: clamp(72px, 8vw, 120px) max(24px, calc((100% - 1280px) / 2));
+  color: #fff;
+  background: radial-gradient(circle at 80% 45%, rgba(87,192,201,.2), transparent 28%), linear-gradient(130deg, #092e36, #104b55 60%, #0a333a);
+}
+
+.route-process .process-hero-copy { max-width: 690px; }
+.route-process .process-hero .section-label { color: #77ddaa !important; }
+.route-process .process-hero h1 { margin: 20px 0; color: #fff; font-size: clamp(2.7rem, 5vw, 5rem); line-height: 1.03; letter-spacing: -.04em; }
+.route-process .process-hero h1 span { color: #64cf94; }
+.route-process .process-hero-copy > p:not(.section-label) { max-width: 650px; color: #d7e4e6; font-size: 1.12rem; line-height: 1.8; }
+.route-process .process-highlights { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 36px; }
+.route-process .process-highlights span { padding: 18px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 13px; background: rgba(255,255,255,.09); color: #d6e3e5; text-align: center; }
+.route-process .process-highlights strong { display: block; margin-bottom: 4px; color: #69d49a; font-size: 1.1rem; }
+
+.route-process .process-hero-visual { display: grid; place-items: center; }
+.route-process .process-orbit { position: relative; display: grid; place-items: center; width: min(440px, 38vw); aspect-ratio: 1; border: 2px solid rgba(106,212,154,.45); border-radius: 50%; background: radial-gradient(circle, rgba(105,212,154,.2), rgba(255,255,255,.04) 48%, transparent 49%); box-shadow: 0 0 0 30px rgba(255,255,255,.025), 0 28px 80px rgba(0,0,0,.28); }
+.route-process .process-orbit::before, .route-process .process-orbit::after { content: ""; position: absolute; width: 72%; height: 72%; border: 1px dashed rgba(255,255,255,.32); border-radius: 50%; }
+.route-process .process-orbit::after { width: 45%; height: 45%; }
+.route-process .process-orbit strong { z-index: 1; color: #fff; font-size: clamp(1.3rem, 2.3vw, 2rem); line-height: 1.2; text-align: center; }
+.route-process .process-orbit span { position: absolute; z-index: 2; padding: 9px 13px; border-radius: 999px; background: #fff; color: #0b4a41; font-weight: 800; box-shadow: 0 8px 24px rgba(0,0,0,.24); }
+.route-process .process-orbit span:nth-child(1) { top: 7%; left: 12%; }.route-process .process-orbit span:nth-child(2) { top: 12%; right: 2%; }.route-process .process-orbit span:nth-child(3) { bottom: 12%; right: 1%; }.route-process .process-orbit span:nth-child(4) { bottom: 7%; left: 7%; }
+
+.route-process .process-overview { padding: 78px 24px 66px; text-align: center; }
+.route-process .process-overview h2, .route-process .process-journey-heading h2, .route-process .process-ecosystem h2, .route-process .process-guidelines h2, .route-process .process-cta h2 { margin: 10px 0 12px; color: #12323a; font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.16; }
+.route-process .process-overview > p:last-of-type, .route-process .process-journey-heading > p:last-child, .route-process .process-guidelines > p:last-of-type { color: #5d7078; font-size: 1.06rem; }
+.route-process .process-flow { display: flex; align-items: flex-start; justify-content: center; gap: clamp(25px, 5vw, 74px); max-width: 1020px; margin: 42px auto 0; padding: 0; list-style: none; }
+.route-process .process-flow li { position: relative; display: grid; justify-items: center; gap: 9px; min-width: 105px; color: #26424a; }
+.route-process .process-flow li:not(:last-child)::after { content: "→"; position: absolute; top: 20px; left: calc(100% + 10px); color: #789098; font-size: 1.3rem; }
+.route-process .process-flow span, .route-process .process-phase-number { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: #1d8e5a; color: #fff; font-weight: 900; box-shadow: 0 9px 20px rgba(24,101,68,.2); }
+.route-process .process-flow li:nth-child(2) span { background: #168095; }.route-process .process-flow li:nth-child(3) span { background: #7250c7; }.route-process .process-flow li:nth-child(4) span { background: #e98c18; }.route-process .process-flow li:nth-child(5) span { background: #d8445b; }
+
+.route-process .process-journey { padding: 80px max(24px, calc((100% - 1220px) / 2)) 100px; background: #f8fbfa; }
+.route-process .process-journey-heading { max-width: 780px; margin: 0 auto 58px; text-align: center; }
+.route-process .process-phase { position: relative; display: flex; margin: 0 0 38px; }
+.route-process .process-phase:nth-of-type(even) { justify-content: flex-end; }
+.route-process .process-phase-body { display: grid; grid-template-columns: 48px minmax(0, 1fr); gap: 5px 18px; width: calc(100% - 70px); padding: clamp(28px, 4vw, 46px); border: 1px solid #dbe7e3; border-radius: 20px; background: #fff; box-shadow: 0 15px 30px rgba(19,52,58,.08); }
+.route-process .process-phase-number { position: absolute; z-index: 2; top: -2px; left: -22px; width: 66px; height: 66px; border-radius: 17px; }
+.route-process .process-phase:nth-of-type(even) .process-phase-number { right: -22px; left: auto; }
+.route-process .process-phase-icon { grid-row: 1; display: grid; place-items: center; color: #168c57; font-size: 1.8rem; font-weight: 900; }
+.route-process .process-phase small { color: #61747c; font-weight: 900; letter-spacing: .13em; }
+.route-process .process-phase h3 { margin: 5px 0 3px; color: #12323a; font-size: clamp(1.5rem, 2.5vw, 2rem); }
+.route-process .process-phase b { color: #168c57; }
+.route-process .process-phase-body > p, .route-process .process-phase-body > ul { grid-column: 1 / -1; }
+.route-process .process-phase-body > p { margin: 20px 0 17px; color: #536a73; font-size: 1.05rem; line-height: 1.75; }
+.route-process .process-phase-body ul { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.route-process .process-phase-body li { padding: 8px 13px; border-radius: 999px; background: #eef5f2; color: #234049; }
+.route-process .process-phase-body li::before { content: "✓ "; color: #12a257; font-weight: 900; }
+.route-process .phase-two .process-phase-number, .route-process .phase-two .process-phase-icon { background-color: #168095; color: #fff; }.route-process .phase-two .process-phase-icon { background: none; color: #168095; }.route-process .phase-two b { color: #168095; }
+.route-process .phase-three .process-phase-number { background: #7250c7; }.route-process .phase-three .process-phase-icon, .route-process .phase-three b { color: #7250c7; }
+.route-process .phase-four .process-phase-number { background: #e98c18; }.route-process .phase-four .process-phase-icon, .route-process .phase-four b { color: #d67a09; }
+.route-process .phase-five .process-phase-number { background: #d8445b; }.route-process .phase-five .process-phase-icon, .route-process .phase-five b { color: #d8445b; }
+
+.route-process .process-ecosystem { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: clamp(50px, 8vw, 120px); padding: 100px max(24px, calc((100% - 1200px) / 2)); }
+.route-process .process-ecosystem-visual { position: relative; display: grid; place-items: center; min-height: 420px; border-radius: 25px; background: radial-gradient(circle, #fff 0 19%, transparent 20%), linear-gradient(140deg, #e8f7f2, #d9f1f2); box-shadow: 0 20px 38px rgba(14,67,72,.12); }
+.route-process .process-ecosystem-visual strong { display: grid; place-items: center; width: 105px; height: 105px; border-radius: 24px; background: #0d6654; color: #fff; box-shadow: 0 16px 30px rgba(13,102,84,.25); }
+.route-process .process-ecosystem-visual span { position: absolute; padding: 14px 18px; border-radius: 14px; background: #fff; color: #13404a; font-weight: 850; box-shadow: 0 12px 24px rgba(26,75,80,.12); }
+.route-process .process-ecosystem-visual span:nth-child(1) { top: 12%; left: 12%; }.route-process .process-ecosystem-visual span:nth-child(2) { top: 12%; right: 10%; }.route-process .process-ecosystem-visual span:nth-child(3) { bottom: 12%; left: 10%; }.route-process .process-ecosystem-visual span:nth-child(4) { right: 10%; bottom: 12%; }
+.route-process .process-ecosystem > div:last-child > p:not(.section-label) { color: #536a73; font-size: 1.05rem; line-height: 1.75; }
+.route-process .process-ecosystem ul { display: grid; gap: 15px; margin: 26px 0 0; padding: 0; list-style: none; color: #28474f; }
+.route-process .process-ecosystem li::before { content: "✓"; display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 10px; border: 2px solid #18a55e; border-radius: 50%; color: #18a55e; font-size: .75rem; font-weight: 900; }
+
+.route-process .process-guidelines { padding: 90px max(24px, calc((100% - 1200px) / 2)) 100px; background: #f6faf8; text-align: center; }
+.route-process .process-guideline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; text-align: left; }
+.route-process .process-guideline-grid article { padding: 30px; border: 1px solid #dbe7e3; border-radius: 17px; background: #fff; box-shadow: 0 10px 23px rgba(19,52,58,.06); }
+.route-process .process-guideline-grid span { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 13px; background: #e9f6ee; color: #159558; font-size: 1.5rem; font-weight: 900; }
+.route-process .process-guideline-grid h3 { margin: 20px 0 10px; color: #16363e; }
+.route-process .process-guideline-grid p { margin: 0; color: #5a7078; line-height: 1.65; }
+
+.route-process .process-cta { padding: 90px 24px; background: linear-gradient(135deg, #edf9f2, #f8fffb); text-align: center; }
+.route-process .process-cta p { color: #5b7078; font-size: 1.08rem; }
+.route-process .process-cta div { display: flex; justify-content: center; gap: 16px; margin-top: 30px; }
+.route-process .process-cta a { display: inline-flex; align-items: center; justify-content: center; min-width: 210px; min-height: 54px; padding: 12px 22px; border: 2px solid #0b984d; border-radius: 10px; color: #087a3e; font-weight: 850; text-decoration: none; }
+.route-process .process-cta a:first-child { background: #0b984d; color: #fff; }
+.route-process .process-cta a:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(11,152,77,.18); }
+
+@media (max-width: 900px) {
+  .route-process .process-hero { grid-template-columns: 1fr; min-height: auto; text-align: center; }
+  .route-process .process-hero-copy { margin: auto; }
+  .route-process .process-hero-copy > p { margin-inline: auto; }
+  .route-process .process-orbit { width: min(430px, 78vw); }
+  .route-process .process-flow { flex-wrap: wrap; }
+  .route-process .process-flow li:not(:last-child)::after { display: none; }
+  .route-process .process-ecosystem { grid-template-columns: 1fr; }
+  .route-process .process-guideline-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .route-process .process-hero { gap: 54px; padding: 58px 20px 68px; }
+  .route-process .process-hero h1 { font-size: clamp(2.35rem, 12vw, 3.25rem); }
+  .route-process .process-highlights { grid-template-columns: repeat(2, 1fr); }
+  .route-process .process-orbit { width: min(330px, 82vw); }
+  .route-process .process-orbit span { padding: 7px 9px; font-size: .75rem; }
+  .route-process .process-overview { padding: 58px 18px; }
+  .route-process .process-flow { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
+  .route-process .process-flow li:last-child { grid-column: 1 / -1; }
+  .route-process .process-journey { padding: 62px 18px 70px; }
+  .route-process .process-phase { padding-top: 22px; }
+  .route-process .process-phase-body { grid-template-columns: 38px minmax(0, 1fr); width: 100%; padding: 28px 20px 24px; }
+  .route-process .process-phase-number, .route-process .process-phase:nth-of-type(even) .process-phase-number { top: -9px; right: 16px; left: auto; width: 52px; height: 52px; border-radius: 13px; }
+  .route-process .process-phase-body ul { display: grid; }
+  .route-process .process-phase-body li { border-radius: 10px; }
+  .route-process .process-ecosystem { gap: 55px; padding: 70px 18px; }
+  .route-process .process-ecosystem-visual { min-height: 330px; }
+  .route-process .process-ecosystem-visual span { padding: 9px; font-size: .76rem; }
+  .route-process .process-guidelines { padding: 68px 18px; }
+  .route-process .process-guideline-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 38px; }
+  .route-process .process-cta { padding: 68px 18px; }
+  .route-process .process-cta div { flex-direction: column; }
+  .route-process .process-cta a { width: 100%; }
+}
+
+/* FINAL PROCESS DROPDOWN AND HERO ALIGNMENT QA */
+
+/* Prevent the active Process-tab style from colouring its dropdown links */
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu > a {
+  color: #17343b !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Match the Training dropdown hover treatment */
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu > a:hover,
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu > a:focus-visible {
+  color: #17343b !important;
+  background: #effaf5 !important;
+}
+
+/* Keep dropdown labels readable */
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu strong {
+  color: #17343b !important;
+}
+
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu small {
+  color: #667b81 !important;
+}
+
+/* Remove the older overlap that pulls Process under the breadcrumb */
+body main.page-shell.route-process #process.process-section {
+  margin-top: 0 !important;
+  transform: none !important;
+}
+
+/* Give the Process hero label professional clearance */
+.route-process .process-hero-copy {
+  padding-top: 20px !important;
+}
+
+.route-process .process-hero .section-label {
+  display: block !important;
+  margin: 0 0 18px !important;
+  color: #77ddaa !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Keep the menu above the hero and breadcrumb */
+.route-process .navbar,
+.route-process #primary-navigation,
+.route-process .nav-dropdown,
+.route-process .process-dropdown-menu {
+  overflow: visible !important;
+}
+
+.route-process .process-dropdown-menu {
+  z-index: 50000 !important;
+}
+
+@media (max-width: 600px) {
+  .route-process .process-hero-copy {
+    padding-top: 0 !important;
+  }
+
+  body main.page-shell.route-process nav.navbar
+  #primary-navigation .process-dropdown-menu > a {
+    width: 100% !important;
+    min-height: 58px !important;
+    text-align: left !important;
+  }
+}
+
+/* PROCESS PAGE FINAL COMPLETE QA */
+
+/* Remove the unused teal banner underneath the navigation */
+body main.page-shell.route-process .hero-section {
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  background: #ffffff !important;
+}
+
+body main.page-shell.route-process .hero-backgrounds,
+body main.page-shell.route-process .hero-section > .dark-overlay,
+body main.page-shell.route-process .hero-section > .code-layer,
+body main.page-shell.route-process .hero-section > .globe-effect,
+body main.page-shell.route-process .hero-section > .slide-arrow,
+body main.page-shell.route-process .hero-section > .hero-content,
+body main.page-shell.route-process .hero-section > .dots {
+  display: none !important;
+}
+
+/* Keep navigation and dropdowns usable above the page */
+body main.page-shell.route-process .navbar {
+  position: relative !important;
+  top: auto !important;
+  z-index: 50000 !important;
+  transform: none !important;
+}
+
+body main.page-shell.route-process #primary-navigation,
+body main.page-shell.route-process .nav-dropdown {
+  overflow: visible !important;
+}
+
+/* Align breadcrumb with the Process content */
+body main.page-shell.route-process .breadcrumb-strip {
+  position: relative !important;
+  top: auto !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 58px !important;
   margin: 0 !important;
+  padding: 10px max(24px, calc((100% - 1280px) / 2)) !important;
 }
 
-@media (max-width: 760px) {
-  .route-home .hero-section .hero-content {
-    left: 20px !important;
-    width: calc(100% - 40px) !important;
+/* Remove previous negative offsets */
+body main.page-shell.route-process #process.process-section {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+  overflow-x: clip !important;
+}
+
+/* Give the hero label and heading proper clearance */
+.route-process .process-hero {
+  box-sizing: border-box !important;
+  padding-top: clamp(76px, 7vw, 108px) !important;
+  padding-bottom: clamp(72px, 7vw, 104px) !important;
+}
+
+.route-process .process-hero-copy {
+  box-sizing: border-box !important;
+  padding-top: 0 !important;
+}
+
+.route-process .process-hero .section-label {
+  display: block !important;
+  margin: 0 0 20px !important;
+  color: #77ddaa !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Stop the active Process tab from colouring How It Works */
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu > a {
+  color: #17343b !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu > a:hover,
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu > a:focus-visible {
+  color: #17343b !important;
+  background: #effaf5 !important;
+}
+
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu strong {
+  color: #17343b !important;
+}
+
+body main.page-shell.route-process nav.navbar
+#primary-navigation .process-dropdown-menu small {
+  color: #667b81 !important;
+}
+
+body main.page-shell.route-process
+#primary-navigation .process-dropdown-menu {
+  z-index: 60000 !important;
+}
+
+/* Bring the next section closer to the hero */
+.route-process .process-overview {
+  padding-top: 58px !important;
+  padding-bottom: 58px !important;
+}
+
+/* Correct anchor scrolling beneath the header */
+.route-process #process-overview,
+.route-process #process-journey,
+.route-process #process-guidelines {
+  scroll-margin-top: 105px !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .route-process .process-hero {
+    padding: 64px 30px 74px !important;
+  }
+
+  .route-process .process-hero-copy {
+    width: 100% !important;
+    max-width: 720px !important;
+    margin-inline: auto !important;
   }
 }
 
-/* Process page breadcrumb clearance */
-.route-process .process-section {
-  padding-top: 72px !important;
-}
+/* Mobile */
+@media (max-width: 600px) {
+  body main.page-shell.route-process .breadcrumb-strip {
+    min-height: 56px !important;
+    padding: 9px 18px !important;
+  }
 
-@media (max-width: 760px) {
-  .route-process .process-section {
-    padding-top: 48px !important;
+  .route-process .process-hero {
+    width: 100% !important;
+    padding: 58px 20px 68px !important;
+  }
+
+  .route-process .process-hero-copy {
+    width: 100% !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  .route-process .process-hero h1 {
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    overflow-wrap: break-word !important;
+  }
+
+  body main.page-shell.route-process nav.navbar
+  #primary-navigation .process-dropdown-menu > a {
+    width: 100% !important;
+    min-height: 58px !important;
+    text-align: left !important;
+  }
+
+  .route-process #process-overview,
+  .route-process #process-journey,
+  .route-process #process-guidelines {
+    scroll-margin-top: 86px !important;
   }
 }
 
-/* Final Process heading clearance */
-.route-process .process-section {
-  padding-top: 160px !important;
+/* PROCESS PROFESSIONAL CENTER ALIGNMENT */
+
+/* Center the breadcrumb presentation */
+body main.page-shell.route-process .breadcrumb-strip {
+  justify-content: center !important;
+  text-align: center !important;
 }
 
-@media (max-width: 760px) {
-  .route-process .process-section {
-    padding-top: 96px !important;
+/* Use a balanced centered desktop grid */
+.route-process .process-hero {
+  grid-template-columns: minmax(0, 720px) minmax(380px, 520px) !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: clamp(54px, 6vw, 92px) !important;
+  width: 100% !important;
+}
+
+/* Center the complete copy column */
+.route-process .process-hero-copy {
+  justify-self: center !important;
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.route-process .process-hero-copy .section-label {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.route-process .process-hero h1 {
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 18px auto 24px !important;
+  text-align: center !important;
+  text-wrap: balance !important;
+}
+
+.route-process .process-hero-copy > p:not(.section-label) {
+  width: 100% !important;
+  max-width: 660px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  text-wrap: pretty !important;
+}
+
+/* Keep all four pathway-style boxes equal and centered */
+.route-process .process-highlights {
+  grid-template-columns: repeat(4, minmax(125px, 1fr)) !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 700px !important;
+  margin: 38px auto 0 !important;
+}
+
+.route-process .process-highlights span {
+  box-sizing: border-box !important;
+  display: flex !important;
+  min-height: 92px !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px 10px !important;
+  text-align: center !important;
+}
+
+/* Center and slightly reduce the journey visual */
+.route-process .process-hero-visual {
+  justify-self: center !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  margin: 0 auto !important;
+}
+
+.route-process .process-orbit {
+  width: min(450px, 32vw) !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* Consistent centered headings throughout the Process page */
+.route-process .process-overview,
+.route-process .process-journey-heading,
+.route-process .process-guidelines,
+.route-process .process-cta {
+  text-align: center !important;
+}
+
+.route-process .process-overview > *,
+.route-process .process-journey-heading > *,
+.route-process .process-guidelines > *,
+.route-process .process-cta > * {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+  .route-process .process-hero {
+    grid-template-columns: 1fr !important;
+    gap: 60px !important;
+    padding-inline: 32px !important;
+  }
+
+  .route-process .process-highlights {
+    grid-template-columns: repeat(2, minmax(0, 220px)) !important;
+  }
+
+  .route-process .process-orbit {
+    width: min(430px, 72vw) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .route-process .process-hero {
+    padding-inline: 18px !important;
+  }
+
+  .route-process .process-hero h1 {
+    max-width: 350px !important;
+    font-size: clamp(2.25rem, 11vw, 3rem) !important;
+    line-height: 1.08 !important;
+  }
+
+  .route-process .process-hero-copy > p:not(.section-label) {
+    max-width: 350px !important;
+    line-height: 1.7 !important;
+  }
+
+  .route-process .process-highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .route-process .process-highlights span {
+    min-height: 88px !important;
+  }
+
+  .route-process .process-orbit {
+    width: min(320px, 82vw) !important;
+  }
+}
+
+/* REMOVE DUPLICATE PROCESS TAB UNDERLINE */
+
+body main.page-shell.route-process nav.navbar
+#primary-navigation > .nav-dropdown > a[href="/process"] {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+body main.page-shell.route-process nav.navbar
+#primary-navigation > .nav-dropdown > a[href="/process"]::before,
+body main.page-shell.route-process nav.navbar
+#primary-navigation > .nav-dropdown > a[href="/process"]::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* CENTER PROCESS PHASE CONTENT LIKE PRICING PATHWAYS */
+
+.route-process .process-phase-body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.route-process .process-phase-icon {
+  display: grid !important;
+  place-items: center !important;
+  width: 48px !important;
+  margin: 0 auto 12px !important;
+}
+
+.route-process .process-phase-body > div {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.route-process .process-phase-body small,
+.route-process .process-phase-body h3,
+.route-process .process-phase-body b {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.route-process .process-phase-body > p {
+  width: 100% !important;
+  max-width: 980px !important;
+  margin: 24px auto 20px !important;
+  text-align: center !important;
+}
+
+.route-process .process-phase-body > ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+.route-process .process-phase-body li {
+  text-align: center !important;
+}
+
+@media (max-width: 600px) {
+  .route-process .process-phase-body {
+    padding: 42px 20px 24px !important;
+  }
+
+  .route-process .process-phase-body > ul {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-process .process-phase-body li {
+    width: 100% !important;
+  }
+}
+
+/* FINAL EQUAL PROCESS CARD ALIGNMENT */
+
+/* Give all five phase rows the same centered dimensions */
+.route-process .process-phase,
+.route-process .process-phase:nth-of-type(even),
+.route-process .process-phase:nth-of-type(odd) {
+  position: relative !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 1360px !important;
+  margin: 0 auto 42px !important;
+  padding: 22px 40px 0 !important;
+}
+
+/* Every white phase card gets exactly the same width */
+.route-process .process-phase-body,
+.route-process .process-phase:nth-of-type(even) .process-phase-body,
+.route-process .process-phase:nth-of-type(odd) .process-phase-body {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 1260px !important;
+  min-height: 380px !important;
+  margin: 0 auto !important;
+}
+
+/* Preserve the alternating badge style, but position it consistently */
+.route-process .process-phase:nth-of-type(odd) .process-phase-number {
+  top: 0 !important;
+  right: auto !important;
+  left: 10px !important;
+}
+
+.route-process .process-phase:nth-of-type(even) .process-phase-number {
+  top: 0 !important;
+  right: 10px !important;
+  left: auto !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .route-process .process-phase,
+  .route-process .process-phase:nth-of-type(even),
+  .route-process .process-phase:nth-of-type(odd) {
+    max-width: 100% !important;
+    padding-inline: 22px !important;
+  }
+
+  .route-process .process-phase-body {
+    min-height: 0 !important;
+  }
+
+  .route-process .process-phase:nth-of-type(odd) .process-phase-number {
+    left: 2px !important;
+  }
+
+  .route-process .process-phase:nth-of-type(even) .process-phase-number {
+    right: 2px !important;
+  }
+}
+
+/* Mobile: center every badge above its card */
+@media (max-width: 600px) {
+  .route-process .process-phase,
+  .route-process .process-phase:nth-of-type(even),
+  .route-process .process-phase:nth-of-type(odd) {
+    margin-bottom: 30px !important;
+    padding: 28px 0 0 !important;
+  }
+
+  .route-process .process-phase-body {
+    width: 100% !important;
+    min-height: 0 !important;
+  }
+
+  .route-process .process-phase:nth-of-type(odd) .process-phase-number,
+  .route-process .process-phase:nth-of-type(even) .process-phase-number {
+    top: 0 !important;
+    right: auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+/* REMOVE DUPLICATE TRAINING TAB UNDERLINE */
+
+body main.page-shell.route-training nav.navbar
+#primary-navigation > .nav-dropdown > a[href="/training"] {
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+body main.page-shell.route-training nav.navbar
+#primary-navigation > .nav-dropdown > a[href="/training"]::before,
+body main.page-shell.route-training nav.navbar
+#primary-navigation > .nav-dropdown > a[href="/training"]::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* PROFESSIONAL PROCESS CTA */
+
+.route-process .process-cta {
+  box-sizing: border-box !important;
+  width: min(1180px, calc(100% - 48px)) !important;
+  margin: 90px auto !important;
+  padding: clamp(58px, 7vw, 84px) clamp(28px, 6vw, 76px) !important;
+  border: 1px solid #d6e9df !important;
+  border-radius: 26px !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(64, 201, 125, .13), transparent 42%),
+    linear-gradient(145deg, #f8fffb, #eef9f3) !important;
+  box-shadow: 0 22px 55px rgba(15, 72, 57, .10) !important;
+  text-align: center !important;
+}
+
+.route-process .process-cta::before {
+  content: "READY TO GET STARTED?" !important;
+  display: inline-block !important;
+  margin-bottom: 18px !important;
+  color: #0b9250 !important;
+  font-size: .78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .16em !important;
+}
+
+.route-process .process-cta h2 {
+  max-width: 780px !important;
+  margin: 0 auto 18px !important;
+  color: #12343b !important;
+  font-size: clamp(2.15rem, 4vw, 3.5rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em !important;
+  text-align: center !important;
+  text-wrap: balance !important;
+}
+
+.route-process .process-cta p {
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  color: #5c7279 !important;
+  font-size: clamp(1rem, 1.4vw, 1.15rem) !important;
+  line-height: 1.7 !important;
+  text-align: center !important;
+}
+
+.route-process .process-cta > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  margin-top: 32px !important;
+}
+
+.route-process .process-cta a {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 245px !important;
+  min-height: 58px !important;
+  padding: 13px 22px !important;
+  border: 2px solid #0b984d !important;
+  border-radius: 11px !important;
+  font-size: 1rem !important;
+  font-weight: 850 !important;
+  line-height: 1.2 !important;
+  text-decoration: none !important;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease !important;
+}
+
+.route-process .process-cta a:first-child {
+  color: #ffffff !important;
+  background: #0b984d !important;
+  box-shadow: 0 10px 22px rgba(11, 152, 77, .20) !important;
+}
+
+.route-process .process-cta a:last-child {
+  color: #087a3e !important;
+  background: #ffffff !important;
+}
+
+.route-process .process-cta a:hover,
+.route-process .process-cta a:focus-visible {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 13px 26px rgba(11, 152, 77, .20) !important;
+}
+
+@media (max-width: 600px) {
+  .route-process .process-cta {
+    width: calc(100% - 32px) !important;
+    margin: 58px auto !important;
+    padding: 48px 20px !important;
+    border-radius: 20px !important;
+  }
+
+  .route-process .process-cta h2 {
+    font-size: clamp(2rem, 9vw, 2.55rem) !important;
+  }
+
+  .route-process .process-cta > div {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .route-process .process-cta a {
+    width: 100% !important;
+    max-width: 340px !important;
+  }
+}
+
+/* FINAL COMPACT PROFESSIONAL PROCESS CTA */
+
+.route-process .process-cta {
+  box-sizing: border-box !important;
+  display: block !important;
+  width: min(1040px, calc(100% - 48px)) !important;
+  margin: 72px auto !important;
+  padding: 52px 48px !important;
+  border: 1px solid #d9e9e1 !important;
+  border-radius: 22px !important;
+  background: linear-gradient(145deg, #ffffff, #f3fbf6) !important;
+  box-shadow: 0 16px 38px rgba(16, 69, 56, .09) !important;
+  text-align: center !important;
+}
+
+.route-process .process-cta::before {
+  content: "LET'S PLAN YOUR NEXT STEP" !important;
+  display: inline-block !important;
+  margin: 0 0 14px !important;
+  color: #0b9250 !important;
+  font-size: .72rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .15em !important;
+}
+
+.route-process .process-cta h2 {
+  width: 100% !important;
+  max-width: 650px !important;
+  margin: 0 auto 14px !important;
+  color: #14353c !important;
+  font-size: clamp(2rem, 3vw, 2.65rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -.025em !important;
+  text-align: center !important;
+  text-wrap: balance !important;
+}
+
+.route-process .process-cta p {
+  width: 100% !important;
+  max-width: 650px !important;
+  margin: 0 auto !important;
+  color: #60757c !important;
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+  text-align: center !important;
+}
+
+.route-process .process-cta > div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  margin: 28px auto 0 !important;
+}
+
+.route-process .process-cta a {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 220px !important;
+  min-width: 220px !important;
+  min-height: 54px !important;
+  padding: 12px 20px !important;
+  border-radius: 10px !important;
+  font-size: .96rem !important;
+  font-weight: 800 !important;
+}
+
+.route-process .process-cta a:first-child {
+  border: 2px solid #0b984d !important;
+  color: #ffffff !important;
+  background: #0b984d !important;
+  box-shadow: 0 9px 20px rgba(11, 152, 77, .18) !important;
+}
+
+.route-process .process-cta a:last-child {
+  border: 2px solid #0b984d !important;
+  color: #087a3e !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 600px) {
+  .route-process .process-cta {
+    width: calc(100% - 32px) !important;
+    margin: 52px auto !important;
+    padding: 42px 20px !important;
+    border-radius: 18px !important;
+  }
+
+  .route-process .process-cta h2 {
+    max-width: 330px !important;
+    font-size: clamp(1.85rem, 8vw, 2.25rem) !important;
+  }
+
+  .route-process .process-cta p {
+    max-width: 330px !important;
+  }
+
+  .route-process .process-cta > div {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .route-process .process-cta a {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 320px !important;
+  }
+}
+
+/* FIX PROCESS JOURNEY VISUAL STRETCH */
+
+.route-process .process-hero {
+  grid-template-columns: minmax(0, 700px) minmax(320px, 420px) !important;
+  gap: clamp(50px, 6vw, 88px) !important;
+}
+
+.route-process .process-hero-visual {
+  box-sizing: border-box !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  margin: 0 auto !important;
+  overflow: visible !important;
+}
+
+.route-process .process-orbit {
+  box-sizing: border-box !important;
+  width: min(380px, 100%) !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: 380px !important;
+  max-height: 380px !important;
+  aspect-ratio: 1 / 1 !important;
+  margin: 0 auto !important;
+  flex: 0 0 auto !important;
+  border-radius: 50% !important;
+  transform: none !important;
+}
+
+.route-process .process-orbit::before {
+  width: 70% !important;
+  height: 70% !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+.route-process .process-orbit::after {
+  width: 44% !important;
+  height: 44% !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+@media (max-width: 1050px) {
+  .route-process .process-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-process .process-hero-visual {
+    max-width: 380px !important;
+  }
+
+  .route-process .process-orbit {
+    width: min(350px, 78vw) !important;
+    max-width: 350px !important;
+    max-height: 350px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .route-process .process-hero-visual {
+    max-width: 310px !important;
+  }
+
+  .route-process .process-orbit {
+    width: min(290px, 78vw) !important;
+    max-width: 290px !important;
+    max-height: 290px !important;
+  }
+}
+
+
+/* COMPACT PROCESS HERO PROPORTIONS */
+
+.route-process .process-hero {
+  box-sizing: border-box !important;
+  grid-template-columns: minmax(0, 680px) minmax(340px, 430px) !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(48px, 6vw, 84px) !important;
+  min-height: 560px !important;
+  padding-top: 58px !important;
+  padding-bottom: 58px !important;
+}
+
+.route-process .process-hero h1 {
+  max-width: 680px !important;
+  font-size: clamp(2.7rem, 4.5vw, 4.35rem) !important;
+  line-height: 1.04 !important;
+}
+
+.route-process .process-hero-copy > p:not(.section-label) {
+  max-width: 620px !important;
+  font-size: 1.05rem !important;
+  line-height: 1.65 !important;
+}
+
+.route-process .process-highlights {
+  max-width: 660px !important;
+  margin-top: 30px !important;
+}
+
+.route-process .process-highlights span {
+  min-height: 78px !important;
+  padding: 12px 8px !important;
+}
+
+.route-process .process-hero-visual {
+  width: 100% !important;
+  max-width: 410px !important;
+}
+
+.route-process .process-orbit {
+  width: min(390px, 30vw) !important;
+  max-width: 390px !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+@media (max-width: 1050px) {
+  .route-process .process-hero {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    padding: 62px 30px !important;
+  }
+
+  .route-process .process-orbit {
+    width: min(360px, 70vw) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .route-process .process-hero {
+    padding: 52px 18px 58px !important;
+  }
+
+  .route-process .process-hero h1 {
+    font-size: clamp(2.2rem, 10vw, 2.85rem) !important;
+  }
+
+  .route-process .process-highlights span {
+    min-height: 82px !important;
+  }
+
+  .route-process .process-orbit {
+    width: min(290px, 78vw) !important;
+  }
+}
+
+/* FINAL HOME ACTIVE TAB CONSISTENCY */
+
+body main.page-shell.route-home nav.navbar
+#primary-navigation > a[href="/"] {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border: 0 !important;
+  border-radius: 9px !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+body main.page-shell.route-home nav.navbar
+#primary-navigation > a[href="/"]::before,
+body main.page-shell.route-home nav.navbar
+#primary-navigation > a[href="/"]::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Final compact desktop Process rectangle */
+@media (min-width: 1051px) {
+  .route-process .process-hero {
+    min-height: 500px !important;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
   }
 }
