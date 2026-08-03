@@ -48,6 +48,20 @@ describe('App', () => {
     expect(pageText).not.toContain('Why NCPL in the UK');
   });
 
+  it('renders the complete five-phase process journey and working calls to action', () => {
+    window.history.pushState({}, '', '/process');
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: /From learning to career confidence/i })).toBeTruthy();
+    expect(screen.getByText('Understand Your Goal')).toBeTruthy();
+    expect(screen.getByText('Build Core Skills')).toBeTruthy();
+    expect(screen.getByText('Practice With Support')).toBeTruthy();
+    expect(screen.getByText('Complete Practical Projects')).toBeTruthy();
+    expect(screen.getByText('Prepare for Work')).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Book Consultation →' }).getAttribute('href')).toBe('/appointment');
+    expect(screen.getByRole('link', { name: 'Explore Training' }).getAttribute('href')).toBe('/training');
+  });
+
   it('opens and closes the accessible mobile navigation', () => {
     render(<App />);
 

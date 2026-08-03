@@ -802,10 +802,30 @@ function App() {
               >
                 Process ▾
               </a>
-              <div className="dropdown-menu">
-                <a href="/process">How It Works</a>
-                <a href="/process#enrollment">Enrollment Steps</a>
-                <a href="/process#support">Support Process</a>
+              <div className="dropdown-menu training-dropdown-menu process-dropdown-menu">
+                <a href="/process">
+                  <span className="training-dropdown-icon" aria-hidden="true">MAP</span>
+                  <span>
+                    <strong>How It Works</strong>
+                    <small>Explore the complete process</small>
+                  </span>
+                </a>
+
+                <a href="/enroll">
+                  <span className="training-dropdown-icon" aria-hidden="true">JOIN</span>
+                  <span>
+                    <strong>Enrollment Form</strong>
+                    <small>Start your program enrollment</small>
+                  </span>
+                </a>
+
+                <a href="/process#process-journey">
+                  <span className="training-dropdown-icon" aria-hidden="true">HELP</span>
+                  <span>
+                    <strong>Support Process</strong>
+                    <small>See how Stellar supports you</small>
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -2107,28 +2127,132 @@ function App() {
       </section>
 
       <section className="process-section" id="process">
-        <p className="section-label">OUR PROCESS</p>
-        <h2>Simple step-by-step support.</h2>
-
-        <div className="process-grid">
-          <div className="process-card">
-            <span>01</span>
-            <h3>Understand Your Goal</h3>
-            <p>We look at your current level, learning needs, and career direction.</p>
+        <div className="process-hero">
+          <div className="process-hero-copy">
+            <p className="section-label">STELLAR TRAINING PROCESS</p>
+            <h1>From learning to <span>career confidence.</span></h1>
+            <p>
+              Our structured five-phase process combines guided training, daily
+              practice, session support, practical milestones, and job-readiness
+              preparation—giving beginners a clear path forward.
+            </p>
+            <div className="process-highlights" aria-label="Training process highlights">
+              <span><strong>Live</strong> Guided Training</span>
+              <span><strong>Daily</strong> Practical Tasks</span>
+              <span><strong>Recorded</strong> Session Access</span>
+              <span><strong>Career</strong> Preparation</span>
+            </div>
           </div>
-
-          <div className="process-card">
-            <span>02</span>
-            <h3>Build Skills</h3>
-            <p>You get practical training, guided tasks, and project-based learning.</p>
-          </div>
-
-          <div className="process-card">
-            <span>03</span>
-            <h3>Prepare for Work</h3>
-            <p>We support resume, LinkedIn, interview practice, and job-readiness.</p>
+          <div className="process-hero-visual" aria-label="Stellar learning journey illustration">
+            <div className="process-orbit">
+              <span>Learn</span><span>Practice</span><span>Build</span><span>Prepare</span>
+              <strong>STELLAR<br />JOURNEY</strong>
+            </div>
           </div>
         </div>
+
+        <div className="process-overview">
+          <p className="section-label">HOW IT ALL CONNECTS</p>
+          <h2>A complete learning journey.</h2>
+          <p>Each phase builds on the previous one to create a practical, supportive path.</p>
+          <ol className="process-flow" aria-label="Five training phases">
+            <li><span>01</span><strong>Goal Plan</strong></li>
+            <li><span>02</span><strong>Skill Building</strong></li>
+            <li><span>03</span><strong>Guided Practice</strong></li>
+            <li><span>04</span><strong>Project Proof</strong></li>
+            <li><span>05</span><strong>Career Ready</strong></li>
+          </ol>
+        </div>
+
+        <div className="process-journey">
+          <div className="process-journey-heading">
+            <p className="section-label">THE STELLAR TRAINING JOURNEY</p>
+            <h2>Simple step-by-step support.</h2>
+            <p>Five focused phases take you from a clear starting point to stronger job readiness.</p>
+          </div>
+
+          <article className="process-phase phase-one">
+            <span className="process-phase-number">01</span>
+            <div className="process-phase-body">
+              <span className="process-phase-icon" aria-hidden="true">◎</span>
+              <div><small>PHASE 01</small><h3>Understand Your Goal</h3><b>A plan designed around your starting point</b></div>
+              <p>We review your experience, learning needs, availability, and career direction. Together, we create a realistic roadmap so you know what to learn and why it matters.</p>
+              <ul><li>Current-level review</li><li>Clear learning roadmap</li><li>Schedule planning</li><li>Dedicated guidance</li></ul>
+            </div>
+          </article>
+
+          <article className="process-phase phase-two">
+            <span className="process-phase-number">02</span>
+            <div className="process-phase-body">
+              <span className="process-phase-icon" aria-hidden="true">⌘</span>
+              <div><small>PHASE 02</small><h3>Build Core Skills</h3><b>Practical learning with clear explanations</b></div>
+              <p>You learn essential tools and concepts through instructor guidance, demonstrations, and structured activities. Every topic is explained in beginner-friendly language.</p>
+              <ul><li>Guided live learning</li><li>Module-based curriculum</li><li>Hands-on exercises</li><li>Question support</li></ul>
+            </div>
+          </article>
+
+          <article className="process-phase phase-three">
+            <span className="process-phase-number">03</span>
+            <div className="process-phase-body">
+              <span className="process-phase-icon" aria-hidden="true">▶</span>
+              <div><small>PHASE 03</small><h3>Practice With Support</h3><b>Build confidence by applying what you learn</b></div>
+              <p>Short daily activities, practice scenarios, and session recordings help you revisit concepts and turn new knowledge into repeatable skills without falling behind.</p>
+              <ul><li>Daily practice tasks</li><li>Session recordings</li><li>Feedback and corrections</li><li>Progress check-ins</li></ul>
+            </div>
+          </article>
+
+          <article className="process-phase phase-four">
+            <span className="process-phase-number">04</span>
+            <div className="process-phase-body">
+              <span className="process-phase-icon" aria-hidden="true">◇</span>
+              <div><small>PHASE 04</small><h3>Complete Practical Projects</h3><b>Show your skills through realistic work</b></div>
+              <p>You complete guided projects and workflow-based assignments that connect training to real workplace situations. These examples strengthen your understanding and portfolio.</p>
+              <ul><li>Realistic scenarios</li><li>Project guidance</li><li>Portfolio evidence</li><li>Quality review</li></ul>
+            </div>
+          </article>
+
+          <article className="process-phase phase-five">
+            <span className="process-phase-number">05</span>
+            <div className="process-phase-body">
+              <span className="process-phase-icon" aria-hidden="true">✓</span>
+              <div><small>PHASE 05</small><h3>Prepare for Work</h3><b>Turn your progress into career confidence</b></div>
+              <p>We help you organize your resume, improve LinkedIn, practise interviews, and explain your project experience clearly so you are better prepared for opportunities.</p>
+              <ul><li>Resume support</li><li>LinkedIn guidance</li><li>Interview practice</li><li>Job-readiness review</li></ul>
+            </div>
+          </article>
+        </div>
+
+        <section className="process-ecosystem">
+          <div className="process-ecosystem-visual" aria-hidden="true">
+            <span>Training</span><span>Practice</span><span>Projects</span><span>Career</span><strong>YOU</strong>
+          </div>
+          <div>
+            <p className="section-label">CONNECTED SUPPORT</p>
+            <h2>A complete learning ecosystem.</h2>
+            <p>Stellar’s process connects training, practice, project work, and career preparation. You are supported throughout the journey instead of being left with theory alone.</p>
+            <ul><li>Learning fits around realistic weekly schedules</li><li>Practice reinforces every important concept</li><li>Recordings help you revisit difficult topics</li><li>Career preparation connects skills to opportunities</li></ul>
+          </div>
+        </section>
+
+        <section className="process-guidelines">
+          <p className="section-label">PROGRAM GUIDELINES</p>
+          <h2>What helps learners succeed.</h2>
+          <p>Simple expectations keep the learning experience productive and consistent.</p>
+          <div className="process-guideline-grid">
+            <article><span>◫</span><h3>Flexible Start</h3><p>Begin from the most suitable module after your learning plan is confirmed.</p></article>
+            <article><span>▥</span><h3>Consistent Attendance</h3><p>Regular participation helps you understand each topic and maintain momentum.</p></article>
+            <article><span>✓</span><h3>Active Participation</h3><p>Complete practice and ask questions so your trainer can support your progress.</p></article>
+            <article><span>▶</span><h3>Recordings Available</h3><p>Review recorded sessions when you need to revisit a concept or missed explanation.</p></article>
+            <article><span>◷</span><h3>Progress Check-ins</h3><p>Stay in contact with your coordinator and discuss blockers before they grow.</p></article>
+            <article><span>◇</span><h3>Completion Milestones</h3><p>Finish the required modules, activities, and projects to complete your pathway.</p></article>
+          </div>
+        </section>
+
+        <section className="process-cta">
+          <h2>Have questions about our training process?</h2>
+          <p>Book a free consultation to discuss your goals and find the right learning pathway.</p>
+          <div><a href="/appointment">Book Consultation →</a><a href="/training">Explore Training</a></div>
+        </section>
       </section>
 
       <section className="about-section" id="about">
