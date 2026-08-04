@@ -17097,3 +17097,43 @@ body main.page-shell.route-home nav.navbar
     padding-bottom: 30px !important;
   }
 }
+
+/* Keep mobile breadcrumbs centered on one line */
+@media (max-width: 600px) {
+  body main.page-shell .breadcrumb-strip {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    min-height: 56px !important;
+    padding: 9px 16px !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+  }
+
+  body main.page-shell .breadcrumb-strip > * {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+  }
+}
+
+
+/* Preserve the circular Stellar breadcrumb icon on mobile */
+@media (max-width: 600px) {
+  body main.page-shell .breadcrumb-strip .breadcrumb-stellar-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    border-radius: 50% !important;
+  }
+}

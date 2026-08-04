@@ -7,6 +7,9 @@ const slides = [
     title: "Switching from Non-IT to IT? Start with Stellar.",
     subtitle: "Transition into Canada's IT Market with Structure & Strategy",
     text: "Many professionals want to move into IT but struggle with how and where to start. Stellar's training and mentoring help you become confident in IT.",
+    primaryLabel: "Explore Training →",
+    primaryHref: "/training",
+    secondaryHref: "/about",
     image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80",
   },
   {
@@ -14,6 +17,9 @@ const slides = [
     title: "Learn Practical IT Skills with Confidence.",
     subtitle: "Training, mentoring, and real project guidance",
     text: "We help beginners understand IT support, business systems, tools, workflows, and professional project practice step by step.",
+    primaryLabel: "View Programs →",
+    primaryHref: "/pricing",
+    secondaryHref: "/training",
     image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=80",
   },
   {
@@ -21,6 +27,9 @@ const slides = [
     title: "Smart Groupware Support for Modern Teams.",
     subtitle: "Better communication, better systems, better workflow",
     text: "Stellar Groupware Inc supports teams with practical technology guidance, collaboration tools, and digital process improvement.",
+    primaryLabel: "See How It Works →",
+    primaryHref: "/process",
+    secondaryHref: "/about",
     image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1800&q=80",
   },
   {
@@ -28,6 +37,9 @@ const slides = [
     title: "Build Your IT Career with Practical Support.",
     subtitle: "Mentoring, project practice, and job preparation",
     text: "Get structured guidance to strengthen your technical skills, practise real workplace scenarios, and prepare confidently for IT opportunities.",
+    primaryLabel: "Read Reviews →",
+    primaryHref: "/reviews",
+    secondaryHref: "/process",
     image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=80",
   },
 ];
@@ -888,17 +900,17 @@ function App() {
 
           <div className="hero-actions" id="hero-action-buttons">
             <a
-              id="hero-book-appointment"
+              id="hero-primary-action"
               className="primary-btn"
-              href="/appointment"
+              href={slide.primaryHref}
             >
-              Book Appointment →
+              {slide.primaryLabel}
             </a>
 
             <a
               id="hero-learn-more"
               className="secondary-btn"
-              href="/training"
+              href={slide.secondaryHref}
             >
               Learn More
             </a>
