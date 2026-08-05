@@ -17706,3 +17706,232 @@ body main.page-shell.route-home nav.navbar
     min-height: 68px !important;
   }
 }
+
+
+/* ABOUT PAGE PROCESS-STYLE TYPOGRAPHY */
+.route-about .about-section {
+  font-size: 16px !important;
+}
+
+.route-about .about-section .section-label {
+  margin: 0 0 10px !important;
+  font-size: 0.78rem !important;
+  line-height: 1.3 !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.2em !important;
+  text-align: center !important;
+}
+
+/* Shared About headings */
+.route-about .about-hero h1,
+.route-about .about-section-heading h2,
+.route-about .about-cta h2 {
+  font-family: inherit !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  text-wrap: balance !important;
+}
+
+.route-about .about-hero h1 {
+  max-width: 820px !important;
+  margin: 10px auto 18px !important;
+  font-size: clamp(2.35rem, 4vw, 3.45rem) !important;
+  line-height: 1.12 !important;
+}
+
+.route-about .about-section-heading {
+  max-width: 760px !important;
+  margin: 0 auto 38px !important;
+  text-align: center !important;
+}
+
+.route-about .about-section-heading h2 {
+  max-width: 760px !important;
+  margin: 8px auto 16px !important;
+  font-size: clamp(2rem, 3.5vw, 2.85rem) !important;
+  line-height: 1.15 !important;
+}
+
+.route-about .about-section-heading > p:last-child,
+.route-about .about-hero .section-intro {
+  max-width: 760px !important;
+  margin-inline: auto !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  text-align: center !important;
+}
+
+/* Consistent Process-style section spacing */
+.route-about .about-hero {
+  padding: 46px 24px 40px !important;
+}
+
+.route-about .about-mission,
+.route-about .about-values,
+.route-about .about-team {
+  padding-top: 72px !important;
+  padding-bottom: 72px !important;
+}
+
+/* All About cards use the same alignment */
+.route-about .about-box article,
+.route-about .about-values-grid article,
+.route-about .about-team-grid article {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.route-about .about-box article {
+  min-height: 200px !important;
+}
+
+.route-about .about-values-grid article {
+  min-height: 230px !important;
+  padding: 28px 22px !important;
+}
+
+.route-about .about-team-grid article {
+  min-height: 250px !important;
+  padding: 30px 26px !important;
+}
+
+/* Consistent card typography */
+.route-about .about-box h3,
+.route-about .about-values-grid h3,
+.route-about .about-team-grid h3 {
+  margin: 0 0 10px !important;
+  font-size: 1.15rem !important;
+  line-height: 1.3 !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+}
+
+.route-about .about-box p,
+.route-about .about-values-grid p,
+.route-about .about-team-grid p {
+  max-width: 390px !important;
+  margin: 0 auto !important;
+  font-size: 0.94rem !important;
+  line-height: 1.65 !important;
+  text-align: center !important;
+}
+
+/* Mission cards */
+.route-about .about-mission-grid {
+  align-items: stretch !important;
+  gap: 24px !important;
+}
+
+.route-about .about-mission-grid p {
+  display: flex !important;
+  min-height: 190px !important;
+  margin: 0 !important;
+  padding: 28px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.96rem !important;
+  line-height: 1.7 !important;
+  text-align: center !important;
+}
+
+/* Equal card grids */
+.route-about .about-values-grid,
+.route-about .about-team-grid,
+.route-about .about-box {
+  align-items: stretch !important;
+}
+
+.route-about .about-card-number,
+.route-about .about-values-grid article > span,
+.route-about .about-team-grid article > span {
+  flex: 0 0 auto !important;
+}
+
+/* Process-style About dropdown text */
+.route-about .about-dropdown-menu > a {
+  grid-template-columns: 56px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  text-align: left !important;
+}
+
+.route-about .about-dropdown-menu > a > span:last-child {
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+.route-about .about-dropdown-menu strong {
+  margin: 0 0 3px !important;
+  font-size: 0.9rem !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  text-align: left !important;
+}
+
+.route-about .about-dropdown-menu small {
+  margin: 0 !important;
+  font-size: 0.74rem !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+}
+
+/* Compact consultation panel */
+.route-about .about-cta {
+  min-height: 0 !important;
+  padding: 40px 44px !important;
+}
+
+.route-about .about-cta h2 {
+  margin: 7px 0 10px !important;
+  font-size: clamp(1.8rem, 3vw, 2.35rem) !important;
+  line-height: 1.15 !important;
+}
+
+.route-about .about-cta p {
+  font-size: 0.96rem !important;
+  line-height: 1.65 !important;
+}
+
+@media (max-width: 900px) {
+  .route-about .about-mission,
+  .route-about .about-values,
+  .route-about .about-team {
+    padding-top: 58px !important;
+    padding-bottom: 58px !important;
+  }
+
+  .route-about .about-values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .route-about .about-hero h1 {
+    font-size: 2.1rem !important;
+  }
+
+  .route-about .about-section-heading h2 {
+    font-size: 1.9rem !important;
+  }
+
+  .route-about .about-values-grid,
+  .route-about .about-team-grid,
+  .route-about .about-mission-grid,
+  .route-about .about-box {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-about .about-box article,
+  .route-about .about-values-grid article,
+  .route-about .about-team-grid article,
+  .route-about .about-mission-grid p {
+    min-height: 0 !important;
+  }
+
+  .route-about .about-cta {
+    padding: 30px 22px !important;
+    text-align: center !important;
+  }
+}
