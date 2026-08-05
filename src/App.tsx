@@ -2268,24 +2268,127 @@ function App() {
       </section>
 
       <section className="about-section" id="about">
-        <p className="section-label">ABOUT STELLAR</p>
-        <h2>Training and mentoring built for real beginners.</h2>
-        <p className="section-intro">
-          Stellar Groupware Inc helps learners understand IT concepts, business systems, tools,
-          workflows, and project practice in a simple and structured way.
-        </p>
+        <div className="about-hero">
+          <p className="section-label">ABOUT STELLAR</p>
+          <h1>Practical IT guidance built around your progress.</h1>
+          <p className="section-intro">
+            Stellar Groupware Inc helps beginners, career changers, and growing
+            professionals build useful technology skills through structured
+            training, mentoring, project practice, and career support.
+          </p>
+        </div>
 
         <div className="about-box">
-          <div>
+          <article>
+            <span className="about-card-number">01</span>
             <h3>What we focus on</h3>
-            <p>Clear explanations, practical tasks, project confidence, and career preparation.</p>
+            <p>
+              Clear explanations, practical tasks, workplace confidence, and
+              steady preparation for real IT opportunities.
+            </p>
+          </article>
+
+          <article>
+            <span className="about-card-number">02</span>
+            <h3>Who it is for</h3>
+            <p>
+              Beginners, career changers, bootcamp learners, students, and
+              professionals who need structured support.
+            </p>
+          </article>
+        </div>
+
+        <section className="about-mission" id="mission">
+          <div className="about-section-heading">
+            <p className="section-label">OUR MISSION</p>
+            <h2>Make technology learning clear, practical, and achievable.</h2>
           </div>
 
-          <div>
-            <h3>Who it is for</h3>
-            <p>Beginners, career changers, bootcamp learners, and students who need extra support.</p>
+          <div className="about-mission-grid">
+            <p>
+              Our mission is to remove confusion from IT learning. We organize
+              each pathway into manageable steps so learners understand what to
+              study, how to practise, and how every skill connects to the workplace.
+            </p>
+            <p>
+              We combine instructor guidance, project practice, mentoring, and
+              career preparation so every learner can move forward with a clear
+              plan and dependable support.
+            </p>
           </div>
-        </div>
+        </section>
+
+        <section className="about-values" aria-labelledby="about-values-title">
+          <div className="about-section-heading">
+            <p className="section-label">WHAT GUIDES US</p>
+            <h2 id="about-values-title">Support that stays practical and personal.</h2>
+          </div>
+
+          <div className="about-values-grid">
+            <article>
+              <span aria-hidden="true">✓</span>
+              <h3>Clarity</h3>
+              <p>We explain technical concepts in straightforward language.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">✓</span>
+              <h3>Practical learning</h3>
+              <p>We connect lessons with tasks, tools, and workplace scenarios.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">✓</span>
+              <h3>Consistent support</h3>
+              <p>We help learners address blockers and maintain momentum.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">✓</span>
+              <h3>Career confidence</h3>
+              <p>We prepare learners to discuss and demonstrate their skills.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="about-team" id="team">
+          <div className="about-section-heading">
+            <p className="section-label">OUR TEAM</p>
+            <h2>Experienced guidance at every stage.</h2>
+            <p>
+              Our instructors, mentors, and coordinators work together to provide
+              organized training, useful feedback, project guidance, and career
+              preparation throughout each learner&apos;s pathway.
+            </p>
+          </div>
+
+          <div className="about-team-grid">
+            <article>
+              <span aria-hidden="true">IT</span>
+              <h3>Instructors</h3>
+              <p>Teach core concepts and demonstrate practical workflows.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">PM</span>
+              <h3>Project Mentors</h3>
+              <p>Guide practical activities and strengthen project confidence.</p>
+            </article>
+            <article>
+              <span aria-hidden="true">CS</span>
+              <h3>Career Support</h3>
+              <p>Help learners prepare their profiles and next career steps.</p>
+            </article>
+          </div>
+        </section>
+
+        <section className="about-cta">
+          <div>
+            <p className="section-label">START YOUR PATHWAY</p>
+            <h2>Ready to discuss your IT goals?</h2>
+            <p>Book a free consultation and receive clear recommendations for your next step.</p>
+          </div>
+          <div className="about-cta-actions">
+            <a className="enroll-btn" href="/appointment">Book a Free Consultation →</a>
+            <a className="about-training-link" href="/training">View Training Programs</a>
+          </div>
+        </section>
       </section>
 
       <section className="account-section" id="account">
