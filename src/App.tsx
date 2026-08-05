@@ -843,7 +843,7 @@ function App() {
 
             <div className={mobileSubmenuOpen === "about" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
               <a
-                className={currentRoute === "about" ? "active" : ""}
+                className=""
                 href="/about"
                 aria-expanded={mobileSubmenuOpen === "about"}
                 onClick={(event) => {
@@ -2293,77 +2293,168 @@ function App() {
           <h1>Practical IT guidance built around your progress.</h1>
           <p className="section-intro">
             Stellar Groupware Inc helps beginners, career changers, and growing
-            professionals build useful technology skills through structured
+            professionals develop practical technology skills through structured
             training, mentoring, project practice, and career support.
           </p>
         </div>
 
-        <div className="about-box">
-          <article>
-            <span className="about-card-number">01</span>
-            <h3>What we focus on</h3>
-            <p>
-              Clear explanations, practical tasks, workplace confidence, and
-              steady preparation for real IT opportunities.
-            </p>
-          </article>
+        <section className="about-story" aria-labelledby="about-story-title">
+          <div className="about-story-media">
+            <img
+              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85"
+              alt="Professionals collaborating around a workplace table"
+            />
+            <div className="about-story-badge">
+              <strong>2,870+</strong>
+              <span>Successful Stories</span>
+            </div>
+          </div>
 
-          <article>
-            <span className="about-card-number">02</span>
-            <h3>Who it is for</h3>
+          <div className="about-story-copy">
+            <p className="section-label">OUR STORY</p>
+            <h2 id="about-story-title">
+              Support designed for real career progress.
+            </h2>
             <p>
-              Beginners, career changers, bootcamp learners, students, and
-              professionals who need structured support.
+              Stellar was created to make technology learning easier to
+              understand, practise, and apply. We organize training into
+              manageable steps so learners can build skills without feeling
+              overwhelmed.
             </p>
+            <p>
+              Our approach connects instructor guidance, project practice,
+              mentoring, and career preparation so every learner understands
+              what to work on and how each skill connects to the workplace.
+            </p>
+          </div>
+        </section>
+
+        <div className="about-stats" aria-label="Stellar Groupware statistics">
+          <article>
+            <AnimatedCounter end={2870} />
+            <span>Successful Stories</span>
+          </article>
+          <article>
+            <AnimatedCounter end={2075} />
+            <span>Active Mentees</span>
+          </article>
+          <article>
+            <AnimatedCounter end={186} />
+            <span>Team Members</span>
+          </article>
+          <article>
+            <AnimatedCounter end={55} />
+            <span>Trainers</span>
           </article>
         </div>
 
         <section className="about-mission" id="mission">
           <div className="about-section-heading">
-            <p className="section-label">OUR MISSION</p>
-            <h2>Make technology learning clear, practical, and achievable.</h2>
+            <p className="section-label">OUR PURPOSE</p>
+            <h2>Clear guidance for every stage of your progress.</h2>
           </div>
 
           <div className="about-mission-grid">
-            <p>
-              Our mission is to remove confusion from IT learning. We organize
-              each pathway into manageable steps so learners understand what to
-              study, how to practise, and how every skill connects to the workplace.
-            </p>
-            <p>
-              We combine instructor guidance, project practice, mentoring, and
-              career preparation so every learner can move forward with a clear
-              plan and dependable support.
-            </p>
+            <article className="about-purpose-card mission-card">
+              <span aria-hidden="true">◎</span>
+              <h3>Our Mission</h3>
+              <p>
+                Make technology learning clear, practical, and achievable
+                through structured instruction, project practice, mentoring,
+                and dependable career support.
+              </p>
+            </article>
+
+            <article className="about-purpose-card vision-card">
+              <span aria-hidden="true">◉</span>
+              <h3>Our Vision</h3>
+              <p>
+                Create an accessible learning environment where beginners and
+                growing professionals can develop useful skills, confidence,
+                and a clear pathway toward technology opportunities.
+              </p>
+            </article>
           </div>
         </section>
 
-        <section className="about-values" aria-labelledby="about-values-title">
+        <section
+          className="about-values"
+          aria-labelledby="about-values-title"
+        >
           <div className="about-section-heading">
-            <p className="section-label">WHAT GUIDES US</p>
-            <h2 id="about-values-title">Support that stays practical and personal.</h2>
+            <p className="section-label">OUR CORE VALUES</p>
+            <h2 id="about-values-title">
+              Principles that guide how we support learners.
+            </h2>
           </div>
 
           <div className="about-values-grid">
             <article>
               <span aria-hidden="true">✓</span>
               <h3>Clarity</h3>
-              <p>We explain technical concepts in straightforward language.</p>
+              <p>
+                We explain technical concepts in straightforward language.
+              </p>
             </article>
+
             <article>
-              <span aria-hidden="true">✓</span>
-              <h3>Practical learning</h3>
-              <p>We connect lessons with tasks, tools, and workplace scenarios.</p>
+              <span aria-hidden="true">◆</span>
+              <h3>Practical Learning</h3>
+              <p>
+                We connect lessons with tasks, tools, and workplace scenarios.
+              </p>
             </article>
+
             <article>
-              <span aria-hidden="true">✓</span>
-              <h3>Consistent support</h3>
-              <p>We help learners address blockers and maintain momentum.</p>
+              <span aria-hidden="true">↗</span>
+              <h3>Consistent Support</h3>
+              <p>
+                We help learners resolve blockers and maintain momentum.
+              </p>
             </article>
+
             <article>
-              <span aria-hidden="true">✓</span>
-              <h3>Career confidence</h3>
-              <p>We prepare learners to discuss and demonstrate their skills.</p>
+              <span aria-hidden="true">◎</span>
+              <h3>Career Confidence</h3>
+              <p>
+                We prepare learners to discuss and demonstrate their skills.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section
+          className="about-difference"
+          aria-labelledby="about-difference-title"
+        >
+          <div className="about-section-heading">
+            <p className="section-label">WHY STELLAR</p>
+            <h2 id="about-difference-title">What sets us apart.</h2>
+          </div>
+
+          <div className="about-difference-grid">
+            <article>
+              <h3>Practical Expertise</h3>
+              <p>
+                Guidance is connected to useful tools, realistic tasks, and
+                professional workplace expectations.
+              </p>
+            </article>
+
+            <article>
+              <h3>Personalized Approach</h3>
+              <p>
+                Learners receive structured support based on their experience,
+                goals, learning pace, and selected pathway.
+              </p>
+            </article>
+
+            <article>
+              <h3>Complete Support</h3>
+              <p>
+                Training, mentoring, project guidance, and career preparation
+                work together as one organized experience.
+              </p>
             </article>
           </div>
         </section>
@@ -2373,9 +2464,9 @@ function App() {
             <p className="section-label">OUR TEAM</p>
             <h2>Experienced guidance at every stage.</h2>
             <p>
-              Our instructors, mentors, and coordinators work together to provide
-              organized training, useful feedback, project guidance, and career
-              preparation throughout each learner&apos;s pathway.
+              Our instructors, mentors, and coordinators work together to
+              provide organized training, useful feedback, project guidance,
+              and career preparation throughout each learner&apos;s pathway.
             </p>
           </div>
 
@@ -2383,17 +2474,25 @@ function App() {
             <article>
               <span aria-hidden="true">IT</span>
               <h3>Instructors</h3>
-              <p>Teach core concepts and demonstrate practical workflows.</p>
+              <p>
+                Teach core concepts and demonstrate practical workflows.
+              </p>
             </article>
+
             <article>
               <span aria-hidden="true">PM</span>
               <h3>Project Mentors</h3>
-              <p>Guide practical activities and strengthen project confidence.</p>
+              <p>
+                Guide practical activities and strengthen project confidence.
+              </p>
             </article>
+
             <article>
               <span aria-hidden="true">CS</span>
               <h3>Career Support</h3>
-              <p>Help learners prepare their profiles and next career steps.</p>
+              <p>
+                Help learners prepare their profiles and next career steps.
+              </p>
             </article>
           </div>
         </section>
@@ -2402,11 +2501,19 @@ function App() {
           <div>
             <p className="section-label">START YOUR PATHWAY</p>
             <h2>Ready to discuss your IT goals?</h2>
-            <p>Book a free consultation and receive clear recommendations for your next step.</p>
+            <p>
+              Book a free consultation and receive clear recommendations for
+              your next step.
+            </p>
           </div>
+
           <div className="about-cta-actions">
-            <a className="enroll-btn" href="/appointment">Book a Free Consultation →</a>
-            <a className="about-training-link" href="/training">View Training Programs</a>
+            <a className="enroll-btn" href="/appointment">
+              Book Free Consultation
+            </a>
+            <a className="about-training-link" href="/training">
+              View Our Training
+            </a>
           </div>
         </section>
       </section>
