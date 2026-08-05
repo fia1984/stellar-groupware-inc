@@ -855,10 +855,30 @@ function App() {
               >
                 About ▾
               </a>
-              <div className="dropdown-menu">
-                <a href="/about">About</a>
-                <a href="/about#mission">Our Mission</a>
-                <a href="/about#team">Our Team</a>
+              <div className="dropdown-menu training-dropdown-menu about-dropdown-menu">
+                <a href="/about">
+                  <span className="training-dropdown-icon" aria-hidden="true">INFO</span>
+                  <span>
+                    <strong>About Stellar</strong>
+                    <small>Learn who we are</small>
+                  </span>
+                </a>
+
+                <a href="/about#mission">
+                  <span className="training-dropdown-icon" aria-hidden="true">GOAL</span>
+                  <span>
+                    <strong>Our Mission</strong>
+                    <small>See what guides our work</small>
+                  </span>
+                </a>
+
+                <a href="/about#team">
+                  <span className="training-dropdown-icon" aria-hidden="true">TEAM</span>
+                  <span>
+                    <strong>Our Team</strong>
+                    <small>Meet your support network</small>
+                  </span>
+                </a>
               </div>
             </div>
 
