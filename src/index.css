@@ -17636,3 +17636,73 @@ body main.page-shell.route-home nav.navbar
     box-shadow: none !important;
   }
 }
+
+
+/* ABOUT DROPDOWN FINAL ACTIVE STATE FIX */
+.route-about .nav-dropdown .about-dropdown-menu {
+  left: auto !important;
+  right: 0 !important;
+  width: 300px !important;
+  min-width: 300px !important;
+}
+
+/* Prevent the main About active-tab rule from colouring dropdown links */
+.route-about .nav-dropdown .about-dropdown-menu > a,
+.route-about .nav-dropdown .about-dropdown-menu > a[href="/about"] {
+  min-height: 72px !important;
+  padding: 10px !important;
+  background: #ffffff !important;
+  border: 0 !important;
+  color: #15343b !important;
+  box-shadow: none !important;
+}
+
+/* Subtle active state for About Stellar inside the dropdown */
+.route-about .nav-dropdown .about-dropdown-menu > a[href="/about"] {
+  background: #edf9f1 !important;
+  box-shadow: inset 3px 0 0 #0aa64a !important;
+}
+
+.route-about .nav-dropdown .about-dropdown-menu > a:hover,
+.route-about .nav-dropdown .about-dropdown-menu > a:focus-visible {
+  background: #e3f6e9 !important;
+  color: #08753b !important;
+}
+
+.route-about .about-dropdown-menu > a strong {
+  color: #15343b !important;
+}
+
+.route-about .about-dropdown-menu > a small {
+  color: #61767c !important;
+  opacity: 1 !important;
+}
+
+.route-about .about-dropdown-menu > a[href="/about"] strong {
+  color: #08753b !important;
+}
+
+.route-about .about-dropdown-menu .training-dropdown-icon {
+  width: 56px !important;
+  height: 46px !important;
+}
+
+.route-about .about-hero {
+  overflow: visible !important;
+}
+
+.route-about .about-hero h1 {
+  max-width: 820px !important;
+}
+
+@media (max-width: 1250px) {
+  .route-about .nav-dropdown .about-dropdown-menu {
+    right: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .route-about .nav-dropdown .about-dropdown-menu > a {
+    min-height: 68px !important;
+  }
+}
