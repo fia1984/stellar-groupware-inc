@@ -1,0 +1,1080 @@
+
+.route-reviews .testimonial-controls button:hover {
+  color: #ffffff !important;
+  background: #08753b !important;
+  transform: none !important;
+}
+
+.route-reviews .testimonial-controls button:first-child {
+  justify-self: start !important;
+}
+
+.route-reviews .testimonial-controls button:last-child {
+  justify-self: end !important;
+}
+
+.route-reviews .testimonial-controls > span {
+  justify-self: center !important;
+  color: #4f5d6c !important;
+  font-size: 0.86rem !important;
+  font-weight: 600 !important;
+}
+
+.route-reviews .testimonial-visual {
+  display: grid !important;
+  place-items: start center !important;
+  min-height: 430px !important;
+  margin-top: 12px !important;
+  padding: 20px !important;
+  overflow: hidden !important;
+  border-radius: 8px !important;
+  background: #f1f3f5 !important;
+}
+
+.route-reviews .testimonial-phone {
+  width: min(100%, 285px) !important;
+  min-height: 390px !important;
+  padding: 18px 14px 13px !important;
+  border: 9px solid #111827 !important;
+  border-radius: 34px !important;
+  background: #0b1d18 !important;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.2) !important;
+}
+
+.route-reviews .linkedin-phone {
+  background: #202938 !important;
+}
+
+.route-reviews .testimonial-phone-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 7px 5px 13px !important;
+  color: #ffffff !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.13) !important;
+}
+
+.route-reviews .testimonial-phone-header strong,
+.route-reviews .testimonial-phone-header span {
+  display: block !important;
+}
+
+.route-reviews .testimonial-phone-header strong {
+  font-size: 0.82rem !important;
+}
+
+.route-reviews .testimonial-phone-header div > span {
+  margin-top: 2px !important;
+  color: #b8c6c0 !important;
+  font-size: 0.66rem !important;
+}
+
+.route-reviews .testimonial-avatar {
+  display: grid !important;
+  place-items: center !important;
+  flex: 0 0 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  background: #08a83f !important;
+  font-weight: 800 !important;
+}
+
+.route-reviews .testimonial-chat-bubble {
+  margin: 34px 5px 52px !important;
+  padding: 16px !important;
+  color: #ffffff !important;
+  border-radius: 12px 12px 3px 12px !important;
+  background: #08783a !important;
+}
+
+.route-reviews .testimonial-chat-bubble p {
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 0.78rem !important;
+  line-height: 1.5 !important;
+}
+
+.route-reviews .testimonial-chat-bubble small {
+  display: block !important;
+  margin-top: 10px !important;
+  color: #c9e9d5 !important;
+  font-size: 0.62rem !important;
+  text-align: right !important;
+}
+
+.route-reviews .testimonial-phone-input {
+  margin-top: auto !important;
+  padding: 10px 13px !important;
+  color: #9facb5 !important;
+  border-radius: 18px !important;
+  background: #24352f !important;
+  font-size: 0.72rem !important;
+}
+
+.route-reviews .share-success-section {
+  width: min(100%, 1100px) !important;
+  margin: 22px auto 0 !important;
+  padding: 39px 28px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(110deg, #079d37, #076f27) !important;
+}
+
+.route-reviews .share-success-section h2 {
+  font-size: 1.65rem !important;
+}
+
+.route-reviews .share-success-section p {
+  margin: 16px auto 22px !important;
+  font-size: 0.96rem !important;
+}
+
+.route-reviews .share-success-actions a {
+  min-width: 270px !important;
+  padding: 14px 21px !important;
+  border-radius: 8px !important;
+}
+
+@media (max-width: 850px) {
+  .route-reviews .reviews-reference-page {
+    padding-inline: 16px !important;
+  }
+
+  .route-reviews .reviews-heading {
+    padding: 40px 12px 30px !important;
+  }
+
+  .route-reviews .review-platform-grid,
+  .route-reviews .testimonial-column-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-reviews .large-testimonial-card {
+    padding: 24px 20px !important;
+  }
+
+  .route-reviews .testimonial-visual {
+    min-height: 405px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .route-reviews .reviews-reference-page > .reviews-heading {
+    padding-top: 42px !important;
+  }
+
+  .route-reviews .hero-section {
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .route-reviews .breadcrumb-strip {
+    top: 0 !important;
+    margin: 0 !important;
+    padding: 8px 20px !important;
+  }
+
+  .route-reviews .reviews-reference-page {
+    margin-top: 0 !important;
+    padding-inline: 12px !important;
+  }
+
+  .route-reviews .reviews-heading {
+    padding-top: 34px !important;
+  }
+
+  .route-reviews .reviews-heading h2 {
+    font-size: 2rem !important;
+  }
+
+  .route-reviews .review-platform-card {
+    align-items: flex-start !important;
+    min-height: 0 !important;
+    padding: 18px !important;
+  }
+
+  .route-reviews .review-platform-icon {
+    flex-basis: 54px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  .route-reviews .large-testimonial-card {
+    padding: 21px 15px !important;
+  }
+
+  .route-reviews .large-testimonial-card header h3 {
+    max-width: 100% !important;
+    font-size: 1.05rem !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .route-reviews .testimonial-visual {
+    min-height: 390px !important;
+    padding: 14px 8px !important;
+  }
+
+  .route-reviews .testimonial-phone {
+    width: min(100%, 270px) !important;
+  }
+
+  .route-reviews .share-success-section {
+    padding: 30px 16px 82px !important;
+  }
+
+  .route-reviews .share-success-section h2 {
+    font-size: 1.45rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .route-reviews .share-success-actions {
+    flex-direction: column !important;
+  }
+
+  .route-reviews .share-success-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 13px 10px !important;
+    font-size: 0.84rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
+  .route-reviews .stellar-chat-bubble {
+    right: 10px !important;
+    bottom: 10px !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
+
+/* Fix: hide the mobile appointment button on desktop */
+body .page-shell .mobile-header-appointment {
+  display: none !important;
+}
+
+/* Show it only when the collapsed navbar is active */
+@media (max-width: 1050px) {
+  body .page-shell .mobile-header-appointment {
+    display: inline-flex !important;
+  }
+}
+
+/* NCPL-style appointment date picker section */
+.appointment-date-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+.appointment-date-grid button {
+  min-height: 86px !important;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease !important;
+}
+
+.appointment-date-grid button:hover:not(:disabled) {
+  border-color: #16a34a !important;
+  background: #f0fdf4 !important;
+  box-shadow: 0 5px 14px rgba(22, 163, 74, 0.14) !important;
+  transform: translateY(-2px) !important;
+}
+
+.appointment-date-grid button:focus-visible {
+  border-color: #16a34a !important;
+  outline: 3px solid rgba(22, 163, 74, 0.24) !important;
+  outline-offset: 2px !important;
+}
+
+.appointment-date-grid button:disabled,
+.appointment-date-grid button:disabled:hover {
+  border-color: #e2e8f0 !important;
+  background: #f8fafc !important;
+  color: #a7b0be !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.appointment-date-grid button:disabled small,
+.appointment-date-grid button:disabled span {
+  color: #a7b0be !important;
+}
+
+.appointment-date-grid button.selected {
+  border-color: #16a34a !important;
+  background: #f0fdf4 !important;
+  color: #123c25 !important;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.12) !important;
+}
+
+@media (max-width: 850px) {
+  .appointment-date-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .appointment-date-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+
+
+/* Stellar appointment page redesign */
+.page-shell.route-appointment #appointment {
+  position: relative !important;
+  padding: 52px clamp(16px, 5vw, 76px) 96px !important;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(38, 190, 178, 0.12), transparent 28%),
+    radial-gradient(circle at 92% 16%, rgba(8, 168, 63, 0.09), transparent 25%),
+    linear-gradient(180deg, #f6fbf9 0%, #ffffff 48%) !important;
+}
+
+.route-appointment .appointment-page-intro {
+  max-width: 1180px !important;
+  margin: 0 auto 32px !important;
+  padding: clamp(28px, 4vw, 46px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.45fr) minmax(250px, 0.75fr) !important;
+  align-items: center !important;
+  gap: 30px !important;
+  color: #fff !important;
+  background: linear-gradient(120deg, #0a4d48, #0c825b) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 20px 46px rgba(7, 62, 52, 0.18) !important;
+}
+
+.route-appointment .appointment-intro-label {
+  margin: 0 0 12px !important;
+  color: #a7f3d0 !important;
+  font-size: 0.76rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.16em !important;
+}
+
+.route-appointment .appointment-page-intro h1 {
+  margin: 0 !important;
+  color: #fff !important;
+  font-size: clamp(2rem, 4vw, 3.4rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.route-appointment .appointment-page-intro > div:first-child > p:last-child {
+  max-width: 700px !important;
+  margin: 17px 0 0 !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+}
+
+.route-appointment .appointment-intro-benefits {
+  padding: 21px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  background: rgba(255, 255, 255, 0.11) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 16px !important;
+}
+
+.route-appointment .appointment-intro-benefits span {
+  color: #fff !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+}
+
+.route-appointment .appointment-layout {
+  max-width: 1180px !important;
+  gap: 30px !important;
+}
+
+.route-appointment .appointment-main-card,
+.route-appointment .appointment-info-card,
+.route-appointment .appointment-hours-card {
+  border: 1px solid #dbe8e4 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 30px rgba(19, 60, 51, 0.08) !important;
+}
+
+.route-appointment .appointment-main-card {
+  position: relative !important;
+  padding: clamp(25px, 4vw, 40px) !important;
+  overflow: hidden !important;
+}
+
+.route-appointment .appointment-main-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 0 auto !important;
+  height: 5px !important;
+  background: linear-gradient(90deg, #20b8b0, #08a83f) !important;
+}
+
+.route-appointment .appointment-date-grid button,
+.route-appointment .appointment-time-grid button {
+  min-height: 92px !important;
+  border: 1px solid #d8e5e1 !important;
+  border-radius: 13px !important;
+  background: #fff !important;
+  transition: transform .18s ease, border-color .18s ease,
+    background-color .18s ease, box-shadow .18s ease !important;
+}
+
+.route-appointment .appointment-date-grid button:not(:disabled):hover,
+.route-appointment .appointment-time-grid button:not(:disabled):hover {
+  transform: translateY(-3px) !important;
+  border-color: #19a96b !important;
+  background: #f0fbf6 !important;
+  box-shadow: 0 10px 22px rgba(16, 132, 84, 0.12) !important;
+}
+
+.route-appointment .appointment-date-grid button.selected,
+.route-appointment .appointment-time-grid button.selected {
+  color: #075f35 !important;
+  border-color: #08a83f !important;
+  background: #eaf9f0 !important;
+  box-shadow: 0 0 0 3px rgba(8, 168, 63, 0.12) !important;
+}
+
+.route-appointment .appointment-date-grid button:disabled,
+.route-appointment .appointment-time-grid button:disabled {
+  color: #a6b0bd !important;
+  background: #f4f6f8 !important;
+  cursor: not-allowed !important;
+  opacity: .75 !important;
+}
+
+.route-appointment .appointment-details-form input,
+.route-appointment .appointment-details-form select,
+.route-appointment .appointment-details-form textarea {
+  border: 1px solid #d5e2de !important;
+  border-radius: 10px !important;
+  background: #fbfdfc !important;
+}
+
+.route-appointment .appointment-details-form input:focus,
+.route-appointment .appointment-details-form select:focus,
+.route-appointment .appointment-details-form textarea:focus {
+  outline: none !important;
+  border-color: #11a36a !important;
+  background: #fff !important;
+  box-shadow: 0 0 0 4px rgba(17, 163, 106, 0.11) !important;
+}
+
+.route-appointment .appointment-selection-summary {
+  border: 1px solid #cde6dc !important;
+  border-radius: 11px !important;
+  background: #f1faf6 !important;
+}
+
+.route-appointment .appointment-sidebar {
+  position: sticky !important;
+  top: 110px !important;
+}
+
+.route-appointment .appointment-hours-card {
+  background: linear-gradient(135deg, #087f52, #24b05a) !important;
+}
+
+.route-appointment .appointment-book-btn:not(:disabled) {
+  background: linear-gradient(135deg, #078c4e, #09b449) !important;
+  box-shadow: 0 10px 22px rgba(8, 168, 63, 0.22) !important;
+}
+
+.route-appointment .breadcrumb-strip {
+  min-height: 46px !important;
+  padding-inline: max(22px, calc((100% - 1180px) / 2)) !important;
+  background: #fff !important;
+  border-bottom: 1px solid #e2e9e6 !important;
+}
+
+.route-appointment .breadcrumb-stellar-icon {
+  display: none !important;
+}
+
+@media (min-width: 670px) and (max-width: 1050px) {
+  .route-appointment .navbar {
+    position: relative !important;
+    width: calc(100% - 28px) !important;
+    min-height: 82px !important;
+    padding: 12px !important;
+    gap: 6px !important;
+  }
+
+  .route-appointment .brand {
+    flex: 0 0 185px !important;
+    width: 185px !important;
+    min-width: 185px !important;
+  }
+
+  .route-appointment .mobile-menu-button,
+  .route-appointment .mobile-header-appointment {
+    display: none !important;
+  }
+
+  .route-appointment .nav-links {
+    position: static !important;
+    display: flex !important;
+    width: auto !important;
+    padding: 0 !important;
+    flex: 1 1 auto !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 1px !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .route-appointment .nav-links > a,
+  .route-appointment .nav-dropdown,
+  .route-appointment .nav-dropdown > a,
+  .route-appointment .book-btn {
+    display: inline-flex !important;
+    position: relative !important;
+    width: auto !important;
+    min-width: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 0 0 auto !important;
+  }
+
+  .route-appointment .nav-links > a,
+  .route-appointment .nav-dropdown > a {
+    min-height: 40px !important;
+    padding-inline: 5px !important;
+    color: #17313a !important;
+    background: transparent !important;
+    font-size: .7rem !important;
+    white-space: nowrap !important;
+  }
+
+  .route-appointment #book-appointment-nav {
+    min-width: 132px !important;
+    padding-inline: 9px !important;
+    color: #fff !important;
+    background: #08a83f !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .route-appointment .appointment-page-intro {
+    grid-template-columns: 1fr !important;
+  }
+
+  .route-appointment .appointment-intro-benefits {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .route-appointment .appointment-sidebar {
+    position: static !important;
+  }
+}
+
+@media (max-width: 669px) {
+  .page-shell.route-appointment #appointment {
+    padding: 30px 15px 68px !important;
+  }
+
+  .route-appointment .appointment-page-intro {
+    margin-bottom: 22px !important;
+    padding: 27px 21px !important;
+    grid-template-columns: 1fr !important;
+    border-radius: 16px !important;
+  }
+
+  .route-appointment .appointment-intro-benefits {
+    display: flex !important;
+  }
+
+  .route-appointment .appointment-main-card {
+    padding: 25px 18px !important;
+  }
+}
+
+
+/* Appointment visual QA correction */
+.route-appointment .appointment-page-intro {
+  background: linear-gradient(135deg, #087f52, #24b05a) !important;
+}
+
+.route-appointment .appointment-page-intro > div:first-child,
+.route-appointment .appointment-page-intro h1,
+.route-appointment .appointment-page-intro p,
+.route-appointment .appointment-intro-benefits {
+  text-align: left !important;
+}
+
+.route-appointment .appointment-page-intro h1 {
+  max-width: 720px !important;
+  font-size: clamp(2rem, 3.6vw, 3.15rem) !important;
+}
+
+.route-appointment .appointment-intro-benefits span {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+.route-appointment .appointment-main-card .section-label {
+  text-align: left !important;
+}
+
+/* Full appointment header from 670px upward */
+@media (min-width: 670px) {
+  body main.page-shell.route-appointment nav.navbar {
+    position: relative !important;
+    width: calc(100% - 32px) !important;
+    min-height: 84px !important;
+    padding: 12px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar .brand {
+    display: flex !important;
+    flex: 0 0 220px !important;
+    width: 220px !important;
+    min-width: 220px !important;
+    align-items: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar .brand h2 {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    color: #17313a !important;
+    font-size: 1.05rem !important;
+    line-height: 1.05 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar .brand span {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    color: #50bdd4 !important;
+    font-size: 0.62rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar .mobile-menu-button,
+  body main.page-shell.route-appointment nav.navbar .mobile-header-appointment {
+    display: none !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar #primary-navigation.nav-links {
+    position: static !important;
+    inset: auto !important;
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    padding: 0 !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 2px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar #primary-navigation.nav-links > a,
+  body main.page-shell.route-appointment nav.navbar #primary-navigation.nav-links > .nav-dropdown,
+  body main.page-shell.route-appointment nav.navbar #primary-navigation.nav-links > .nav-dropdown > a {
+    display: inline-flex !important;
+    position: relative !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 42px !important;
+    margin: 0 !important;
+    padding: 0 7px !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #17313a !important;
+    background: transparent !important;
+    font-size: 0.75rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    transform: none !important;
+    clip: auto !important;
+    pointer-events: auto !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar
+    #primary-navigation.nav-links > #book-appointment-nav {
+    min-width: 146px !important;
+    padding-inline: 13px !important;
+    color: #fff !important;
+    background: #08a83f !important;
+    box-shadow: 0 5px 12px rgba(8, 168, 63, 0.22) !important;
+  }
+}
+
+@media (min-width: 1180px) {
+  body main.page-shell.route-appointment nav.navbar .brand {
+    flex-basis: 270px !important;
+    width: 270px !important;
+    min-width: 270px !important;
+  }
+
+  body main.page-shell.route-appointment nav.navbar
+    #primary-navigation.nav-links > a,
+  body main.page-shell.route-appointment nav.navbar
+    #primary-navigation.nav-links > .nav-dropdown > a {
+    padding-inline: 11px !important;
+    font-size: 0.88rem !important;
+  }
+}
+
+
+/* Appointment form typography QA */
+.route-appointment .appointment-details-form {
+  font-family: inherit !important;
+}
+
+.route-appointment .appointment-details-form label {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  color: #17313a !important;
+  font-family: inherit !important;
+  font-size: 0.96rem !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+}
+
+.route-appointment .appointment-details-form input,
+.route-appointment .appointment-details-form select,
+.route-appointment .appointment-details-form textarea {
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 13px 15px !important;
+  color: #17313a !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+}
+
+.route-appointment .appointment-details-form textarea {
+  min-height: 128px !important;
+  resize: vertical !important;
+}
+
+.route-appointment .appointment-details-form input::placeholder,
+.route-appointment .appointment-details-form textarea::placeholder {
+  color: #6b7890 !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  opacity: 1 !important;
+}
+
+.route-appointment .appointment-details-form select option {
+  color: #17313a !important;
+  background: #ffffff !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+}
+
+.route-appointment .appointment-consent-copy {
+  font-size: 0.88rem !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+}
+
+.route-appointment .appointment-book-btn {
+  min-height: 52px !important;
+  font-family: inherit !important;
+  font-size: 0.98rem !important;
+  font-weight: 800 !important;
+}
+
+@media (max-width: 669px) {
+  .route-appointment .appointment-details-form label {
+    font-size: 0.92rem !important;
+  }
+
+  .route-appointment .appointment-details-form input,
+  .route-appointment .appointment-details-form select,
+  .route-appointment .appointment-details-form textarea {
+    font-size: 16px !important;
+  }
+}
+
+
+/* Final simplified appointment flow */
+.route-appointment,
+.route-appointment button,
+.route-appointment input,
+.route-appointment select,
+.route-appointment textarea {
+  font-family: inherit !important;
+}
+
+.route-appointment .appointment-page-intro {
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.route-appointment .appointment-page-intro:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 24px 50px rgba(7, 82, 55, 0.2) !important;
+}
+
+.route-appointment .appointment-page-intro h1 {
+  font-size: clamp(2rem, 3.25vw, 3rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.route-appointment .appointment-page-intro p {
+  font-size: 0.98rem !important;
+}
+
+.route-appointment .appointment-steps-simple {
+  max-width: 310px !important;
+}
+
+.route-appointment .appointment-details-form label {
+  gap: 7px !important;
+  color: #17313a !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+}
+
+.route-appointment .appointment-details-form input,
+.route-appointment .appointment-details-form select,
+.route-appointment .appointment-details-form textarea {
+  min-height: 52px !important;
+  padding: 13px 15px !important;
+  color: #17313a !important;
+  font-size: 0.96rem !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+}
+
+.route-appointment .appointment-details-form textarea {
+  min-height: 128px !important;
+}
+
+.route-appointment .appointment-date-grid button:not(:disabled),
+.route-appointment .appointment-book-btn:not(:disabled),
+.route-appointment .appointment-consent-toggle,
+.route-appointment .appointment-selection-summary button {
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease, background-color 0.18s ease !important;
+}
+
+.route-appointment .appointment-date-grid button:not(:disabled):hover,
+.route-appointment .appointment-selection-summary button:hover {
+  transform: translateY(-3px) !important;
+}
+
+.route-appointment .appointment-book-btn:not(:disabled):hover {
+  transform: translateY(-2px) scale(1.01) !important;
+}
+
+.route-appointment .appointment-confirmation {
+  animation: appointment-confirmation-in 0.35s ease both !important;
+}
+
+@keyframes appointment-confirmation-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 669px) {
+  .route-appointment .appointment-page-intro h1 {
+    font-size: 2rem !important;
+  }
+
+  .route-appointment .appointment-details-form input,
+  .route-appointment .appointment-details-form select,
+  .route-appointment .appointment-details-form textarea {
+    font-size: 16px !important;
+  }
+}
+
+
+/* Clean appointment responsive QA rules */
+@media (max-width: 850px) {
+  body .page-shell.route-appointment .navbar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+  }
+
+  body .page-shell.route-appointment .brand {
+    flex: 0 1 150px !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+
+  body .page-shell.route-appointment .brand span {
+    display: none !important;
+  }
+
+  body .page-shell.route-appointment .mobile-header-appointment {
+    flex: 1 1 180px !important;
+    width: auto !important;
+    min-width: 110px !important;
+    max-width: 240px !important;
+    margin-left: auto !important;
+  }
+
+  body .page-shell.route-appointment .mobile-menu-button {
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+  }
+
+  body .page-shell.route-appointment section.appointment-section#appointment {
+    position: static !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding-top: 24px !important;
+  }
+
+  body .page-shell.route-appointment .appointment-page-intro {
+    margin: 0 auto 20px !important;
+  }
+
+  body .page-shell.route-home .nav-links #book-appointment-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  body .page-shell.route-appointment .navbar {
+    gap: 7px !important;
+    width: calc(100% - 24px) !important;
+    padding: 10px !important;
+  }
+
+  body .page-shell.route-appointment .brand {
+    flex-basis: 112px !important;
+  }
+
+  body .page-shell.route-appointment .brand-icon {
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  body .page-shell.route-appointment .brand h2 {
+    margin: 0 !important;
+    font-size: 0.95rem !important;
+  }
+
+  body .page-shell.route-appointment .mobile-header-appointment {
+    flex: 1 1 112px !important;
+    min-width: 100px !important;
+    max-width: 150px !important;
+    padding: 9px 7px !important;
+    font-size: 0.7rem !important;
+    line-height: 1.15 !important;
+  }
+
+  body .page-shell.route-appointment section.appointment-section#appointment {
+    padding: 20px 12px 68px !important;
+  }
+
+  body .page-shell.route-appointment .appointment-page-intro,
+  body .page-shell.route-appointment .appointment-main-card,
+  body .page-shell.route-appointment .appointment-info-card,
+  body .page-shell.route-appointment .appointment-hours-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 22px 18px !important;
+    overflow: hidden !important;
+  }
+
+  body .page-shell.route-appointment .appointment-layout {
+    width: 100% !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 20px !important;
+  }
+
+  body .page-shell.route-appointment .appointment-date-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  body .page-shell.route-appointment .appointment-details-form input,
+  body .page-shell.route-appointment .appointment-details-form select,
+  body .page-shell.route-appointment .appointment-details-form textarea {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    font-size: 16px !important;
+  }
+}
+
+
+/* Appointment inline validation */
+.appointment-details-form .appointment-field-error {
+  display: block;
+  margin: 5px 2px 0;
+  color: #b42318;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.appointment-details-form input[aria-invalid="true"],
+.appointment-details-form select[aria-invalid="true"],
+.appointment-details-form textarea[aria-invalid="true"] {
+  border-color: #d92d20 !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.appointment-details-form input[aria-invalid="true"]:focus,
+.appointment-details-form select[aria-invalid="true"]:focus,
+.appointment-details-form textarea[aria-invalid="true"]:focus {
+  outline: 2px solid rgba(217, 45, 32, 0.18) !important;
+  outline-offset: 1px;
+}
+
+

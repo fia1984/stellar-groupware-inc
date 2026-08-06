@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, type ReactNode } from "react";
-import "./index.css";
 
 const slides = [
   {

@@ -1,0 +1,809 @@
+
+/* =========================================================
+   95% NCPL REFERENCE POLISH
+   ========================================================= */
+
+@media (min-width: 769px) {
+  /* Cleaner header spacing */
+  .route-home .header-inner,
+  .route-home .navbar,
+  .route-home header > div {
+    width: min(1240px, calc(100% - 48px)) !important;
+    margin-inline: auto !important;
+  }
+
+  .route-home .nav-links {
+    gap: 6px !important;
+    align-items: center !important;
+  }
+
+  /* Regular links are plain text until hovered */
+  .route-home .nav-links > a:not(#book-appointment-nav),
+  .route-home .nav-dropdown > a,
+  .route-home #home-nav-link,
+  .route-home .nav-links > a.active:not(#book-appointment-nav),
+  .route-home .nav-dropdown > a.active {
+    min-height: 44px !important;
+    padding: 0 15px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  /* Forest green only while hovering */
+  .route-home .nav-links > a:not(#book-appointment-nav):hover,
+  .route-home .nav-links > a:not(#book-appointment-nav):focus,
+  .route-home .nav-dropdown:hover > a,
+  .route-home .nav-dropdown:focus-within > a {
+    background: #0b3d24 !important;
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Book Appointment remains green */
+  .route-home #book-appointment-nav {
+    min-height: 44px !important;
+    padding: 0 22px !important;
+    background: #0ca943 !important;
+    color: #ffffff !important;
+    border: 1px solid #088d37 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  .route-home #book-appointment-nav:hover,
+  .route-home #book-appointment-nav:focus {
+    background: #098f39 !important;
+  }
+
+  /* Slightly smaller Stellar branding */
+  .route-home .brand {
+    gap: 10px !important;
+  }
+
+  .route-home .brand-icon {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 11px !important;
+  }
+
+  .route-home .brand h2 {
+    font-size: 1.65rem !important;
+    line-height: 1 !important;
+  }
+
+  .route-home .brand span {
+    font-size: 0.72rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  /* NCPL-style dropdown sizing */
+  .route-home .nav-dropdown .dropdown-menu {
+    min-width: 175px !important;
+    padding: 5px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22) !important;
+  }
+
+  .route-home .nav-dropdown .dropdown-menu a {
+    padding: 9px 10px !important;
+    font-size: 0.9rem !important;
+    border-radius: 4px !important;
+  }
+
+  /* Position hero content closer to the reference */
+  .route-home .hero-content {
+    width: min(620px, 48vw) !important;
+    margin-left: clamp(145px, 14vw, 230px) !important;
+    margin-right: auto !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .route-home .hero-content h1 {
+    max-width: 610px !important;
+    margin-bottom: 16px !important;
+    font-size: clamp(3rem, 4.25vw, 4.35rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .route-home .hero-content h2 {
+    max-width: 590px !important;
+    margin-bottom: 14px !important;
+    font-size: clamp(1.3rem, 1.8vw, 1.75rem) !important;
+    line-height: 1.3 !important;
+  }
+
+  .route-home .hero-content p {
+    max-width: 580px !important;
+    margin-bottom: 22px !important;
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .route-home .hero-tag {
+    margin-bottom: 22px !important;
+    padding: 8px 18px !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Slightly darker left side while keeping image visible */
+  .route-home .hero-section::before {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.79) 0%,
+      rgba(2, 10, 16, 0.64) 32%,
+      rgba(2, 10, 16, 0.39) 59%,
+      rgba(2, 10, 16, 0.17) 100%
+    ) !important;
+  }
+
+  /* Uniform hero buttons */
+  .route-home .hero-actions {
+    gap: 12px !important;
+  }
+
+  .route-home .hero-actions a,
+  .route-home .hero-actions button {
+    width: 190px !important;
+    min-height: 50px !important;
+    padding: 0 20px !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+  .route-home .hero-content {
+    width: min(590px, 58vw) !important;
+    margin-left: 90px !important;
+  }
+
+  .route-home .nav-links > a:not(#book-appointment-nav),
+  .route-home .nav-dropdown > a {
+    padding-inline: 10px !important;
+  }
+}
+
+/* Lighten home hero overlay while keeping text readable */
+@media (min-width: 769px) {
+  .route-home .hero-section::before {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.68) 0%,
+      rgba(2, 10, 16, 0.52) 32%,
+      rgba(2, 10, 16, 0.28) 60%,
+      rgba(2, 10, 16, 0.10) 100%
+    ) !important;
+  }
+}
+
+/* Final lighter hero overlay */
+@media (min-width: 769px) {
+  .route-home .hero-section::before {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.48) 0%,
+      rgba(2, 10, 16, 0.34) 34%,
+      rgba(2, 10, 16, 0.16) 64%,
+      rgba(2, 10, 16, 0.04) 100%
+    ) !important;
+  }
+
+  .route-home .hero-content h1,
+  .route-home .hero-content h2,
+  .route-home .hero-content p {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.42) !important;
+  }
+}
+
+/* Final hero brightness fix: lighten the actual overlay layer */
+@media (min-width: 769px) {
+  .route-home .hero-section .dark-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(2, 10, 16, 0.42) 0%,
+      rgba(2, 10, 16, 0.28) 36%,
+      rgba(2, 10, 16, 0.12) 68%,
+      rgba(2, 10, 16, 0.02) 100%
+    ) !important;
+  }
+
+  .route-home .hero-section::before,
+  .route-home .hero-section::after {
+    background: none !important;
+  }
+}
+
+/* Improve hero text readability without darkening the whole image */
+@media (min-width: 769px) {
+  .route-home .hero-content {
+    padding: 28px 30px !important;
+    background: rgba(3, 14, 20, 0.20) !important;
+    border-radius: 14px !important;
+    backdrop-filter: blur(1px) !important;
+  }
+
+  .route-home .hero-content > p:not(.hero-tag) {
+    color: rgba(255, 255, 255, 0.98) !important;
+    font-weight: 500 !important;
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.55) !important;
+  }
+
+  .route-home .hero-content h3 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .route-home .hero-actions .secondary-btn {
+    background: rgba(5, 20, 27, 0.48) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Reviews page — reference-inspired layout */
+.route-reviews .reviews-reference-page {
+  background: #f7f9fb;
+  padding: 0 7% 80px;
+}
+
+.route-reviews .reviews-heading {
+  padding: 56px 20px 40px;
+  text-align: center;
+}
+
+.route-reviews .reviews-heading h2 {
+  margin: 0;
+  color: #111827;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1.15;
+}
+
+.route-reviews .reviews-heading p {
+  margin: 18px auto 0;
+  max-width: 760px;
+  color: #526071;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.route-reviews .review-platform-grid,
+.route-reviews .testimonial-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.route-reviews .review-platform-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 126px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e8edf0;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.09);
+}
+
+.route-reviews .review-platform-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 76px;
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.route-reviews .google-review-icon {
+  color: #4285f4;
+  background: #effaf5;
+}
+
+.route-reviews .linkedin-review-icon {
+  color: #0879b9;
+  background: #eef3ff;
+  font-size: 1.55rem;
+}
+
+.route-reviews .review-platform-card h3 {
+  margin: 0 0 5px;
+  color: #111827;
+  font-size: 1.2rem;
+}
+
+.route-reviews .review-platform-card p {
+  margin: 0 0 8px;
+  color: #526071;
+}
+
+.route-reviews .review-stars {
+  color: #f7b500;
+  letter-spacing: 1px;
+}
+
+.route-reviews .review-stars strong {
+  margin-left: 6px;
+  color: #1f2937;
+}
+
+.route-reviews .linkedin-review-button {
+  display: inline-flex;
+  padding: 8px 15px;
+  color: #ffffff;
+  background: #0879b9;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.route-reviews .testimonial-column-grid {
+  margin-top: 24px;
+  align-items: stretch;
+}
+
+.route-reviews .large-testimonial-card {
+  overflow: hidden;
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e8edf0;
+  border-radius: 14px;
+  box-shadow: 0 5px 15px rgba(15, 23, 42, 0.08);
+}
+
+.route-reviews .large-testimonial-card header {
+  text-align: center;
+}
+
+.route-reviews .large-testimonial-card header h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.55rem;
+}
+
+.route-reviews .large-testimonial-card header p {
+  margin: 7px 0 20px;
+  color: #526071;
+}
+
+.route-reviews .testimonial-feature {
+  min-height: 190px;
+  text-align: center;
+}
+
+.route-reviews .testimonial-feature h4 {
+  margin: 0 0 10px;
+  color: #16202f;
+  font-size: 1.05rem;
+}
+
+.route-reviews .testimonial-feature p {
+  max-width: 520px;
+  margin: 0 auto 15px;
+  color: #445365;
+  line-height: 1.65;
+}
+
+.route-reviews .testimonial-feature strong,
+.route-reviews .testimonial-feature span {
+  display: block;
+}
+
+.route-reviews .testimonial-feature strong {
+  color: #16202f;
+}
+
+.route-reviews .testimonial-feature span {
+  margin-top: 4px;
+  color: #08a83f;
+  font-weight: 700;
+}
+
+.route-reviews .testimonial-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 5px;
+  border-bottom: 1px solid #dbe3e8;
+}
+
+.route-reviews .testimonial-controls button {
+  padding: 4px 10px;
+  color: #526071;
+  background: transparent;
+  border: 0;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.route-reviews .testimonial-controls span {
+  color: #526071;
+}
+
+.route-reviews .testimonial-visual {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  margin-top: 14px;
+  padding: 26px;
+  background: #f1f3f5;
+  border-radius: 10px;
+}
+
+.route-reviews .testimonial-message {
+  display: flex;
+  gap: 14px;
+  width: min(100%, 420px);
+  padding: 22px;
+  color: #ffffff;
+  background: #17201c;
+  border-radius: 18px;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.18);
+}
+
+.route-reviews .testimonial-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  background: #08a83f;
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.route-reviews .testimonial-message p {
+  margin: 7px 0 0;
+  color: #e6ece8;
+  line-height: 1.5;
+}
+
+.route-reviews .share-success-section {
+  max-width: 1180px;
+  margin: 28px auto 0;
+  padding: 46px 30px;
+  text-align: center;
+  color: #ffffff;
+  background: linear-gradient(110deg, #0ca83b, #087328);
+  border-radius: 16px;
+}
+
+.route-reviews .share-success-section h2 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+}
+
+.route-reviews .share-success-section p {
+  margin: 20px auto 28px;
+  color: #ffffff;
+  font-size: 1.05rem;
+}
+
+.route-reviews .share-success-actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.route-reviews .share-success-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 290px;
+  padding: 17px 24px;
+  color: #099436;
+  background: #ffffff;
+  border-radius: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.route-reviews .share-success-actions a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 850px) {
+  .route-reviews .review-platform-grid,
+  .route-reviews .testimonial-column-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-reviews .reviews-reference-page {
+    padding-inline: 20px;
+  }
+
+  .route-reviews .share-success-actions a {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Reviews page header and card spacing correction */
+@media (min-width: 1050px) {
+  .route-reviews .nav-links {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .route-reviews .nav-links > a,
+  .route-reviews .nav-links > .nav-dropdown {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .route-reviews .mobile-menu-button,
+  .route-reviews .mobile-menu-toggle {
+    display: none !important;
+  }
+}
+
+.route-reviews .large-testimonial-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.route-reviews .testimonial-feature {
+  min-height: 0;
+  padding-bottom: 18px;
+}
+
+.route-reviews .testimonial-controls {
+  margin-top: 0;
+}
+
+.route-reviews .testimonial-column-grid {
+  align-items: start;
+}
+
+.route-reviews .reviews-heading {
+  padding-top: 26px;
+}
+
+.route-reviews .reviews-heading h2 {
+  font-size: clamp(2rem, 2.5vw, 2.55rem);
+}
+
+/* Final Reviews header correction */
+.route-reviews .hero-section {
+  min-height: auto !important;
+  height: auto !important;
+  background-image: none !important;
+  overflow: visible !important;
+}
+
+.route-reviews .dark-overlay,
+.route-reviews .code-layer,
+.route-reviews .globe-effect,
+.route-reviews .slide-flash,
+.route-reviews .slide-arrow,
+.route-reviews .hero-content,
+.route-reviews .dots,
+.route-reviews .home-stats-section {
+  display: none !important;
+}
+
+.route-reviews .breadcrumb-strip {
+  position: relative !important;
+  top: auto !important;
+  margin-top: 0 !important;
+  z-index: 2;
+}
+
+.route-reviews .reviews-reference-page {
+  position: relative;
+  z-index: 1;
+}
+
+.route-reviews .reviews-heading {
+  padding-top: 42px !important;
+}
+
+@media (min-width: 1050px) {
+  .route-reviews .navbar {
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    align-items: center !important;
+  }
+
+  .route-reviews .nav-links {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 18px !important;
+    width: auto !important;
+    overflow: visible !important;
+  }
+
+  .route-reviews .nav-links > a,
+  .route-reviews .nav-links > .nav-dropdown {
+    display: flex !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* Reviews page: definitive header and heading correction */
+.route-reviews .reviews-reference-page,
+.route-reviews .reviews-heading {
+  margin-top: 0 !important;
+  transform: none !important;
+}
+
+.route-reviews .reviews-heading {
+  position: relative !important;
+  top: auto !important;
+  padding: 64px 20px 34px !important;
+}
+
+.route-reviews .reviews-heading h2 {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+  overflow: visible !important;
+}
+
+@media (min-width: 1050px) {
+  .route-reviews .navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    overflow: visible !important;
+  }
+
+  .route-reviews .nav-links {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 16px !important;
+    width: auto !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  .route-reviews .nav-links > a,
+  .route-reviews .nav-links > .nav-dropdown,
+  .route-reviews #home-nav-link {
+    display: inline-flex !important;
+    position: relative !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* Reviews page: restore every desktop navigation item */
+@media (min-width: 1050px) {
+  body .route-reviews .navbar {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 32px !important;
+    padding-inline: max(4%, 32px) !important;
+  }
+
+  body .route-reviews .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: none !important;
+    overflow: visible !important;
+  }
+
+  body .route-reviews .nav-links > a,
+  body .route-reviews .nav-links > .nav-dropdown,
+  body .route-reviews .nav-links > a[href="/"],
+  body .route-reviews .nav-links > a[href="/reviews"],
+  body .route-reviews .nav-links > a[href="/pricing"],
+  body .route-reviews .nav-links > a[href="/account-access.html"] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    transform: none !important;
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+    pointer-events: auto !important;
+  }
+
+  body .route-reviews .nav-links > a,
+  body .route-reviews .nav-dropdown > a {
+    padding-inline: 10px !important;
+    font-size: 0.94rem !important;
+    white-space: nowrap !important;
+  }
+
+  body .route-reviews .brand {
+    flex-shrink: 0 !important;
+  }
+}
+
+/* Reviews page: make all desktop navbar links visible */
+@media (min-width: 1050px) {
+  body .route-reviews .nav-links > a:not(#book-appointment-nav),
+  body .route-reviews .nav-dropdown > a,
+  body .route-reviews #home-nav-link,
+  body .route-reviews .nav-links > a.active:not(#book-appointment-nav),
+  body .route-reviews .nav-dropdown > a.active {
+    color: #0f2f35 !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  body .route-reviews .nav-links > a:not(#book-appointment-nav):hover,
+  body .route-reviews .nav-dropdown > a:hover {
+    color: #ffffff !important;
+    background: #17613f !important;
+  }
+
+  body .route-reviews .nav-links > a[href="/reviews"] {
+    color: #ffffff !important;
+    background: #17613f !important;
+    border-radius: 7px !important;
+  }
+
+  body .route-reviews #book-appointment-nav {
+    color: #ffffff !important;
+    background: #08a83f !important;
+  }
+}
+
+/* Reviews page final heading spacing */
+.route-reviews .reviews-heading {
+  padding-top: 58px !important;
+  padding-bottom: 38px !important;
+}
+
+.route-reviews .reviews-heading h2 {
+  margin: 0 !important;
+  line-height: 1.15 !important;
+}
+
+.route-reviews .reviews-heading p {
+  margin-top: 18px !important;
+}
+
+/* Reviews page: final breathing room */
+.route-reviews .reviews-heading {
+  padding-top: 78px !important;
+  padding-bottom: 46px !important;
+}
+
+.route-reviews .reviews-heading p {
+  margin-top: 20px !important;
+}
+
+/* Clickable Reviews platform card */
+.route-reviews .review-platform-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
