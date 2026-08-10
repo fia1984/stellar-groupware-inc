@@ -61,6 +61,65 @@ body main.page-shell.route-home .slide-arrow.right {
   right: 18px !important;
 }
 
+/* NCPL-style brightening and light sweep for Book Appointment. */
+body main.page-shell .book-btn,
+body main.page-shell .mobile-header-appointment {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  transition:
+    background-color 0.2s cubic-bezier(0, 0, 0.2, 1),
+    box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1),
+    transform 0.2s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
+body main.page-shell .book-btn::after,
+body main.page-shell .mobile-header-appointment::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: -40% auto -40% -65% !important;
+  width: 45% !important;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 25%,
+    rgba(255, 255, 255, 0.72) 50%,
+    rgba(255, 255, 255, 0.18) 75%,
+    transparent 100%
+  ) !important;
+  transform: skewX(-18deg) !important;
+  transition: left 0.5s ease !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+body main.page-shell .book-btn:hover,
+body main.page-shell .book-btn:focus-visible,
+body main.page-shell .mobile-header-appointment:hover,
+body main.page-shell .mobile-header-appointment:focus-visible {
+  background-color: #12bb4f !important;
+  box-shadow:
+    0 0 0 1px rgba(18, 187, 79, 0.45),
+    0 8px 20px rgba(8, 117, 59, 0.32) !important;
+  transform: translateY(-1px) !important;
+}
+
+body main.page-shell .book-btn:hover::after,
+body main.page-shell .book-btn:focus-visible::after,
+body main.page-shell .mobile-header-appointment:hover::after,
+body main.page-shell .mobile-header-appointment:focus-visible::after {
+  left: 125% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body main.page-shell .book-btn,
+  body main.page-shell .mobile-header-appointment,
+  body main.page-shell .book-btn::after,
+  body main.page-shell .mobile-header-appointment::after {
+    transition: none !important;
+  }
+}
+
 /* Strong, readable social-media badges with white boundaries. */
 body main.page-shell .social-row a,
 body main.page-shell.route-reviews .review-platform-icon,
