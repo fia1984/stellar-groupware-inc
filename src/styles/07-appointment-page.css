@@ -939,3 +939,17 @@
   cursor: pointer !important;
   z-index: 5 !important;
 }
+
+
+/* Keep the Appointment breadcrumb above the green banner */
+.route-appointment .breadcrumb-strip {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  z-index: 2 !important;
+}
+
+.route-appointment .appointment-page {
+  padding-top: 32px !important;
+}

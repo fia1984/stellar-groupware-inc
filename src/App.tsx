@@ -405,7 +405,14 @@ function App() {
       ? "Book Appointment"
       : currentRoute === "enroll"
       ? "Enrollment"
+      : currentRoute === "contact"
+      ? "Contact"
       : "Home";
+
+  useEffect(() => {
+    const title = currentRoute === "home" ? "Home" : routeTitle;
+    document.title = `${title} | Stellar Groupware Inc.`;
+  }, [currentRoute, routeTitle]);
 
   const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -767,12 +774,19 @@ function App() {
             >
               Reviews
             </a>
-            <a className={currentRoute === "pricing" ? "active" : ""} href="/pricing">Pricing</a>
+            <a
+              className={currentRoute === "pricing" ? "active" : ""}
+              href="/pricing"
+              aria-current={currentRoute === "pricing" ? "page" : undefined}
+            >
+              Pricing
+            </a>
 
             <div className={mobileSubmenuOpen === "training" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
               <a
                 className={currentRoute === "training" ? "active" : ""}
                 href="/training"
+                aria-current={currentRoute === "training" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "training"}
                 onClick={(event) => {
                   if (window.matchMedia("(max-width: 1250px)").matches) {
@@ -803,6 +817,7 @@ function App() {
               <a
                 className={currentRoute === "process" ? "active" : ""}
                 href="/process"
+                aria-current={currentRoute === "process" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "process"}
                 onClick={(event) => {
                   if (window.matchMedia("(max-width: 1250px)").matches) {
@@ -842,8 +857,9 @@ function App() {
 
             <div className={mobileSubmenuOpen === "about" ? "nav-dropdown mobile-submenu-open" : "nav-dropdown"}>
               <a
-                className=""
+                className={currentRoute === "about" ? "active" : ""}
                 href="/about"
+                aria-current={currentRoute === "about" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "about"}
                 onClick={(event) => {
                   if (window.matchMedia("(max-width: 1250px)").matches) {
@@ -881,7 +897,11 @@ function App() {
               </div>
             </div>
 
-            <a href="/account-access.html" target="_blank" rel="noreferrer">
+            <a
+              className={currentRoute === "account" ? "active" : ""}
+              href="/account"
+              aria-current={currentRoute === "account" ? "page" : undefined}
+            >
               My Account
             </a>
 
@@ -2017,7 +2037,7 @@ function App() {
 
           <a
             className="review-platform-card review-platform-link linkedin-platform-card"
-            href="https://www.linkedin.com/"
+            href="https://www.linkedin.com/search/results/companies/?keywords=Stellar%20Groupware%20Inc"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View Stellar Groupware LinkedIn recommendations"
@@ -2145,7 +2165,7 @@ function App() {
             </a>
 
             <a
-              href="https://www.linkedin.com/"
+              href="https://www.linkedin.com/search/results/companies/?keywords=Stellar%20Groupware%20Inc"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -3093,7 +3113,7 @@ function App() {
                 </a>
 
                 <a
-                  href="https://www.linkedin.com/"
+                  href="https://www.linkedin.com/search/results/companies/?keywords=Stellar%20Groupware%20Inc"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open LinkedIn"

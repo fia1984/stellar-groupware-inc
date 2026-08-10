@@ -62,6 +62,26 @@ describe('App', () => {
     expect(screen.getByRole('link', { name: 'Explore Training' }).getAttribute('href')).toBe('/training');
   });
 
+  it('keeps route titles, breadcrumbs, and active navigation consistent', () => {
+    window.history.pushState({}, '', '/about');
+    const aboutPage = render(<App />);
+
+    const aboutLink = screen.getByRole('link', { name: 'About ▾' });
+    expect(aboutLink.classList.contains('active')).toBe(true);
+    expect(aboutLink.getAttribute('aria-current')).toBe('page');
+    expect(document.title).toBe('About | Stellar Groupware Inc.');
+    screen.getAllByRole('link', { name: 'My Account' }).forEach((link) => {
+      expect(link.getAttribute('href')).toBe('/account');
+    });
+
+    aboutPage.unmount();
+    window.history.pushState({}, '', '/contact');
+    render(<App />);
+
+    expect(document.querySelector('.breadcrumb-strip')?.textContent).toContain('Contact');
+    expect(document.title).toBe('Contact | Stellar Groupware Inc.');
+  });
+
   it('opens and closes the accessible mobile navigation', () => {
     render(<App />);
 

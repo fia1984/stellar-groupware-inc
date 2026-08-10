@@ -1,0 +1,119 @@
+/* Final cross-page QA fixes from the August feedback pass. */
+
+/* Keep every non-home header and breadcrumb in one stable document flow. */
+body main.page-shell:not(.route-home) > .hero-section {
+  position: sticky !important;
+  top: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+body main.page-shell:not(.route-home) > .hero-section > .navbar {
+  position: relative !important;
+  top: auto !important;
+}
+
+body main.page-shell:not(.route-home) > .hero-section > .breadcrumb-strip {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  width: 100% !important;
+  height: 52px !important;
+  min-height: 52px !important;
+  margin: 0 !important;
+  padding: 0 max(24px, calc((100% - 1180px) / 2)) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  background: #ffffff !important;
+  border-top: 1px solid rgba(18, 50, 58, 0.08) !important;
+  border-bottom: 1px solid rgba(18, 50, 58, 0.12) !important;
+  box-sizing: border-box !important;
+  z-index: 3 !important;
+}
+
+body main.page-shell.route-appointment .appointment-page {
+  padding-top: 32px !important;
+}
+
+/* Make all current-route states explicit and consistent. */
+body main.page-shell.route-about #primary-navigation > .nav-dropdown > a[href="/about"],
+body main.page-shell.route-account #primary-navigation > a[href="/account"],
+body main.page-shell #primary-navigation a[aria-current="page"]:not(.book-btn) {
+  color: #ffffff !important;
+  background: #08753b !important;
+  border-color: #08753b !important;
+  border-radius: 9px !important;
+}
+
+/* Keep the home carousel controls clear of the copy. */
+body main.page-shell.route-home .hero-content {
+  left: clamp(76px, 7vw, 112px) !important;
+  width: min(650px, calc(100% - 190px)) !important;
+}
+
+body main.page-shell.route-home .slide-arrow.left {
+  left: 18px !important;
+}
+
+body main.page-shell.route-home .slide-arrow.right {
+  right: 18px !important;
+}
+
+/* Strong, readable social-media badges with white boundaries. */
+body main.page-shell .social-row a,
+body main.page-shell.route-reviews .review-platform-icon,
+body main.page-shell.route-reviews .share-success-actions a > span {
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 0 0 1px rgba(15, 35, 42, 0.18) !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body main.page-shell .social-row a:nth-child(1) span {
+  background: #1877f2 !important;
+}
+
+body main.page-shell .social-row a:nth-child(2) span,
+body main.page-shell.route-reviews .linkedin-review-icon,
+body main.page-shell.route-reviews .share-success-actions a:last-child > span {
+  background: #0a66c2 !important;
+}
+
+body main.page-shell .social-row a:nth-child(3) span {
+  background: #c13584 !important;
+}
+
+body main.page-shell .social-row a:nth-child(4) span {
+  background: #111111 !important;
+}
+
+body main.page-shell .social-row a:nth-child(5) span {
+  background: #ff0000 !important;
+}
+
+body main.page-shell.route-reviews .google-review-icon,
+body main.page-shell.route-reviews .share-success-actions a:first-child > span {
+  background: #4285f4 !important;
+}
+
+@media (max-width: 700px) {
+  body main.page-shell:not(.route-home) > .hero-section > .breadcrumb-strip {
+    height: 48px !important;
+    min-height: 48px !important;
+    padding-inline: 16px !important;
+    justify-content: flex-start !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+
+  body main.page-shell.route-home .hero-content {
+    left: 20px !important;
+    width: calc(100% - 40px) !important;
+  }
+
+  body main.page-shell.route-home .slide-arrow {
+    display: none !important;
+  }
+}
