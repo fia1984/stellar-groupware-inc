@@ -222,3 +222,21 @@ body main.page-shell.route-reviews
     transform: none !important;
   }
 }
+
+/* Final mobile pricing badge spacing */
+@media (max-width: 600px) {
+  body main.page-shell.route-pricing
+    section#pricing .price-card.popular {
+    padding: 64px 20px 24px !important;
+  }
+
+  body main.page-shell.route-pricing
+    section#pricing .price-card.popular > .badge {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
