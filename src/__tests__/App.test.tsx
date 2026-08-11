@@ -20,6 +20,19 @@ import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
 
 describe('App', () => {
+  it('shows a not-found page for unknown routes and invalid courses', () => {
+    window.history.pushState({}, '', '/missing-page')
+    const { unmount } = render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Page not found.' })).toBeInTheDocument()
+    expect(document.title).toBe('Page Not Found | Stellar Groupware Inc.')
+
+    unmount()
+    window.history.pushState({}, '', '/course?program=NotARealCourse')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Page not found.' })).toBeInTheDocument()
+  })
   it('renders the main website page', () => {
     render(<App />);
 

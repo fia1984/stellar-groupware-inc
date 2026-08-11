@@ -372,3 +372,48 @@ body main.page-shell.route-reviews
     text-shadow: none !important;
   }
 }
+/* Proper fallback page for unknown routes and invalid course links */
+.page-shell .not-found-section {
+  display: none;
+}
+
+.page-shell.route-not-found .not-found-section {
+  display: grid;
+  min-height: 62vh;
+  padding: 96px 24px;
+  place-content: center;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+  background: linear-gradient(145deg, #f6fffa, #ffffff);
+  color: #102d34;
+}
+
+.route-not-found .not-found-section h1,
+.route-not-found .not-found-section p {
+  margin: 0;
+}
+
+.route-not-found .not-found-section h1 {
+  font-size: clamp(2rem, 6vw, 3.75rem);
+}
+
+.route-not-found .not-found-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .page-shell.route-not-found .not-found-section {
+    min-height: 55vh;
+    padding: 64px 20px;
+  }
+
+  .route-not-found .not-found-actions,
+  .route-not-found .not-found-actions a {
+    width: 100%;
+  }
+}

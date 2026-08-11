@@ -384,7 +384,15 @@ function App() {
     "/contact": "contact",
   };
 
-  const currentRoute = routeMap[window.location.pathname] || "home";
+  const requestedCourseName = new URLSearchParams(window.location.search).get("program");
+  const requestedCourseExists =
+    !requestedCourseName ||
+    stellarTrainingCourses.some((course) => course.title === requestedCourseName);
+  const matchedRoute = routeMap[window.location.pathname];
+  const currentRoute =
+    matchedRoute === "course" && !requestedCourseExists
+      ? "not-found"
+      : matchedRoute || "not-found";
 
   const routeTitle =
     currentRoute === "reviews"
@@ -407,6 +415,8 @@ function App() {
       ? "Enrollment"
       : currentRoute === "contact"
       ? "Contact"
+      : currentRoute === "not-found"
+      ? "Page Not Found"
       : "Home";
 
   useEffect(() => {
@@ -466,8 +476,7 @@ function App() {
   };
 
   const selectedCourseName =
-    new URLSearchParams(window.location.search).get("program") ||
-    stellarTrainingCourses[0].title;
+    requestedCourseName || stellarTrainingCourses[0].title;
   const selectedTrainingCourse =
     stellarTrainingCourses.find((course) => course.title === selectedCourseName) ||
     stellarTrainingCourses[0];
@@ -2341,7 +2350,7 @@ function App() {
         <section className="process-cta">
           <h2>Have questions about our training process?</h2>
           <p>Book a free consultation to discuss your goals and find the right learning pathway.</p>
-          <div><a href="/appointment">Book Consultation →</a><a href="/training">Explore Training</a></div>
+          <div><a href="/appointment">Book Consultation →</a><a href="/training">Browse Training</a></div>
         </section>
       </section>
 
@@ -3052,6 +3061,16 @@ function App() {
         </a>
       </section>
 
+
+      <section className="not-found-section" id="not-found" aria-labelledby="not-found-title">
+        <p className="section-label">404 ERROR</p>
+        <h1 id="not-found-title">Page not found.</h1>
+        <p>The page you requested does not exist or may have moved.</p>
+        <div className="not-found-actions">
+          <a className="primary-btn" href="/">Return Home</a>
+          <a className="secondary-btn" href="/training">Explore Training</a>
+        </div>
+      </section>
 
       <div className="cookie-banner">
         <div className="cookie-icon">🛡️</div>
