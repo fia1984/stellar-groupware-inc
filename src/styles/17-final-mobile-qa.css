@@ -185,3 +185,22 @@
     overflow: hidden !important;
   }
 }
+
+/* Centre testimonial logo on desktop, tablet and mobile */
+body main.page-shell.route-reviews
+  .testimonial-phone-header > .testimonial-avatar {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 36px !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+  text-align: center !important;
+  transform: none !important;
+}
