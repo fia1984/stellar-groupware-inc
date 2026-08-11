@@ -278,6 +278,11 @@
   display: block !important;
 }
 
+.page-shell.route-privacy #privacy,
+.page-shell.route-terms #terms {
+  display: block !important;
+}
+
 .page-shell:not(.route-home) .hero-section {
   min-height: 92px !important;
   height: 92px !important;

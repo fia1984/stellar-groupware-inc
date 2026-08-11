@@ -382,6 +382,8 @@ function App() {
     "/appointment": "appointment",
     "/enroll": "enroll",
     "/contact": "contact",
+    "/privacy": "privacy",
+    "/terms": "terms",
   };
 
   const requestedCourseName = new URLSearchParams(window.location.search).get("program");
@@ -415,6 +417,10 @@ function App() {
       ? "Enrollment"
       : currentRoute === "contact"
       ? "Contact"
+      : currentRoute === "privacy"
+      ? "Privacy Policy"
+      : currentRoute === "terms"
+      ? "Terms of Use"
       : currentRoute === "not-found"
       ? "Page Not Found"
       : "Home";
@@ -3061,6 +3067,76 @@ function App() {
         </a>
       </section>
 
+      <section className="legal-page" id="privacy" aria-labelledby="privacy-title">
+        <div className="legal-page-inner">
+          <p className="section-label">LEGAL</p>
+          <h1 id="privacy-title">Privacy Policy</h1>
+          <p className="legal-updated">Last updated: August 11, 2026</p>
+
+          <div className="legal-content">
+            <article>
+              <h2>Information we collect</h2>
+              <p>We may collect the information you provide when you contact us, book a consultation, or enroll in a program, including your name, email address, phone number, city, selected service, and message.</p>
+            </article>
+            <article>
+              <h2>How we use your information</h2>
+              <p>We use your information to respond to inquiries, arrange consultations, provide requested services, support enrollment, and improve our website and programs.</p>
+            </article>
+            <article>
+              <h2>Cookies and website data</h2>
+              <p>We may use essential and analytics cookies to operate the website, understand traffic, and improve the visitor experience. You can manage cookies through your browser settings.</p>
+            </article>
+            <article>
+              <h2>Sharing and protection</h2>
+              <p>We do not sell personal information. We may share limited information with service providers that help us operate our website or deliver requested services, subject to appropriate safeguards.</p>
+            </article>
+            <article>
+              <h2>Your choices</h2>
+              <p>You may ask to access, correct, or delete personal information we hold about you, subject to applicable Canadian law and legitimate record-keeping requirements.</p>
+            </article>
+            <article>
+              <h2>Contact us</h2>
+              <p>For privacy questions or requests, email <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="legal-page" id="terms" aria-labelledby="terms-title">
+        <div className="legal-page-inner">
+          <p className="section-label">LEGAL</p>
+          <h1 id="terms-title">Terms of Use</h1>
+          <p className="legal-updated">Last updated: August 11, 2026</p>
+
+          <div className="legal-content">
+            <article>
+              <h2>Using this website</h2>
+              <p>By using this website, you agree to use it lawfully and not interfere with its operation, security, content, or other visitors.</p>
+            </article>
+            <article>
+              <h2>Training information</h2>
+              <p>Program descriptions, schedules, fees, and availability may change. Enrollment is confirmed only after Stellar Groupware Inc. accepts the registration and any required payment arrangements.</p>
+            </article>
+            <article>
+              <h2>No employment guarantee</h2>
+              <p>Training and career-support services are designed to build skills and readiness. They do not guarantee certification, employment, promotion, income, or any particular career result.</p>
+            </article>
+            <article>
+              <h2>Website content</h2>
+              <p>Website text, branding, graphics, and original training materials belong to Stellar Groupware Inc. or their respective owners and may not be copied or redistributed without permission.</p>
+            </article>
+            <article>
+              <h2>External links</h2>
+              <p>This website may link to third-party services. Stellar Groupware Inc. is not responsible for their content, availability, or privacy practices.</p>
+            </article>
+            <article>
+              <h2>Contact us</h2>
+              <p>Questions about these terms can be sent to <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a>.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
 
       <section className="not-found-section" id="not-found" aria-labelledby="not-found-title">
         <p className="section-label">404 ERROR</p>
@@ -3212,8 +3288,8 @@ function App() {
         <div className="footer-bottom">
           <span>© 2026 Stellar Groupware Inc. All rights reserved.</span>
           <div>
-            <a href="/contact">Privacy Policy</a>
-            <a href="/contact">Terms of Use</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
             <a href="/contact">Customer Support</a>
           </div>
         </div>

@@ -33,6 +33,24 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: 'Page not found.' })).toBeInTheDocument()
   })
+
+  it('links to and renders the privacy policy and terms pages', () => {
+    window.history.pushState({}, '', '/privacy')
+    const privacyPage = render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Privacy Policy' })).toBeInTheDocument()
+    expect(document.title).toBe('Privacy Policy | Stellar Groupware Inc.')
+    expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy')
+    expect(screen.getByRole('link', { name: 'Terms of Use' })).toHaveAttribute('href', '/terms')
+    expect(screen.getByRole('link', { name: 'Customer Support' })).toHaveAttribute('href', '/contact')
+
+    privacyPage.unmount()
+    window.history.pushState({}, '', '/terms')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Terms of Use' })).toBeInTheDocument()
+    expect(document.title).toBe('Terms of Use | Stellar Groupware Inc.')
+  })
   it('renders the main website page', () => {
     render(<App />);
 
