@@ -1,0 +1,134 @@
+/* Final shared mobile QA overrides.
+ * Keep these last in the cascade so page-specific legacy rules cannot
+ * reintroduce horizontal overflow or misalignment on narrow screens.
+ */
+@media (max-width: 600px) {
+  html,
+  body,
+  #root,
+  body main.page-shell {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: clip !important;
+  }
+
+  body main.page-shell nav.navbar {
+    box-sizing: border-box !important;
+    width: calc(100% - 24px) !important;
+    max-width: calc(100% - 24px) !important;
+    margin: 12px auto 0 !important;
+  }
+
+  /* The mobile header is dark, so both lines of the wordmark must be light. */
+  body main.page-shell nav.navbar .brand h2,
+  body main.page-shell nav.navbar .brand span {
+    color: #ffffff !important;
+  }
+
+  body main.page-shell nav.navbar .brand > div:last-child {
+    min-width: 0 !important;
+  }
+
+  /* Keep the complete breadcrumb on one centered line at every mobile width. */
+  body main.page-shell:not(.route-home) .breadcrumb-strip {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 52px !important;
+    margin: 0 !important;
+    padding: 7px 16px !important;
+    white-space: nowrap !important;
+  }
+
+  body main.page-shell:not(.route-home) .breadcrumb-strip > * {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  body main.page-shell:not(.route-home)
+    .breadcrumb-strip .breadcrumb-stellar-icon {
+    flex-basis: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* Contain the review mockups and their avatars inside the card. */
+  body main.page-shell.route-reviews .testimonial-visual,
+  body main.page-shell.route-reviews .testimonial-phone,
+  body main.page-shell.route-reviews .testimonial-phone-header {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
+
+  body main.page-shell.route-reviews .testimonial-visual {
+    overflow: hidden !important;
+  }
+
+  body main.page-shell.route-reviews .testimonial-phone {
+    width: min(100%, 270px) !important;
+    margin-inline: auto !important;
+  }
+
+  body main.page-shell.route-reviews .testimonial-phone-header {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body main.page-shell.route-reviews .testimonial-phone-header > div {
+    min-width: 0 !important;
+  }
+
+  body main.page-shell.route-reviews .testimonial-phone-header strong,
+  body main.page-shell.route-reviews .testimonial-phone-header div > span {
+    overflow-wrap: anywhere !important;
+  }
+
+  body main.page-shell.route-reviews .testimonial-avatar {
+    position: static !important;
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  /* Keep the pricing ribbon fully inside its card. */
+  body main.page-shell.route-pricing .price-card.popular {
+    overflow: hidden !important;
+  }
+
+  body main.page-shell.route-pricing .price-card .badge {
+    box-sizing: border-box !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    max-width: calc(100% - 16px) !important;
+    padding: 7px 12px !important;
+    border-radius: 0 10px 0 10px !important;
+    transform: none !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body main.page-shell nav.navbar .mobile-header-appointment {
+    flex-basis: 116px !important;
+    width: 116px !important;
+    max-width: 116px !important;
+  }
+
+  body main.page-shell nav.navbar .brand h2 {
+    font-size: 0.9rem !important;
+  }
+}
