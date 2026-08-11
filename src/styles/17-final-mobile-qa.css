@@ -204,3 +204,21 @@ body main.page-shell.route-reviews
   text-align: center !important;
   transform: none !important;
 }
+
+/* Prevent the pricing badge from covering the card title on mobile */
+@media (max-width: 600px) {
+  body main.page-shell.route-pricing .price-card.popular {
+    position: relative !important;
+    padding-top: 64px !important;
+    overflow: hidden !important;
+  }
+
+  body main.page-shell.route-pricing .price-card.popular > .badge {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
