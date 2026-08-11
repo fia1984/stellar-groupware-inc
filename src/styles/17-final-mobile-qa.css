@@ -240,3 +240,16 @@ body main.page-shell.route-reviews
     transform: none !important;
   }
 }
+
+/* Improve mobile header brand contrast */
+@media (max-width: 600px) {
+  body main.page-shell.route-reviews
+    nav.navbar .brand h2,
+  body main.page-shell.route-pricing
+    nav.navbar .brand h2 {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+}
