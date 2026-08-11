@@ -3075,28 +3075,63 @@ function App() {
 
           <div className="legal-content">
             <article>
-              <h2>Information we collect</h2>
-              <p>We may collect the information you provide when you contact us, book a consultation, or enroll in a program, including your name, email address, phone number, city, selected service, and message.</p>
+              <h2>1. Introduction</h2>
+              <p>Stellar Groupware Inc. ("Stellar", "we", "our", or "us") is committed to protecting your privacy and personal information. This policy explains how we collect, use, disclose, and safeguard information in accordance with Canada’s Personal Information Protection and Electronic Documents Act (PIPEDA) and applicable provincial privacy laws.</p>
             </article>
             <article>
-              <h2>How we use your information</h2>
-              <p>We use your information to respond to inquiries, arrange consultations, provide requested services, support enrollment, and improve our website and programs.</p>
+              <h2>2. Information We Collect</h2>
+              <h3>2.1 Personal Information</h3>
+              <p>Depending on how you use our website and services, we may collect:</p>
+              <ul>
+                <li>Your name and contact information, including email address, phone number, city, and address when required</li>
+                <li>Educational background, employment history, professional goals, and career interests</li>
+                <li>Course enrollment, attendance, progress, and completion information</li>
+                <li>Payment and billing information processed through our payment providers</li>
+                <li>Messages and other communications with our advisors, mentors, and instructors</li>
+              </ul>
+              <h3>2.2 Technical Information</h3>
+              <p>When you visit our website, we or our service providers may collect:</p>
+              <ul>
+                <li>IP address, browser type, device information, and operating system</li>
+                <li>Pages visited, time spent on the website, and referring website addresses</li>
+                <li>Essential cookie data and analytics information, where permitted</li>
+              </ul>
             </article>
             <article>
-              <h2>Cookies and website data</h2>
-              <p>We may use essential and analytics cookies to operate the website, understand traffic, and improve the visitor experience. You can manage cookies through your browser settings.</p>
+              <h2>3. How We Use Your Information</h2>
+              <p>We may use personal information to:</p>
+              <ul>
+                <li>Provide IT training, mentoring, job-support, and career-readiness services</li>
+                <li>Process course registrations, appointments, and payments</li>
+                <li>Communicate about programs, consultations, schedules, and service updates</li>
+                <li>Improve our programs, website functionality, and visitor experience</li>
+                <li>Send marketing communications when you have provided consent</li>
+                <li>Meet legal, regulatory, security, and record-keeping obligations</li>
+              </ul>
             </article>
             <article>
-              <h2>Sharing and protection</h2>
-              <p>We do not sell personal information. We may share limited information with service providers that help us operate our website or deliver requested services, subject to appropriate safeguards.</p>
+              <h2>4. Your Privacy Rights</h2>
+              <p>Subject to applicable law, you may ask to:</p>
+              <ul>
+                <li>Access the personal information we hold about you</li>
+                <li>Correct inaccurate or incomplete information</li>
+                <li>Withdraw consent for certain uses of your information</li>
+                <li>Request deletion of information, subject to legal and record-keeping requirements</li>
+                <li>Raise a concern with Stellar or the Office of the Privacy Commissioner of Canada</li>
+              </ul>
             </article>
             <article>
-              <h2>Your choices</h2>
-              <p>You may ask to access, correct, or delete personal information we hold about you, subject to applicable Canadian law and legitimate record-keeping requirements.</p>
+              <h2>5. Sharing and Data Security</h2>
+              <p>We do not sell personal information. We may share limited information with service providers that help us operate the website, process payments, communicate with you, or deliver requested services. We use reasonable administrative, technical, and organizational safeguards designed to protect information from unauthorized access, use, disclosure, alteration, or loss.</p>
             </article>
             <article>
-              <h2>Contact us</h2>
-              <p>For privacy questions or requests, email <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a>.</p>
+              <h2>6. Contact Us</h2>
+              <p>For questions, concerns, or requests about this policy or our privacy practices, contact:</p>
+              <address>
+                <strong>Stellar Groupware Inc.</strong><br />
+                Canada<br />
+                Email: <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a>
+              </address>
             </article>
           </div>
         </div>

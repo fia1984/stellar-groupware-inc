@@ -625,6 +625,13 @@
   flex-wrap: wrap;
 }
 
+.footer-bottom div a:not(:last-child)::after {
+  color: rgba(255, 255, 255, 0.42);
+  content: "|";
+  margin-left: 18px;
+  pointer-events: none;
+}
+
 /* Mobile */
 @media (max-width: 900px) {
   .page-shell:not(.route-home) .hero-section {

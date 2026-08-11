@@ -46,10 +46,32 @@
   margin: 0 0 10px;
 }
 
+.legal-content h3 {
+  color: #1b4650;
+  font-size: 1.05rem;
+  margin: 22px 0 8px;
+}
+
 .legal-content p {
   color: #456169;
   line-height: 1.75;
   margin: 0;
+}
+
+.legal-content ul {
+  color: #456169;
+  display: grid;
+  gap: 8px;
+  line-height: 1.65;
+  margin: 14px 0 0;
+  padding-left: 22px;
+}
+
+.legal-content address {
+  color: #456169;
+  font-style: normal;
+  line-height: 1.8;
+  margin-top: 16px;
 }
 
 .legal-content a {

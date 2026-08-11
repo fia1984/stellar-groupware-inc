@@ -39,6 +39,10 @@ describe('App', () => {
     const privacyPage = render(<App />)
 
     expect(screen.getByRole('heading', { name: 'Privacy Policy' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '1. Introduction' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '2. Information We Collect' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '4. Your Privacy Rights' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: '6. Contact Us' })).toBeInTheDocument()
     expect(document.title).toBe('Privacy Policy | Stellar Groupware Inc.')
     expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy')
     expect(screen.getByRole('link', { name: 'Terms of Use' })).toHaveAttribute('href', '/terms')
