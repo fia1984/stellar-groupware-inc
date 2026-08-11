@@ -414,6 +414,25 @@ function App() {
     document.title = `${title} | Stellar Groupware Inc.`;
   }, [currentRoute, routeTitle]);
 
+  useEffect(() => {
+    const scrollToHashTarget = () => {
+      const targetId = decodeURIComponent(window.location.hash.slice(1));
+      if (!targetId) return;
+
+      window.requestAnimationFrame(() => {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    };
+
+    scrollToHashTarget();
+    window.addEventListener("hashchange", scrollToHashTarget);
+
+    return () => window.removeEventListener("hashchange", scrollToHashTarget);
+  }, [currentRoute]);
+
   const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<"training" | "process" | "about" | null>(null);
@@ -434,6 +453,17 @@ function App() {
 
     return matchesCategory && matchesSearch;
   });
+
+  const selectTrainingCategory = (category: string) => {
+    setTrainingCategory(category);
+
+    window.requestAnimationFrame(() => {
+      document.getElementById("training-results-heading")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
 
   const selectedCourseName =
     new URLSearchParams(window.location.search).get("program") ||
@@ -1326,19 +1356,28 @@ function App() {
               <button
                 type="button"
                 key={category}
-                className={trainingCategory === category ? "active" : ""}
-                aria-pressed={trainingCategory === category}
-                onClick={() => setTrainingCategory(category)}
-              >
+              className={trainingCategory === category ? "active" : ""}
+              aria-pressed={trainingCategory === category}
+              aria-controls="training-results-heading"
+              aria-label={`Show ${category} courses`}
+              onClick={() => selectTrainingCategory(category)}
+            >
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 {category}
               </button>
             ))}
           </div>
 
-          <div className="training-results-heading">
+          <div
+            className="training-results-heading"
+            id="training-results-heading"
+            tabIndex={-1}
+          >
             <h2>Stellar training programs</h2>
-            <span>{filteredTrainingCourses.length} programs</span>
+            <span aria-live="polite">
+              {filteredTrainingCourses.length}{" "}
+              {filteredTrainingCourses.length === 1 ? "program" : "programs"}
+            </span>
           </div>
 
           {filteredTrainingCourses.length > 0 ? (
@@ -2215,7 +2254,7 @@ function App() {
           </ol>
         </div>
 
-        <div className="process-journey">
+        <div className="process-journey" id="process-journey">
           <div className="process-journey-heading">
             <p className="section-label">THE STELLAR TRAINING JOURNEY</p>
             <h2>Simple step-by-step support.</h2>

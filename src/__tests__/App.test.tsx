@@ -10,6 +10,10 @@ class MockIntersectionObserver {
 }
 
 vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
+Object.defineProperty(Element.prototype, "scrollIntoView", {
+  configurable: true,
+  value: vi.fn(),
+});
 
 import { describe, expect, it } from 'vitest';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
@@ -58,6 +62,10 @@ describe('App', () => {
     expect(screen.getByText('Practice With Support')).toBeTruthy();
     expect(screen.getByText('Complete Practical Projects')).toBeTruthy();
     expect(screen.getByText('Prepare for Work')).toBeTruthy();
+    expect(document.getElementById('process-journey')).toBeTruthy();
+    expect(document.querySelector('a[href="/process#process-journey"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/training#job-support"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/training#career-mentoring"]')).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Book Consultation →' }).getAttribute('href')).toBe('/appointment');
     expect(screen.getByRole('link', { name: 'Explore Training' }).getAttribute('href')).toBe('/training');
   });
@@ -99,6 +107,22 @@ describe('App', () => {
 
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.getByRole('button', { name: 'Open navigation menu' })).toBeTruthy();
+  });
+
+  it('filters training programs when a category card is selected', () => {
+    window.history.pushState({}, '', '/training');
+    render(<App />);
+
+    expect(document.querySelectorAll('.training-course-card')).toHaveLength(6);
+
+    const aiCategory = screen.getByRole('button', {
+      name: 'Show AI & Automation courses',
+    });
+    fireEvent.click(aiCategory);
+
+    expect(aiCategory.getAttribute('aria-pressed')).toBe('true');
+    expect(document.querySelectorAll('.training-course-card')).toHaveLength(1);
+    expect(screen.getByText('1 program')).toBeTruthy();
   });
 
   it('uses inline validation and completes the appointment flow', () => {

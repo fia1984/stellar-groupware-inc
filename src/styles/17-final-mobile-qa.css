@@ -121,6 +121,125 @@
   }
 }
 
+/* Smooth mobile submenus without delayed display switching. */
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown
+    > .dropdown-menu {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-4px) !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transition:
+      max-height 180ms ease,
+      opacity 140ms ease,
+      transform 180ms ease,
+      padding 180ms ease,
+      margin 180ms ease,
+      visibility 0s linear 180ms !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown.mobile-submenu-open
+    > .dropdown-menu {
+    max-height: 420px !important;
+    margin: 4px 0 8px !important;
+    padding: 8px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+    transition:
+      max-height 200ms ease,
+      opacity 140ms ease,
+      transform 180ms ease,
+      padding 180ms ease,
+      margin 180ms ease,
+      visibility 0s !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown
+    > .dropdown-menu a {
+    min-height: 46px !important;
+    touch-action: manipulation !important;
+  }
+}
+
+/* Keep the mobile wordmark readable on every inner page. */
+@media (max-width: 600px) {
+  body main.page-shell:not(.route-home) nav.navbar .brand h2 {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  body main.page-shell nav.navbar
+    #primary-navigation.nav-links
+    > .nav-dropdown
+    > .dropdown-menu {
+    transition: none !important;
+  }
+}
+
+/* Make the training category cards feel and behave like real filters. */
+body main.page-shell.route-training .training-category-strip {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+body main.page-shell.route-training .training-category-strip button {
+  position: relative !important;
+  z-index: 1 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: rgba(8, 168, 63, 0.16) !important;
+  user-select: none !important;
+}
+
+body main.page-shell.route-training .training-category-strip button:active {
+  transform: translateY(0) scale(0.98) !important;
+}
+
+body main.page-shell.route-training .training-category-strip button.active {
+  box-shadow: 0 10px 24px rgba(8, 168, 63, 0.22) !important;
+}
+
+body main.page-shell.route-training #training-results-heading {
+  scroll-margin-top: 150px !important;
+  outline: none !important;
+}
+
+@media (max-width: 600px) {
+  body main.page-shell.route-training .training-category-strip button {
+    min-height: 76px !important;
+  }
+
+  body main.page-shell.route-training #training-results-heading {
+    scroll-margin-top: 124px !important;
+  }
+}
+
 @media (max-width: 390px) {
   body main.page-shell nav.navbar .mobile-header-appointment {
     flex-basis: 116px !important;
