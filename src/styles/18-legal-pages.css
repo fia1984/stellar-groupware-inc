@@ -48,17 +48,6 @@
   width: 100%;
 }
 
-/* Keep the Privacy Policy cards visually uniform on larger screens. */
-@media (min-width: 701px) {
-  .route-privacy .legal-content {
-    grid-auto-rows: 1fr;
-  }
-
-  .route-privacy .legal-content article {
-    height: 100%;
-    min-height: 0;
-  }
-}
 
 .legal-content h2 {
   color: #12323a;
