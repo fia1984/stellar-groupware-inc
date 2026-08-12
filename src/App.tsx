@@ -1063,8 +1063,6 @@ function App() {
       <a
         className="stellar-chat-bubble"
         href="mailto:info@stellargroupware.com?subject=Stellar%20Groupware%20Inquiry"
-        target="_blank"
-        rel="noopener noreferrer"
         aria-label="Contact Stellar Groupware"
         title="Contact Stellar Groupware"
       >

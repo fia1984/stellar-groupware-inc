@@ -1,5 +1,47 @@
 /* Final mobile layout QA — loaded last to resolve legacy cascade conflicts. */
 
+/* Reference-style contact placement: consistently inset from the viewport's
+ * bottom-right corner instead of floating unusually high above the edge. */
+body main.page-shell a.stellar-chat-bubble {
+  position: fixed !important;
+  right: max(24px, calc(env(safe-area-inset-right) + 24px)) !important;
+  bottom: max(24px, calc(env(safe-area-inset-bottom) + 24px)) !important;
+  width: 58px !important;
+  min-width: 58px !important;
+  height: 58px !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transform: translate3d(0, 0, 0) !important;
+  will-change: transform !important;
+  isolation: isolate !important;
+}
+
+body main.page-shell a.stellar-chat-bubble svg {
+  width: 29px !important;
+  height: 29px !important;
+  pointer-events: none !important;
+}
+
+/* Avoid sticky hover effects on touchscreens while retaining desktop feedback. */
+@media (hover: hover) and (pointer: fine) {
+  body main.page-shell a.stellar-chat-bubble:hover {
+    transform: translate3d(0, -3px, 0) !important;
+  }
+}
+
+body main.page-shell a.stellar-chat-bubble:active {
+  transform: translate3d(0, 1px, 0) scale(0.96) !important;
+}
+
 @media (max-width: 600px) {
   /* Keep the shared header and breadcrumbs identical on every route. */
   body main.page-shell nav.navbar {
@@ -178,20 +220,20 @@
     padding: 20px 18px !important;
   }
 
-  /* Keep mobile contact available while reducing its footprint and lifting it
-   * clear of carousel arrows, form actions and browser controls. */
+  /* Preserve the same clean bottom-right inset on phones and respect notches. */
   body main.page-shell a.stellar-chat-bubble {
     display: grid !important;
-    right: max(8px, env(safe-area-inset-right)) !important;
-    bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px)) !important;
-    width: 44px !important;
-    height: 44px !important;
-    opacity: 0.94 !important;
+    right: max(14px, calc(env(safe-area-inset-right) + 14px)) !important;
+    bottom: max(18px, calc(env(safe-area-inset-bottom) + 18px)) !important;
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    opacity: 1 !important;
   }
 
   body main.page-shell a.stellar-chat-bubble svg {
-    width: 22px !important;
-    height: 22px !important;
+    width: 24px !important;
+    height: 24px !important;
   }
 
   /* Inner pages do not have a hero image behind the floating header, so

@@ -22,6 +22,21 @@ import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
 
 describe('App', () => {
+  it('keeps the floating contact bubble directly clickable', () => {
+    window.history.pushState({}, '', '/');
+    render(<App />);
+
+    const contactBubble = screen.getByRole('link', {
+      name: 'Contact Stellar Groupware',
+    });
+
+    expect(contactBubble).toHaveAttribute(
+      'href',
+      'mailto:info@stellargroupware.com?subject=Stellar%20Groupware%20Inquiry'
+    );
+    expect(contactBubble).not.toHaveAttribute('target');
+  });
+
   it('opens regular routes at the top while preserving section links', () => {
     scrollToMock.mockClear();
     window.history.pushState({}, '', '/pricing');
