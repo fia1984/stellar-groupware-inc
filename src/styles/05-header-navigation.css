@@ -1464,8 +1464,6 @@ a,
 .consent-card,
 [class*="cookie"],
 [class*="Cookie"],
-[class*="privacy"],
-[class*="Privacy"],
 [class*="consent"],
 [class*="Consent"] {
   display: none !important;
