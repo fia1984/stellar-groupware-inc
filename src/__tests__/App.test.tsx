@@ -10,6 +10,8 @@ class MockIntersectionObserver {
 }
 
 vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
+const scrollToMock = vi.fn();
+vi.stubGlobal("scrollTo", scrollToMock);
 Object.defineProperty(Element.prototype, "scrollIntoView", {
   configurable: true,
   value: vi.fn(),
@@ -20,6 +22,25 @@ import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
 
 describe('App', () => {
+  it('opens regular routes at the top while preserving section links', () => {
+    scrollToMock.mockClear();
+    window.history.pushState({}, '', '/pricing');
+    const pricingPage = render(<App />);
+
+    expect(scrollToMock).toHaveBeenCalledWith({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+
+    pricingPage.unmount();
+    scrollToMock.mockClear();
+    window.history.pushState({}, '', '/about#team');
+    render(<App />);
+
+    expect(scrollToMock).not.toHaveBeenCalled();
+  });
+
   it('shows a not-found page for unknown routes and invalid courses', () => {
     window.history.pushState({}, '', '/missing-page')
     const { unmount } = render(<App />)

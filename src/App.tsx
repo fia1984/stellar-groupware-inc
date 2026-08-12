@@ -433,7 +433,15 @@ function App() {
   useEffect(() => {
     const scrollToHashTarget = () => {
       const targetId = decodeURIComponent(window.location.hash.slice(1));
-      if (!targetId) return;
+      if (!targetId) {
+        window.history.scrollRestoration = "manual";
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+
+        window.requestAnimationFrame(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        });
+        return;
+      }
 
       window.requestAnimationFrame(() => {
         const target = document.getElementById(targetId);
