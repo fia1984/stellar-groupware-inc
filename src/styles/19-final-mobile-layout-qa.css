@@ -1,0 +1,221 @@
+/* Final mobile layout QA — loaded last to resolve legacy cascade conflicts. */
+
+@media (max-width: 600px) {
+  /* Keep the shared header and breadcrumbs identical on every route. */
+  body main.page-shell nav.navbar {
+    min-height: 76px !important;
+    padding: 10px 12px !important;
+  }
+
+  body main.page-shell:not(.route-home) .breadcrumb-strip,
+  html body #root main.page-shell.route-privacy
+    > .hero-section > .breadcrumb-strip,
+  html body #root main.page-shell.route-terms
+    > .hero-section > .breadcrumb-strip {
+    display: flex !important;
+    flex-flow: row nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    height: auto !important;
+    min-height: 52px !important;
+    padding: 8px 12px !important;
+    overflow: hidden !important;
+  }
+
+  body main.page-shell:not(.route-home) .breadcrumb-strip > *,
+  html body #root main.page-shell.route-privacy
+    > .hero-section > .breadcrumb-strip > *,
+  html body #root main.page-shell.route-terms
+    > .hero-section > .breadcrumb-strip > * {
+    position: static !important;
+    display: inline-flex !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  body main.page-shell:not(.route-home)
+    .breadcrumb-strip .breadcrumb-stellar-icon {
+    flex: 0 0 36px !important;
+  }
+
+  /* Make the home hero readable within one phone-sized section. */
+  body main.page-shell.route-home .hero-section {
+    min-height: max(760px, 100svh) !important;
+    padding-bottom: 76px !important;
+  }
+
+  body main.page-shell.route-home .hero-section .dark-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(4, 10, 15, 0.5) 0%,
+      rgba(4, 10, 15, 0.78) 42%,
+      rgba(4, 10, 15, 0.94) 100%
+    ) !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-content {
+    box-sizing: border-box !important;
+    width: calc(100% - 40px) !important;
+    max-width: none !important;
+    margin: 112px 20px 0 !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-tag {
+    margin-bottom: 8px !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-content h1 {
+    margin: 12px 0 14px !important;
+    font-size: clamp(2.35rem, 11vw, 3rem) !important;
+    line-height: 1.04 !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-content h3 {
+    margin: 18px 0 10px !important;
+    font-size: 1.25rem !important;
+    line-height: 1.28 !important;
+  }
+
+  body main.page-shell.route-home
+    .hero-section .hero-content > p:not(.hero-tag) {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-actions {
+    margin-top: 22px !important;
+    gap: 10px !important;
+  }
+
+  body main.page-shell.route-home
+    .hero-section .hero-actions .primary-btn,
+  body main.page-shell.route-home
+    .hero-section .hero-actions .secondary-btn {
+    min-height: 52px !important;
+    height: 52px !important;
+  }
+
+  /* Remove inherited desktop card heights that create large blank areas. */
+  body main.page-shell.route-home .home-guarantee-section {
+    padding: 48px 20px 56px !important;
+  }
+
+  body main.page-shell.route-home .home-guarantee-section .home-section-heading {
+    margin-bottom: 28px !important;
+  }
+
+  body main.page-shell.route-home .home-guarantee-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  body main.page-shell.route-home .home-guarantee-grid article {
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 26px 22px !important;
+  }
+
+  body main.page-shell.route-home .home-guarantee-grid article > span {
+    margin-bottom: 12px !important;
+  }
+
+  /* Keep the process introduction compact without crowding its cards. */
+  body main.page-shell.route-process .process-hero {
+    gap: 34px !important;
+    padding: 42px 18px 48px !important;
+  }
+
+  body main.page-shell.route-process .process-hero h1 {
+    margin: 14px 0 !important;
+    font-size: clamp(2.2rem, 10vw, 2.75rem) !important;
+  }
+
+  body main.page-shell.route-process
+    .process-hero-copy > p:not(.section-label) {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+
+  body main.page-shell.route-process .process-highlights {
+    gap: 10px !important;
+    margin-top: 24px !important;
+  }
+
+  body main.page-shell.route-process .process-highlights span {
+    min-height: 74px !important;
+    padding: 10px 8px !important;
+  }
+
+  /* Avoid a large empty block on the account placeholder page. */
+  body main.page-shell.route-account .account-section {
+    min-height: 0 !important;
+    padding: 68px 20px 70px !important;
+  }
+
+  body main.page-shell.route-account .account-section .section-intro {
+    margin-bottom: 28px !important;
+  }
+
+  /* Legal cards stay readable but use the limited phone width efficiently. */
+  body main.page-shell.route-privacy .legal-page,
+  body main.page-shell.route-terms .legal-page {
+    padding: 42px 14px 58px !important;
+  }
+
+  body main.page-shell.route-privacy .legal-content,
+  body main.page-shell.route-terms .legal-content {
+    gap: 14px !important;
+  }
+
+  body main.page-shell.route-privacy .legal-content article,
+  body main.page-shell.route-terms .legal-content article {
+    padding: 20px 18px !important;
+  }
+
+  /* Keep mobile contact available while reducing its footprint and lifting it
+   * clear of carousel arrows, form actions and browser controls. */
+  body main.page-shell a.stellar-chat-bubble {
+    display: grid !important;
+    right: max(8px, env(safe-area-inset-right)) !important;
+    bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px)) !important;
+    width: 44px !important;
+    height: 44px !important;
+    opacity: 0.94 !important;
+  }
+
+  body main.page-shell a.stellar-chat-bubble svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  /* Inner pages do not have a hero image behind the floating header, so
+   * remove the stray white strip above it and use the full phone width. */
+  body main.page-shell:not(.route-home) nav.navbar {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0 !important;
+    border-radius: 0 0 16px 16px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body main.page-shell nav.navbar {
+    width: calc(100% - 16px) !important;
+    max-width: calc(100% - 16px) !important;
+  }
+
+  body main.page-shell nav.navbar .brand span {
+    display: none !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-content {
+    width: calc(100% - 32px) !important;
+    margin-inline: 16px !important;
+  }
+}
