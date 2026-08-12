@@ -1,13 +1,17 @@
 .legal-page {
   background: linear-gradient(180deg, #f4fbf8 0, #ffffff 260px);
+  box-sizing: border-box;
   color: #102d34;
   min-height: 65vh;
   padding: 72px 24px 96px;
+  width: 100%;
 }
 
 .legal-page-inner {
+  box-sizing: border-box;
   margin: 0 auto;
   max-width: 980px;
+  width: 100%;
 }
 
 .legal-page .section-label,
@@ -30,14 +34,18 @@
 .legal-content {
   display: grid;
   gap: 18px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .legal-content article {
   background: #ffffff;
   border: 1px solid rgba(18, 50, 58, 0.12);
   border-radius: 16px;
+  box-sizing: border-box;
   box-shadow: 0 12px 30px rgba(18, 50, 58, 0.07);
   padding: 26px 28px;
+  width: 100%;
 }
 
 .legal-content h2 {
@@ -92,4 +100,44 @@
     border-radius: 14px;
     padding: 22px 18px;
   }
+}
+
+/* Ensure legal routes remain visible after legacy page-routing CSS */
+html body #root main.page-shell.route-privacy,
+html body #root main.page-shell.route-terms {
+  box-sizing: border-box !important;
+  display: block !important;
+  max-width: none !important;
+  overflow-x: clip !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+}
+
+html body #root main.page-shell.route-privacy > .hero-section,
+html body #root main.page-shell.route-terms > .hero-section {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html body #root main.page-shell.route-privacy > #privacy,
+html body #root main.page-shell.route-terms > #terms {
+  box-sizing: border-box !important;
+  display: block !important;
+  margin-inline: 0 !important;
+  max-width: none !important;
+  position: relative !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+}
+
+html body #root main.page-shell.route-privacy > .site-footer,
+html body #root main.page-shell.route-terms > .site-footer {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
