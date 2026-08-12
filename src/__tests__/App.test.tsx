@@ -80,8 +80,8 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: '4. Your Privacy Rights' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: '6. Contact Us' })).toBeInTheDocument()
     expect(document.title).toBe('Privacy Policy | Stellar Groupware Inc.')
-    expect(screen.getByRole('link', { name: 'Privacy Policy' })).toHaveAttribute('href', '/privacy')
-    expect(screen.getByRole('link', { name: 'Terms of Use' })).toHaveAttribute('href', '/terms')
+    expect(screen.getAllByRole('link', { name: 'Privacy Policy' })[0]).toHaveAttribute('href', '/privacy')
+    expect(screen.getAllByRole('link', { name: 'Terms of Use' })[0]).toHaveAttribute('href', '/terms')
     expect(screen.getByRole('link', { name: 'Customer Support' })).toHaveAttribute('href', '/contact')
 
     privacyPage.unmount()
@@ -90,6 +90,32 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: 'Terms of Use' })).toBeInTheDocument()
     expect(document.title).toBe('Terms of Use | Stellar Groupware Inc.')
+  })
+
+  it('renders the refund, sitemap, and email-preference routes', () => {
+    window.history.pushState({}, '', '/refund-policy')
+    const refundPage = render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Refund Policy' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Before a Program Begins' })).toBeInTheDocument()
+    expect(document.title).toBe('Refund Policy | Stellar Groupware Inc.')
+
+    refundPage.unmount()
+    window.history.pushState({}, '', '/sitemap')
+    const sitemapPage = render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Site Map' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Policies & Help' })).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: 'Refund Policy' })[0]).toHaveAttribute('href', '/refund-policy')
+
+    sitemapPage.unmount()
+    window.history.pushState({}, '', '/unsubscribe')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'Manage Email Preferences' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Update Preferences' }))
+    expect(screen.getByRole('status')).toHaveTextContent('saved on this device')
+    expect(document.title).toBe('Email Preferences | Stellar Groupware Inc.')
   })
   it('renders the main website page', () => {
     render(<App />);

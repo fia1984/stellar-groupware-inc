@@ -382,6 +382,9 @@ function App() {
     "/appointment": "appointment",
     "/enroll": "enroll",
     "/contact": "contact",
+    "/unsubscribe": "unsubscribe",
+    "/sitemap": "sitemap",
+    "/refund-policy": "refund",
     "/privacy": "privacy",
     "/terms": "terms",
   };
@@ -417,6 +420,12 @@ function App() {
       ? "Enrollment"
       : currentRoute === "contact"
       ? "Contact"
+      : currentRoute === "unsubscribe"
+      ? "Email Preferences"
+      : currentRoute === "sitemap"
+      ? "Site Map"
+      : currentRoute === "refund"
+      ? "Refund Policy"
       : currentRoute === "privacy"
       ? "Privacy Policy"
       : currentRoute === "terms"
@@ -464,6 +473,8 @@ function App() {
   const [careerReviewIndex, setCareerReviewIndex] = useState(0);
   const [trainingSearch, setTrainingSearch] = useState("");
   const [trainingCategory, setTrainingCategory] = useState("All Programs");
+  const [unsubscribeEmail, setUnsubscribeEmail] = useState("");
+  const [preferenceMessage, setPreferenceMessage] = useState("");
 
   const filteredTrainingCourses = stellarTrainingCourses.filter((course) => {
     const matchesCategory =
@@ -3073,6 +3084,76 @@ function App() {
         </a>
       </section>
 
+      <section className="policy-page unsubscribe-page" id="unsubscribe" aria-labelledby="unsubscribe-title">
+        <header className="policy-hero">
+          <span className="policy-icon" aria-hidden="true">✉</span>
+          <p className="section-label">EMAIL CONTROL</p>
+          <h1 id="unsubscribe-title">Manage Email Preferences</h1>
+          <p>Choose the updates you want from Stellar or unsubscribe from marketing emails.</p>
+        </header>
+
+        <div className="policy-page-inner unsubscribe-layout">
+          <form className="policy-card preference-card" onSubmit={(event) => {
+            event.preventDefault();
+            setPreferenceMessage("Your email preferences have been saved on this device.");
+          }}>
+            <div className="policy-card-heading"><span aria-hidden="true">✓</span><div><h2>Customize Your Preferences</h2><p>Select the Stellar emails that are useful to you.</p></div></div>
+            <div className="preference-options">
+              <label><input type="checkbox" defaultChecked /><span><strong>Training and Program Updates</strong><small>New courses, learning schedules, and program announcements</small></span></label>
+              <label><input type="checkbox" defaultChecked /><span><strong>Career Resources</strong><small>Practical career tips, mentoring insights, and event invitations</small></span></label>
+              <label><input type="checkbox" defaultChecked /><span><strong>Stellar Newsletter</strong><small>Company news, learner stories, and helpful resources</small></span></label>
+              <label><input type="checkbox" defaultChecked /><span><strong>Important Service Notices</strong><small>Changes that affect appointments, enrollment, or active services</small></span></label>
+            </div>
+            <button type="submit" className="policy-action primary">Update Preferences</button>
+          </form>
+
+          <form className="policy-card unsubscribe-card" onSubmit={(event) => {
+            event.preventDefault();
+            if (!unsubscribeEmail.trim()) {
+              setPreferenceMessage("Please enter your email address.");
+              return;
+            }
+            setPreferenceMessage("Your unsubscribe request is ready for processing.");
+          }}>
+            <div className="policy-card-heading"><span aria-hidden="true">−</span><div><h2>Unsubscribe from Marketing Emails</h2><p>You may still receive essential messages about services you requested.</p></div></div>
+            <label className="policy-field"><span>Unsubscribe email address</span><input type="email" value={unsubscribeEmail} placeholder="your.email@example.com" onChange={(event) => setUnsubscribeEmail(event.target.value)} /></label>
+            <button type="submit" className="policy-action danger">Unsubscribe</button>
+            <p className="policy-note">Questions? Email <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a>.</p>
+          </form>
+          {preferenceMessage && <p className="policy-status" role="status">{preferenceMessage}</p>}
+        </div>
+      </section>
+
+      <section className="policy-page sitemap-page" id="sitemap" aria-labelledby="sitemap-title">
+        <header className="policy-hero sitemap-hero">
+          <span className="policy-icon" aria-hidden="true">⌘</span>
+          <p className="section-label">EXPLORE STELLAR</p>
+          <h1 id="sitemap-title">Site Map</h1>
+          <p>Find every important Stellar page, program, and support resource.</p>
+        </header>
+        <div className="policy-page-inner">
+          <div className="sitemap-region-card"><strong>🇨🇦 Canada</strong><span>Programs, pricing, and support are currently presented for Canada.</span></div>
+          <div className="sitemap-grid">
+            <article className="policy-card"><span className="sitemap-card-icon">⌂</span><h2>Main Pages</h2><a href="/">Home</a><a href="/pricing">Pricing</a><a href="/reviews">Reviews</a><a href="/appointment">Book Appointment</a></article>
+            <article className="policy-card"><span className="sitemap-card-icon">◎</span><h2>About Stellar</h2><a href="/about">About Us</a><a href="/about#mission">Our Mission</a><a href="/about#team">Our Team</a><a href="/process">How It Works</a></article>
+            <article className="policy-card"><span className="sitemap-card-icon">▻</span><h2>Learning &amp; Support</h2><a href="/training">Training Programs</a><a href="/training#job-support">Job Support</a><a href="/training#career-mentoring">Career Mentoring</a><a href="/account">Student Account</a></article>
+            <article className="policy-card"><span className="sitemap-card-icon">§</span><h2>Policies &amp; Help</h2><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Use</a><a href="/refund-policy">Refund Policy</a><a href="/unsubscribe">Email Preferences</a></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="policy-page refund-page" id="refund-policy" aria-labelledby="refund-title">
+        <header className="policy-hero legal-hero"><p className="section-label">STELLAR POLICIES</p><h1 id="refund-title">Refund Policy</h1><p>Last updated: August 12, 2026</p></header>
+        <div className="policy-page-inner policy-document-grid">
+          <article className="policy-card"><span className="policy-number">01</span><h2>Overview</h2><p>We want program fees and refund expectations to be clear before enrollment. Eligibility depends on the service purchased, delivery already completed, and the written enrollment agreement.</p></article>
+          <article className="policy-card"><span className="policy-number">02</span><h2>Before a Program Begins</h2><p>A written cancellation request received before the confirmed start date may qualify for a refund, less any clearly disclosed non-refundable administrative or payment-processing charges.</p></article>
+          <article className="policy-card"><span className="policy-number">03</span><h2>After Delivery Begins</h2><p>Once training, mentoring, project support, digital materials, or career services have started, any refund is assessed according to the unused portion of the service and the applicable enrollment terms.</p></article>
+          <article className="policy-card"><span className="policy-number">04</span><h2>Non-Refundable Services</h2><p>Completed sessions, accessed digital materials, third-party fees, customized work, and services already delivered are generally non-refundable unless required by applicable law.</p></article>
+          <article className="policy-card"><span className="policy-number">05</span><h2>Processing</h2><p>Approved refunds are returned through the original payment method where possible. Bank, card, and currency-conversion timelines may affect when funds appear.</p></article>
+          <article className="policy-card"><span className="policy-number">06</span><h2>Request a Review</h2><p>Email <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a> with your name, program, payment date, and reason for the request. We will review the applicable agreement and respond in writing.</p></article>
+        </div>
+      </section>
+
       <section className="legal-page" id="privacy" aria-labelledby="privacy-title">
         <div className="legal-page-inner">
           <p className="section-label">LEGAL</p>
@@ -3331,6 +3412,9 @@ function App() {
           <div>
             <a href="/privacy">Privacy Policy</a>
             <a href="/terms">Terms of Use</a>
+            <a href="/refund-policy">Refund Policy</a>
+            <a href="/sitemap">Site Map</a>
+            <a href="/unsubscribe">Email Preferences</a>
             <a href="/contact">Customer Support</a>
           </div>
         </div>
