@@ -1,17 +1,13 @@
 .legal-page {
   background: linear-gradient(180deg, #f4fbf8 0, #ffffff 260px);
-  box-sizing: border-box;
   color: #102d34;
   min-height: 65vh;
   padding: 72px 24px 96px;
-  width: 100%;
 }
 
 .legal-page-inner {
-  box-sizing: border-box;
   margin: 0 auto;
   max-width: 980px;
-  width: 100%;
 }
 
 .legal-page .section-label,
@@ -34,20 +30,15 @@
 .legal-content {
   display: grid;
   gap: 18px;
-  margin: 0 auto;
-  width: 100%;
 }
 
 .legal-content article {
   background: #ffffff;
   border: 1px solid rgba(18, 50, 58, 0.12);
   border-radius: 16px;
-  box-sizing: border-box;
   box-shadow: 0 12px 30px rgba(18, 50, 58, 0.07);
   padding: 26px 28px;
-  width: 100%;
 }
-
 
 .legal-content h2 {
   color: #12323a;
@@ -106,34 +97,39 @@
 /* Ensure legal routes remain visible after legacy page-routing CSS */
 html body #root main.page-shell.route-privacy,
 html body #root main.page-shell.route-terms {
-  box-sizing: border-box !important;
   display: block !important;
-  max-width: none !important;
-  overflow-x: clip !important;
   visibility: visible !important;
   opacity: 1 !important;
-  width: 100% !important;
+  pointer-events: auto !important;
 }
 
 html body #root main.page-shell.route-privacy > .hero-section,
 html body #root main.page-shell.route-terms > .hero-section {
   display: block !important;
+  position: relative !important;
+  top: auto !important;
   height: auto !important;
   min-height: 0 !important;
   visibility: visible !important;
   opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 html body #root main.page-shell.route-privacy > #privacy,
 html body #root main.page-shell.route-terms > #terms {
-  box-sizing: border-box !important;
   display: block !important;
-  margin-inline: 0 !important;
-  max-width: none !important;
   position: relative !important;
+  width: 100% !important;
+  margin: 0 !important;
   visibility: visible !important;
   opacity: 1 !important;
-  width: 100% !important;
+  pointer-events: auto !important;
+}
+
+html body #root main.page-shell.route-privacy .legal-page-inner,
+html body #root main.page-shell.route-terms .legal-page-inner {
+  width: min(100%, 980px) !important;
+  margin-inline: auto !important;
 }
 
 html body #root main.page-shell.route-privacy > .site-footer,
@@ -141,4 +137,61 @@ html body #root main.page-shell.route-terms > .site-footer {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* Keep legal-page breadcrumbs aligned as one row on narrow screens. */
+@media (max-width: 600px) {
+  html body #root main.page-shell.route-privacy
+    > .hero-section > .breadcrumb-strip,
+  html body #root main.page-shell.route-terms
+    > .hero-section > .breadcrumb-strip {
+    display: grid !important;
+    grid-template-columns: 36px max-content max-content max-content !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    padding: 8px 14px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+  }
+
+  html body #root main.page-shell.route-privacy
+    > .hero-section > .breadcrumb-strip > *,
+  html body #root main.page-shell.route-terms
+    > .hero-section > .breadcrumb-strip > * {
+    position: static !important;
+    inset: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    align-self: center !important;
+    grid-row: 1 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  html body #root main.page-shell.route-privacy
+    > .hero-section > .breadcrumb-strip > a,
+  html body #root main.page-shell.route-terms
+    > .hero-section > .breadcrumb-strip > a {
+    place-self: center !important;
+    padding: 0 !important;
+  }
+
+  html body #root main.page-shell.route-privacy
+    > .hero-section > .breadcrumb-strip .breadcrumb-stellar-icon,
+  html body #root main.page-shell.route-terms
+    > .hero-section > .breadcrumb-strip .breadcrumb-stellar-icon {
+    justify-content: center !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
 }
