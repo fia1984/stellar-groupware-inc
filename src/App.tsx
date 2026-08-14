@@ -43,6 +43,8 @@ const slides = [
   },
 ];
 
+const mobileNavigationQuery = "(max-width: 1050px)";
+
 const appointmentDates = Array.from({ length: 7 }, (_, index) => {
   const date = new Date();
   date.setHours(12, 0, 0, 0);
@@ -853,7 +855,7 @@ function App() {
                 aria-current={currentRoute === "training" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "training"}
                 onClick={(event) => {
-                  if (window.matchMedia("(max-width: 1250px)").matches) {
+                  if (window.matchMedia(mobileNavigationQuery).matches) {
                     event.preventDefault();
                     setMobileSubmenuOpen((open) => open === "training" ? null : "training");
                   }
@@ -884,7 +886,7 @@ function App() {
                 aria-current={currentRoute === "process" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "process"}
                 onClick={(event) => {
-                  if (window.matchMedia("(max-width: 1250px)").matches) {
+                  if (window.matchMedia(mobileNavigationQuery).matches) {
                     event.preventDefault();
                     setMobileSubmenuOpen((open) => open === "process" ? null : "process");
                   }
@@ -926,7 +928,7 @@ function App() {
                 aria-current={currentRoute === "about" ? "page" : undefined}
                 aria-expanded={mobileSubmenuOpen === "about"}
                 onClick={(event) => {
-                  if (window.matchMedia("(max-width: 1250px)").matches) {
+                  if (window.matchMedia(mobileNavigationQuery).matches) {
                     event.preventDefault();
                     setMobileSubmenuOpen((open) => open === "about" ? null : "about");
                   }
