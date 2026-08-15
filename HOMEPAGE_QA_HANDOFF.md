@@ -18,9 +18,10 @@ Fix: the three dropdown triggers now use the same `(max-width: 1050px)` breakpoi
 - The green contact bubble remains fixed, visible, keyboard-accessible, and directly linked to the Stellar email address.
 - Homepage sections use responsive one-column layouts at narrow widths for pathway, offer, audience, struggle, mentoring, expert, and consultation cards.
 - The live desktop homepage had no confirmed horizontal layout overflow or overlapping visible controls during inspection.
+- Policy route layout was also corrected after QA: the Email Preferences page no longer leaves an empty teal hero strip above the cards, and the policy heading is visible.
+- The Email Preferences list contains one Important Service Notices option rather than a duplicate.
 
 ## Verification
 
-- `npm test -- --run` — 15 tests passed
+- `npm test -- --run` — 16 tests passed
 - `npm run build` — production build passed
-

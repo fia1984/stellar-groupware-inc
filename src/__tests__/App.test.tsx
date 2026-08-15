@@ -18,7 +18,7 @@ Object.defineProperty(Element.prototype, "scrollIntoView", {
 });
 
 import { describe, expect, it } from 'vitest';
-import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, createEvent, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
 
 describe('App', () => {
@@ -113,6 +113,8 @@ describe('App', () => {
     render(<App />)
 
     expect(screen.getByRole('heading', { name: 'Manage Email Preferences' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Manage Email Preferences' }).closest('.policy-hero')).toBeInTheDocument()
+    expect(screen.getAllByText('Important Service Notices')).toHaveLength(1)
     fireEvent.click(screen.getByRole('button', { name: 'Update Preferences' }))
     expect(screen.getByRole('status')).toHaveTextContent('saved on this device')
     expect(document.title).toBe('Email Preferences | Stellar Groupware Inc.')
@@ -204,6 +206,40 @@ describe('App', () => {
 
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(screen.getByRole('button', { name: 'Open navigation menu' })).toBeTruthy();
+  });
+
+  it('keeps dropdown parent links clickable when desktop navigation is visible', () => {
+    const originalMatchMedia = window.matchMedia;
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      value: vi.fn().mockReturnValue({
+        matches: false,
+        media: '(max-width: 1050px)',
+        onchange: null,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
+      }),
+    });
+
+    const { unmount } = render(<App />);
+
+    for (const name of ['Training ▾', 'Process ▾', 'About ▾']) {
+      const link = screen.getByRole('link', { name });
+      const click = createEvent.click(link);
+
+      fireEvent(link, click);
+
+      expect(click.defaultPrevented).toBe(false);
+    }
+
+    unmount();
+    Object.defineProperty(window, 'matchMedia', {
+      configurable: true,
+      value: originalMatchMedia,
+    });
   });
 
   it('filters training programs when a category card is selected', () => {

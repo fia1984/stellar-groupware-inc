@@ -1,0 +1,49 @@
+/* Policy route layout fix: remove the empty hero remainder and keep the
+ * policy header content visible below the shared navigation/breadcrumb. */
+body main.page-shell.route-unsubscribe > .hero-section,
+body main.page-shell.route-sitemap > .hero-section,
+body main.page-shell.route-refund > .hero-section {
+  position: relative !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  background: #ffffff !important;
+}
+
+body main.page-shell.route-unsubscribe > .hero-section > .hero-backgrounds,
+body main.page-shell.route-unsubscribe > .hero-section > .dark-overlay,
+body main.page-shell.route-unsubscribe > .hero-section > .code-layer,
+body main.page-shell.route-unsubscribe > .hero-section > .globe-effect,
+body main.page-shell.route-unsubscribe > .hero-section > .slide-arrow,
+body main.page-shell.route-unsubscribe > .hero-section > .dots,
+body main.page-shell.route-sitemap > .hero-section > .hero-backgrounds,
+body main.page-shell.route-sitemap > .hero-section > .dark-overlay,
+body main.page-shell.route-sitemap > .hero-section > .code-layer,
+body main.page-shell.route-sitemap > .hero-section > .globe-effect,
+body main.page-shell.route-sitemap > .hero-section > .slide-arrow,
+body main.page-shell.route-sitemap > .hero-section > .dots,
+body main.page-shell.route-refund > .hero-section > .hero-backgrounds,
+body main.page-shell.route-refund > .hero-section > .dark-overlay,
+body main.page-shell.route-refund > .hero-section > .code-layer,
+body main.page-shell.route-refund > .hero-section > .globe-effect,
+body main.page-shell.route-refund > .hero-section > .slide-arrow,
+body main.page-shell.route-refund > .hero-section > .dots {
+  display: none !important;
+}
+
+body main.page-shell.route-unsubscribe > #unsubscribe,
+body main.page-shell.route-sitemap > #sitemap,
+body main.page-shell.route-refund > #refund-policy {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+body main.page-shell.route-unsubscribe > #unsubscribe .policy-hero,
+body main.page-shell.route-sitemap > #sitemap .policy-hero,
+body main.page-shell.route-refund > #refund-policy .policy-hero {
+  display: block !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding: clamp(54px, 7vw, 88px) 24px !important;
+}
