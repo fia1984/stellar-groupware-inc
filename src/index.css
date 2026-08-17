@@ -36,10 +36,15 @@
 .navbar a.brand:focus-visible,
 .page-shell .navbar a.brand.active {
   background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
   border: 0 !important;
   box-shadow: none !important;
   color: inherit !important;
+  display: flex !important;
+  height: auto !important;
   min-height: 0 !important;
+  min-width: 0 !important;
   padding: 0 !important;
   transform: none !important;
 }
