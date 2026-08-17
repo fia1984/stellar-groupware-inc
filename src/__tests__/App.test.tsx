@@ -74,14 +74,23 @@ describe('App', () => {
     window.history.pushState({}, '', '/ca')
     const { unmount } = render(<App />)
 
-    expect(screen.getByRole('heading', { name: /build your it future/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /switching from non-it to it/i })).toBeInTheDocument()
     expect(document.title).toBe('Home | Stellar Groupware Inc.')
 
     unmount()
     window.history.pushState({}, '', '/uk')
     render(<App />)
 
-    expect(screen.getByRole('heading', { name: /build your it future/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /switching from non-it to it/i })).toBeInTheDocument()
+  })
+
+  it('shows the selected region in the homepage content and footer', () => {
+    window.history.pushState({}, '', '/uk')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /why stellar in uk & eu/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /transition into the uk & eu it market/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Open UK and EU website' })).toHaveAttribute('aria-current', 'page')
   })
 
   it('links to and renders the privacy policy and terms pages', () => {

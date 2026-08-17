@@ -45,6 +45,29 @@ const slides = [
 
 const mobileNavigationQuery = "(max-width: 1050px)";
 
+const regionConfig = {
+  "/": {
+    name: "Canada",
+    market: "Canada's IT Market",
+    flag: "🇨🇦",
+  },
+  "/ca": {
+    name: "Canada",
+    market: "Canada's IT Market",
+    flag: "🇨🇦",
+  },
+  "/uk": {
+    name: "UK & EU",
+    market: "the UK & EU IT Market",
+    flag: "🇬🇧",
+  },
+  "/in": {
+    name: "India",
+    market: "India's IT Market",
+    flag: "🇮🇳",
+  },
+} as const;
+
 const appointmentDates = Array.from({ length: 7 }, (_, index) => {
   const date = new Date();
   date.setHours(12, 0, 0, 0);
@@ -405,6 +428,15 @@ function App() {
     matchedRoute === "course" && !requestedCourseExists
       ? "not-found"
       : matchedRoute || "not-found";
+  const currentRegion = regionConfig[window.location.pathname as keyof typeof regionConfig] || regionConfig["/"];
+  const regionSlides = slides.map((slide, index) =>
+    index === 0
+      ? {
+          ...slide,
+          subtitle: `Transition into ${currentRegion.market} with Structure & Strategy`,
+        }
+      : slide,
+  );
 
   const routeTitle =
     currentRoute === "reviews"
@@ -727,7 +759,7 @@ function App() {
     setActiveSlide((current) => (current - 1 + slides.length) % slides.length);
   };
 
-  const slide = slides[activeSlide];
+  const slide = regionSlides[activeSlide];
   const trainingReview = trainingReviews[trainingReviewIndex];
   const careerReview = careerReviews[careerReviewIndex];
 
@@ -764,7 +796,7 @@ function App() {
         className="hero-section"
       >
         <div className="hero-backgrounds" aria-hidden="true">
-          {slides.map((item, index) => (
+          {regionSlides.map((item, index) => (
             <div
               key={item.image}
               className={
@@ -1041,7 +1073,7 @@ function App() {
           role="group"
           aria-label="Hero slide navigation"
         >
-          {slides.slice(0, 4).map((_, index) => (
+          {regionSlides.slice(0, 4).map((_, index) => (
             <button
               type="button"
               key={index}
@@ -1257,12 +1289,12 @@ function App() {
 
       <section className="home-reference-section home-canada-section" aria-labelledby="home-canada-title">
         <div className="home-section-heading">
-          <h2 id="home-canada-title">Why Stellar in Canada</h2>
+          <h2 id="home-canada-title">Why Stellar in {currentRegion.name}</h2>
         </div>
         <div className="home-canada-grid">
-          <article><span>✓</span><p>Training focused on practical skills used by Canadian and North American employers.</p></article>
+          <article><span>✓</span><p>Training focused on practical skills used by {currentRegion.name} and international employers.</p></article>
           <article><span>✓</span><p>Online mentoring and one-on-one guidance scheduled for Eastern Time.</p></article>
-          <article><span>✓</span><p>Canadian-format resume, LinkedIn, interview, and career-readiness support.</p></article>
+          <article><span>✓</span><p>Region-aware resume, LinkedIn, interview, and career-readiness support.</p></article>
         </div>
       </section>
 
@@ -3340,6 +3372,8 @@ function App() {
                 onClick={() => {
                   window.location.href = "/ca";
                 }}
+                className={currentRegion.name === "Canada" ? "active-region" : undefined}
+                aria-current={currentRegion.name === "Canada" ? "page" : undefined}
                 aria-label="Open Canada website"
               >
                 🇨🇦 Canada
@@ -3350,6 +3384,8 @@ function App() {
                 onClick={() => {
                   window.location.href = "/uk";
                 }}
+                className={currentRegion.name === "UK & EU" ? "active-region" : undefined}
+                aria-current={currentRegion.name === "UK & EU" ? "page" : undefined}
                 aria-label="Open UK and EU website"
               >
                 🇬🇧 UK &amp; EU
@@ -3360,6 +3396,8 @@ function App() {
                 onClick={() => {
                   window.location.href = "/in";
                 }}
+                className={currentRegion.name === "India" ? "active-region" : undefined}
+                aria-current={currentRegion.name === "India" ? "page" : undefined}
                 aria-label="Open India website"
               >
                 🇮🇳 India
