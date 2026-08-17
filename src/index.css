@@ -27,3 +27,19 @@
 @import "./styles/19-final-mobile-layout-qa.css";
 @import "./styles/20-policy-pages.css";
 @import "./styles/21-policy-layout-fix.css";
+
+/* Keep the accessible logo link visually identical to the original brand
+   block after all navigation and responsive overrides have loaded. */
+.navbar a.brand,
+.navbar a.brand:hover,
+.navbar a.brand:focus,
+.navbar a.brand:focus-visible,
+.page-shell .navbar a.brand.active {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
