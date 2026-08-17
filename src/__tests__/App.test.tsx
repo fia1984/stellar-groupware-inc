@@ -37,6 +37,13 @@ describe('App', () => {
     expect(contactBubble).not.toHaveAttribute('target');
   });
 
+  it('gives the live header logo an accessible name', () => {
+    window.history.pushState({}, '', '/')
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: 'Stellar Groupware Inc.' })).toHaveAttribute('href', '/')
+  })
+
   it('opens regular routes at the top while preserving section links', () => {
     scrollToMock.mockClear();
     window.history.pushState({}, '', '/pricing');

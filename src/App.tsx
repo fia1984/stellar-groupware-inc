@@ -813,13 +813,13 @@ function App() {
         <div className="globe-effect"></div>
 
         <nav className="navbar">
-          <div className="brand">
+          <a className="brand" href="/" aria-label="Stellar Groupware Inc.">
             <div className="brand-icon">S</div>
             <div>
               <h2>Stellar</h2>
               <span>Groupware Inc</span>
             </div>
-          </div>
+          </a>
 
           <a className="mobile-header-appointment" href="/appointment">
             Book Appointment
