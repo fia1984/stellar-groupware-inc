@@ -994,6 +994,20 @@ a,
   transform: none !important;
 }
 
+/* The brand is a link for keyboard and screen-reader users, but it should
+   retain the original logo appearance instead of nav-link hover styling. */
+.navbar a.brand,
+.navbar a.brand:hover,
+.navbar a.brand:focus-visible {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  transform: none !important;
+}
+
 /* Book Appointment stays green like reference */
 .navbar .book-btn,
 .book-btn {
