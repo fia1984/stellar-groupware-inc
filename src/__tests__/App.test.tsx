@@ -70,6 +70,20 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'Page not found.' })).toBeInTheDocument()
   })
 
+  it('resolves region URLs to the current homepage', () => {
+    window.history.pushState({}, '', '/ca')
+    const { unmount } = render(<App />)
+
+    expect(screen.getByRole('heading', { name: /build your it future/i })).toBeInTheDocument()
+    expect(document.title).toBe('Home | Stellar Groupware Inc.')
+
+    unmount()
+    window.history.pushState({}, '', '/uk')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /build your it future/i })).toBeInTheDocument()
+  })
+
   it('links to and renders the privacy policy and terms pages', () => {
     window.history.pushState({}, '', '/privacy')
     const privacyPage = render(<App />)

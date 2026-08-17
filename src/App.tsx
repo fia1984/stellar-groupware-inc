@@ -374,6 +374,11 @@ const stellarTrainingCourses = [
 function App() {
   const routeMap: Record<string, string> = {
     "/": "home",
+    // Region links currently use path-prefixed URLs. Keep them valid until
+    // region-specific content is introduced.
+    "/ca": "home",
+    "/uk": "home",
+    "/in": "home",
     "/reviews": "reviews",
     "/pricing": "pricing",
     "/training": "training",
