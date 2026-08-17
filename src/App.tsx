@@ -813,13 +813,27 @@ function App() {
         <div className="globe-effect"></div>
 
         <nav className="navbar">
-          <a className="brand" href="/" aria-label="Stellar Groupware Inc.">
+          <div
+            className="brand"
+            role="link"
+            tabIndex={0}
+            aria-label="Stellar Groupware Inc."
+            onClick={() => {
+              window.location.href = "/";
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                window.location.href = "/";
+              }
+            }}
+          >
             <div className="brand-icon">S</div>
             <div>
               <h2>Stellar</h2>
               <span>Groupware Inc</span>
             </div>
-          </a>
+          </div>
 
           <a className="mobile-header-appointment" href="/appointment">
             Book Appointment

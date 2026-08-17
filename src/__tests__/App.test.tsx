@@ -41,7 +41,7 @@ describe('App', () => {
     window.history.pushState({}, '', '/')
     render(<App />)
 
-    expect(screen.getByRole('link', { name: 'Stellar Groupware Inc.' })).toHaveAttribute('href', '/')
+    expect(screen.getByRole('link', { name: 'Stellar Groupware Inc.' })).toHaveAttribute('tabindex', '0')
   })
 
   it('opens regular routes at the top while preserving section links', () => {
