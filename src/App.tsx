@@ -506,6 +506,7 @@ function App() {
   }, [currentRoute]);
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<"training" | "process" | "about" | null>(null);
   const [trainingReviewIndex, setTrainingReviewIndex] = useState(0);
@@ -728,12 +729,16 @@ function App() {
 
 
   useEffect(() => {
+    if (heroPaused) {
+      return;
+    }
+
     const auto = setInterval(() => {
       setActiveSlide((current) => (current + 1) % slides.length);
     }, 4000);
 
     return () => clearInterval(auto);
-  }, []);
+  }, [heroPaused]);
 
   useEffect(() => {
     if (!mobileMenuOpen) {
@@ -1097,6 +1102,15 @@ function App() {
               onClick={() => setActiveSlide(index)}
             />
           ))}
+          <button
+            type="button"
+            className="hero-pause-button"
+            onClick={() => setHeroPaused((paused) => !paused)}
+            aria-label={heroPaused ? "Play hero slideshow" : "Pause hero slideshow"}
+            aria-pressed={heroPaused}
+          >
+            {heroPaused ? "▶" : "Ⅱ"}
+          </button>
         </div>
       </section>
 

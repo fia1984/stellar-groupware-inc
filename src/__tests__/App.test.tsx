@@ -44,6 +44,17 @@ describe('App', () => {
     expect(screen.getByRole('link', { name: 'Stellar Groupware Inc.' })).toHaveAttribute('tabindex', '0')
   })
 
+  it('allows visitors to pause and resume the hero slideshow', () => {
+    window.history.pushState({}, '', '/')
+    render(<App />)
+
+    const pauseButton = screen.getByRole('button', { name: 'Pause hero slideshow' })
+    expect(pauseButton).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.click(pauseButton)
+    expect(screen.getByRole('button', { name: 'Play hero slideshow' })).toHaveAttribute('aria-pressed', 'true')
+  })
+
   it('opens regular routes at the top while preserving section links', () => {
     scrollToMock.mockClear();
     window.history.pushState({}, '', '/pricing');
