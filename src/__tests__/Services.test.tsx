@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Services from "../components/Services";
-import { serviceCards } from "../mocks/siteData";
+import { serviceCards } from "../constants/siteData";
 
 describe("Services component", () => {
   test("renders the services heading and all service cards", () => {

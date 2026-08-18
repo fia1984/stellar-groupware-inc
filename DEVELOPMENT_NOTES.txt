@@ -1,0 +1,24 @@
+STELLAR GROUPWARE INC. – DEVELOPMENT NOTES
+
+Date: 2026-08-18
+
+Repository cleanup notes
+------------------------
+- The files named App.backup.tsx, index.backup.css, and index.before-mobile-fix.css were historical copies. They were not imported by the application and could confuse reviewers about which file is active.
+- CSS_REFACTOR_HANDOFF.md and HOMEPAGE_QA_HANDOFF.md were temporary handoff artifacts. They were removed from the project root.
+- README.md was retained because it is the normal, canonical project overview.
+- siteData.ts was moved out of mocks because it contains application content consumed by production components and tests; it is not generated test data.
+- Footer navigation/social data and Process card colors now live in dedicated constants files.
+
+Behavior preserved
+------------------
+- No user-facing route, page copy, form behavior, or slideshow behavior was intentionally changed by this cleanup.
+- Imports were updated to the new constants location.
+- The build and tests must pass before the commit is sent for review.
+
+Future convention
+-----------------
+- Use src/constants for shared application data and configuration.
+- Use src/__tests__ for test-only fixtures and mocks.
+- Do not commit backup copies or chat-generated handoff files.
+- Keep one active source file for each component/style entry point.

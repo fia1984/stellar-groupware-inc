@@ -1,4 +1,4 @@
-import { benefits } from "../mocks/siteData";
+import { benefits } from "../constants/siteData";
 
 function WhyChooseUs() {
   return (

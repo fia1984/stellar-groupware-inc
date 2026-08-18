@@ -1,4 +1,5 @@
-import { processSteps } from "../mocks/siteData";
+import { processSteps } from "../constants/siteData";
+import { processCardColors } from "../constants/processData";
 
 function Process() {
   return (
@@ -21,17 +22,10 @@ function Process() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-4">
           {processSteps.map((item, index) => {
-            const cardColors = [
-              "bg-blue-50",
-              "bg-emerald-50",
-              "bg-green-50",
-              "bg-amber-50",
-            ];
-
             return (
               <article
                 key={item.step}
-                className={`rounded-3xl border border-slate-200 p-6 shadow-sm ${cardColors[index]}`}
+                className={`rounded-3xl border border-slate-200 p-6 shadow-sm ${processCardColors[index]}`}
               >
                 <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-600 text-xl font-extrabold text-white shadow-md">
                   {item.step}

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import WhyChooseUs from "../components/WhyChooseUs";
-import { benefits } from "../mocks/siteData";
+import { benefits } from "../constants/siteData";
 
 describe("WhyChooseUs component", () => {
   test("renders the section heading and introduction", () => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Process from "../components/Process";
-import { processSteps } from "../mocks/siteData";
+import { processSteps } from "../constants/siteData";
 
 describe("Process component", () => {
   test("renders the process heading and every process step", () => {

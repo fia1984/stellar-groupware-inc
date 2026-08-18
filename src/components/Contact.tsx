@@ -1,5 +1,5 @@
 import { contactButton } from "../styles/buttonStyles";
-import { contactEmail, gmailComposeLink } from "../mocks/siteData";
+import { contactEmail, gmailComposeLink } from "../constants/siteData";
 
 function Contact() {
   return (

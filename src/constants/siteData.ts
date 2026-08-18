@@ -77,5 +77,4 @@ export const processSteps = [
 
 export const contactEmail = "info@stellargroupware.com";
 
-export const gmailComposeLink =
-  "mailto:info@stellargroupware.com?";
+export const gmailComposeLink = "mailto:info@stellargroupware.com?";

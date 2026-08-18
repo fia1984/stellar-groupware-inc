@@ -1,0 +1,42 @@
+STELLAR GROUPWARE INC. – REVIEW-READY CLEANUP SUMMARY
+
+Purpose
+-------
+This file summarizes the cleanup completed before Sammy's code review.
+
+What was fixed
+--------------
+1. Removed temporary backup source files:
+   - src/App.backup.tsx
+   - src/index.backup.css
+   - src/index.before-mobile-fix.css
+
+2. Removed temporary handoff files that were not part of the application:
+   - CSS_REFACTOR_HANDOFF.md
+   - HOMEPAGE_QA_HANDOFF.md
+
+3. Renamed the production content data location:
+   - Moved src/mocks/siteData.ts to src/constants/siteData.ts
+   - Updated every component and test that imported the data.
+   - The data is application content, not test-only mock data, so constants/ is the professional location.
+
+4. Centralized shared footer constants:
+   - Created src/constants/footerData.ts
+   - Moved quickLinks, resources, and socialLinks out of Footer.tsx.
+
+5. Centralized the Process component's card color list:
+   - Created processCardColors at module scope instead of rebuilding the list during every render.
+
+6. Preserved README.md as the project's standard documentation file.
+   - Temporary handoff notes were removed; the README remains useful project documentation.
+
+Validation
+----------
+- Production build: npm run build (passed)
+- Full Vitest suite: npx vitest run --reporter=dot (9 files, 36 tests passed)
+- Lint: npm run lint (passed)
+
+Review focus
+------------
+The cleanup keeps runtime behavior unchanged while making ownership clearer:
+components render UI, constants files own reusable data, and temporary backups do not remain in the source tree.

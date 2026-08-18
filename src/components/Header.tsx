@@ -1,4 +1,4 @@
-import { navLinks } from "../mocks/siteData";
+import { navLinks } from "../constants/siteData";
 import { navButton } from "../styles/buttonStyles";
 
 function Header() {

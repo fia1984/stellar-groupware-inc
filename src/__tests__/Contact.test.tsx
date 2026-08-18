@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Contact from "../components/Contact";
-import { contactEmail, gmailComposeLink } from "../mocks/siteData";
+import { contactEmail, gmailComposeLink } from "../constants/siteData";
 
 describe("Contact component", () => {
   test("renders the contact heading and email address", () => {
