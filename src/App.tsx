@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   appointmentDates,
   careerReviews,
@@ -47,59 +47,8 @@ type AnimatedCounterProps = {
   duration?: number;
 };
 
-function AnimatedCounter({ end, duration = 1800 }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
-  const counterRef = useRef<HTMLElement | null>(null);
-  const hasAnimated = useRef(false);
-
-  useEffect(() => {
-    const element = counterRef.current;
-
-    if (!element) {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || hasAnimated.current) {
-          return;
-        }
-
-        hasAnimated.current = true;
-        const startTime = performance.now();
-
-        const animate = (currentTime: number) => {
-          const progress = Math.min(
-            (currentTime - startTime) / duration,
-            1
-          );
-
-          const easedProgress = 1 - Math.pow(1 - progress, 3);
-          setCount(Math.round(end * easedProgress));
-
-          if (progress < 1) {
-            requestAnimationFrame(animate);
-          }
-        };
-
-        requestAnimationFrame(animate);
-        observer.disconnect();
-      },
-      {
-        threshold: 0.35,
-      }
-    );
-
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, [end, duration]);
-
-  return (
-    <strong ref={counterRef}>
-      {count.toLocaleString()}
-    </strong>
-  );
+function AnimatedCounter({ end }: AnimatedCounterProps) {
+  return <strong>{end.toLocaleString()}</strong>;
 }
 
 
@@ -246,6 +195,8 @@ function App() {
     Record<string, string>
   >({});
   const [enrollmentComplete, setEnrollmentComplete] = useState(false);
+  const [enrollmentSubmitting, setEnrollmentSubmitting] = useState(false);
+  const [enrollmentSubmitError, setEnrollmentSubmitError] = useState("");
 
   const [appointmentStep, setAppointmentStep] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
@@ -259,6 +210,8 @@ function App() {
   const [appointmentRequirement, setAppointmentRequirement] = useState("");
   const [appointmentConsent, setAppointmentConsent] = useState(false);
   const [appointmentBooked, setAppointmentBooked] = useState(false);
+  const [appointmentSubmitting, setAppointmentSubmitting] = useState(false);
+  const [appointmentSubmitError, setAppointmentSubmitError] = useState("");
   const [appointmentErrors, setAppointmentErrors] = useState<Record<string, string>>({});
 
   const validateEnrollmentStep = (step: number) => {
@@ -298,6 +251,44 @@ function App() {
       ...current,
       [field]: "",
     }));
+  };
+
+  const submitEnrollment = async () => {
+    setEnrollmentSubmitting(true);
+    setEnrollmentSubmitError("");
+
+    try {
+      const response = await fetch("/api/enrollments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          program: enrollmentProgram,
+          email: enrollmentEmail.trim(),
+          name: enrollmentName.trim(),
+          phone: enrollmentPhone.trim(),
+          city: enrollmentCity.trim(),
+          country: enrollmentCountry,
+          goal: enrollmentGoal.trim(),
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Unable to send your enrollment request.");
+      }
+
+      setEnrollmentComplete(true);
+    } catch (error) {
+      setEnrollmentSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your enrollment request. Please try again.",
+      );
+    } finally {
+      setEnrollmentSubmitting(false);
+    }
   };
 
   const validateAppointmentField = (
@@ -387,6 +378,50 @@ function App() {
 
     setAppointmentErrors(errors);
     return Object.keys(errors).length === 0;
+  };
+
+  const submitAppointment = async () => {
+    if (!validateAppointmentForm()) {
+      return;
+    }
+
+    setAppointmentSubmitting(true);
+    setAppointmentSubmitError("");
+
+    try {
+      const response = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          date: selectedDate,
+          time: selectedTime,
+          name: appointmentName.trim(),
+          phone: appointmentPhone.trim(),
+          email: appointmentEmail.trim(),
+          city: appointmentCity.trim(),
+          country: appointmentCountry,
+          service: appointmentService,
+          requirement: appointmentRequirement.trim(),
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Unable to send your appointment request.");
+      }
+
+      setAppointmentBooked(true);
+    } catch (error) {
+      setAppointmentSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your appointment request. Please try again.",
+      );
+    } finally {
+      setAppointmentSubmitting(false);
+    }
   };
 
   // Automatically reset the booking confirmation after 15 seconds.
@@ -1572,10 +1607,11 @@ function App() {
                 {enrollmentComplete ? (
                   <>
                     <span className="enrollment-success-icon">✓</span>
-                    <h1>Request prepared</h1>
+                    <h1>Request sent</h1>
                     <p>
-                      Your frontend request for <strong>{enrollmentProgram}</strong>{" "}
-                      has been prepared.
+                      We received your enrollment request for{" "}
+                      <strong>{enrollmentProgram}</strong>. A Stellar advisor
+                      will contact you at {enrollmentEmail}.
                     </p>
                     <a href="/pricing">Back to programs and pricing</a>
                   </>
@@ -1594,24 +1630,34 @@ function App() {
                     </dl>
 
                     <p className="enrollment-notice">
-                      Frontend demonstration only. No payment is collected and
-                      no information is sent to a backend.
+                      No payment is collected on this form. After you confirm,
+                      your details are sent to Stellar.
                     </p>
+
+                    {enrollmentSubmitError && (
+                      <span className="enrollment-error" role="alert">
+                        {enrollmentSubmitError}
+                      </span>
+                    )}
 
                     <div className="enrollment-form-actions">
                       <button
                         type="button"
                         className="enrollment-secondary-btn"
                         onClick={() => setEnrollmentStep(2)}
+                        disabled={enrollmentSubmitting}
                       >
                         Edit details
                       </button>
                       <button
                         type="button"
                         className="enrollment-primary-btn"
-                        onClick={() => setEnrollmentComplete(true)}
+                        onClick={() => {
+                          void submitEnrollment();
+                        }}
+                        disabled={enrollmentSubmitting}
                       >
-                        Confirm request
+                        {enrollmentSubmitting ? "Sending…" : "Confirm request"}
                       </button>
                     </div>
                   </>
@@ -2397,12 +2443,11 @@ function App() {
                   <div className="appointment-confirmation">
                     <div className="appointment-confirmation-icon">✓</div>
 
-                    <h3>Request prepared!</h3>
+                    <h3>Booking request sent!</h3>
 
                     <p>
-                      Your appointment details passed validation. Email confirmation
-                      is not connected yet, so please contact Stellar to complete
-                      the booking.
+                      Your appointment request was sent to Stellar. An advisor
+                      will contact you using the details you provided.
                     </p>
 
                     <div className="appointment-confirmation-date">
@@ -2525,12 +2570,7 @@ function App() {
                   noValidate
                   onSubmit={(event) => {
                     event.preventDefault();
-
-                    if (!validateAppointmentForm()) {
-                      return;
-                    }
-
-                    setAppointmentBooked(true);
+                    void submitAppointment();
                   }}
                 >
                   <div className="appointment-selection-summary">
@@ -2778,13 +2818,19 @@ function App() {
                       </span>
                     </button>
 
+                    {appointmentSubmitError && (
+                      <p className="appointment-submit-error" role="alert">
+                        {appointmentSubmitError}
+                      </p>
+                    )}
+
                   <div className="appointment-form-actions">
                     <button
                       type="submit"
                       className="appointment-book-btn"
-                      disabled={!appointmentConsent}
+                      disabled={!appointmentConsent || appointmentSubmitting}
                     >
-                      ✈ Book Appointment
+                      {appointmentSubmitting ? "Sending…" : "✈ Book Appointment"}
                     </button>
                   </div>
                 </form>

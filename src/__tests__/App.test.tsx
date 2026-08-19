@@ -299,8 +299,14 @@ describe('App', () => {
     expect(screen.getByText('1 program')).toBeTruthy();
   });
 
-  it('uses inline validation and completes the appointment flow', () => {
+  it('uses inline validation and completes the appointment flow', async () => {
     vi.useFakeTimers();
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ ok: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    );
     window.history.pushState({}, '', '/appointment');
     render(<App />);
 
@@ -371,16 +377,24 @@ describe('App', () => {
       target: { value: 'I need help choosing an IT training pathway.' },
     });
 
-    fireEvent.click(bookButton);
-    expect(screen.getByText('Request prepared!')).toBeTruthy();
+    await act(async () => {
+      fireEvent.click(bookButton);
+    });
+
+    expect(screen.getByText('Booking request sent!')).toBeTruthy();
+    expect(fetchSpy).toHaveBeenCalledWith(
+      '/api/appointments',
+      expect.objectContaining({ method: 'POST' }),
+    );
     expect(screen.getAllByText(/9:00 AM/).length).toBeGreaterThan(0);
 
     act(() => {
       vi.advanceTimersByTime(15000);
     });
 
-    expect(screen.queryByText('Request prepared!')).toBeNull();
+    expect(screen.queryByText('Booking request sent!')).toBeNull();
     expect(screen.getByText('Select a day')).toBeTruthy();
+    fetchSpy.mockRestore();
     vi.useRealTimers();
   });
 
@@ -406,7 +420,13 @@ describe('App', () => {
     });
   });
 
-  it('validates and completes the three-step enrollment frontend flow', () => {
+  it('validates and completes the three-step enrollment frontend flow', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ ok: true, id: 'enroll-1' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    );
     window.history.pushState(
       {},
       '',
@@ -455,11 +475,18 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: /Review/ }));
     expect(screen.getByText('Confirm your details')).toBeTruthy();
 
-    fireEvent.click(
-      screen.getByRole('button', { name: 'Confirm request' })
-    );
+    await act(async () => {
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Confirm request' })
+      );
+    });
 
-    expect(screen.getByText('Request prepared')).toBeTruthy();
+    expect(fetchSpy).toHaveBeenCalledWith(
+      '/api/enrollments',
+      expect.objectContaining({ method: 'POST' }),
+    );
+    expect(screen.getByText('Request sent')).toBeTruthy();
+    fetchSpy.mockRestore();
   });
 
 });
