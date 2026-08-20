@@ -193,7 +193,7 @@ function App() {
   const [enrollmentName, setEnrollmentName] = useState("");
   const [enrollmentPhone, setEnrollmentPhone] = useState("");
   const [enrollmentCity, setEnrollmentCity] = useState("");
-  const [enrollmentCountry, setEnrollmentCountry] = useState(currentRegion.defaultCountry);
+  const [enrollmentCountry, setEnrollmentCountry] = useState<string>(currentRegion.defaultCountry);
   const [enrollmentGoal, setEnrollmentGoal] = useState("");
   const [enrollmentErrors, setEnrollmentErrors] = useState<
     Record<string, string>
