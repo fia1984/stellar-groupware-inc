@@ -4,12 +4,14 @@ import {
   careerReviews,
   getAppointmentDates,
   getAvailableAppointmentTimes,
+  getCurrentRegion,
   homeAudiences,
   homeOffers,
   homePathways,
   mobileNavigationQuery,
-  regionConfig,
+  reviewLinks,
   routeMap,
+  socialLinks,
   seekerChallenges,
   slides,
   stellarTrainingCategories,
@@ -65,7 +67,7 @@ function App() {
     matchedRoute === "course" && !requestedCourseExists
       ? "not-found"
       : matchedRoute || "not-found";
-  const currentRegion = regionConfig[window.location.pathname as keyof typeof regionConfig] || regionConfig["/"];
+  const currentRegion = getCurrentRegion(window.location.pathname);
   const regionSlides = slides.map((slide, index) =>
     index === 0
       ? {
@@ -191,7 +193,7 @@ function App() {
   const [enrollmentName, setEnrollmentName] = useState("");
   const [enrollmentPhone, setEnrollmentPhone] = useState("");
   const [enrollmentCity, setEnrollmentCity] = useState("");
-  const [enrollmentCountry, setEnrollmentCountry] = useState("Canada");
+  const [enrollmentCountry, setEnrollmentCountry] = useState(currentRegion.defaultCountry);
   const [enrollmentGoal, setEnrollmentGoal] = useState("");
   const [enrollmentErrors, setEnrollmentErrors] = useState<
     Record<string, string>
@@ -2000,29 +2002,33 @@ function App() {
         <div className="review-platform-grid">
           <a
             className="review-platform-card review-platform-link"
-            href="/reviews"
-            aria-label="Read Stellar Groupware learner reviews"
+            href={reviewLinks.google}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open Google Reviews"
           >
             <div className="review-platform-icon google-review-icon">G</div>
             <div>
-              <h3>Learner Reviews</h3>
-              <p>See what our learners say</p>
-              <div className="review-stars" aria-label="Five-star reviews">
-                ★★★★★ <strong>5</strong>
+              <h3>Google Reviews</h3>
+              <p>See what our clients say</p>
+              <div className="review-stars" aria-label="4.7 star Google reviews">
+                ★★★★★ <strong>4.7</strong>
               </div>
             </div>
           </a>
 
           <a
             className="review-platform-card review-platform-link linkedin-platform-card"
-            href="/reviews"
-            aria-label="Read Stellar Groupware learner reviews"
+            href={reviewLinks.linkedinRecommendations}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="View LinkedIn Recommendations"
           >
             <div className="review-platform-icon linkedin-review-icon">in</div>
             <div>
-              <h3>On-site Testimonials</h3>
+              <h3>LinkedIn Recommendations</h3>
               <p>Professional recommendations</p>
-              <span className="linkedin-review-button">Read reviews</span>
+              <span className="linkedin-review-button">View on LinkedIn</span>
             </div>
           </a>
         </div>
@@ -2131,14 +2137,14 @@ function App() {
           </p>
 
           <div className="share-success-actions">
-            <a href="/reviews">
+            <a href={reviewLinks.google} target="_blank" rel="noreferrer">
               <span>G</span>
-              Read learner reviews
+              Leave a Google Review
             </a>
 
-            <a href="/contact">
+            <a href={reviewLinks.linkedinProfile} target="_blank" rel="noreferrer">
               <span>in</span>
-              Share your story with Stellar
+              Give LinkedIn Recommendation
             </a>
           </div>
         </section>
@@ -3316,19 +3322,19 @@ function App() {
               </button>
 
               <div className="social-row">
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.facebook} target="_blank" rel="noreferrer" aria-label="Open Facebook">
                   <span>f</span>
                 </a>
-                <a href="/reviews" aria-label="Read Stellar reviews">
+                <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn">
                   <span>in</span>
                 </a>
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.instagram} target="_blank" rel="noreferrer" aria-label="Open Instagram">
                   <span>◎</span>
                 </a>
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.twitter} target="_blank" rel="noreferrer" aria-label="Open X">
                   <span>𝕏</span>
                 </a>
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.youtube} target="_blank" rel="noreferrer" aria-label="Open YouTube">
                   <span>▶</span>
                 </a>
               </div>

@@ -17,11 +17,36 @@ Object.defineProperty(Element.prototype, "scrollIntoView", {
   value: vi.fn(),
 });
 
-import { describe, expect, it } from 'vitest';
+const memoryStore: Record<string, string> = {};
+vi.stubGlobal("localStorage", {
+  getItem: (key: string) => memoryStore[key] ?? null,
+  setItem: (key: string, value: string) => {
+    memoryStore[key] = value;
+  },
+  removeItem: (key: string) => {
+    delete memoryStore[key];
+  },
+  clear: () => {
+    for (const key of Object.keys(memoryStore)) {
+      delete memoryStore[key];
+    }
+  },
+});
+
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { act, createEvent, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
+import { reviewLinks, socialLinks } from '../constants/appData';
 
 describe('App', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('keeps the floating contact bubble directly clickable', () => {
     window.history.pushState({}, '', '/');
     render(<App />);
@@ -110,6 +135,43 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: /transition into the uk & eu it market/i })).toBeInTheDocument()
     expect(screen.getByText(/scheduled for UK Time/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Open UK and EU website' })).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('keeps UK appointment hours after leaving the UK homepage', () => {
+    window.history.pushState({}, '', '/uk')
+    const homePage = render(<App />)
+    expect(screen.getByRole('heading', { name: /why stellar in uk & eu/i })).toBeInTheDocument()
+    homePage.unmount()
+
+    window.history.pushState({}, '', '/appointment')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /IT Training and Career Consultation — UK & EU/i })).toBeInTheDocument()
+    expect(document.body.textContent).toMatch(/9:00 AM – 6:00 PM UK/)
+  })
+
+  it('opens Google and LinkedIn review pages from the reviews section', () => {
+    window.history.pushState({}, '', '/reviews')
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: 'Open Google Reviews' })).toHaveAttribute('href', reviewLinks.google)
+    expect(screen.getByRole('link', { name: 'View LinkedIn Recommendations' })).toHaveAttribute(
+      'href',
+      reviewLinks.linkedinRecommendations,
+    )
+    expect(screen.getByRole('link', { name: /Leave a Google Review/i })).toHaveAttribute('href', reviewLinks.google)
+    expect(screen.getByRole('link', { name: /Give LinkedIn Recommendation/i })).toHaveAttribute(
+      'href',
+      reviewLinks.linkedinProfile,
+    )
+    expect(screen.getByRole('link', { name: 'Open Facebook' })).toHaveAttribute('href', socialLinks.facebook)
+  })
+
+  it('sends the old account-access page to the account request form', () => {
+    window.history.pushState({}, '', '/account-access.html')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /Request student account access/i })).toBeInTheDocument()
   })
 
   it('links to and renders the privacy policy and terms pages', () => {
@@ -317,7 +379,7 @@ describe('App', () => {
   });
 
   it('uses inline validation and completes the appointment flow', async () => {
-    vi.useFakeTimers();
+    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'clearTimeout'] });
     vi.setSystemTime(new Date("2026-08-20T15:00:00-04:00"));
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(JSON.stringify({ ok: true }), {

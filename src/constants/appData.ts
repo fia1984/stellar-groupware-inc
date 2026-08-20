@@ -10,6 +10,7 @@ export const routeMap: Record<string, string> = {
   "/process": "process",
   "/about": "about",
   "/account": "account",
+  "/account-access.html": "account",
   "/appointment": "appointment",
   "/enroll": "enroll",
   "/contact": "contact",
@@ -106,6 +107,68 @@ export const regionConfig = {
     defaultCountry: "India",
     cityPlaceholder: "Bengaluru",
   },
+} as const;
+
+export type RegionPath = keyof typeof regionConfig;
+
+export const regionStorageKey = "stellar-region";
+
+export function resolveRegionPath(
+  pathname: string,
+  storedPath?: string | null,
+): RegionPath {
+  if (pathname in regionConfig) {
+    return pathname as RegionPath;
+  }
+
+  if (storedPath && storedPath in regionConfig) {
+    return storedPath as RegionPath;
+  }
+
+  return "/";
+}
+
+export function readStoredRegionPath(): string | null {
+  try {
+    return window.localStorage.getItem(regionStorageKey);
+  } catch {
+    return null;
+  }
+}
+
+export function rememberRegionPath(pathname: string) {
+  if (!(pathname in regionConfig)) {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(regionStorageKey, pathname);
+  } catch {
+    // Ignore storage failures and keep using the current URL region.
+  }
+}
+
+export function getCurrentRegion(pathname = window.location.pathname) {
+  if (pathname in regionConfig) {
+    rememberRegionPath(pathname);
+  }
+
+  return regionConfig[resolveRegionPath(pathname, readStoredRegionPath())];
+}
+
+export const reviewLinks = {
+  google: "https://share.google/0PZhMOwR6LQrlaefx",
+  linkedinRecommendations:
+    "https://www.linkedin.com/in/rvasupilli/details/recommendations/?detailScreenTabIndex=0",
+  linkedinProfile: "https://www.linkedin.com/in/rvasupilli/",
+} as const;
+
+export const socialLinks = {
+  facebook: "https://www.facebook.com/ncplconsulting.net",
+  linkedin: "https://www.linkedin.com/company/ncpl-consulting",
+  instagram: "https://www.instagram.com/ncplconsulting",
+  twitter: "https://x.com/ncplconsulting",
+  youtube: "https://www.youtube.com/@ncpl-media",
 } as const;
 
 export const appointmentServices = [

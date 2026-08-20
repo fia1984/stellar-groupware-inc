@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/account-access.html",
+      "destination": "/account",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",
