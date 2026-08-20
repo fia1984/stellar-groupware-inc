@@ -1,7 +1,9 @@
 import { useEffect, useState, type ReactNode } from "react";
 import {
-  appointmentDates,
+  appointmentServices,
   careerReviews,
+  getAppointmentDates,
+  getAvailableAppointmentTimes,
   homeAudiences,
   homeOffers,
   homePathways,
@@ -205,7 +207,7 @@ function App() {
   const [appointmentPhone, setAppointmentPhone] = useState("");
   const [appointmentEmail, setAppointmentEmail] = useState("");
   const [appointmentCity, setAppointmentCity] = useState("");
-  const [appointmentCountry, setAppointmentCountry] = useState("Canada");
+  const [appointmentCountry, setAppointmentCountry] = useState(currentRegion.defaultCountry);
   const [appointmentService, setAppointmentService] = useState("");
   const [appointmentRequirement, setAppointmentRequirement] = useState("");
   const [appointmentConsent, setAppointmentConsent] = useState(false);
@@ -213,6 +215,21 @@ function App() {
   const [appointmentSubmitting, setAppointmentSubmitting] = useState(false);
   const [appointmentSubmitError, setAppointmentSubmitError] = useState("");
   const [appointmentErrors, setAppointmentErrors] = useState<Record<string, string>>({});
+  const [accountName, setAccountName] = useState("");
+  const [accountEmail, setAccountEmail] = useState("");
+  const [accountNote, setAccountNote] = useState("");
+  const [accountSubmitting, setAccountSubmitting] = useState(false);
+  const [accountError, setAccountError] = useState("");
+  const [accountComplete, setAccountComplete] = useState(false);
+  const [preferenceEmail, setPreferenceEmail] = useState("");
+  const [preferenceSubmitting, setPreferenceSubmitting] = useState(false);
+  const [cookieChoice, setCookieChoice] = useState<string | null>(null);
+
+  const appointmentDates = getAppointmentDates(currentRegion.timeZone);
+  const selectedAppointmentDate = appointmentDates.find((date) => date.value === selectedDate);
+  const appointmentTimes = selectedAppointmentDate
+    ? getAvailableAppointmentTimes(selectedAppointmentDate, currentRegion.timeZone)
+    : [];
 
   const validateEnrollmentStep = (step: number) => {
     const errors: Record<string, string> = {};
@@ -439,15 +456,108 @@ function App() {
       setAppointmentPhone("");
       setAppointmentEmail("");
       setAppointmentCity("");
-      setAppointmentCountry("Canada");
+      setAppointmentCountry(currentRegion.defaultCountry);
       setAppointmentService("");
       setAppointmentRequirement("");
       setAppointmentConsent(false);
     }, 15000);
 
     return () => window.clearTimeout(confirmationTimer);
-  }, [appointmentBooked]);
+  }, [appointmentBooked, currentRegion.defaultCountry]);
 
+  useEffect(() => {
+    try {
+      setCookieChoice(window.localStorage.getItem("stellar-cookie-choice"));
+    } catch {
+      setCookieChoice(null);
+    }
+  }, []);
+
+  const saveCookieChoice = (choice: "accept" | "decline") => {
+    try {
+      window.localStorage.setItem("stellar-cookie-choice", choice);
+    } catch {
+      // Ignore storage failures and still hide the banner for this visit.
+    }
+
+    setCookieChoice(choice);
+  };
+
+  const submitAccountRequest = async () => {
+    setAccountSubmitting(true);
+    setAccountError("");
+
+    try {
+      const response = await fetch("/api/account-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: accountName.trim(),
+          email: accountEmail.trim(),
+          note: accountNote.trim(),
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Unable to send your account request.");
+      }
+
+      setAccountComplete(true);
+    } catch (error) {
+      setAccountError(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your account request. Please try again.",
+      );
+    } finally {
+      setAccountSubmitting(false);
+    }
+  };
+
+  const submitPreferences = async (action: "update" | "unsubscribe") => {
+    const email = (action === "unsubscribe" ? unsubscribeEmail : preferenceEmail).trim();
+    setPreferenceSubmitting(true);
+    setPreferenceMessage("");
+
+    try {
+      const response = await fetch("/api/preferences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          action,
+          topics:
+            action === "update"
+              ? ["training", "career", "newsletter", "notices"]
+              : [],
+        }),
+      });
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Unable to save your email preferences.");
+      }
+
+      setPreferenceMessage(
+        action === "unsubscribe"
+          ? "Your unsubscribe request was sent to Stellar."
+          : "Your email preferences were sent to Stellar.",
+      );
+    } catch (error) {
+      setPreferenceMessage(
+        error instanceof Error
+          ? error.message
+          : "Unable to save your email preferences. Please try again.",
+      );
+    } finally {
+      setPreferenceSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (heroPaused) {
@@ -1042,7 +1152,7 @@ function App() {
         </div>
         <div className="home-canada-grid">
           <article><span>✓</span><p>Training focused on practical skills used by {currentRegion.name} and international employers.</p></article>
-          <article><span>✓</span><p>Online mentoring and one-on-one guidance scheduled for Eastern Time.</p></article>
+          <article><span>✓</span><p>Online mentoring and one-on-one guidance scheduled for {currentRegion.timeLabel}.</p></article>
           <article><span>✓</span><p>Region-aware resume, LinkedIn, interview, and career-readiness support.</p></article>
         </div>
       </section>
@@ -1890,14 +2000,12 @@ function App() {
         <div className="review-platform-grid">
           <a
             className="review-platform-card review-platform-link"
-            href="https://www.google.com/search?q=Stellar+Groupware+Inc+reviews"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Stellar Groupware Google Reviews"
+            href="/reviews"
+            aria-label="Read Stellar Groupware learner reviews"
           >
             <div className="review-platform-icon google-review-icon">G</div>
             <div>
-              <h3>Google Reviews</h3>
+              <h3>Learner Reviews</h3>
               <p>See what our learners say</p>
               <div className="review-stars" aria-label="Five-star reviews">
                 ★★★★★ <strong>5</strong>
@@ -1907,16 +2015,14 @@ function App() {
 
           <a
             className="review-platform-card review-platform-link linkedin-platform-card"
-            href="https://www.linkedin.com/search/results/companies/?keywords=Stellar%20Groupware%20Inc"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View Stellar Groupware LinkedIn recommendations"
+            href="/reviews"
+            aria-label="Read Stellar Groupware learner reviews"
           >
             <div className="review-platform-icon linkedin-review-icon">in</div>
             <div>
-              <h3>LinkedIn Recommendations</h3>
+              <h3>On-site Testimonials</h3>
               <p>Professional recommendations</p>
-              <span className="linkedin-review-button">View on LinkedIn</span>
+              <span className="linkedin-review-button">Read reviews</span>
             </div>
           </a>
         </div>
@@ -2025,22 +2131,14 @@ function App() {
           </p>
 
           <div className="share-success-actions">
-            <a
-              href="https://www.google.com/search?q=Stellar+Groupware+Inc+reviews"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="/reviews">
               <span>G</span>
-              Leave a Google Review
+              Read learner reviews
             </a>
 
-            <a
-              href="https://www.linkedin.com/search/results/companies/?keywords=Stellar%20Groupware%20Inc"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="/contact">
               <span>in</span>
-              Give LinkedIn Recommendation
+              Share your story with Stellar
             </a>
           </div>
         </section>
@@ -2409,11 +2507,66 @@ function App() {
 
       <section className="account-section" id="account">
         <p className="section-label">MY ACCOUNT</p>
-        <h2>Student account access coming soon.</h2>
+        <h2>Request student account access.</h2>
         <p className="section-intro">
-          This area can later include student login, course progress, saved resources, and appointment history.
+          Send your details and a Stellar advisor will help you with login,
+          course progress, and appointment history.
         </p>
-        <a href="/appointment" className="enroll-btn">Request Account Help →</a>
+        {accountComplete ? (
+          <p className="section-intro" role="status">
+            Your account request was sent to Stellar. An advisor will contact you
+            at {accountEmail}.
+          </p>
+        ) : (
+          <form
+            className="account-request-form"
+            noValidate
+            onSubmit={(event) => {
+              event.preventDefault();
+              void submitAccountRequest();
+            }}
+          >
+            <label>
+              Full name
+              <input
+                type="text"
+                autoComplete="name"
+                value={accountName}
+                onChange={(event) => setAccountName(event.target.value)}
+              />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                autoComplete="email"
+                value={accountEmail}
+                onChange={(event) => setAccountEmail(event.target.value)}
+              />
+            </label>
+            <label>
+              How can we help?
+              <textarea
+                rows={4}
+                value={accountNote}
+                onChange={(event) => setAccountNote(event.target.value)}
+                placeholder="Tell us about your program or account issue."
+              />
+            </label>
+            {accountError && (
+              <span className="enrollment-error" role="alert">
+                {accountError}
+              </span>
+            )}
+            <button
+              type="submit"
+              className="enroll-btn"
+              disabled={accountSubmitting}
+            >
+              {accountSubmitting ? "Sending…" : "Send account request"}
+            </button>
+          </form>
+        )}
       </section>
 
         <section className="appointment-section" id="appointment">
@@ -2454,7 +2607,7 @@ function App() {
                       <span>▣</span>
                       <div>
                         <strong>{selectedDate} at {selectedTime}</strong>
-                        <small>Eastern Time — Canada</small>
+                        <small>{currentRegion.timeLabel} — {currentRegion.name}</small>
                       </div>
                     </div>
 
@@ -2475,7 +2628,7 @@ function App() {
                 ) : (
                   <>
 
-              <h3>IT Training and Career Consultation — Canada</h3>
+              <h3>IT Training and Career Consultation — {currentRegion.name}</h3>
               <p className="appointment-description">
                 This free consultation helps learners and professionals choose the
                 right IT training, project support, or career-support pathway.
@@ -2532,14 +2685,10 @@ function App() {
                   <h4>Select a time</h4>
 
                   <div className="appointment-time-grid">
-                    {[
-                      "9:00 AM",
-                      "10:00 AM",
-                      "11:30 AM",
-                      "1:00 PM",
-                      "3:30 PM",
-                      "5:00 PM",
-                    ].map((time) => (
+                    {appointmentTimes.length === 0 ? (
+                      <p>No times are left on this day. Please choose another date.</p>
+                    ) : (
+                      appointmentTimes.map((time) => (
                       <button
                         key={time}
                         type="button"
@@ -2551,7 +2700,8 @@ function App() {
                       >
                         {time}
                       </button>
-                    ))}
+                      ))
+                    )}
                   </div>
 
                   <button
@@ -2686,7 +2836,7 @@ function App() {
                       maxLength={80}
                       autoComplete="address-level2"
                       type="text"
-                      placeholder="Toronto"
+                      placeholder={currentRegion.cityPlaceholder}
                       value={appointmentCity}
                       aria-invalid={Boolean(appointmentErrors.city)}
                       aria-describedby={
@@ -2747,10 +2897,9 @@ function App() {
                       }}
                     >
                       <option value="">Select a service</option>
-                      <option>Regular IT Training</option>
-                      <option>AI + IT Training</option>
-                      <option>Bootcamp Support</option>
-                      <option>Career Support</option>
+                      {appointmentServices.map((service) => (
+                        <option key={service}>{service}</option>
+                      ))}
                     </select>
                     {appointmentErrors.service && (
                       <span
@@ -2852,8 +3001,8 @@ function App() {
 
               <div className="appointment-hours-card">
                 <h3>◷ Available Hours</h3>
-                <p><span>Monday – Friday:</span><strong>9:00 AM – 6:00 PM ET</strong></p>
-                <p><span>Saturday:</span><strong>10:00 AM – 4:00 PM ET</strong></p>
+                <p><span>Monday – Friday:</span><strong>9:00 AM – 6:00 PM {currentRegion.timeAbbrev}</strong></p>
+                <p><span>Saturday:</span><strong>10:00 AM – 4:00 PM {currentRegion.timeAbbrev}</strong></p>
                 <p><span>Sunday:</span><strong>Closed</strong></p>
               </div>
 
@@ -2894,29 +3043,30 @@ function App() {
         <div className="policy-page-inner unsubscribe-layout">
           <form className="policy-card preference-card" onSubmit={(event) => {
             event.preventDefault();
-            setPreferenceMessage("Your email preferences have been saved on this device.");
+            void submitPreferences("update");
           }}>
             <div className="policy-card-heading"><span aria-hidden="true">✓</span><div><h2>Customize Your Preferences</h2><p>Select the Stellar emails that are useful to you.</p></div></div>
+            <label className="policy-field"><span>Your email for updates</span><input type="email" value={preferenceEmail} placeholder="your.email@example.com" onChange={(event) => setPreferenceEmail(event.target.value)} /></label>
             <div className="preference-options">
               <label><input type="checkbox" defaultChecked /><span><strong>Training and Program Updates</strong><small>New courses, learning schedules, and program announcements</small></span></label>
               <label><input type="checkbox" defaultChecked /><span><strong>Career Resources</strong><small>Practical career tips, mentoring insights, and event invitations</small></span></label>
               <label><input type="checkbox" defaultChecked /><span><strong>Stellar Newsletter</strong><small>Company news, learner stories, and helpful resources</small></span></label>
               <label><input type="checkbox" defaultChecked /><span><strong>Important Service Notices</strong><small>Changes that affect appointments, enrollment, or active services</small></span></label>
             </div>
-            <button type="submit" className="policy-action primary">Update Preferences</button>
+            <button type="submit" className="policy-action primary" disabled={preferenceSubmitting}>
+              {preferenceSubmitting ? "Sending…" : "Update Preferences"}
+            </button>
           </form>
 
           <form className="policy-card unsubscribe-card" onSubmit={(event) => {
             event.preventDefault();
-            if (!unsubscribeEmail.trim()) {
-              setPreferenceMessage("Please enter your email address.");
-              return;
-            }
-            setPreferenceMessage("Your unsubscribe request is ready for processing.");
+            void submitPreferences("unsubscribe");
           }}>
             <div className="policy-card-heading"><span aria-hidden="true">−</span><div><h2>Unsubscribe from Marketing Emails</h2><p>You may still receive essential messages about services you requested.</p></div></div>
             <label className="policy-field"><span>Unsubscribe email address</span><input type="email" value={unsubscribeEmail} placeholder="your.email@example.com" onChange={(event) => setUnsubscribeEmail(event.target.value)} /></label>
-            <button type="submit" className="policy-action danger">Unsubscribe</button>
+            <button type="submit" className="policy-action danger" disabled={preferenceSubmitting}>
+              {preferenceSubmitting ? "Sending…" : "Unsubscribe"}
+            </button>
             <p className="policy-note">Questions? Email <a href="mailto:info@stellargroupware.com">info@stellargroupware.com</a>.</p>
           </form>
           {preferenceMessage && <p className="policy-status" role="status">{preferenceMessage}</p>}
@@ -3069,6 +3219,7 @@ function App() {
         </div>
       </section>
 
+      {cookieChoice === null && (
       <div className="cookie-banner">
         <div className="cookie-icon">🛡️</div>
         <div className="cookie-copy">
@@ -3079,14 +3230,15 @@ function App() {
           </p>
         </div>
         <div className="cookie-actions">
-          <button type="button" onClick={() => document.querySelector('.cookie-banner')?.remove()}>
+          <button type="button" onClick={() => saveCookieChoice("accept")}>
             Accept All
           </button>
-          <button type="button" className="decline-btn" onClick={() => document.querySelector('.cookie-banner')?.remove()}>
+          <button type="button" className="decline-btn" onClick={() => saveCookieChoice("decline")}>
             Decline
           </button>
         </div>
       </div>
+      )}
 
 
       <footer className="site-footer">
@@ -3164,48 +3316,19 @@ function App() {
               </button>
 
               <div className="social-row">
-                <a
-                  href="https://www.facebook.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Facebook"
-                >
+                <a href="/contact" aria-label="Contact Stellar">
                   <span>f</span>
                 </a>
-
-                <a
-                  href="https://www.linkedin.com/search/results/companies/?keywords=Stellar%20Groupware%20Inc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open LinkedIn"
-                >
+                <a href="/reviews" aria-label="Read Stellar reviews">
                   <span>in</span>
                 </a>
-
-                <a
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Instagram"
-                >
+                <a href="/contact" aria-label="Contact Stellar">
                   <span>◎</span>
                 </a>
-
-                <a
-                  href="https://x.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open X"
-                >
+                <a href="/contact" aria-label="Contact Stellar">
                   <span>𝕏</span>
                 </a>
-
-                <a
-                  href="https://www.youtube.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open YouTube"
-                >
+                <a href="/contact" aria-label="Contact Stellar">
                   <span>▶</span>
                 </a>
               </div>

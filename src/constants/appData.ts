@@ -70,41 +70,169 @@ export const regionConfig = {
     name: "Canada",
     market: "Canada's IT Market",
     flag: "🇨🇦",
+    timeZone: "America/Toronto",
+    timeLabel: "Eastern Time",
+    timeAbbrev: "ET",
+    defaultCountry: "Canada",
+    cityPlaceholder: "Toronto",
   },
   "/ca": {
     name: "Canada",
     market: "Canada's IT Market",
     flag: "🇨🇦",
+    timeZone: "America/Toronto",
+    timeLabel: "Eastern Time",
+    timeAbbrev: "ET",
+    defaultCountry: "Canada",
+    cityPlaceholder: "Toronto",
   },
   "/uk": {
     name: "UK & EU",
     market: "the UK & EU IT Market",
     flag: "🇬🇧",
+    timeZone: "Europe/London",
+    timeLabel: "UK Time",
+    timeAbbrev: "UK",
+    defaultCountry: "United Kingdom",
+    cityPlaceholder: "London",
   },
   "/in": {
     name: "India",
     market: "India's IT Market",
     flag: "🇮🇳",
+    timeZone: "Asia/Kolkata",
+    timeLabel: "India Time",
+    timeAbbrev: "IST",
+    defaultCountry: "India",
+    cityPlaceholder: "Bengaluru",
   },
 } as const;
 
-export const appointmentDates = Array.from({ length: 7 }, (_, index) => {
-  const date = new Date();
-  date.setHours(12, 0, 0, 0);
-  date.setDate(date.getDate() + index);
+export const appointmentServices = [
+  "Regular IT Training",
+  "AI + IT Training",
+  "Bootcamp Support",
+  "Marketing Support",
+  "Direct Bootcamp",
+  "Career Marketing",
+  "Direct Marketing Program",
+] as const;
 
-  const day = date.toLocaleDateString("en-CA", { weekday: "short" }).toUpperCase();
-  const month = date.toLocaleDateString("en-CA", { month: "short" }).toUpperCase();
-  const dateNumber = date.getDate().toString();
+export const weekdayAppointmentTimes = [
+  "9:00 AM",
+  "10:00 AM",
+  "11:30 AM",
+  "1:00 PM",
+  "3:30 PM",
+  "5:00 PM",
+] as const;
+
+export const saturdayAppointmentTimes = [
+  "10:00 AM",
+  "11:30 AM",
+  "1:00 PM",
+  "3:30 PM",
+] as const;
+
+export type AppointmentDateOption = {
+  day: string;
+  date: string;
+  month: string;
+  value: string;
+  iso: string;
+  weekday: number;
+  disabled: boolean;
+};
+
+function addDaysToIso(isoDate: string, days: number) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  const shifted = new Date(Date.UTC(year, month - 1, day + days, 12, 0, 0));
+  return shifted.toISOString().slice(0, 10);
+}
+
+function weekdayFromIso(isoDate: string) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day, 12, 0, 0)).getUTCDay();
+}
+
+function formatIsoDate(isoDate: string) {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
 
   return {
-    day,
-    date: dateNumber,
-    month,
-    value: `${day}, ${month} ${dateNumber}`,
-    disabled: date.getDay() === 0,
+    day: date.toLocaleDateString("en-CA", { weekday: "short", timeZone: "UTC" }).toUpperCase(),
+    month: date.toLocaleDateString("en-CA", { month: "short", timeZone: "UTC" }).toUpperCase(),
+    date: String(day),
+    value: `${date.toLocaleDateString("en-CA", { weekday: "short", timeZone: "UTC" }).toUpperCase()}, ${date.toLocaleDateString("en-CA", { month: "short", timeZone: "UTC" }).toUpperCase()} ${day}`,
+    iso: isoDate,
+    weekday: date.getUTCDay(),
   };
-});
+}
+
+export function timeLabelToMinutes(label: string) {
+  const [clock, period] = label.split(" ");
+  const [hours, minutes] = clock.split(":").map(Number);
+  const hour = (hours % 12) + (period === "PM" ? 12 : 0);
+  return hour * 60 + minutes;
+}
+
+export function getZonedNow(timeZone: string, now = new Date()) {
+  const isoDate = now.toLocaleDateString("en-CA", { timeZone });
+  const hour = Number(
+    now.toLocaleString("en-US", { timeZone, hour: "numeric", hour12: false }),
+  );
+  const minute = Number(
+    now.toLocaleString("en-US", { timeZone, minute: "numeric" }),
+  );
+
+  return {
+    isoDate,
+    minutes: ((hour === 24 ? 0 : hour) * 60) + minute,
+  };
+}
+
+export function getAppointmentDates(timeZone: string, now = new Date()): AppointmentDateOption[] {
+  const todayIso = getZonedNow(timeZone, now).isoDate;
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const iso = addDaysToIso(todayIso, index);
+    const formatted = formatIsoDate(iso);
+    const weekday = weekdayFromIso(iso);
+    const availableTimes = getAvailableAppointmentTimes(
+      { ...formatted, weekday, disabled: false },
+      timeZone,
+      now,
+    );
+
+    return {
+      ...formatted,
+      weekday,
+      disabled: weekday === 0 || availableTimes.length === 0,
+    };
+  });
+}
+
+export function getAvailableAppointmentTimes(
+  date: Pick<AppointmentDateOption, "iso" | "weekday">,
+  timeZone: string,
+  now = new Date(),
+) {
+  const slots =
+    date.weekday === 6 ? saturdayAppointmentTimes : weekdayAppointmentTimes;
+  const zonedNow = getZonedNow(timeZone, now);
+
+  return slots.filter((slot) => {
+    if (date.iso > zonedNow.isoDate) {
+      return true;
+    }
+
+    if (date.iso < zonedNow.isoDate) {
+      return false;
+    }
+
+    return timeLabelToMinutes(slot) > zonedNow.minutes;
+  });
+}
 
 
 export type ReviewItem = {

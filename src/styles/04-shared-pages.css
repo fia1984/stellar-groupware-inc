@@ -689,6 +689,35 @@ button:hover {
   text-align: center !important;
 }
 
+.account-request-form {
+  display: grid;
+  gap: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.account-request-form label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+  color: #15303a;
+}
+
+.account-request-form input,
+.account-request-form textarea {
+  width: 100%;
+  border: 1px solid #d7e3dc;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+}
+
+.account-request-form .enroll-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .account-section .section-intro,
 .appointment-section .section-intro,
 .contact-section .section-intro {

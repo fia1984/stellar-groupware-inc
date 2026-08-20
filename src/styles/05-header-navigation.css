@@ -1459,31 +1459,11 @@ a,
   }
 }
 
-/* Remove cookie/privacy banner from home page */
-.cookie-consent,
-.cookie-notice,
-.cookie-modal,
-.cookie-box,
-.cookie-card,
-.cookie-container,
-.privacy-banner,
-.privacy-popup,
-.privacy-modal,
-.privacy-box,
-.privacy-card,
-.consent-banner,
-.consent-popup,
-.consent-modal,
-.consent-box,
-.consent-card,
-[class*="cookie"],
-[class*="Cookie"],
-[class*="consent"],
-[class*="Consent"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+.cookie-banner {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* Feedback 4: Sticky top navbar on all routes */

@@ -108,6 +108,7 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /why stellar in uk & eu/i })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: /transition into the uk & eu it market/i })).toBeInTheDocument()
+    expect(screen.getByText(/scheduled for UK Time/i)).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Open UK and EU website' })).toHaveAttribute('aria-current', 'page')
   })
 
@@ -133,7 +134,7 @@ describe('App', () => {
     expect(document.title).toBe('Terms of Use | Stellar Groupware Inc.')
   })
 
-  it('renders the refund, sitemap, and email-preference routes', () => {
+  it('renders the refund, sitemap, and email-preference routes', async () => {
     window.history.pushState({}, '', '/refund-policy')
     const refundPage = render(<App />)
 
@@ -156,8 +157,24 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'Manage Email Preferences' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Manage Email Preferences' }).closest('.policy-hero')).toBeInTheDocument()
     expect(screen.getAllByText('Important Service Notices')).toHaveLength(1)
-    fireEvent.click(screen.getByRole('button', { name: 'Update Preferences' }))
-    expect(screen.getByRole('status')).toHaveTextContent('saved on this device')
+    fireEvent.change(screen.getByLabelText('Your email for updates'), {
+      target: { value: 'learner@example.com' },
+    })
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ ok: true, id: 'pref-1' }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      }),
+    )
+    await act(async () => {
+      fireEvent.click(screen.getByRole('button', { name: 'Update Preferences' }))
+    })
+    expect(fetchSpy).toHaveBeenCalledWith(
+      '/api/preferences',
+      expect.objectContaining({ method: 'POST' }),
+    )
+    expect(screen.getByRole('status')).toHaveTextContent('sent to Stellar')
+    fetchSpy.mockRestore()
     expect(document.title).toBe('Email Preferences | Stellar Groupware Inc.')
   })
   it('renders the main website page', () => {
@@ -301,6 +318,7 @@ describe('App', () => {
 
   it('uses inline validation and completes the appointment flow', async () => {
     vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-08-20T15:00:00-04:00"));
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(JSON.stringify({ ok: true }), {
         status: 200,
@@ -313,18 +331,19 @@ describe('App', () => {
     const dateButtons = screen.getAllByRole('button', {
       name: /^(MON|TUE|WED|THU|FRI|SAT|SUN),/,
     });
-    const availableDate = dateButtons.find(
-      (button) => !button.hasAttribute('disabled')
-    );
+    const weekdayDate = [...dateButtons].reverse().find((button) => {
+      const label = button.getAttribute('aria-label') || '';
+      return !button.hasAttribute('disabled') && /^(MON|TUE|WED|THU|FRI),/.test(label);
+    });
     const sunday = dateButtons.find((button) =>
       button.getAttribute('aria-label')?.startsWith('SUN,')
     );
 
     expect(dateButtons).toHaveLength(7);
-    expect(availableDate).toBeTruthy();
+    expect(weekdayDate).toBeTruthy();
     expect(sunday?.hasAttribute('disabled')).toBe(true);
 
-    fireEvent.click(availableDate!);
+    fireEvent.click(weekdayDate!);
     fireEvent.click(screen.getByRole('button', { name: '9:00 AM' }));
 
     const detailsForm = document.querySelector(
@@ -447,20 +466,20 @@ describe('App', () => {
     fireEvent.click(screen.getByRole('button', { name: /Continue/ }));
     expect(screen.getByText('Enter a valid email address.')).toBeTruthy();
 
-    fireEvent.change(screen.getByLabelText('Email address'), {
+    fireEvent.change(within(enrollmentPage).getByLabelText('Email address'), {
       target: { value: 'learner@example.com' },
     });
     fireEvent.click(screen.getByRole('button', { name: /Continue/ }));
 
     expect(screen.getByText('Tell us about yourself')).toBeTruthy();
 
-    fireEvent.change(screen.getByLabelText('Full name'), {
+    fireEvent.change(within(enrollmentPage).getByLabelText('Full name'), {
       target: { value: 'Jane Doe' },
     });
-    fireEvent.change(screen.getByLabelText('Mobile number'), {
+    fireEvent.change(within(enrollmentPage).getByLabelText('Mobile number'), {
       target: { value: '+1 416 555 0123' },
     });
-    fireEvent.change(screen.getByLabelText('City'), {
+    fireEvent.change(within(enrollmentPage).getByLabelText('City'), {
       target: { value: 'Toronto' },
     });
     fireEvent.change(
