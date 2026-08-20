@@ -207,7 +207,7 @@ function App() {
   const [appointmentPhone, setAppointmentPhone] = useState("");
   const [appointmentEmail, setAppointmentEmail] = useState("");
   const [appointmentCity, setAppointmentCity] = useState("");
-  const [appointmentCountry, setAppointmentCountry] = useState(currentRegion.defaultCountry);
+  const [appointmentCountry, setAppointmentCountry] = useState<string>(currentRegion.defaultCountry);
   const [appointmentService, setAppointmentService] = useState("");
   const [appointmentRequirement, setAppointmentRequirement] = useState("");
   const [appointmentConsent, setAppointmentConsent] = useState(false);

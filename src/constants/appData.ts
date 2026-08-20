@@ -199,7 +199,7 @@ export function getAppointmentDates(timeZone: string, now = new Date()): Appoint
     const formatted = formatIsoDate(iso);
     const weekday = weekdayFromIso(iso);
     const availableTimes = getAvailableAppointmentTimes(
-      { ...formatted, weekday, disabled: false },
+      { iso, weekday },
       timeZone,
       now,
     );
