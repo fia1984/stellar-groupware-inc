@@ -186,6 +186,20 @@
   font: inherit;
 }
 .policy-field input:focus { outline: 3px solid rgba(18, 176, 91, 0.2); border-color: #0aaa51; }
+.policy-field input[aria-invalid="true"] { border-color: #d92d20; }
+.policy-card .field-error {
+  display: block;
+  margin-top: 6px;
+  color: #b42318;
+  font-size: 0.8rem;
+  font-weight: 550;
+  line-height: 1.35;
+}
+.preference-options[aria-invalid="true"] {
+  outline: 1px solid #d92d20;
+  border-radius: 10px;
+  padding: 8px;
+}
 .policy-button,
 .policy-action {
   min-height: 50px;

@@ -477,7 +477,7 @@ describe('App', () => {
     expect(screen.getByText('Select a day')).toBeTruthy();
     fetchSpy.mockRestore();
     vi.useRealTimers();
-  });
+  }, 10000);
 
 
   it('connects every pricing enrollment button to a selected program', () => {

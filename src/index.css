@@ -27,6 +27,7 @@
 @import "./styles/19-final-mobile-layout-qa.css";
 @import "./styles/20-policy-pages.css";
 @import "./styles/21-policy-layout-fix.css";
+@import "./styles/22-home-responsive-final.css";
 
 /* Keep the accessible logo link visually identical to the original brand
    block after all navigation and responsive overrides have loaded. */
