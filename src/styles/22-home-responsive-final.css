@@ -1,7 +1,4 @@
-/* Final homepage responsive QA pass.
- * This file is intentionally last in the cascade so older page-wide fixes
- * cannot reintroduce clipping or excessive hero spacing.
- */
+/* Homepage responsive QA. Header layout is owned by 23-header-layout.css. */
 
 body main.page-shell.route-home {
   max-width: 100%;
@@ -58,5 +55,21 @@ body main.page-shell.route-home {
 
   body main.page-shell.route-home a.stellar-chat-bubble {
     right: 14px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  body main.page-shell.route-home .hero-section .hero-actions,
+  body main.page-shell.route-home .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  body main.page-shell.route-home .hero-section .hero-actions .primary-btn,
+  body main.page-shell.route-home .hero-section .hero-actions .secondary-btn,
+  body main.page-shell.route-home .hero-actions a {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
   }
 }

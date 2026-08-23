@@ -1,4 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
+import FieldError from "./components/FieldError";
+import ProgramBook from "./components/ProgramBook";
 import {
   appointmentServices,
   careerReviews,
@@ -12,6 +14,7 @@ import {
   homePathways,
   mobileNavigationQuery,
   preferenceTopicOptions,
+  programPricesCad,
   reviewLinks,
   routeMap,
   socialLinks,
@@ -22,6 +25,15 @@ import {
   trainingReviews,
   type CareerIconName,
 } from "./constants/appData";
+import {
+  focusFirstInvalidField,
+  isValidCity,
+  isValidEmail,
+  isValidName,
+  isValidPhone,
+} from "./utils/validation";
+import { errorMessage, postJson } from "./utils/apiClient";
+import { recordInboxItem } from "./utils/workspaceStore";
 
 
 function CareerIcon({ name }: { name: CareerIconName }) {
@@ -58,61 +70,6 @@ function AnimatedCounter({ end }: AnimatedCounterProps) {
   return <strong>{end.toLocaleString()}</strong>;
 }
 
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const namePattern = /^[A-Za-zÀ-ÿ' -]{2,80}$/;
-const phonePattern = /^[0-9+() -]{10,20}$/;
-const cityPattern = /^[A-Za-zÀ-ÿ' .-]{2,80}$/;
-
-function isValidEmail(value: string) {
-  return emailPattern.test(value.trim());
-}
-
-function isValidName(value: string) {
-  return namePattern.test(value.trim());
-}
-
-function isValidPhone(value: string) {
-  return phonePattern.test(value.trim());
-}
-
-function isValidCity(value: string) {
-  return cityPattern.test(value.trim());
-}
-
-function focusFirstInvalidField(
-  errors: Record<string, string>,
-  fieldIds: Array<[string, string]>,
-) {
-  const first = fieldIds.find(([field]) => Boolean(errors[field]));
-  if (!first) {
-    return;
-  }
-
-  document.getElementById(first[1])?.focus();
-}
-
-function FieldError({
-  id,
-  message,
-  className = "field-error",
-}: {
-  id: string;
-  message?: string;
-  className?: string;
-}) {
-  if (!message) {
-    return null;
-  }
-
-  return (
-    <span id={id} className={className} role="alert">
-      {message}
-    </span>
-  );
-}
-
-
-
 function App() {
   const requestedCourseName = new URLSearchParams(window.location.search).get("program");
   const requestedCourseExists =
@@ -148,6 +105,8 @@ function App() {
       ? "About"
       : currentRoute === "account"
       ? "My Account"
+      : currentRoute === "staff"
+      ? "Staff Inbox"
       : currentRoute === "appointment"
       ? "Book Appointment"
       : currentRoute === "enroll"
@@ -244,6 +203,9 @@ function App() {
   const enrollmentProgram =
     new URLSearchParams(window.location.search).get("program") ||
     "Regular IT Training";
+  const enrollmentProgramCad =
+    programPricesCad[enrollmentProgram as keyof typeof programPricesCad] ?? 500;
+  const enrollmentPriceLabel = formatProgramPrice(enrollmentProgramCad, currentRegion);
   const [enrollmentStep, setEnrollmentStep] = useState(1);
   const [enrollmentEmail, setEnrollmentEmail] = useState("");
   const [enrollmentName, setEnrollmentName] = useState("");
@@ -381,10 +343,9 @@ function App() {
     setEnrollmentSubmitError("");
 
     try {
-      const response = await fetch("/api/enrollments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/enrollments",
+        {
           program: enrollmentProgram,
           email: enrollmentEmail.trim(),
           name: enrollmentName.trim(),
@@ -392,22 +353,21 @@ function App() {
           city: enrollmentCity.trim(),
           country: enrollmentCountry,
           goal: enrollmentGoal.trim(),
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your enrollment request.");
-      }
+        },
+        "Unable to send your enrollment request.",
+      );
 
       setEnrollmentComplete(true);
+      recordInboxItem({
+        type: "enrollment",
+        title: enrollmentProgram,
+        email: enrollmentEmail.trim(),
+        name: enrollmentName.trim(),
+        detail: `${enrollmentPriceLabel} · ${enrollmentCity}, ${enrollmentCountry}`,
+      });
     } catch (error) {
       setEnrollmentSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your enrollment request. Please try again.",
+        errorMessage(error, "Unable to send your enrollment request. Please try again."),
       );
     } finally {
       setEnrollmentSubmitting(false);
@@ -594,10 +554,9 @@ function App() {
     setAppointmentSubmitError("");
 
     try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/appointments",
+        {
           date: selectedDate,
           time: selectedTime,
           name: appointmentName.trim(),
@@ -607,22 +566,21 @@ function App() {
           country: appointmentCountry,
           service: appointmentService,
           requirement: appointmentRequirement.trim(),
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your appointment request.");
-      }
+        },
+        "Unable to send your appointment request.",
+      );
 
       setAppointmentBooked(true);
+      recordInboxItem({
+        type: "appointment",
+        title: appointmentService,
+        email: appointmentEmail.trim(),
+        name: appointmentName.trim(),
+        detail: `${selectedDate} at ${selectedTime} · ${appointmentCity}, ${appointmentCountry}`,
+      });
     } catch (error) {
       setAppointmentSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your appointment request. Please try again.",
+        errorMessage(error, "Unable to send your appointment request. Please try again."),
       );
     } finally {
       setAppointmentSubmitting(false);
@@ -734,29 +692,27 @@ function App() {
     setAccountError("");
 
     try {
-      const response = await fetch("/api/account-requests", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/account-requests",
+        {
           name: accountName.trim(),
           email: accountEmail.trim(),
           note: accountNote.trim(),
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your account request.");
-      }
+        },
+        "Unable to send your account request.",
+      );
 
       setAccountComplete(true);
+      recordInboxItem({
+        type: "account",
+        title: "Account help request",
+        email: accountEmail.trim(),
+        name: accountName.trim(),
+        detail: accountNote.trim(),
+      });
     } catch (error) {
       setAccountError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your account request. Please try again.",
+        errorMessage(error, "Unable to send your account request. Please try again."),
       );
     } finally {
       setAccountSubmitting(false);
@@ -829,33 +785,33 @@ function App() {
     setPreferenceMessage("");
 
     try {
-      const response = await fetch("/api/preferences", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/preferences",
+        {
           email,
           action,
           topics: action === "update" ? preferenceTopics : [],
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to save your email preferences.");
-      }
+        },
+        "Unable to save your email preferences.",
+      );
 
       setPreferenceMessage(
         action === "unsubscribe"
           ? "Your unsubscribe request was sent to Stellar."
           : "Your email preferences were sent to Stellar.",
       );
+      recordInboxItem({
+        type: "preference",
+        title: action === "unsubscribe" ? "Unsubscribe request" : "Email preference update",
+        email,
+        detail:
+          action === "unsubscribe"
+            ? "Visitor unsubscribed from Stellar email."
+            : `Topics: ${preferenceTopics.join(", ")}`,
+      });
     } catch (error) {
       setPreferenceMessage(
-        error instanceof Error
-          ? error.message
-          : "Unable to save your email preferences. Please try again.",
+        errorMessage(error, "Unable to save your email preferences. Please try again."),
       );
     } finally {
       setPreferenceSubmitting(false);
@@ -1618,23 +1574,23 @@ function App() {
               {filteredTrainingCourses.map((course) => (
                 <article className="training-course-card" key={course.title}>
                   <div className={`training-course-visual ${course.tone}`}>
-                    <span>{course.visual}</span>
-                    <small>STELLAR LAB</small>
+                    <ProgramBook
+                      className="program-book-block--cover"
+                      title={course.title}
+                      href={`/course?program=${encodeURIComponent(course.title)}`}
+                      actionLabel="View Curriculum →"
+                      actionClassName="training-view-curriculum"
+                      openInNewTab={false}
+                    />
                   </div>
                   <div className="training-course-body">
                     <span className="training-course-category">{course.category}</span>
                     <h3>{course.title}</h3>
                     <p>{course.description}</p>
                     <div className="training-course-meta">
-                      <span>◷ {course.duration}</span>
+                      <span>🕓 {course.duration}</span>
                       <span>♢ Certificate</span>
                     </div>
-                    <a
-                      className="training-view-curriculum"
-                      href={`/course?program=${encodeURIComponent(course.title)}`}
-                    >
-                      View Curriculum <span>→</span>
-                    </a>
                   </div>
                 </article>
               ))}
@@ -1782,9 +1738,13 @@ function App() {
               Start your Stellar enrollment to unlock every module, the complete
               topic list, project details, mentoring options, and current program information.
             </p>
-            <a href={`/enroll?program=${encodeURIComponent(selectedTrainingCourse.title)}`}>
-              Unlock the Full Curriculum <span>→</span>
-            </a>
+            <ProgramBook
+              title={selectedTrainingCourse.title}
+              href={`/enroll?program=${encodeURIComponent(selectedTrainingCourse.title)}`}
+              actionLabel="Unlock the Full Curriculum →"
+              actionClassName="course-unlock-action"
+              openInNewTab={false}
+            />
             <small>No payment is required to start your request.</small>
           </aside>
         </div>
@@ -2166,7 +2126,10 @@ function App() {
                 <li>Real-world practice tasks</li>
                 <li>Certificate of completion</li>
               </ul>
-              <a href="/enroll?program=Regular%20IT%20Training" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Regular IT Training"
+                href="/enroll?program=Regular%20IT%20Training"
+              />
             </div>
 
             <div className="price-card popular">
@@ -2181,13 +2144,16 @@ function App() {
                 <li>Project mentorship</li>
                 <li>Career confidence building</li>
               </ul>
-              <a href="/enroll?program=AI%20%2B%20IT%20Training" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="AI + IT Training"
+                href="/enroll?program=AI%20%2B%20IT%20Training"
+              />
             </div>
 
             <div className="price-card">
               <h3>Bootcamp Support</h3>
               <p className="small-text">Add-on project and hands-on practice support</p>
-              <h4>$500</h4>
+              <h4>{formatProgramPrice(500, currentRegion)}</h4>
               <ul>
                 <li>Project-based practice</li>
                 <li>Portfolio building</li>
@@ -2195,14 +2161,18 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Skill validation support</li>
               </ul>
-              <a href="/enroll?program=Bootcamp%20Support" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Bootcamp Support"
+                href="/enroll?program=Bootcamp%20Support"
+                actionClassName="enroll-btn dark"
+              />
             </div>
 
             <div className="price-card popular">
               <span className="badge">CAREER SUPPORT</span>
               <h3>Marketing Support</h3>
               <p className="small-text">Placement and career preparation support</p>
-              <h4>$500</h4>
+              <h4>{formatProgramPrice(500, currentRegion)}</h4>
               <ul>
                 <li>Professional resume creation</li>
                 <li>LinkedIn optimization</li>
@@ -2210,7 +2180,10 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Marketing%20Support" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Marketing Support"
+                href="/enroll?program=Marketing%20Support"
+              />
             </div>
           </div>
         </div>
@@ -2239,14 +2212,18 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Workplace confidence building</li>
               </ul>
-              <a href="/enroll?program=Direct%20Bootcamp" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Direct Bootcamp"
+                href="/enroll?program=Direct%20Bootcamp"
+                actionClassName="enroll-btn dark"
+              />
             </div>
 
             <div className="price-card popular">
               <span className="badge">NEXT STEP</span>
               <h3>Career Marketing</h3>
               <p className="small-text">Resume, LinkedIn, applications, and interview support</p>
-              <h4>$500</h4>
+              <h4>{formatProgramPrice(500, currentRegion)}</h4>
               <ul>
                 <li>Professional resume creation</li>
                 <li>LinkedIn optimization</li>
@@ -2254,7 +2231,10 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Career%20Marketing" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Career Marketing"
+                href="/enroll?program=Career%20Marketing"
+              />
             </div>
           </div>
         </div>
@@ -2284,7 +2264,11 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Direct%20Marketing%20Program" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Direct Marketing Program"
+                href="/enroll?program=Direct%20Marketing%20Program"
+                actionClassName="enroll-btn dark"
+              />
             </div>
           </div>
         </div>
@@ -2295,7 +2279,7 @@ function App() {
               <article className="pricing-faq-card">
                 <h3>What currency are Stellar prices listed in?</h3>
                 <p>
-                  Stellar prices are listed in Canadian dollars (CAD). Applicable
+                  Stellar prices are listed in {currentRegion.currencyName}. Applicable
                   taxes may be added depending on the service and location.
                 </p>
               </article>

@@ -1,5 +1,3 @@
-import { vi } from "vitest";
-
 class MockIntersectionObserver {
   observe() {}
   unobserve() {}
@@ -9,31 +7,41 @@ class MockIntersectionObserver {
   }
 }
 
-vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
-const scrollToMock = vi.fn();
-vi.stubGlobal("scrollTo", scrollToMock);
+Object.defineProperty(globalThis, "IntersectionObserver", {
+  configurable: true,
+  writable: true,
+  value: MockIntersectionObserver,
+});
+const scrollToMock = jest.fn();
+Object.defineProperty(window, "scrollTo", {
+  configurable: true,
+  writable: true,
+  value: scrollToMock,
+});
 Object.defineProperty(Element.prototype, "scrollIntoView", {
   configurable: true,
-  value: vi.fn(),
+  value: jest.fn(),
 });
 
 const memoryStore: Record<string, string> = {};
-vi.stubGlobal("localStorage", {
-  getItem: (key: string) => memoryStore[key] ?? null,
-  setItem: (key: string, value: string) => {
-    memoryStore[key] = value;
-  },
-  removeItem: (key: string) => {
-    delete memoryStore[key];
-  },
-  clear: () => {
-    for (const key of Object.keys(memoryStore)) {
+Object.defineProperty(window, "localStorage", {
+  configurable: true,
+  value: {
+    getItem: (key: string) => memoryStore[key] ?? null,
+    setItem: (key: string, value: string) => {
+      memoryStore[key] = value;
+    },
+    removeItem: (key: string) => {
       delete memoryStore[key];
-    }
+    },
+    clear: () => {
+      for (const key of Object.keys(memoryStore)) {
+        delete memoryStore[key];
+      }
+    },
   },
 });
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { act, createEvent, fireEvent, render, screen, within } from '@testing-library/react';
 import App from '../App';
 import { reviewLinks, socialLinks } from '../constants/appData';
@@ -44,7 +52,7 @@ describe('App', () => {
   });
 
   afterEach(() => {
-    vi.useRealTimers();
+    jest.useRealTimers();
   });
 
   it('keeps the floating contact bubble directly clickable', () => {
@@ -222,7 +230,7 @@ describe('App', () => {
     fireEvent.change(screen.getByLabelText('Your email for updates'), {
       target: { value: 'learner@example.com' },
     })
-    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(JSON.stringify({ ok: true, id: 'pref-1' }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
@@ -332,15 +340,15 @@ describe('App', () => {
     const originalMatchMedia = window.matchMedia;
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
-      value: vi.fn().mockReturnValue({
+      value: jest.fn().mockReturnValue({
         matches: false,
         media: '(max-width: 1050px)',
         onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-        dispatchEvent: vi.fn(),
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
       }),
     });
 
@@ -378,10 +386,30 @@ describe('App', () => {
     expect(screen.getByText('1 program')).toBeTruthy();
   });
 
+  it('keeps a closed program book on every training and course card', () => {
+    window.history.pushState({}, '', '/training');
+    const trainingPage = render(<App />);
+
+    expect(document.querySelectorAll('.training-course-card .program-book')).toHaveLength(6);
+    expect(document.querySelectorAll('.training-course-card .program-book.is-open')).toHaveLength(0);
+    expect(screen.getAllByRole('link', { name: /View Curriculum/ })).toHaveLength(6);
+    trainingPage.unmount();
+
+    window.history.pushState({}, '', '/course?program=AI%20%26%20Automation%20Foundations');
+    render(<App />);
+
+    expect(document.querySelectorAll('.course-unlock-card .program-book')).toHaveLength(1);
+    expect(document.querySelectorAll('.course-unlock-card .program-book.is-open')).toHaveLength(0);
+    expect(screen.getByRole('link', { name: /Unlock the Full Curriculum/ })).toHaveAttribute(
+      'href',
+      '/enroll?program=AI%20%26%20Automation%20Foundations',
+    );
+  });
+
   it('uses inline validation and completes the appointment flow', async () => {
-    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'clearTimeout'] });
-    vi.setSystemTime(new Date("2026-08-20T15:00:00-04:00"));
-    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date("2026-08-20T15:00:00-04:00"));
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(JSON.stringify({ ok: true }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
@@ -470,15 +498,40 @@ describe('App', () => {
     expect(screen.getAllByText(/9:00 AM/).length).toBeGreaterThan(0);
 
     act(() => {
-      vi.advanceTimersByTime(15000);
+      jest.advanceTimersByTime(15000);
     });
 
     expect(screen.queryByText('Booking request sent!')).toBeNull();
     expect(screen.getByText('Select a day')).toBeTruthy();
     fetchSpy.mockRestore();
-    vi.useRealTimers();
+    jest.useRealTimers();
   }, 10000);
 
+
+  it('shows leftover $500 programs in the selected region currency', () => {
+    window.history.pushState({}, '', '/uk');
+    const ukHome = render(<App />);
+    ukHome.unmount();
+
+    window.history.pushState({}, '', '/pricing');
+    const ukPricing = render(<App />);
+
+    expect(document.body.textContent).toContain('£275');
+    expect(document.body.textContent).toMatch(/British pounds \(GBP\)/);
+    expect(document.body.textContent).not.toMatch(/\$500/);
+    ukPricing.unmount();
+
+    window.history.pushState({}, '', '/in');
+    const indiaHome = render(<App />);
+    indiaHome.unmount();
+
+    window.history.pushState({}, '', '/pricing');
+    render(<App />);
+
+    expect(document.body.textContent).toContain('₹31,000');
+    expect(document.body.textContent).toMatch(/Indian rupees \(INR\)/);
+    expect(document.body.textContent).not.toMatch(/\$500/);
+  });
 
   it('connects every pricing enrollment button to a selected program', () => {
     window.history.pushState({}, '', '/pricing');
@@ -489,6 +542,8 @@ describe('App', () => {
     });
 
     expect(enrollmentLinks).toHaveLength(7);
+    expect(document.querySelectorAll("#pricing .program-book")).toHaveLength(7);
+    expect(document.querySelectorAll("#pricing .program-book.is-open")).toHaveLength(0);
     expect(enrollmentLinks[0].getAttribute('href')).toBe(
       '/enroll?program=Regular%20IT%20Training'
     );
@@ -502,7 +557,7 @@ describe('App', () => {
   });
 
   it('validates and completes the three-step enrollment frontend flow', async () => {
-    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+    const fetchSpy = jest.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(JSON.stringify({ ok: true, id: 'enroll-1' }), {
         status: 200,
         headers: { 'Content-Type': 'application/json' },

@@ -760,7 +760,7 @@ body main.page-shell nav.navbar #primary-navigation .training-dropdown-menu > a 
 /* 3. Switch to the compact menu before desktop navigation can collide. */
 @media (min-width: 1051px) and (max-width: 1250px) {
   body main.page-shell nav.navbar {
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     width: calc(100% - 32px) !important;
   }
 

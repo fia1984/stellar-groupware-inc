@@ -1824,59 +1824,6 @@ body main.page-shell.route-course #course {
   }
 }
 
-/* MOBILE NAVIGATION NO-OVERLAP FIX */
-@media (max-width: 1050px) {
-  body main.page-shell nav.navbar {
-    flex-wrap: wrap !important;
-    overflow: visible !important;
-  }
-
-  body main.page-shell nav.navbar
-    #primary-navigation.nav-links {
-    position: relative !important;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    order: 10 !important;
-    flex: 0 0 100% !important;
-    width: 100% !important;
-    max-width: none !important;
-    margin: 8px 0 0 !important;
-    border-radius: 14px !important;
-    box-sizing: border-box !important;
-  }
-
-  body main.page-shell nav.navbar
-    #primary-navigation.nav-links:not(.menu-open) {
-    display: none !important;
-  }
-
-  body main.page-shell nav.navbar
-    #primary-navigation.nav-links.menu-open {
-    display: flex !important;
-    animation: stellar-mobile-menu-enter 0.24s ease both;
-  }
-}
-
-@keyframes stellar-mobile-menu-enter {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body main.page-shell nav.navbar
-    #primary-navigation.nav-links.menu-open {
-    animation: none !important;
-  }
-}
-
 /* MOBILE TRAINING OPTION VISUAL BALANCE */
 @media (max-width: 1050px) {
   body main.page-shell nav.navbar
@@ -1950,7 +1897,7 @@ body main.page-shell.route-course #course {
   }
 }
 
-/* Pricing manager feedback: center the section and all pricing copy */
+/* Pricing section title stays centered. Card copy is left-aligned for reading. */
 .page-shell.route-pricing section.pricing-section#pricing {
   width: 100% !important;
   max-width: none !important;
@@ -1967,7 +1914,7 @@ body main.page-shell.route-course #course {
 
 .page-shell.route-pricing #pricing .pathway-box {
   margin-inline: auto !important;
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .page-shell.route-pricing #pricing .pathway-header {
@@ -1995,26 +1942,26 @@ body main.page-shell.route-course #course {
 }
 
 .page-shell.route-pricing #pricing .price-card {
-  align-items: center !important;
-  text-align: center !important;
+  align-items: flex-start !important;
+  text-align: left !important;
 }
 
 .page-shell.route-pricing #pricing .price-card h3,
 .page-shell.route-pricing #pricing .price-card .small-text,
 .page-shell.route-pricing #pricing .price-card h4 {
   width: 100% !important;
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .page-shell.route-pricing #pricing .price-card ul {
   width: 100% !important;
   padding-left: 0 !important;
-  text-align: center !important;
+  text-align: left !important;
 }
 
 .page-shell.route-pricing #pricing .price-card li {
-  justify-content: center !important;
-  text-align: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
 }
 
 @media (max-width: 900px) {
@@ -2149,7 +2096,7 @@ body main.page-shell nav.navbar #primary-navigation .training-dropdown-menu > a 
 
 @media (min-width: 1051px) and (max-width: 1250px) {
   body main.page-shell nav.navbar {
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     width: calc(100% - 32px) !important;
   }
 

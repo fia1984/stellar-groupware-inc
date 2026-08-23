@@ -1,0 +1,197 @@
+/* Closed program books stay inside their cards and never cover the next section. */
+
+.program-book-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  margin-top: auto;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 0;
+}
+
+.program-book {
+  width: 96px;
+  height: 132px;
+  flex: 0 0 auto;
+  position: relative;
+  overflow: hidden;
+  perspective: 700px;
+  border-radius: 0 6px 6px 3px;
+  box-shadow: 3px 5px 12px rgba(12, 40, 28, 0.18);
+}
+
+.program-book::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 8px;
+  background: linear-gradient(180deg, #084d1e, #0a6b2b);
+  z-index: 2;
+}
+
+.program-book-cover {
+  position: absolute;
+  inset: 0 0 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1px;
+  padding: 32px 6px 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), transparent 30%),
+    linear-gradient(165deg, #1aa34a, #0c7a33 60%, #086028);
+  color: #fff;
+  text-align: center !important;
+  transform-origin: left center;
+  transition: transform 0.65s cubic-bezier(0.22, 0.75, 0.28, 1);
+}
+
+.program-book-mark {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  transform: translateX(-50%);
+}
+
+.program-book-cover strong {
+  display: block;
+  width: 100%;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 800;
+  text-align: center !important;
+  color: #fff !important;
+}
+
+.program-book.is-open .program-book-cover {
+  transform: rotateY(-72deg);
+}
+
+.price-card .program-book-block .enroll-btn,
+.program-book-block .training-view-curriculum,
+.program-book-block .course-unlock-action {
+  position: static;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .program-book-cover {
+    transition: none;
+  }
+}
+
+/* Pricing cards: keep 285px as WIDTH on desktop, never as HEIGHT. */
+html body main.page-shell.route-pricing #pricing .price-card,
+html body main.page-shell.route-pricing #pricing .pricing-grid .price-card,
+html body main.page-shell.route-pricing #pricing .pricing-grid.two-card .price-card,
+html body main.page-shell.route-pricing #pricing .pricing-grid.single-card .price-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+html body main.page-shell.route-pricing #pricing .pathway-box,
+html body main.page-shell.route-pricing #pricing .pricing-grid,
+html body main.page-shell.route-pricing #pricing .pricing-grid.two-card,
+html body main.page-shell.route-pricing #pricing .pricing-grid.single-card {
+  height: auto !important;
+  max-height: none !important;
+}
+
+html body main.page-shell.route-pricing .pricing-faq {
+  position: relative;
+  z-index: 1;
+  clear: both;
+}
+
+@media (max-width: 900px) {
+  html body main.page-shell.route-pricing #pricing .price-card,
+  html body main.page-shell.route-pricing #pricing .pricing-grid .price-card,
+  html body main.page-shell.route-pricing #pricing .pricing-grid.two-card .price-card,
+  html body main.page-shell.route-pricing #pricing .pricing-grid.single-card .price-card {
+    flex: 0 0 auto !important;
+    flex-basis: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+  }
+}
+
+/* Training catalog: book lives on the card cover. */
+.training-course-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.training-course-visual {
+  min-height: 236px;
+  padding: 18px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.training-course-visual .program-book-block--cover {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  width: min(100%, 240px);
+}
+
+.course-unlock-card .program-book-block {
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+.training-course-visual .training-view-curriculum {
+  background: rgba(255, 255, 255, 0.96);
+  color: #0b3d32;
+  box-shadow: none;
+}
+
+.training-course-visual .training-view-curriculum:hover,
+.training-course-visual .training-view-curriculum:focus-visible {
+  background: #fff;
+  color: #086028;
+}
+
+.course-unlock-card .program-book-block {
+  margin-top: 4px;
+}
+
+.course-unlock-card .course-unlock-action {
+  min-height: 52px;
+  padding: 14px 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #ffffff;
+  background: #08a83f;
+  font-weight: 850;
+  text-decoration: none;
+}

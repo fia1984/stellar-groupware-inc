@@ -1,0 +1,146 @@
+.page-shell.route-staff #staff {
+  display: block !important;
+}
+
+.account-auth-toggle,
+.staff-auth-toggle {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.account-auth-toggle button,
+.staff-auth-toggle button {
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 1px solid #d7e4de;
+  border-radius: 999px;
+  background: #fff;
+  color: #17313a;
+  font-weight: 700;
+}
+
+.account-auth-toggle button[aria-pressed="true"],
+.staff-auth-toggle button[aria-pressed="true"] {
+  color: #fff;
+  background: #08a83f;
+  border-color: #08a83f;
+}
+
+.account-request-form,
+.account-dashboard,
+.staff-inbox {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px;
+  border: 1px solid #dce8e2;
+  border-radius: 18px;
+  background: #fff;
+  text-align: left;
+}
+
+.account-request-form label,
+.staff-login-form label,
+.enrollment-form .payment-grid label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: #17313a;
+  font-weight: 700;
+}
+
+.account-request-form input,
+.account-request-form textarea,
+.staff-login-form input,
+.enrollment-form .payment-grid input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid #d4e0db;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.account-demo-note,
+.staff-demo-note {
+  margin: 0 0 18px;
+  color: #526b73;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.account-dashboard h3,
+.staff-inbox h3 {
+  margin: 0 0 8px;
+  color: #12323a;
+}
+
+.account-dashboard ul,
+.staff-inbox ul {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-dashboard li,
+.staff-inbox li {
+  padding: 14px 16px;
+  border: 1px solid #e4eee9;
+  border-radius: 12px;
+  background: #f7fbf8;
+}
+
+.account-dashboard li strong,
+.staff-inbox li strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.account-dashboard li small,
+.staff-inbox li small {
+  display: block;
+  color: #526b73;
+}
+
+.account-toolbar,
+.staff-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.payment-grid {
+  display: grid;
+  gap: 8px 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.payment-grid .payment-card-name,
+.payment-grid .payment-card-number {
+  grid-column: 1 / -1;
+}
+
+.staff-section {
+  padding: 90px 8%;
+  background: #f7fbf8;
+}
+
+.staff-section h2,
+.staff-section .section-intro {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+}

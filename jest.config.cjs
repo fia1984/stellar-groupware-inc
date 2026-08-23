@@ -3,16 +3,7 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   roots: ["<rootDir>/src"],
-  testMatch: [
-    "**/__tests__/Contact.test.tsx",
-    "**/__tests__/Footer.test.tsx",
-    "**/__tests__/Header.test.tsx",
-    "**/__tests__/Hero.test.tsx",
-    "**/__tests__/Process.test.tsx",
-    "**/__tests__/Services.test.tsx",
-    "**/__tests__/VideoSection.test.tsx",
-    "**/__tests__/WhyChooseUs.test.tsx",
-  ],
+  testMatch: ["**/__tests__/**/*.test.{ts,tsx}"],
   transform: {
     "^.+\\.(ts|tsx)$": [
       "ts-jest",
@@ -23,6 +14,7 @@ module.exports = {
           moduleResolution: "Node",
           esModuleInterop: true,
           verbatimModuleSyntax: false,
+          types: ["jest", "node", "@testing-library/jest-dom"],
         },
       },
     ],

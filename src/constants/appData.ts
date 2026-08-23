@@ -11,6 +11,7 @@ export const routeMap: Record<string, string> = {
   "/about": "about",
   "/account": "account",
   "/account-access.html": "account",
+  "/staff": "staff",
   "/appointment": "appointment",
   "/enroll": "enroll",
   "/contact": "contact",

@@ -1,4 +1,3 @@
-import { describe, expect, it, vi } from "vitest";
 import handler, { parseEnrollment } from "../../api/enrollments";
 
 function mockResponse() {
@@ -51,7 +50,7 @@ describe("enrollments API", () => {
   });
 
   it("accepts a valid enrollment without sending email", async () => {
-    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const fetchSpy = jest.spyOn(globalThis, "fetch");
     const response = mockResponse();
 
     await handler({ method: "POST", body: validEnrollment }, response);
