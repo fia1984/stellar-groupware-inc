@@ -720,7 +720,7 @@
   body .route-reviews .nav-links > a[href="/"],
   body .route-reviews .nav-links > a[href="/reviews"],
   body .route-reviews .nav-links > a[href="/pricing"],
-  body .route-reviews .nav-links > a[href="/account-access.html"] {
+  body .route-reviews .nav-links > a[href="/account"] {
     display: inline-flex !important;
     visibility: visible !important;
     opacity: 1 !important;

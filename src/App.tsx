@@ -1,15 +1,23 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import FieldError from "./components/FieldError";
+import ProgramBook from "./components/ProgramBook";
 import {
   appointmentServices,
   careerReviews,
+  defaultPreferenceTopics,
+  formatProgramPrice,
   getAppointmentDates,
   getAvailableAppointmentTimes,
+  getCurrentRegion,
   homeAudiences,
   homeOffers,
   homePathways,
   mobileNavigationQuery,
-  regionConfig,
+  preferenceTopicOptions,
+  programPricesCad,
+  reviewLinks,
   routeMap,
+  socialLinks,
   seekerChallenges,
   slides,
   stellarTrainingCategories,
@@ -17,6 +25,15 @@ import {
   trainingReviews,
   type CareerIconName,
 } from "./constants/appData";
+import {
+  focusFirstInvalidField,
+  getCityError,
+  getEmailError,
+  getNameError,
+  getPhoneError,
+} from "./utils/validation";
+import { errorMessage, postJson } from "./utils/apiClient";
+import { recordInboxItem } from "./utils/workspaceStore";
 
 
 function CareerIcon({ name }: { name: CareerIconName }) {
@@ -49,11 +66,57 @@ type AnimatedCounterProps = {
   duration?: number;
 };
 
-function AnimatedCounter({ end }: AnimatedCounterProps) {
-  return <strong>{end.toLocaleString()}</strong>;
+function AnimatedCounter({ end, duration = 2000 }: AnimatedCounterProps) {
+  const [value, setValue] = useState(0);
+  const nodeRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node) {
+      return;
+    }
+
+    let frame = 0;
+    let visible = false;
+
+    const animate = () => {
+      cancelAnimationFrame(frame);
+      setValue(0);
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - (1 - progress) ** 3;
+        setValue(Math.round(end * eased));
+        if (progress < 1) {
+          frame = requestAnimationFrame(tick);
+        }
+      };
+      frame = requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (!visible) {
+            visible = true;
+            animate();
+          }
+        } else {
+          visible = false;
+        }
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [duration, end]);
+
+  return <strong ref={nodeRef}>{value.toLocaleString()}</strong>;
 }
-
-
 
 function App() {
   const requestedCourseName = new URLSearchParams(window.location.search).get("program");
@@ -65,7 +128,7 @@ function App() {
     matchedRoute === "course" && !requestedCourseExists
       ? "not-found"
       : matchedRoute || "not-found";
-  const currentRegion = regionConfig[window.location.pathname as keyof typeof regionConfig] || regionConfig["/"];
+  const currentRegion = getCurrentRegion(window.location.pathname);
   const regionSlides = slides.map((slide, index) =>
     index === 0
       ? {
@@ -90,6 +153,8 @@ function App() {
       ? "About"
       : currentRoute === "account"
       ? "My Account"
+      : currentRoute === "staff"
+      ? "Staff Inbox"
       : currentRoute === "appointment"
       ? "Book Appointment"
       : currentRoute === "enroll"
@@ -186,12 +251,15 @@ function App() {
   const enrollmentProgram =
     new URLSearchParams(window.location.search).get("program") ||
     "Regular IT Training";
+  const enrollmentProgramCad =
+    programPricesCad[enrollmentProgram as keyof typeof programPricesCad] ?? 500;
+  const enrollmentPriceLabel = formatProgramPrice(enrollmentProgramCad, currentRegion);
   const [enrollmentStep, setEnrollmentStep] = useState(1);
   const [enrollmentEmail, setEnrollmentEmail] = useState("");
   const [enrollmentName, setEnrollmentName] = useState("");
   const [enrollmentPhone, setEnrollmentPhone] = useState("");
   const [enrollmentCity, setEnrollmentCity] = useState("");
-  const [enrollmentCountry, setEnrollmentCountry] = useState("Canada");
+  const [enrollmentCountry, setEnrollmentCountry] = useState<string>(currentRegion.defaultCountry);
   const [enrollmentGoal, setEnrollmentGoal] = useState("");
   const [enrollmentErrors, setEnrollmentErrors] = useState<
     Record<string, string>
@@ -220,9 +288,15 @@ function App() {
   const [accountNote, setAccountNote] = useState("");
   const [accountSubmitting, setAccountSubmitting] = useState(false);
   const [accountError, setAccountError] = useState("");
+  const [accountErrors, setAccountErrors] = useState<Record<string, string>>({});
   const [accountComplete, setAccountComplete] = useState(false);
   const [preferenceEmail, setPreferenceEmail] = useState("");
+  const [preferenceTopics, setPreferenceTopics] = useState<string[]>([
+    ...defaultPreferenceTopics,
+  ]);
   const [preferenceSubmitting, setPreferenceSubmitting] = useState(false);
+  const [preferenceErrors, setPreferenceErrors] = useState<Record<string, string>>({});
+  const [unsubscribeErrors, setUnsubscribeErrors] = useState<Record<string, string>>({});
   const [cookieChoice, setCookieChoice] = useState<string | null>(null);
 
   const appointmentDates = getAppointmentDates(currentRegion.timeZone);
@@ -231,43 +305,85 @@ function App() {
     ? getAvailableAppointmentTimes(selectedAppointmentDate, currentRegion.timeZone)
     : [];
 
-  const validateEnrollmentStep = (step: number) => {
-    const errors: Record<string, string> = {};
+  const enrollmentFieldError = (
+    field: "email" | "name" | "phone" | "city" | "country" | "goal",
+    value?: string,
+  ) => {
+    const values = {
+      email: field === "email" && value !== undefined ? value : enrollmentEmail,
+      name: field === "name" && value !== undefined ? value : enrollmentName,
+      phone: field === "phone" && value !== undefined ? value : enrollmentPhone,
+      city: field === "city" && value !== undefined ? value : enrollmentCity,
+      country: field === "country" && value !== undefined ? value : enrollmentCountry,
+      goal: field === "goal" && value !== undefined ? value : enrollmentGoal,
+    };
 
-    if (
-      step === 1 &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(enrollmentEmail.trim())
-    ) {
-      errors.email = "Enter a valid email address.";
+    if (field === "email") {
+      return getEmailError(values.email);
     }
 
-    if (step === 2) {
-      if (!/^[A-Za-zÀ-ÿ' -]{2,80}$/.test(enrollmentName.trim())) {
-        errors.name = "Enter your full name using at least 2 letters.";
-      }
+    if (field === "name") {
+      return getNameError(values.name);
+    }
 
-      if (!/^[0-9+() -]{10,20}$/.test(enrollmentPhone.trim())) {
-        errors.phone = "Enter a valid phone number.";
-      }
+    if (field === "phone") {
+      return getPhoneError(values.phone);
+    }
 
-      if (!/^[A-Za-zÀ-ÿ' .-]{2,80}$/.test(enrollmentCity.trim())) {
-        errors.city = "Enter a valid city name.";
-      }
+    if (field === "city") {
+      return getCityError(values.city);
+    }
 
-      if (enrollmentGoal.trim().length < 10) {
-        errors.goal = "Tell us about your goal using at least 10 characters.";
+    if (field === "country" && !values.country.trim()) {
+      return "Select a country.";
+    }
+
+    if (field === "goal" && values.goal.trim().length < 10) {
+      return "Tell us about your goal using at least 10 characters.";
+    }
+
+    return "";
+  };
+
+  const setEnrollmentFieldError = (
+    field: "email" | "name" | "phone" | "city" | "country" | "goal",
+    value?: string,
+  ) => {
+    setEnrollmentErrors((current) => ({
+      ...current,
+      [field]: enrollmentFieldError(field, value),
+    }));
+  };
+
+  const validateEnrollmentStep = (step: number) => {
+    const fields =
+      step === 1
+        ? (["email"] as const)
+        : (["name", "phone", "city", "country", "goal"] as const);
+    const errors: Record<string, string> = {};
+
+    for (const field of fields) {
+      const error = enrollmentFieldError(field);
+      if (error) {
+        errors[field] = error;
       }
     }
 
     setEnrollmentErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
 
-  const clearEnrollmentError = (field: string) => {
-    setEnrollmentErrors((current) => ({
-      ...current,
-      [field]: "",
-    }));
+    if (Object.keys(errors).length > 0) {
+      focusFirstInvalidField(errors, [
+        ["email", "enrollment-email"],
+        ["name", "enrollment-name"],
+        ["phone", "enrollment-phone"],
+        ["city", "enrollment-city"],
+        ["country", "enrollment-country"],
+        ["goal", "enrollment-goal"],
+      ]);
+      return false;
+    }
+
+    return true;
   };
 
   const submitEnrollment = async () => {
@@ -275,10 +391,9 @@ function App() {
     setEnrollmentSubmitError("");
 
     try {
-      const response = await fetch("/api/enrollments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/enrollments",
+        {
           program: enrollmentProgram,
           email: enrollmentEmail.trim(),
           name: enrollmentName.trim(),
@@ -286,99 +401,157 @@ function App() {
           city: enrollmentCity.trim(),
           country: enrollmentCountry,
           goal: enrollmentGoal.trim(),
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your enrollment request.");
-      }
+        },
+        "Unable to send your enrollment request.",
+      );
 
       setEnrollmentComplete(true);
+      recordInboxItem({
+        type: "enrollment",
+        title: enrollmentProgram,
+        email: enrollmentEmail.trim(),
+        name: enrollmentName.trim(),
+        detail: `${enrollmentPriceLabel} · ${enrollmentCity}, ${enrollmentCountry}`,
+      });
     } catch (error) {
       setEnrollmentSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your enrollment request. Please try again.",
+        errorMessage(error, "Unable to send your enrollment request. Please try again."),
       );
     } finally {
       setEnrollmentSubmitting(false);
     }
   };
 
-  const validateAppointmentField = (
-    field: "name" | "phone" | "email" | "city" | "service" | "requirement"
+  const appointmentFieldError = (
+    field:
+      | "date"
+      | "time"
+      | "name"
+      | "phone"
+      | "email"
+      | "city"
+      | "country"
+      | "service"
+      | "requirement"
+      | "consent",
+    value?: string | boolean,
   ) => {
-    let error = "";
+    const values = {
+      date: field === "date" && typeof value === "string" ? value : selectedDate,
+      time: field === "time" && typeof value === "string" ? value : selectedTime,
+      name: field === "name" && typeof value === "string" ? value : appointmentName,
+      phone: field === "phone" && typeof value === "string" ? value : appointmentPhone,
+      email: field === "email" && typeof value === "string" ? value : appointmentEmail,
+      city: field === "city" && typeof value === "string" ? value : appointmentCity,
+      country:
+        field === "country" && typeof value === "string" ? value : appointmentCountry,
+      service:
+        field === "service" && typeof value === "string" ? value : appointmentService,
+      requirement:
+        field === "requirement" && typeof value === "string"
+          ? value
+          : appointmentRequirement,
+      consent:
+        field === "consent" && typeof value === "boolean" ? value : appointmentConsent,
+    };
 
-    if (
-      field === "name" &&
-      !/^[A-Za-zÀ-ÿ' -]{2,80}$/.test(appointmentName.trim())
-    ) {
-      error = "Enter your full name using at least 2 letters.";
+    if (field === "date") {
+      const selected = appointmentDates.find((date) => date.value === values.date);
+      if (!values.date || !selected || selected.disabled) {
+        return "Select an available date. Sundays are not available.";
+      }
     }
 
-    if (
-      field === "phone" &&
-      !/^[0-9+() -]{10,20}$/.test(appointmentPhone.trim())
-    ) {
-      error = "Enter a valid phone number.";
+    if (field === "time" && !values.time) {
+      return "Select a time.";
     }
 
-    if (
-      field === "email" &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(appointmentEmail.trim())
-    ) {
-      error = "Enter a valid email address.";
+    if (field === "name") {
+      return getNameError(values.name);
     }
 
-    if (
-      field === "city" &&
-      !/^[A-Za-zÀ-ÿ' .-]{2,80}$/.test(appointmentCity.trim())
-    ) {
-      error = "Enter a valid city name.";
+    if (field === "phone") {
+      return getPhoneError(values.phone);
     }
 
-    if (field === "service" && !appointmentService) {
-      error = "Select a service.";
+    if (field === "email") {
+      return getEmailError(values.email);
     }
 
-    if (
-      field === "requirement" &&
-      appointmentRequirement.trim().length < 10
-    ) {
-      error = "Add at least 10 characters.";
+    if (field === "city") {
+      return getCityError(values.city);
     }
 
+    if (field === "country" && !values.country) {
+      return "Select a country.";
+    }
+
+    if (field === "service" && !values.service) {
+      return "Select a service.";
+    }
+
+    if (field === "requirement" && values.requirement.trim().length < 10) {
+      return "Add at least 10 characters.";
+    }
+
+    if (field === "consent" && !values.consent) {
+      return "Confirm you agree to receive appointment messages.";
+    }
+
+    return "";
+  };
+
+  const validateAppointmentField = (
+    field:
+      | "date"
+      | "time"
+      | "name"
+      | "phone"
+      | "email"
+      | "city"
+      | "country"
+      | "service"
+      | "requirement"
+      | "consent",
+    value?: string | boolean,
+  ) => {
     setAppointmentErrors((current) => ({
       ...current,
-      [field]: error,
+      [field]: appointmentFieldError(field, value),
     }));
   };
 
   const validateAppointmentForm = () => {
     const errors: Record<string, string> = {};
-    const namePattern = /^[A-Za-zÀ-ÿ' -]{2,80}$/;
-    const phonePattern = /^[0-9+() -]{10,20}$/;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const cityPattern = /^[A-Za-zÀ-ÿ' .-]{2,80}$/;
 
-    if (!namePattern.test(appointmentName.trim())) {
-      errors.name = "Please enter a valid full name using at least 2 letters.";
+    const dateError = appointmentFieldError("date");
+    if (dateError) {
+      errors.date = dateError;
     }
 
-    if (!phonePattern.test(appointmentPhone.trim())) {
-      errors.phone = "Please enter a valid phone number using 10 to 20 characters.";
+    const timeError = appointmentFieldError("time");
+    if (timeError) {
+      errors.time = timeError;
     }
 
-    if (!emailPattern.test(appointmentEmail.trim())) {
-      errors.email = "Please enter a valid email address.";
+    const nameError = appointmentFieldError("name");
+    if (nameError) {
+      errors.name = nameError;
     }
 
-    if (!cityPattern.test(appointmentCity.trim())) {
-      errors.city = "Please enter a valid city name using at least 2 letters.";
+    const phoneError = appointmentFieldError("phone");
+    if (phoneError) {
+      errors.phone = phoneError;
+    }
+
+    const emailError = appointmentFieldError("email");
+    if (emailError) {
+      errors.email = emailError;
+    }
+
+    const cityError = appointmentFieldError("city");
+    if (cityError) {
+      errors.city = cityError;
     }
 
     if (!appointmentCountry) {
@@ -393,8 +566,35 @@ function App() {
       errors.requirement = "Please provide at least 10 characters.";
     }
 
+    if (!appointmentConsent) {
+      errors.consent = "Confirm you agree to receive appointment messages.";
+    }
+
     setAppointmentErrors(errors);
-    return Object.keys(errors).length === 0;
+
+    if (Object.keys(errors).length > 0) {
+      if (errors.date) {
+        setAppointmentStep(1);
+      } else if (errors.time) {
+        setAppointmentStep(2);
+      }
+
+      focusFirstInvalidField(errors, [
+        ["date", "appointment-date-picker"],
+        ["time", "appointment-time-picker"],
+        ["name", "appointment-name"],
+        ["phone", "appointment-phone"],
+        ["email", "appointment-email"],
+        ["city", "appointment-city"],
+        ["country", "appointment-country"],
+        ["service", "appointment-service"],
+        ["requirement", "appointment-requirement"],
+        ["consent", "appointment-consent"],
+      ]);
+      return false;
+    }
+
+    return true;
   };
 
   const submitAppointment = async () => {
@@ -406,10 +606,9 @@ function App() {
     setAppointmentSubmitError("");
 
     try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/appointments",
+        {
           date: selectedDate,
           time: selectedTime,
           name: appointmentName.trim(),
@@ -419,22 +618,21 @@ function App() {
           country: appointmentCountry,
           service: appointmentService,
           requirement: appointmentRequirement.trim(),
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your appointment request.");
-      }
+        },
+        "Unable to send your appointment request.",
+      );
 
       setAppointmentBooked(true);
+      recordInboxItem({
+        type: "appointment",
+        title: appointmentService,
+        email: appointmentEmail.trim(),
+        name: appointmentName.trim(),
+        detail: `${selectedDate} at ${selectedTime} · ${appointmentCity}, ${appointmentCountry}`,
+      });
     } catch (error) {
       setAppointmentSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your appointment request. Please try again.",
+        errorMessage(error, "Unable to send your appointment request. Please try again."),
       );
     } finally {
       setAppointmentSubmitting(false);
@@ -483,76 +681,191 @@ function App() {
     setCookieChoice(choice);
   };
 
+  const accountFieldError = (
+    field: "name" | "email" | "note",
+    value?: string,
+  ) => {
+    const name = field === "name" && value !== undefined ? value : accountName;
+    const email = field === "email" && value !== undefined ? value : accountEmail;
+    const note = field === "note" && value !== undefined ? value : accountNote;
+
+    if (field === "name") {
+      return getNameError(name);
+    }
+
+    if (field === "email") {
+      return getEmailError(email);
+    }
+
+    if (field === "note" && note.trim().length < 10) {
+      return "Tell us how we can help using at least 10 characters.";
+    }
+
+    return "";
+  };
+
+  const validateAccountField = (field: "name" | "email" | "note", value?: string) => {
+    setAccountErrors((current) => ({
+      ...current,
+      [field]: accountFieldError(field, value),
+    }));
+  };
+
+  const validateAccountForm = () => {
+    const errors: Record<string, string> = {};
+    const nameError = accountFieldError("name");
+    const emailError = accountFieldError("email");
+    const noteError = accountFieldError("note");
+
+    if (nameError) errors.name = nameError;
+    if (emailError) errors.email = emailError;
+    if (noteError) errors.note = noteError;
+
+    setAccountErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      focusFirstInvalidField(errors, [
+        ["name", "account-name"],
+        ["email", "account-email"],
+        ["note", "account-note"],
+      ]);
+      return false;
+    }
+
+    return true;
+  };
+
   const submitAccountRequest = async () => {
+    if (!validateAccountForm()) {
+      return;
+    }
+
     setAccountSubmitting(true);
     setAccountError("");
 
     try {
-      const response = await fetch("/api/account-requests", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/account-requests",
+        {
           name: accountName.trim(),
           email: accountEmail.trim(),
           note: accountNote.trim(),
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your account request.");
-      }
+        },
+        "Unable to send your account request.",
+      );
 
       setAccountComplete(true);
+      recordInboxItem({
+        type: "account",
+        title: "Account help request",
+        email: accountEmail.trim(),
+        name: accountName.trim(),
+        detail: accountNote.trim(),
+      });
     } catch (error) {
       setAccountError(
-        error instanceof Error
-          ? error.message
-          : "Unable to send your account request. Please try again.",
+        errorMessage(error, "Unable to send your account request. Please try again."),
       );
     } finally {
       setAccountSubmitting(false);
     }
   };
 
+  const togglePreferenceTopic = (topicId: string) => {
+    setPreferenceTopics((current) =>
+      current.includes(topicId)
+        ? current.filter((id) => id !== topicId)
+        : [...current, topicId],
+    );
+    setPreferenceErrors((current) => ({
+      ...current,
+      topics: "",
+    }));
+  };
+
+  const validatePreferenceForm = () => {
+    const errors: Record<string, string> = {};
+
+    const preferenceEmailError = getEmailError(preferenceEmail);
+    if (preferenceEmailError) {
+      errors.email = preferenceEmailError;
+    }
+
+    if (preferenceTopics.length === 0) {
+      errors.topics = "Pick at least one topic.";
+    }
+
+    setPreferenceErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      focusFirstInvalidField(errors, [
+        ["email", "preference-email"],
+        ["topics", "preference-topics"],
+      ]);
+      return false;
+    }
+
+    return true;
+  };
+
+  const validateUnsubscribeForm = () => {
+    const errors: Record<string, string> = {};
+
+    const unsubscribeEmailError = getEmailError(unsubscribeEmail);
+    if (unsubscribeEmailError) {
+      errors.email = unsubscribeEmailError;
+    }
+
+    setUnsubscribeErrors(errors);
+
+    if (errors.email) {
+      focusFirstInvalidField(errors, [["email", "unsubscribe-email"]]);
+      return false;
+    }
+
+    return true;
+  };
+
   const submitPreferences = async (action: "update" | "unsubscribe") => {
+    const isValid =
+      action === "unsubscribe" ? validateUnsubscribeForm() : validatePreferenceForm();
+
+    if (!isValid) {
+      return;
+    }
+
     const email = (action === "unsubscribe" ? unsubscribeEmail : preferenceEmail).trim();
     setPreferenceSubmitting(true);
     setPreferenceMessage("");
 
     try {
-      const response = await fetch("/api/preferences", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      await postJson(
+        "/api/preferences",
+        {
           email,
           action,
-          topics:
-            action === "update"
-              ? ["training", "career", "newsletter", "notices"]
-              : [],
-        }),
-      });
-      const result = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
-      if (!response.ok) {
-        throw new Error(result?.error || "Unable to save your email preferences.");
-      }
+          topics: action === "update" ? preferenceTopics : [],
+        },
+        "Unable to save your email preferences.",
+      );
 
       setPreferenceMessage(
         action === "unsubscribe"
           ? "Your unsubscribe request was sent to Stellar."
           : "Your email preferences were sent to Stellar.",
       );
+      recordInboxItem({
+        type: "preference",
+        title: action === "unsubscribe" ? "Unsubscribe request" : "Email preference update",
+        email,
+        detail:
+          action === "unsubscribe"
+            ? "Visitor unsubscribed from Stellar email."
+            : `Topics: ${preferenceTopics.join(", ")}`,
+      });
     } catch (error) {
       setPreferenceMessage(
-        error instanceof Error
-          ? error.message
-          : "Unable to save your email preferences. Please try again.",
+        errorMessage(error, "Unable to save your email preferences. Please try again."),
       );
     } finally {
       setPreferenceSubmitting(false);
@@ -671,8 +984,12 @@ function App() {
             </div>
           </div>
 
-          <a className="mobile-header-appointment" href="/appointment">
-            Book Appointment
+          <a
+            className="mobile-header-appointment"
+            href="/appointment"
+            aria-label="Book Appointment"
+          >
+            Book <span className="mobile-appointment-word">Appointment</span>
           </a>
 
           <button
@@ -1315,23 +1632,23 @@ function App() {
               {filteredTrainingCourses.map((course) => (
                 <article className="training-course-card" key={course.title}>
                   <div className={`training-course-visual ${course.tone}`}>
-                    <span>{course.visual}</span>
-                    <small>STELLAR LAB</small>
+                    <ProgramBook
+                      className="program-book-block--cover"
+                      title={course.title}
+                      href={`/course?program=${encodeURIComponent(course.title)}`}
+                      actionLabel="View Curriculum →"
+                      actionClassName="training-view-curriculum"
+                      openInNewTab={false}
+                    />
                   </div>
                   <div className="training-course-body">
                     <span className="training-course-category">{course.category}</span>
                     <h3>{course.title}</h3>
                     <p>{course.description}</p>
                     <div className="training-course-meta">
-                      <span>◷ {course.duration}</span>
+                      <span>🕓 {course.duration}</span>
                       <span>♢ Certificate</span>
                     </div>
-                    <a
-                      className="training-view-curriculum"
-                      href={`/course?program=${encodeURIComponent(course.title)}`}
-                    >
-                      View Curriculum <span>→</span>
-                    </a>
                   </div>
                 </article>
               ))}
@@ -1479,9 +1796,13 @@ function App() {
               Start your Stellar enrollment to unlock every module, the complete
               topic list, project details, mentoring options, and current program information.
             </p>
-            <a href={`/enroll?program=${encodeURIComponent(selectedTrainingCourse.title)}`}>
-              Unlock the Full Curriculum <span>→</span>
-            </a>
+            <ProgramBook
+              title={selectedTrainingCourse.title}
+              href={`/enroll?program=${encodeURIComponent(selectedTrainingCourse.title)}`}
+              actionLabel="Unlock the Full Curriculum →"
+              actionClassName="course-unlock-action"
+              openInNewTab={false}
+            />
             <small>No payment is required to start your request.</small>
           </aside>
         </div>
@@ -1568,17 +1889,24 @@ function App() {
                   placeholder="you@example.com"
                   value={enrollmentEmail}
                   aria-invalid={Boolean(enrollmentErrors.email)}
+                  aria-describedby={
+                    enrollmentErrors.email ? "enrollment-email-error" : undefined
+                  }
+                  onBlur={() => setEnrollmentFieldError("email")}
                   onChange={(event) => {
-                    setEnrollmentEmail(event.target.value);
-                    clearEnrollmentError("email");
+                    const value = event.target.value;
+                    setEnrollmentEmail(value);
+                    if (enrollmentErrors.email) {
+                      setEnrollmentFieldError("email", value);
+                    }
                   }}
                 />
 
-                {enrollmentErrors.email && (
-                  <span className="enrollment-error" role="alert">
-                    {enrollmentErrors.email}
-                  </span>
-                )}
+                <FieldError
+                  id="enrollment-email-error"
+                  className="enrollment-error"
+                  message={enrollmentErrors.email}
+                />
 
                 <button type="submit" className="enrollment-primary-btn">
                   Continue →
@@ -1611,16 +1939,23 @@ function App() {
                   autoComplete="name"
                   value={enrollmentName}
                   aria-invalid={Boolean(enrollmentErrors.name)}
+                  aria-describedby={
+                    enrollmentErrors.name ? "enrollment-name-error" : undefined
+                  }
+                  onBlur={() => setEnrollmentFieldError("name")}
                   onChange={(event) => {
-                    setEnrollmentName(event.target.value);
-                    clearEnrollmentError("name");
+                    const value = event.target.value;
+                    setEnrollmentName(value);
+                    if (enrollmentErrors.name) {
+                      setEnrollmentFieldError("name", value);
+                    }
                   }}
                 />
-                {enrollmentErrors.name && (
-                  <span className="enrollment-error" role="alert">
-                    {enrollmentErrors.name}
-                  </span>
-                )}
+                <FieldError
+                  id="enrollment-name-error"
+                  className="enrollment-error"
+                  message={enrollmentErrors.name}
+                />
 
                 <label htmlFor="enrollment-phone">Mobile number</label>
                 <input
@@ -1630,16 +1965,23 @@ function App() {
                   autoComplete="tel"
                   value={enrollmentPhone}
                   aria-invalid={Boolean(enrollmentErrors.phone)}
+                  aria-describedby={
+                    enrollmentErrors.phone ? "enrollment-phone-error" : undefined
+                  }
+                  onBlur={() => setEnrollmentFieldError("phone")}
                   onChange={(event) => {
-                    setEnrollmentPhone(event.target.value);
-                    clearEnrollmentError("phone");
+                    const value = event.target.value;
+                    setEnrollmentPhone(value);
+                    if (enrollmentErrors.phone) {
+                      setEnrollmentFieldError("phone", value);
+                    }
                   }}
                 />
-                {enrollmentErrors.phone && (
-                  <span className="enrollment-error" role="alert">
-                    {enrollmentErrors.phone}
-                  </span>
-                )}
+                <FieldError
+                  id="enrollment-phone-error"
+                  className="enrollment-error"
+                  message={enrollmentErrors.phone}
+                />
 
                 <div className="enrollment-field-row">
                   <div>
@@ -1650,16 +1992,23 @@ function App() {
                       autoComplete="address-level2"
                       value={enrollmentCity}
                       aria-invalid={Boolean(enrollmentErrors.city)}
+                      aria-describedby={
+                        enrollmentErrors.city ? "enrollment-city-error" : undefined
+                      }
+                      onBlur={() => setEnrollmentFieldError("city")}
                       onChange={(event) => {
-                        setEnrollmentCity(event.target.value);
-                        clearEnrollmentError("city");
+                        const value = event.target.value;
+                        setEnrollmentCity(value);
+                        if (enrollmentErrors.city) {
+                          setEnrollmentFieldError("city", value);
+                        }
                       }}
                     />
-                    {enrollmentErrors.city && (
-                      <span className="enrollment-error" role="alert">
-                        {enrollmentErrors.city}
-                      </span>
-                    )}
+                    <FieldError
+                      id="enrollment-city-error"
+                      className="enrollment-error"
+                      message={enrollmentErrors.city}
+                    />
                   </div>
 
                   <div>
@@ -1667,16 +2016,33 @@ function App() {
                     <select
                       id="enrollment-country"
                       value={enrollmentCountry}
-                      onChange={(event) =>
-                        setEnrollmentCountry(event.target.value)
+                      aria-invalid={Boolean(enrollmentErrors.country)}
+                      aria-describedby={
+                        enrollmentErrors.country
+                          ? "enrollment-country-error"
+                          : undefined
                       }
+                      onBlur={() => setEnrollmentFieldError("country")}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        setEnrollmentCountry(value);
+                        if (enrollmentErrors.country) {
+                          setEnrollmentFieldError("country", value);
+                        }
+                      }}
                     >
-                      <option>Canada</option>
-                      <option>United States</option>
-                      <option>United Kingdom</option>
-                      <option>India</option>
-                      <option>Other</option>
+                      <option value="">Select a country</option>
+                      <option value="Canada">Canada</option>
+                      <option value="United States">United States</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="India">India</option>
+                      <option value="Other">Other</option>
                     </select>
+                    <FieldError
+                      id="enrollment-country-error"
+                      className="enrollment-error"
+                      message={enrollmentErrors.country}
+                    />
                   </div>
                 </div>
 
@@ -1688,16 +2054,23 @@ function App() {
                   rows={4}
                   value={enrollmentGoal}
                   aria-invalid={Boolean(enrollmentErrors.goal)}
+                  aria-describedby={
+                    enrollmentErrors.goal ? "enrollment-goal-error" : undefined
+                  }
+                  onBlur={() => setEnrollmentFieldError("goal")}
                   onChange={(event) => {
-                    setEnrollmentGoal(event.target.value);
-                    clearEnrollmentError("goal");
+                    const value = event.target.value;
+                    setEnrollmentGoal(value);
+                    if (enrollmentErrors.goal) {
+                      setEnrollmentFieldError("goal", value);
+                    }
                   }}
                 />
-                {enrollmentErrors.goal && (
-                  <span className="enrollment-error" role="alert">
-                    {enrollmentErrors.goal}
-                  </span>
-                )}
+                <FieldError
+                  id="enrollment-goal-error"
+                  className="enrollment-error"
+                  message={enrollmentErrors.goal}
+                />
 
                 <div className="enrollment-form-actions">
                   <button
@@ -1803,7 +2176,7 @@ function App() {
               <span className="badge">MOST POPULAR</span>
               <h3>Regular IT Training</h3>
               <p className="small-text">Complete instructor-led learning support</p>
-              <h4>$1,500</h4>
+              <h4>{formatProgramPrice(1500, currentRegion)}</h4>
               <ul>
                 <li>Live guided training sessions</li>
                 <li>Frontend development basics</li>
@@ -1811,14 +2184,17 @@ function App() {
                 <li>Real-world practice tasks</li>
                 <li>Certificate of completion</li>
               </ul>
-              <a href="/enroll?program=Regular%20IT%20Training" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Regular IT Training"
+                href="/enroll?program=Regular%20IT%20Training"
+              />
             </div>
 
             <div className="price-card popular">
               <span className="badge">MOST POPULAR</span>
               <h3>AI + IT Training</h3>
               <p className="small-text">Training support for modern AI tools and IT work</p>
-              <h4>$2,000</h4>
+              <h4>{formatProgramPrice(2000, currentRegion)}</h4>
               <ul>
                 <li>All regular training features</li>
                 <li>AI tool guidance</li>
@@ -1826,13 +2202,16 @@ function App() {
                 <li>Project mentorship</li>
                 <li>Career confidence building</li>
               </ul>
-              <a href="/enroll?program=AI%20%2B%20IT%20Training" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="AI + IT Training"
+                href="/enroll?program=AI%20%2B%20IT%20Training"
+              />
             </div>
 
             <div className="price-card">
               <h3>Bootcamp Support</h3>
               <p className="small-text">Add-on project and hands-on practice support</p>
-              <h4>$500</h4>
+              <h4>{formatProgramPrice(500, currentRegion)}</h4>
               <ul>
                 <li>Project-based practice</li>
                 <li>Portfolio building</li>
@@ -1840,14 +2219,18 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Skill validation support</li>
               </ul>
-              <a href="/enroll?program=Bootcamp%20Support" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Bootcamp Support"
+                href="/enroll?program=Bootcamp%20Support"
+                actionClassName="enroll-btn dark"
+              />
             </div>
 
             <div className="price-card popular">
               <span className="badge">CAREER SUPPORT</span>
               <h3>Marketing Support</h3>
               <p className="small-text">Placement and career preparation support</p>
-              <h4>$500</h4>
+              <h4>{formatProgramPrice(500, currentRegion)}</h4>
               <ul>
                 <li>Professional resume creation</li>
                 <li>LinkedIn optimization</li>
@@ -1855,7 +2238,10 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Marketing%20Support" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Marketing Support"
+                href="/enroll?program=Marketing%20Support"
+              />
             </div>
           </div>
         </div>
@@ -1876,7 +2262,7 @@ function App() {
             <div className="price-card">
               <h3>Direct Bootcamp</h3>
               <p className="small-text">Hands-on project and job-readiness support</p>
-              <h4>$1,000</h4>
+              <h4>{formatProgramPrice(1000, currentRegion)}</h4>
               <ul>
                 <li>Intensive project practice</li>
                 <li>Hands-on technical tasks</li>
@@ -1884,14 +2270,18 @@ function App() {
                 <li>Interview preparation</li>
                 <li>Workplace confidence building</li>
               </ul>
-              <a href="/enroll?program=Direct%20Bootcamp" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Direct Bootcamp"
+                href="/enroll?program=Direct%20Bootcamp"
+                actionClassName="enroll-btn dark"
+              />
             </div>
 
             <div className="price-card popular">
               <span className="badge">NEXT STEP</span>
               <h3>Career Marketing</h3>
               <p className="small-text">Resume, LinkedIn, applications, and interview support</p>
-              <h4>$500</h4>
+              <h4>{formatProgramPrice(500, currentRegion)}</h4>
               <ul>
                 <li>Professional resume creation</li>
                 <li>LinkedIn optimization</li>
@@ -1899,7 +2289,10 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Career%20Marketing" className="enroll-btn" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Career Marketing"
+                href="/enroll?program=Career%20Marketing"
+              />
             </div>
           </div>
         </div>
@@ -1920,7 +2313,7 @@ function App() {
             <div className="price-card">
               <h3>Direct Marketing Program</h3>
               <p className="small-text">Placement-only support for trained candidates</p>
-              <h4>$1,000</h4>
+              <h4>{formatProgramPrice(1000, currentRegion)}</h4>
               <ul>
                 <li>Professional resume creation</li>
                 <li>LinkedIn optimization</li>
@@ -1929,7 +2322,11 @@ function App() {
                 <li>Interview guidance</li>
                 <li>Placement support</li>
               </ul>
-              <a href="/enroll?program=Direct%20Marketing%20Program" className="enroll-btn dark" target="_blank" rel="noopener noreferrer">Enroll Now →</a>
+              <ProgramBook
+                title="Direct Marketing Program"
+                href="/enroll?program=Direct%20Marketing%20Program"
+                actionClassName="enroll-btn dark"
+              />
             </div>
           </div>
         </div>
@@ -1940,7 +2337,7 @@ function App() {
               <article className="pricing-faq-card">
                 <h3>What currency are Stellar prices listed in?</h3>
                 <p>
-                  Stellar prices are listed in Canadian dollars (CAD). Applicable
+                  Stellar prices are listed in {currentRegion.currencyName}. Applicable
                   taxes may be added depending on the service and location.
                 </p>
               </article>
@@ -2000,29 +2397,33 @@ function App() {
         <div className="review-platform-grid">
           <a
             className="review-platform-card review-platform-link"
-            href="/reviews"
-            aria-label="Read Stellar Groupware learner reviews"
+            href={reviewLinks.google}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open Google Reviews"
           >
             <div className="review-platform-icon google-review-icon">G</div>
             <div>
-              <h3>Learner Reviews</h3>
-              <p>See what our learners say</p>
-              <div className="review-stars" aria-label="Five-star reviews">
-                ★★★★★ <strong>5</strong>
+              <h3>Google Reviews</h3>
+              <p>See what our clients say</p>
+              <div className="review-stars" aria-label="4.7 star Google reviews">
+                ★★★★★ <strong>4.7</strong>
               </div>
             </div>
           </a>
 
           <a
             className="review-platform-card review-platform-link linkedin-platform-card"
-            href="/reviews"
-            aria-label="Read Stellar Groupware learner reviews"
+            href={reviewLinks.linkedinRecommendations}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="View LinkedIn Recommendations"
           >
             <div className="review-platform-icon linkedin-review-icon">in</div>
             <div>
-              <h3>On-site Testimonials</h3>
+              <h3>LinkedIn Recommendations</h3>
               <p>Professional recommendations</p>
-              <span className="linkedin-review-button">Read reviews</span>
+              <span className="linkedin-review-button">View on LinkedIn</span>
             </div>
           </a>
         </div>
@@ -2131,14 +2532,14 @@ function App() {
           </p>
 
           <div className="share-success-actions">
-            <a href="/reviews">
+            <a href={reviewLinks.google} target="_blank" rel="noreferrer">
               <span>G</span>
-              Read learner reviews
+              Leave a Google Review
             </a>
 
-            <a href="/contact">
+            <a href={reviewLinks.linkedinProfile} target="_blank" rel="noreferrer">
               <span>in</span>
-              Share your story with Stellar
+              Give LinkedIn Recommendation
             </a>
           </div>
         </section>
@@ -2526,32 +2927,71 @@ function App() {
               void submitAccountRequest();
             }}
           >
-            <label>
+            <label htmlFor="account-name">
               Full name
               <input
+                id="account-name"
                 type="text"
                 autoComplete="name"
                 value={accountName}
-                onChange={(event) => setAccountName(event.target.value)}
+                aria-invalid={Boolean(accountErrors.name)}
+                aria-describedby={
+                  accountErrors.name ? "account-name-error" : undefined
+                }
+                onBlur={() => validateAccountField("name")}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setAccountName(value);
+                  if (accountErrors.name) {
+                    validateAccountField("name", value);
+                  }
+                }}
               />
+              <FieldError id="account-name-error" message={accountErrors.name} />
             </label>
-            <label>
+            <label htmlFor="account-email">
               Email
               <input
+                id="account-email"
                 type="email"
                 autoComplete="email"
                 value={accountEmail}
-                onChange={(event) => setAccountEmail(event.target.value)}
+                aria-invalid={Boolean(accountErrors.email)}
+                aria-describedby={
+                  accountErrors.email ? "account-email-error" : undefined
+                }
+                onBlur={() => validateAccountField("email")}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setAccountEmail(value);
+                  if (accountErrors.email) {
+                    validateAccountField("email", value);
+                  }
+                }}
               />
+              <FieldError id="account-email-error" message={accountErrors.email} />
             </label>
-            <label>
+            <label htmlFor="account-note">
               How can we help?
               <textarea
+                id="account-note"
                 rows={4}
                 value={accountNote}
-                onChange={(event) => setAccountNote(event.target.value)}
+                aria-invalid={Boolean(accountErrors.note)}
+                aria-describedby={
+                  accountErrors.note ? "account-note-error" : undefined
+                }
+                onBlur={() => validateAccountField("note")}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setAccountNote(value);
+                  if (accountErrors.note) {
+                    validateAccountField("note", value);
+                  }
+                }}
                 placeholder="Tell us about your program or account issue."
               />
+              <FieldError id="account-note-error" message={accountErrors.note} />
             </label>
             {accountError && (
               <span className="enrollment-error" role="alert">
@@ -2647,7 +3087,17 @@ function App() {
                 <div className="appointment-step-panel">
                   <h4>Select a day</h4>
 
-                  <div className="appointment-date-grid">
+                  <div
+                    id="appointment-date-picker"
+                    className="appointment-date-grid"
+                    tabIndex={-1}
+                    role="group"
+                    aria-label="Available appointment dates"
+                    aria-invalid={Boolean(appointmentErrors.date)}
+                    aria-describedby={
+                      appointmentErrors.date ? "appointment-date-error" : undefined
+                    }
+                  >
                     {appointmentDates.map(({ day, date, month, value, disabled }) => {
                       return (
                         <button
@@ -2660,6 +3110,11 @@ function App() {
                           onClick={() => {
                             setSelectedDate(value);
                             setSelectedTime("");
+                            setAppointmentErrors((current) => ({
+                              ...current,
+                              date: "",
+                              time: "",
+                            }));
                             setAppointmentStep(2);
                           }}
                         >
@@ -2670,6 +3125,11 @@ function App() {
                       );
                     })}
                   </div>
+                  <FieldError
+                    id="appointment-date-error"
+                    className="appointment-field-error"
+                    message={appointmentErrors.date}
+                  />
                 </div>
               )}
 
@@ -2684,7 +3144,17 @@ function App() {
 
                   <h4>Select a time</h4>
 
-                  <div className="appointment-time-grid">
+                  <div
+                    id="appointment-time-picker"
+                    className="appointment-time-grid"
+                    tabIndex={-1}
+                    role="group"
+                    aria-label="Available appointment times"
+                    aria-invalid={Boolean(appointmentErrors.time)}
+                    aria-describedby={
+                      appointmentErrors.time ? "appointment-time-error" : undefined
+                    }
+                  >
                     {appointmentTimes.length === 0 ? (
                       <p>No times are left on this day. Please choose another date.</p>
                     ) : (
@@ -2695,6 +3165,10 @@ function App() {
                         className={selectedTime === time ? "selected" : ""}
                         onClick={() => {
                           setSelectedTime(time);
+                          setAppointmentErrors((current) => ({
+                            ...current,
+                            time: "",
+                          }));
                           setAppointmentStep(3);
                         }}
                       >
@@ -2703,6 +3177,11 @@ function App() {
                       ))
                     )}
                   </div>
+                  <FieldError
+                    id="appointment-time-error"
+                    className="appointment-field-error"
+                    message={appointmentErrors.time}
+                  />
 
                   <button
                     type="button"
@@ -2730,9 +3209,10 @@ function App() {
                     </button>
                   </div>
 
-                  <label>
+                  <label htmlFor="appointment-name">
                     Full Name *
                     <input
+                      id="appointment-name"
                       minLength={2}
                       maxLength={80}
                       autoComplete="name"
@@ -2745,27 +3225,24 @@ function App() {
                       }
                       onBlur={() => validateAppointmentField("name")}
                       onChange={(event) => {
-                        setAppointmentName(event.target.value);
-                        setAppointmentErrors((current) => ({
-                          ...current,
-                          name: "",
-                        }));
+                        const value = event.target.value;
+                        setAppointmentName(value);
+                        if (appointmentErrors.name) {
+                          validateAppointmentField("name", value);
+                        }
                       }}
                     />
-                    {appointmentErrors.name && (
-                      <span
-                        id="appointment-name-error"
-                        className="appointment-field-error"
-                        role="alert"
-                      >
-                        {appointmentErrors.name}
-                      </span>
-                    )}
+                    <FieldError
+                      id="appointment-name-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.name}
+                    />
                   </label>
 
-                  <label>
+                  <label htmlFor="appointment-phone">
                     Mobile Number *
                     <input
+                      id="appointment-phone"
                       minLength={10}
                       maxLength={20}
                       inputMode="tel"
@@ -2779,27 +3256,24 @@ function App() {
                       }
                       onBlur={() => validateAppointmentField("phone")}
                       onChange={(event) => {
-                        setAppointmentPhone(event.target.value);
-                        setAppointmentErrors((current) => ({
-                          ...current,
-                          phone: "",
-                        }));
+                        const value = event.target.value;
+                        setAppointmentPhone(value);
+                        if (appointmentErrors.phone) {
+                          validateAppointmentField("phone", value);
+                        }
                       }}
                     />
-                    {appointmentErrors.phone && (
-                      <span
-                        id="appointment-phone-error"
-                        className="appointment-field-error"
-                        role="alert"
-                      >
-                        {appointmentErrors.phone}
-                      </span>
-                    )}
+                    <FieldError
+                      id="appointment-phone-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.phone}
+                    />
                   </label>
 
-                  <label>
+                  <label htmlFor="appointment-email">
                     Email *
                     <input
+                      id="appointment-email"
                       maxLength={120}
                       autoComplete="email"
                       type="email"
@@ -2811,27 +3285,24 @@ function App() {
                       }
                       onBlur={() => validateAppointmentField("email")}
                       onChange={(event) => {
-                        setAppointmentEmail(event.target.value);
-                        setAppointmentErrors((current) => ({
-                          ...current,
-                          email: "",
-                        }));
+                        const value = event.target.value;
+                        setAppointmentEmail(value);
+                        if (appointmentErrors.email) {
+                          validateAppointmentField("email", value);
+                        }
                       }}
                     />
-                    {appointmentErrors.email && (
-                      <span
-                        id="appointment-email-error"
-                        className="appointment-field-error"
-                        role="alert"
-                      >
-                        {appointmentErrors.email}
-                      </span>
-                    )}
+                    <FieldError
+                      id="appointment-email-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.email}
+                    />
                   </label>
 
-                  <label>
+                  <label htmlFor="appointment-city">
                     City *
                     <input
+                      id="appointment-city"
                       minLength={2}
                       maxLength={80}
                       autoComplete="address-level2"
@@ -2844,42 +3315,59 @@ function App() {
                       }
                       onBlur={() => validateAppointmentField("city")}
                       onChange={(event) => {
-                        setAppointmentCity(event.target.value);
-                        setAppointmentErrors((current) => ({
-                          ...current,
-                          city: "",
-                        }));
+                        const value = event.target.value;
+                        setAppointmentCity(value);
+                        if (appointmentErrors.city) {
+                          validateAppointmentField("city", value);
+                        }
                       }}
                     />
-                    {appointmentErrors.city && (
-                      <span
-                        id="appointment-city-error"
-                        className="appointment-field-error"
-                        role="alert"
-                      >
-                        {appointmentErrors.city}
-                      </span>
-                    )}
+                    <FieldError
+                      id="appointment-city-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.city}
+                    />
                   </label>
 
-                  <label>
+                  <label htmlFor="appointment-country">
                     Country *
                     <select
+                      id="appointment-country"
                       required
                       value={appointmentCountry}
-                      onChange={(event) => setAppointmentCountry(event.target.value)}
+                      aria-invalid={Boolean(appointmentErrors.country)}
+                      aria-describedby={
+                        appointmentErrors.country
+                          ? "appointment-country-error"
+                          : undefined
+                      }
+                      onBlur={() => validateAppointmentField("country")}
+                      onChange={(event) => {
+                        const value = event.target.value;
+                        setAppointmentCountry(value);
+                        if (appointmentErrors.country) {
+                          validateAppointmentField("country", value);
+                        }
+                      }}
                     >
+                      <option value="">Select a country</option>
                       <option value="Canada">Canada</option>
                       <option value="United Kingdom">United Kingdom</option>
                       <option value="India">India</option>
                       <option value="United States">United States</option>
                       <option value="Other">Other</option>
                     </select>
+                    <FieldError
+                      id="appointment-country-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.country}
+                    />
                   </label>
 
-                  <label>
+                  <label htmlFor="appointment-service">
                     Service Interested *
                     <select
+                      id="appointment-service"
                       value={appointmentService}
                       aria-invalid={Boolean(appointmentErrors.service)}
                       aria-describedby={
@@ -2889,11 +3377,11 @@ function App() {
                       }
                       onBlur={() => validateAppointmentField("service")}
                       onChange={(event) => {
-                        setAppointmentService(event.target.value);
-                        setAppointmentErrors((current) => ({
-                          ...current,
-                          service: "",
-                        }));
+                        const value = event.target.value;
+                        setAppointmentService(value);
+                        if (appointmentErrors.service) {
+                          validateAppointmentField("service", value);
+                        }
                       }}
                     >
                       <option value="">Select a service</option>
@@ -2901,20 +3389,17 @@ function App() {
                         <option key={service}>{service}</option>
                       ))}
                     </select>
-                    {appointmentErrors.service && (
-                      <span
-                        id="appointment-service-error"
-                        className="appointment-field-error"
-                        role="alert"
-                      >
-                        {appointmentErrors.service}
-                      </span>
-                    )}
+                    <FieldError
+                      id="appointment-service-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.service}
+                    />
                   </label>
 
-                  <label>
+                  <label htmlFor="appointment-requirement">
                     Requirement *
                     <textarea
+                      id="appointment-requirement"
                       minLength={10}
                       maxLength={1000}
                       rows={5}
@@ -2928,33 +3413,38 @@ function App() {
                       }
                       onBlur={() => validateAppointmentField("requirement")}
                       onChange={(event) => {
-                        setAppointmentRequirement(event.target.value);
-                        setAppointmentErrors((current) => ({
-                          ...current,
-                          requirement: "",
-                        }));
+                        const value = event.target.value;
+                        setAppointmentRequirement(value);
+                        if (appointmentErrors.requirement) {
+                          validateAppointmentField("requirement", value);
+                        }
                       }}
                     />
-                    {appointmentErrors.requirement && (
-                      <span
-                        id="appointment-requirement-error"
-                        className="appointment-field-error"
-                        role="alert"
-                      >
-                        {appointmentErrors.requirement}
-                      </span>
-                    )}
+                    <FieldError
+                      id="appointment-requirement-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.requirement}
+                    />
                   </label>
 
                     <button
                       type="button"
+                      id="appointment-consent"
                       className={`appointment-consent-toggle ${
                         appointmentConsent ? "checked" : ""
                       }`}
                       aria-pressed={appointmentConsent}
-                      onClick={() =>
-                        setAppointmentConsent((current) => !current)
+                      aria-invalid={Boolean(appointmentErrors.consent)}
+                      aria-describedby={
+                        appointmentErrors.consent
+                          ? "appointment-consent-error"
+                          : undefined
                       }
+                      onClick={() => {
+                        const next = !appointmentConsent;
+                        setAppointmentConsent(next);
+                        validateAppointmentField("consent", next);
+                      }}
                     >
                       <span className="appointment-consent-box" aria-hidden="true">
                         {appointmentConsent ? "✓" : ""}
@@ -2966,6 +3456,11 @@ function App() {
                         may include appointment reminders. Reply STOP to opt out.
                       </span>
                     </button>
+                    <FieldError
+                      id="appointment-consent-error"
+                      className="appointment-field-error"
+                      message={appointmentErrors.consent}
+                    />
 
                     {appointmentSubmitError && (
                       <p className="appointment-submit-error" role="alert">
@@ -3041,29 +3536,115 @@ function App() {
         </header>
 
         <div className="policy-page-inner unsubscribe-layout">
-          <form className="policy-card preference-card" onSubmit={(event) => {
-            event.preventDefault();
-            void submitPreferences("update");
-          }}>
+          <form
+            className="policy-card preference-card"
+            noValidate
+            onSubmit={(event) => {
+              event.preventDefault();
+              void submitPreferences("update");
+            }}
+          >
             <div className="policy-card-heading"><span aria-hidden="true">✓</span><div><h2>Customize Your Preferences</h2><p>Select the Stellar emails that are useful to you.</p></div></div>
-            <label className="policy-field"><span>Your email for updates</span><input type="email" value={preferenceEmail} placeholder="your.email@example.com" onChange={(event) => setPreferenceEmail(event.target.value)} /></label>
-            <div className="preference-options">
-              <label><input type="checkbox" defaultChecked /><span><strong>Training and Program Updates</strong><small>New courses, learning schedules, and program announcements</small></span></label>
-              <label><input type="checkbox" defaultChecked /><span><strong>Career Resources</strong><small>Practical career tips, mentoring insights, and event invitations</small></span></label>
-              <label><input type="checkbox" defaultChecked /><span><strong>Stellar Newsletter</strong><small>Company news, learner stories, and helpful resources</small></span></label>
-              <label><input type="checkbox" defaultChecked /><span><strong>Important Service Notices</strong><small>Changes that affect appointments, enrollment, or active services</small></span></label>
+            <label className="policy-field" htmlFor="preference-email">
+              <span>Your email for updates</span>
+              <input
+                id="preference-email"
+                type="email"
+                value={preferenceEmail}
+                placeholder="your.email@example.com"
+                aria-invalid={Boolean(preferenceErrors.email)}
+                aria-describedby={
+                  preferenceErrors.email ? "preference-email-error" : undefined
+                }
+                onBlur={() => {
+                  setPreferenceErrors((current) => ({
+                    ...current,
+                    email: getEmailError(preferenceEmail),
+                  }));
+                }}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setPreferenceEmail(value);
+                  if (preferenceErrors.email) {
+                    setPreferenceErrors((current) => ({
+                      ...current,
+                      email: getEmailError(value),
+                    }));
+                  }
+                }}
+              />
+              <FieldError id="preference-email-error" message={preferenceErrors.email} />
+            </label>
+            <div
+              id="preference-topics"
+              className="preference-options"
+              tabIndex={-1}
+              role="group"
+              aria-label="Email topics"
+              aria-invalid={Boolean(preferenceErrors.topics)}
+              aria-describedby={
+                preferenceErrors.topics ? "preference-topics-error" : undefined
+              }
+            >
+              {preferenceTopicOptions.map((topic) => (
+                <label key={topic.id}>
+                  <input
+                    type="checkbox"
+                    checked={preferenceTopics.includes(topic.id)}
+                    onChange={() => togglePreferenceTopic(topic.id)}
+                  />
+                  <span>
+                    <strong>{topic.title}</strong>
+                    <small>{topic.detail}</small>
+                  </span>
+                </label>
+              ))}
             </div>
+            <FieldError id="preference-topics-error" message={preferenceErrors.topics} />
             <button type="submit" className="policy-action primary" disabled={preferenceSubmitting}>
               {preferenceSubmitting ? "Sending…" : "Update Preferences"}
             </button>
           </form>
 
-          <form className="policy-card unsubscribe-card" onSubmit={(event) => {
-            event.preventDefault();
-            void submitPreferences("unsubscribe");
-          }}>
+          <form
+            className="policy-card unsubscribe-card"
+            noValidate
+            onSubmit={(event) => {
+              event.preventDefault();
+              void submitPreferences("unsubscribe");
+            }}
+          >
             <div className="policy-card-heading"><span aria-hidden="true">−</span><div><h2>Unsubscribe from Marketing Emails</h2><p>You may still receive essential messages about services you requested.</p></div></div>
-            <label className="policy-field"><span>Unsubscribe email address</span><input type="email" value={unsubscribeEmail} placeholder="your.email@example.com" onChange={(event) => setUnsubscribeEmail(event.target.value)} /></label>
+            <label className="policy-field" htmlFor="unsubscribe-email">
+              <span>Unsubscribe email address</span>
+              <input
+                id="unsubscribe-email"
+                type="email"
+                value={unsubscribeEmail}
+                placeholder="your.email@example.com"
+                aria-invalid={Boolean(unsubscribeErrors.email)}
+                aria-describedby={
+                  unsubscribeErrors.email ? "unsubscribe-email-error" : undefined
+                }
+                onBlur={() => {
+                  setUnsubscribeErrors((current) => ({
+                    ...current,
+                    email: getEmailError(unsubscribeEmail),
+                  }));
+                }}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setUnsubscribeEmail(value);
+                  if (unsubscribeErrors.email) {
+                    setUnsubscribeErrors((current) => ({
+                      ...current,
+                      email: getEmailError(value),
+                    }));
+                  }
+                }}
+              />
+              <FieldError id="unsubscribe-email-error" message={unsubscribeErrors.email} />
+            </label>
             <button type="submit" className="policy-action danger" disabled={preferenceSubmitting}>
               {preferenceSubmitting ? "Sending…" : "Unsubscribe"}
             </button>
@@ -3316,19 +3897,19 @@ function App() {
               </button>
 
               <div className="social-row">
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.facebook} target="_blank" rel="noreferrer" aria-label="Open Facebook">
                   <span>f</span>
                 </a>
-                <a href="/reviews" aria-label="Read Stellar reviews">
+                <a href={socialLinks.linkedin} target="_blank" rel="noreferrer" aria-label="Open LinkedIn">
                   <span>in</span>
                 </a>
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.instagram} target="_blank" rel="noreferrer" aria-label="Open Instagram">
                   <span>◎</span>
                 </a>
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.twitter} target="_blank" rel="noreferrer" aria-label="Open X">
                   <span>𝕏</span>
                 </a>
-                <a href="/contact" aria-label="Contact Stellar">
+                <a href={socialLinks.youtube} target="_blank" rel="noreferrer" aria-label="Open YouTube">
                   <span>▶</span>
                 </a>
               </div>

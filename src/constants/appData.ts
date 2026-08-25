@@ -10,6 +10,8 @@ export const routeMap: Record<string, string> = {
   "/process": "process",
   "/about": "about",
   "/account": "account",
+  "/account-access.html": "account",
+  "/staff": "staff",
   "/appointment": "appointment",
   "/enroll": "enroll",
   "/contact": "contact",
@@ -75,6 +77,10 @@ export const regionConfig = {
     timeAbbrev: "ET",
     defaultCountry: "Canada",
     cityPlaceholder: "Toronto",
+    currencyCode: "CAD",
+    currencySymbol: "$",
+    currencyName: "Canadian dollars (CAD)",
+    cadToLocal: 1,
   },
   "/ca": {
     name: "Canada",
@@ -85,6 +91,10 @@ export const regionConfig = {
     timeAbbrev: "ET",
     defaultCountry: "Canada",
     cityPlaceholder: "Toronto",
+    currencyCode: "CAD",
+    currencySymbol: "$",
+    currencyName: "Canadian dollars (CAD)",
+    cadToLocal: 1,
   },
   "/uk": {
     name: "UK & EU",
@@ -95,6 +105,10 @@ export const regionConfig = {
     timeAbbrev: "UK",
     defaultCountry: "United Kingdom",
     cityPlaceholder: "London",
+    currencyCode: "GBP",
+    currencySymbol: "£",
+    currencyName: "British pounds (GBP)",
+    cadToLocal: 0.55,
   },
   "/in": {
     name: "India",
@@ -105,7 +119,73 @@ export const regionConfig = {
     timeAbbrev: "IST",
     defaultCountry: "India",
     cityPlaceholder: "Bengaluru",
+    currencyCode: "INR",
+    currencySymbol: "₹",
+    currencyName: "Indian rupees (INR)",
+    cadToLocal: 62,
   },
+} as const;
+
+export type RegionPath = keyof typeof regionConfig;
+
+export const regionStorageKey = "stellar-region";
+
+export function resolveRegionPath(
+  pathname: string,
+  storedPath?: string | null,
+): RegionPath {
+  if (pathname in regionConfig) {
+    return pathname as RegionPath;
+  }
+
+  if (storedPath && storedPath in regionConfig) {
+    return storedPath as RegionPath;
+  }
+
+  return "/";
+}
+
+export function readStoredRegionPath(): string | null {
+  try {
+    return window.localStorage.getItem(regionStorageKey);
+  } catch {
+    return null;
+  }
+}
+
+export function rememberRegionPath(pathname: string) {
+  if (!(pathname in regionConfig)) {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(regionStorageKey, pathname);
+  } catch {
+    // Ignore storage failures and keep using the current URL region.
+  }
+}
+
+export function getCurrentRegion(pathname = window.location.pathname) {
+  if (pathname in regionConfig) {
+    rememberRegionPath(pathname);
+  }
+
+  return regionConfig[resolveRegionPath(pathname, readStoredRegionPath())];
+}
+
+export const reviewLinks = {
+  google: "https://www.google.com/maps/search/?api=1&query=Stellar%20Groupware%20Inc",
+  linkedinRecommendations:
+    "https://www.linkedin.com/in/rvasupilli/details/recommendations/?detailScreenTabIndex=0",
+  linkedinProfile: "https://www.linkedin.com/in/rvasupilli/",
+} as const;
+
+export const socialLinks = {
+  facebook: "https://www.facebook.com/ncplconsulting.net",
+  linkedin: "https://www.linkedin.com/company/ncpl-consulting",
+  instagram: "https://www.instagram.com/ncplconsulting",
+  twitter: "https://x.com/ncplconsulting",
+  youtube: "https://www.youtube.com/@ncpl-media",
 } as const;
 
 export const appointmentServices = [
@@ -117,6 +197,59 @@ export const appointmentServices = [
   "Career Marketing",
   "Direct Marketing Program",
 ] as const;
+
+export const programPricesCad = {
+  "Regular IT Training": 1500,
+  "AI + IT Training": 2000,
+  "Bootcamp Support": 500,
+  "Marketing Support": 500,
+  "Direct Bootcamp": 1000,
+  "Career Marketing": 500,
+  "Direct Marketing Program": 1000,
+} as const;
+
+export type RegionSettings = (typeof regionConfig)[RegionPath];
+
+export function formatProgramPrice(amountCad: number, region: RegionSettings) {
+  const amount = Math.round(amountCad * region.cadToLocal);
+
+  if (region.currencyCode === "INR") {
+    return `₹${amount.toLocaleString("en-IN")}`;
+  }
+
+  if (region.currencyCode === "GBP") {
+    return `£${amount.toLocaleString("en-GB")}`;
+  }
+
+  return `$${amount.toLocaleString("en-US")}`;
+}
+
+export const preferenceTopicOptions = [
+  {
+    id: "training",
+    title: "Training and Program Updates",
+    detail: "New courses, learning schedules, and program announcements",
+  },
+  {
+    id: "career",
+    title: "Career Resources",
+    detail: "Practical career tips, mentoring insights, and event invitations",
+  },
+  {
+    id: "newsletter",
+    title: "Stellar Newsletter",
+    detail: "Company news, learner stories, and helpful resources",
+  },
+  {
+    id: "notices",
+    title: "Important Service Notices",
+    detail: "Changes that affect appointments, enrollment, or active services",
+  },
+] as const;
+
+export const defaultPreferenceTopics = preferenceTopicOptions.map(
+  (topic) => topic.id,
+);
 
 export const weekdayAppointmentTimes = [
   "9:00 AM",
@@ -144,26 +277,32 @@ export type AppointmentDateOption = {
   disabled: boolean;
 };
 
-function addDaysToIso(isoDate: string, days: number) {
+function utcNoonFromIso(isoDate: string, extraDays = 0) {
   const [year, month, day] = isoDate.split("-").map(Number);
-  const shifted = new Date(Date.UTC(year, month - 1, day + days, 12, 0, 0));
-  return shifted.toISOString().slice(0, 10);
+  return {
+    day,
+    date: new Date(Date.UTC(year, month - 1, day + extraDays, 12, 0, 0)),
+  };
 }
 
-function weekdayFromIso(isoDate: string) {
-  const [year, month, day] = isoDate.split("-").map(Number);
-  return new Date(Date.UTC(year, month - 1, day, 12, 0, 0)).getUTCDay();
+function addDaysToIso(isoDate: string, days: number) {
+  return utcNoonFromIso(isoDate, days).date.toISOString().slice(0, 10);
 }
 
 function formatIsoDate(isoDate: string) {
-  const [year, month, day] = isoDate.split("-").map(Number);
-  const date = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+  const { day, date } = utcNoonFromIso(isoDate);
+  const weekdayLabel = date
+    .toLocaleDateString("en-CA", { weekday: "short", timeZone: "UTC" })
+    .toUpperCase();
+  const monthLabel = date
+    .toLocaleDateString("en-CA", { month: "short", timeZone: "UTC" })
+    .toUpperCase();
 
   return {
-    day: date.toLocaleDateString("en-CA", { weekday: "short", timeZone: "UTC" }).toUpperCase(),
-    month: date.toLocaleDateString("en-CA", { month: "short", timeZone: "UTC" }).toUpperCase(),
+    day: weekdayLabel,
+    month: monthLabel,
     date: String(day),
-    value: `${date.toLocaleDateString("en-CA", { weekday: "short", timeZone: "UTC" }).toUpperCase()}, ${date.toLocaleDateString("en-CA", { month: "short", timeZone: "UTC" }).toUpperCase()} ${day}`,
+    value: `${weekdayLabel}, ${monthLabel} ${day}`,
     iso: isoDate,
     weekday: date.getUTCDay(),
   };
@@ -191,35 +330,12 @@ export function getZonedNow(timeZone: string, now = new Date()) {
   };
 }
 
-export function getAppointmentDates(timeZone: string, now = new Date()): AppointmentDateOption[] {
-  const todayIso = getZonedNow(timeZone, now).isoDate;
-
-  return Array.from({ length: 7 }, (_, index) => {
-    const iso = addDaysToIso(todayIso, index);
-    const formatted = formatIsoDate(iso);
-    const weekday = weekdayFromIso(iso);
-    const availableTimes = getAvailableAppointmentTimes(
-      { iso, weekday },
-      timeZone,
-      now,
-    );
-
-    return {
-      ...formatted,
-      weekday,
-      disabled: weekday === 0 || availableTimes.length === 0,
-    };
-  });
-}
-
-export function getAvailableAppointmentTimes(
+function availableTimesForDate(
   date: Pick<AppointmentDateOption, "iso" | "weekday">,
-  timeZone: string,
-  now = new Date(),
+  zonedNow: { isoDate: string; minutes: number },
 ) {
   const slots =
     date.weekday === 6 ? saturdayAppointmentTimes : weekdayAppointmentTimes;
-  const zonedNow = getZonedNow(timeZone, now);
 
   return slots.filter((slot) => {
     if (date.iso > zonedNow.isoDate) {
@@ -232,6 +348,29 @@ export function getAvailableAppointmentTimes(
 
     return timeLabelToMinutes(slot) > zonedNow.minutes;
   });
+}
+
+export function getAppointmentDates(timeZone: string, now = new Date()): AppointmentDateOption[] {
+  const zonedNow = getZonedNow(timeZone, now);
+
+  return Array.from({ length: 7 }, (_, index) => {
+    const iso = addDaysToIso(zonedNow.isoDate, index);
+    const formatted = formatIsoDate(iso);
+    const availableTimes = availableTimesForDate(formatted, zonedNow);
+
+    return {
+      ...formatted,
+      disabled: formatted.weekday === 0 || availableTimes.length === 0,
+    };
+  });
+}
+
+export function getAvailableAppointmentTimes(
+  date: Pick<AppointmentDateOption, "iso" | "weekday">,
+  timeZone: string,
+  now = new Date(),
+) {
+  return availableTimesForDate(date, getZonedNow(timeZone, now));
 }
 
 

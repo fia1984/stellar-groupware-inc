@@ -1,0 +1,83 @@
+/* Collapsed header layout.
+ *
+ * This file is imported last so page-level QA sheets cannot restack the
+ * logo, Book Appointment button, and menu control onto separate lines.
+ * The open menu is an overlay under the bar, not a wrapping flex item.
+ */
+
+@media (max-width: 1050px) {
+  body main.page-shell nav.navbar {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow: visible !important;
+    gap: 8px !important;
+  }
+
+  body main.page-shell nav.navbar .brand,
+  body main.page-shell nav.navbar a.brand {
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-header-appointment {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    max-width: 168px !important;
+    white-space: nowrap !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-menu-button {
+    display: inline-flex !important;
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    margin-left: 0 !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links {
+    position: absolute !important;
+    top: calc(100% + 8px) !important;
+    right: 0 !important;
+    left: auto !important;
+    bottom: auto !important;
+    order: 0 !important;
+    flex: 0 0 auto !important;
+    width: min(390px, calc(100vw - 32px)) !important;
+    max-width: none !important;
+    margin: 0 !important;
+    border-radius: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links:not(.menu-open) {
+    display: none !important;
+  }
+
+  body main.page-shell nav.navbar #primary-navigation.nav-links.menu-open {
+    display: flex !important;
+    animation: stellar-mobile-menu-enter 0.24s ease both;
+  }
+}
+
+@keyframes stellar-mobile-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body main.page-shell nav.navbar #primary-navigation.nav-links.menu-open {
+    animation: none !important;
+  }
+}

@@ -78,8 +78,10 @@
   .page-shell.route-pricing #pricing .price-card,
   .page-shell.route-pricing #pricing .pricing-grid.two-card .price-card,
   .page-shell.route-pricing #pricing .pricing-grid.single-card .price-card {
+    flex: 0 0 auto !important;
     width: 100% !important;
     max-width: none !important;
+    height: auto !important;
     min-height: 0 !important;
   }
 }

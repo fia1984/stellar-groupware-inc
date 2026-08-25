@@ -1077,4 +1077,18 @@ body .page-shell .mobile-header-appointment {
   outline-offset: 1px;
 }
 
+.appointment-step-panel .appointment-field-error {
+  display: block;
+  margin: 8px 2px 0;
+  color: #b42318;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.appointment-consent-toggle[aria-invalid="true"] {
+  outline: 2px solid rgba(217, 45, 32, 0.35);
+  outline-offset: 2px;
+}
+
 

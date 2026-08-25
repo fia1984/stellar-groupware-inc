@@ -46,9 +46,13 @@ export const enrollmentPrograms = [
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const namePattern = /^[A-Za-zÀ-ÿ' -]{2,80}$/;
-const phonePattern = /^[0-9+() -]{10,20}$/;
 const cityPattern = /^[A-Za-zÀ-ÿ' .-]{2,80}$/;
 const countries = ["Canada", "United States", "United Kingdom", "India", "Other"];
+
+function isValidPhone(value: string) {
+  const digits = value.replace(/\D/g, "");
+  return digits.length >= 10 && digits.length <= 15;
+}
 
 function getBody(request: VercelRequest): EnrollmentRequest {
   if (typeof request.body === "string") {
@@ -85,7 +89,7 @@ export function parseEnrollment(
     return { ok: false, error: "Please enter your full name." };
   }
 
-  if (!phonePattern.test(enrollment.phone)) {
+  if (!isValidPhone(enrollment.phone)) {
     return { ok: false, error: "Please enter a valid phone number." };
   }
 

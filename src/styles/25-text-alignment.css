@@ -1,0 +1,145 @@
+/*
+ * Site-wide reading alignment.
+ * Short titles/banners may stay centered.
+ * Paragraphs, lists, FAQs, cards, and forms are left-aligned.
+ */
+
+html body .page-shell p,
+html body .page-shell li,
+html body .page-shell dd,
+html body .page-shell label,
+html body .page-shell .section-intro,
+html body .page-shell .small-text,
+html body .page-shell .price-card,
+html body .page-shell .price-card h3,
+html body .page-shell .price-card h4,
+html body .page-shell .price-card p,
+html body .page-shell .price-card li,
+html body .page-shell .pricing-faq-card,
+html body .page-shell .pricing-faq-card h3,
+html body .page-shell .pricing-faq-card p,
+html body .page-shell .review-card,
+html body .page-shell .review-card p,
+html body .page-shell .review-card h3,
+html body .page-shell .process-card,
+html body .page-shell .process-card h3,
+html body .page-shell .process-card p,
+html body .page-shell .process-phase-body,
+html body .page-shell .process-phase-body p,
+html body .page-shell .about-box,
+html body .page-shell .about-box p,
+html body .page-shell .about-purpose-card,
+html body .page-shell .about-purpose-card p,
+html body .page-shell .about-values-grid p,
+html body .page-shell .about-difference-grid p,
+html body .page-shell .about-story-copy,
+html body .page-shell .about-story-copy p,
+html body .page-shell .training-course-card,
+html body .page-shell .training-course-card p,
+html body .page-shell .policy-card,
+html body .page-shell .policy-card p,
+html body .page-shell .legal-content p,
+html body .page-shell .account-request-form,
+html body .page-shell .account-dashboard,
+html body .page-shell .staff-inbox,
+html body .page-shell .enrollment-form,
+html body .page-shell .enrollment-review,
+html body .page-shell .appointment-details-form,
+html body .page-shell footer p {
+  text-align: left !important;
+}
+
+html body .page-shell .enroll-btn,
+html body .page-shell .primary-btn,
+html body .page-shell .secondary-btn,
+html body .page-shell .book-btn,
+html body .page-shell .enrollment-primary-btn,
+html body .page-shell .hero-actions a,
+html body .page-shell .cookie-actions button {
+  text-align: center !important;
+}
+
+html body .page-shell .home-section-heading,
+html body .page-shell .home-services-heading,
+html body .page-shell .reviews-heading,
+html body .page-shell .about-section-heading {
+  text-align: center !important;
+  max-width: min(820px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+html body .page-shell .home-section-heading h2,
+html body .page-shell .home-section-heading p,
+html body .page-shell .home-services-heading h2,
+html body .page-shell .home-services-heading p,
+html body .page-shell .home-path-cta h2,
+html body .page-shell .home-path-cta > p,
+html body .page-shell .home-final-cta h2,
+html body .page-shell .home-final-cta > p,
+html body .page-shell .home-consultation-section h2,
+html body .page-shell .home-consultation-section > p,
+html body .page-shell .home-stats-section,
+html body .page-shell .home-stat-item,
+html body .page-shell .reviews-heading h2,
+html body .page-shell .reviews-heading p,
+html body .page-shell .about-hero h1,
+html body .page-shell .about-hero .section-intro,
+html body .page-shell .about-section-heading h2,
+html body .page-shell .about-section-heading p,
+html body .page-shell .process-hero h1,
+html body .page-shell .process-hero p,
+html body .page-shell .training-page-hero h1,
+html body .page-shell .training-page-hero p {
+  text-align: center !important;
+}
+
+html body .page-shell.route-pricing #pricing .price-card,
+html body .page-shell.route-pricing #pricing .price-card h3,
+html body .page-shell.route-pricing #pricing .price-card h4,
+html body .page-shell.route-pricing #pricing .price-card .small-text,
+html body .page-shell.route-pricing #pricing .price-card ul,
+html body .page-shell.route-pricing #pricing .price-card li,
+html body .page-shell.route-pricing #pricing .pricing-faq-card,
+html body .page-shell.route-pricing #pricing .pricing-faq-card h3,
+html body .page-shell.route-pricing #pricing .pricing-faq-card p {
+  text-align: left !important;
+}
+
+html body .page-shell.route-pricing #pricing .price-card {
+  align-items: flex-start !important;
+}
+
+html body .page-shell.route-pricing #pricing .price-card .enroll-btn {
+  text-align: center !important;
+  align-self: center !important;
+}
+
+html body .page-shell .program-book-block,
+html body .page-shell .program-book,
+html body .page-shell .program-book-cover,
+html body .page-shell .program-book-title,
+html body .page-shell .program-book-title *,
+html body .page-shell .program-book-cover .program-book-title,
+html body .page-shell .program-book-cover .program-book-title strong,
+html body .page-shell.route-pricing #pricing .price-card .program-book-title,
+html body .page-shell.route-pricing #pricing .price-card .program-book-title * {
+  text-align: center !important;
+}
+
+@media (max-width: 900px) {
+  html body .page-shell.route-pricing #pricing .pricing-grid,
+  html body .page-shell.route-pricing #pricing .pricing-grid.two-card,
+  html body .page-shell.route-pricing #pricing .pricing-grid.single-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  html body .page-shell.route-pricing #pricing .price-card,
+  html body .page-shell.route-pricing #pricing .pricing-grid.two-card .price-card,
+  html body .page-shell.route-pricing #pricing .pricing-grid.single-card .price-card {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

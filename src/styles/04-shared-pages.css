@@ -713,6 +713,20 @@ button:hover {
   font: inherit;
 }
 
+.account-request-form [aria-invalid="true"] {
+  border-color: #d92d20;
+}
+
+.account-request-form .field-error,
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: #b42318;
+  font-size: 0.8rem;
+  font-weight: 550;
+  line-height: 1.35;
+}
+
 .account-request-form .enroll-btn:disabled {
   opacity: 0.65;
   cursor: not-allowed;

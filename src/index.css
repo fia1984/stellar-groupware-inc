@@ -1,8 +1,9 @@
 /*
  * Global stylesheet entry point.
  *
- * Styles are split by page/component and imported in their original cascade
- * order. Keep this order stable when adding future responsive overrides.
+ * Styles are split by page/component and imported in cascade order.
+ * Header layout is in 23-header-layout.css. Reading alignment is in
+ * 25-text-alignment.css so those rules stay last.
  */
 @import "./styles/01-foundation-navigation.css";
 @import "./styles/02-home-page.css";
@@ -27,6 +28,12 @@
 @import "./styles/19-final-mobile-layout-qa.css";
 @import "./styles/20-policy-pages.css";
 @import "./styles/21-policy-layout-fix.css";
+@import "./styles/22-home-responsive-final.css";
+@import "./styles/23-header-layout.css";
+@import "./styles/24-account-payment-staff.css";
+@import "./styles/25-text-alignment.css";
+@import "./styles/26-program-book.css";
+@import "./styles/27-mobile-page-safe.css";
 
 /* Keep the accessible logo link visually identical to the original brand
    block after all navigation and responsive overrides have loaded. */
