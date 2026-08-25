@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import FieldError from "./components/FieldError";
 import ProgramBook from "./components/ProgramBook";
 import {
@@ -27,10 +27,10 @@ import {
 } from "./constants/appData";
 import {
   focusFirstInvalidField,
-  isValidCity,
-  isValidEmail,
-  isValidName,
-  isValidPhone,
+  getCityError,
+  getEmailError,
+  getNameError,
+  getPhoneError,
 } from "./utils/validation";
 import { errorMessage, postJson } from "./utils/apiClient";
 import { recordInboxItem } from "./utils/workspaceStore";
@@ -66,8 +66,50 @@ type AnimatedCounterProps = {
   duration?: number;
 };
 
-function AnimatedCounter({ end }: AnimatedCounterProps) {
-  return <strong>{end.toLocaleString()}</strong>;
+function AnimatedCounter({ end, duration = 1600 }: AnimatedCounterProps) {
+  const [value, setValue] = useState(0);
+  const nodeRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const node = nodeRef.current;
+    if (!node) {
+      return;
+    }
+
+    let frame = 0;
+    let started = false;
+
+    const animate = () => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - (1 - progress) ** 3;
+        setValue(Math.round(end * eased));
+        if (progress < 1) {
+          frame = requestAnimationFrame(tick);
+        }
+      };
+      frame = requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          animate();
+        }
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(node);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [duration, end]);
+
+  return <strong ref={nodeRef}>{value.toLocaleString()}</strong>;
 }
 
 function App() {
@@ -270,20 +312,20 @@ function App() {
       goal: field === "goal" && value !== undefined ? value : enrollmentGoal,
     };
 
-    if (field === "email" && !isValidEmail(values.email)) {
-      return "Enter a valid email address.";
+    if (field === "email") {
+      return getEmailError(values.email);
     }
 
-    if (field === "name" && !isValidName(values.name)) {
-      return "Enter your full name using at least 2 letters.";
+    if (field === "name") {
+      return getNameError(values.name);
     }
 
-    if (field === "phone" && !isValidPhone(values.phone)) {
-      return "Enter a valid phone number.";
+    if (field === "phone") {
+      return getPhoneError(values.phone);
     }
 
-    if (field === "city" && !isValidCity(values.city)) {
-      return "Enter a valid city name.";
+    if (field === "city") {
+      return getCityError(values.city);
     }
 
     if (field === "country" && !values.country.trim()) {
@@ -418,20 +460,20 @@ function App() {
       return "Select a time.";
     }
 
-    if (field === "name" && !isValidName(values.name)) {
-      return "Enter your full name using at least 2 letters.";
+    if (field === "name") {
+      return getNameError(values.name);
     }
 
-    if (field === "phone" && !isValidPhone(values.phone)) {
-      return "Enter a valid phone number.";
+    if (field === "phone") {
+      return getPhoneError(values.phone);
     }
 
-    if (field === "email" && !isValidEmail(values.email)) {
-      return "Enter a valid email address.";
+    if (field === "email") {
+      return getEmailError(values.email);
     }
 
-    if (field === "city" && !isValidCity(values.city)) {
-      return "Enter a valid city name.";
+    if (field === "city") {
+      return getCityError(values.city);
     }
 
     if (field === "country" && !values.country) {
@@ -486,20 +528,24 @@ function App() {
       errors.time = timeError;
     }
 
-    if (!isValidName(appointmentName)) {
-      errors.name = "Please enter a valid full name using at least 2 letters.";
+    const nameError = appointmentFieldError("name");
+    if (nameError) {
+      errors.name = nameError;
     }
 
-    if (!isValidPhone(appointmentPhone)) {
-      errors.phone = "Please enter a valid phone number using 10 to 20 characters.";
+    const phoneError = appointmentFieldError("phone");
+    if (phoneError) {
+      errors.phone = phoneError;
     }
 
-    if (!isValidEmail(appointmentEmail)) {
-      errors.email = "Please enter a valid email address.";
+    const emailError = appointmentFieldError("email");
+    if (emailError) {
+      errors.email = emailError;
     }
 
-    if (!isValidCity(appointmentCity)) {
-      errors.city = "Please enter a valid city name using at least 2 letters.";
+    const cityError = appointmentFieldError("city");
+    if (cityError) {
+      errors.city = cityError;
     }
 
     if (!appointmentCountry) {
@@ -637,12 +683,12 @@ function App() {
     const email = field === "email" && value !== undefined ? value : accountEmail;
     const note = field === "note" && value !== undefined ? value : accountNote;
 
-    if (field === "name" && !isValidName(name)) {
-      return "Enter your full name using at least 2 letters.";
+    if (field === "name") {
+      return getNameError(name);
     }
 
-    if (field === "email" && !isValidEmail(email)) {
-      return "Enter a valid email address.";
+    if (field === "email") {
+      return getEmailError(email);
     }
 
     if (field === "note" && note.trim().length < 10) {
@@ -734,8 +780,9 @@ function App() {
   const validatePreferenceForm = () => {
     const errors: Record<string, string> = {};
 
-    if (!isValidEmail(preferenceEmail)) {
-      errors.email = "Enter a valid email address.";
+    const preferenceEmailError = getEmailError(preferenceEmail);
+    if (preferenceEmailError) {
+      errors.email = preferenceEmailError;
     }
 
     if (preferenceTopics.length === 0) {
@@ -758,8 +805,9 @@ function App() {
   const validateUnsubscribeForm = () => {
     const errors: Record<string, string> = {};
 
-    if (!isValidEmail(unsubscribeEmail)) {
-      errors.email = "Enter a valid email address.";
+    const unsubscribeEmailError = getEmailError(unsubscribeEmail);
+    if (unsubscribeEmailError) {
+      errors.email = unsubscribeEmailError;
     }
 
     setUnsubscribeErrors(errors);
@@ -3501,9 +3549,7 @@ function App() {
                 onBlur={() => {
                   setPreferenceErrors((current) => ({
                     ...current,
-                    email: isValidEmail(preferenceEmail)
-                      ? ""
-                      : "Enter a valid email address.",
+                    email: getEmailError(preferenceEmail),
                   }));
                 }}
                 onChange={(event) => {
@@ -3512,7 +3558,7 @@ function App() {
                   if (preferenceErrors.email) {
                     setPreferenceErrors((current) => ({
                       ...current,
-                      email: isValidEmail(value) ? "" : "Enter a valid email address.",
+                      email: getEmailError(value),
                     }));
                   }
                 }}
@@ -3573,9 +3619,7 @@ function App() {
                 onBlur={() => {
                   setUnsubscribeErrors((current) => ({
                     ...current,
-                    email: isValidEmail(unsubscribeEmail)
-                      ? ""
-                      : "Enter a valid email address.",
+                    email: getEmailError(unsubscribeEmail),
                   }));
                 }}
                 onChange={(event) => {
@@ -3584,7 +3628,7 @@ function App() {
                   if (unsubscribeErrors.email) {
                     setUnsubscribeErrors((current) => ({
                       ...current,
-                      email: isValidEmail(value) ? "" : "Enter a valid email address.",
+                      email: getEmailError(value),
                     }));
                   }
                 }}

@@ -163,6 +163,9 @@ describe('App', () => {
     render(<App />)
 
     expect(screen.getByRole('link', { name: 'Open Google Reviews' })).toHaveAttribute('href', reviewLinks.google)
+    expect(reviewLinks.google).toContain('Stellar%20Groupware%20Inc')
+    expect(reviewLinks.google.toLowerCase()).not.toContain('ncpl')
+    expect(reviewLinks.google.toLowerCase()).not.toContain('nclp')
     expect(screen.getByRole('link', { name: 'View LinkedIn Recommendations' })).toHaveAttribute(
       'href',
       reviewLinks.linkedinRecommendations,
@@ -453,7 +456,7 @@ describe('App', () => {
     fireEvent.click(bookButton);
 
     expect(
-      screen.getByText('Please enter a valid email address.')
+      screen.getByText('Enter your email address.')
     ).toBeTruthy();
     expect(
       appointmentForm.getByLabelText(/Email/).getAttribute('aria-invalid')
@@ -544,6 +547,11 @@ describe('App', () => {
     expect(enrollmentLinks).toHaveLength(7);
     expect(document.querySelectorAll("#pricing .program-book")).toHaveLength(7);
     expect(document.querySelectorAll("#pricing .program-book.is-open")).toHaveLength(0);
+    expect(document.querySelectorAll(".ai-sample-book")).toHaveLength(0);
+    const careerCover = [...document.querySelectorAll("#pricing .program-book-cover")].find(
+      (cover) => cover.textContent?.includes("Career") && cover.textContent?.includes("Marketing"),
+    );
+    expect(careerCover?.querySelectorAll("strong")).toHaveLength(2);
     expect(enrollmentLinks[0].getAttribute('href')).toBe(
       '/enroll?program=Regular%20IT%20Training'
     );
@@ -581,7 +589,7 @@ describe('App', () => {
     ).toBeTruthy();
 
     fireEvent.click(screen.getByRole('button', { name: /Continue/ }));
-    expect(screen.getByText('Enter a valid email address.')).toBeTruthy();
+    expect(screen.getByText('Enter your email address.')).toBeTruthy();
 
     fireEvent.change(within(enrollmentPage).getByLabelText('Email address'), {
       target: { value: 'learner@example.com' },

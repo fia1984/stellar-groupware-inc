@@ -29,12 +29,16 @@ describe("ProgramBook", () => {
 
     const book = document.querySelector(".program-book");
     const enrollLink = screen.getByRole("link", { name: /Enroll Now/ });
+    const coverLines = document.querySelectorAll(".program-book-title strong");
 
     expect(book).not.toHaveClass("is-open");
     expect(enrollLink).toHaveAttribute("aria-expanded", "false");
     expect(book?.textContent).toContain("Career");
     expect(book?.textContent).toContain("Marketing");
     expect(book?.textContent).not.toContain("Stellar pathway");
+    expect(coverLines).toHaveLength(2);
+    expect(coverLines[0]).toHaveTextContent("Career");
+    expect(coverLines[1]).toHaveTextContent("Marketing");
 
     fireEvent.click(enrollLink);
 

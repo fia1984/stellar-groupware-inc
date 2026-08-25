@@ -75,9 +75,11 @@ function ProgramBook({
       <div className={`program-book${open ? " is-open" : ""}`} aria-hidden="true">
         <div className="program-book-cover">
           <span className="program-book-mark">S</span>
-          {coverLines.map((line) => (
-            <strong key={line}>{line}</strong>
-          ))}
+          <span className="program-book-title">
+            {coverLines.map((line) => (
+              <strong key={line}>{line}</strong>
+            ))}
+          </span>
         </div>
       </div>
       <a

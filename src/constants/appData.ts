@@ -174,7 +174,7 @@ export function getCurrentRegion(pathname = window.location.pathname) {
 }
 
 export const reviewLinks = {
-  google: "https://share.google/0PZhMOwR6LQrlaefx",
+  google: "https://www.google.com/maps/search/?api=1&query=Stellar%20Groupware%20Inc",
   linkedinRecommendations:
     "https://www.linkedin.com/in/rvasupilli/details/recommendations/?detailScreenTabIndex=0",
   linkedinProfile: "https://www.linkedin.com/in/rvasupilli/",
