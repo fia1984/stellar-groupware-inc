@@ -60,9 +60,17 @@ html body .page-shell .cookie-actions button {
 }
 
 html body .page-shell .home-section-heading,
+html body .page-shell .home-services-heading,
+html body .page-shell .reviews-heading,
+html body .page-shell .about-section-heading {
+  text-align: center !important;
+  max-width: min(820px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 html body .page-shell .home-section-heading h2,
 html body .page-shell .home-section-heading p,
-html body .page-shell .home-services-heading,
 html body .page-shell .home-services-heading h2,
 html body .page-shell .home-services-heading p,
 html body .page-shell .home-path-cta h2,
@@ -73,24 +81,17 @@ html body .page-shell .home-consultation-section h2,
 html body .page-shell .home-consultation-section > p,
 html body .page-shell .home-stats-section,
 html body .page-shell .home-stat-item,
-html body .page-shell .reviews-heading,
 html body .page-shell .reviews-heading h2,
 html body .page-shell .reviews-heading p,
-html body .page-shell .about-hero,
 html body .page-shell .about-hero h1,
 html body .page-shell .about-hero .section-intro,
-html body .page-shell .about-section-heading,
 html body .page-shell .about-section-heading h2,
 html body .page-shell .about-section-heading p,
-html body .page-shell .process-hero,
 html body .page-shell .process-hero h1,
 html body .page-shell .process-hero p,
-html body .page-shell .training-page-hero,
 html body .page-shell .training-page-hero h1,
 html body .page-shell .training-page-hero p {
   text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
 }
 
 html body .page-shell.route-pricing #pricing .price-card,

@@ -66,7 +66,7 @@ type AnimatedCounterProps = {
   duration?: number;
 };
 
-function AnimatedCounter({ end, duration = 1600 }: AnimatedCounterProps) {
+function AnimatedCounter({ end, duration = 2000 }: AnimatedCounterProps) {
   const [value, setValue] = useState(0);
   const nodeRef = useRef<HTMLElement>(null);
 
@@ -77,9 +77,11 @@ function AnimatedCounter({ end, duration = 1600 }: AnimatedCounterProps) {
     }
 
     let frame = 0;
-    let started = false;
+    let visible = false;
 
     const animate = () => {
+      cancelAnimationFrame(frame);
+      setValue(0);
       const start = performance.now();
       const tick = (now: number) => {
         const progress = Math.min((now - start) / duration, 1);
@@ -94,12 +96,16 @@ function AnimatedCounter({ end, duration = 1600 }: AnimatedCounterProps) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !started) {
-          started = true;
-          animate();
+        if (entry.isIntersecting) {
+          if (!visible) {
+            visible = true;
+            animate();
+          }
+        } else {
+          visible = false;
         }
       },
-      { threshold: 0.35 },
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
     );
 
     observer.observe(node);
@@ -978,8 +984,12 @@ function App() {
             </div>
           </div>
 
-          <a className="mobile-header-appointment" href="/appointment">
-            Book Appointment
+          <a
+            className="mobile-header-appointment"
+            href="/appointment"
+            aria-label="Book Appointment"
+          >
+            Book <span className="mobile-appointment-word">Appointment</span>
           </a>
 
           <button

@@ -1,0 +1,267 @@
+/* Last-cascade mobile safety: keep pages inside the screen. */
+
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body main.page-shell {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body main.page-shell img,
+body main.page-shell video {
+  max-width: 100%;
+  height: auto;
+}
+
+body main.page-shell iframe {
+  max-width: 100%;
+}
+
+/* Keep Home › Page on one baseline so the trail is not crushed. */
+html body #root main.page-shell:not(.route-home) .breadcrumb-strip,
+body main.page-shell .breadcrumb-strip {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: auto !important;
+  min-height: 52px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+html body #root main.page-shell:not(.route-home) .breadcrumb-strip > *,
+body main.page-shell .breadcrumb-strip > a,
+body main.page-shell .breadcrumb-strip > span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 auto !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1 !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  transform: none !important;
+  position: static !important;
+  vertical-align: middle !important;
+}
+
+html body #root main.page-shell:not(.route-home)
+  .breadcrumb-strip .breadcrumb-stellar-icon,
+body main.page-shell .breadcrumb-strip .breadcrumb-stellar-icon {
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  line-height: 1 !important;
+  font-size: 0.95rem !important;
+}
+
+/* NCPL/Wix-style: cookie card on the left, chat in the free right corner. */
+html body #root main.page-shell .cookie-banner,
+body main.page-shell .cookie-banner {
+  left: max(16px, calc(env(safe-area-inset-left) + 12px)) !important;
+  right: auto !important;
+  bottom: max(16px, calc(env(safe-area-inset-bottom) + 12px)) !important;
+  width: min(420px, calc(100% - 92px)) !important;
+  max-width: min(420px, calc(100% - 92px)) !important;
+  transform: none !important;
+  z-index: 10040 !important;
+}
+
+html body #root main.page-shell a.stellar-chat-bubble,
+body main.page-shell a.stellar-chat-bubble {
+  right: max(20px, calc(env(safe-area-inset-right) + 16px)) !important;
+  bottom: max(20px, calc(env(safe-area-inset-bottom) + 16px)) !important;
+  width: 56px !important;
+  min-width: 56px !important;
+  height: 56px !important;
+  z-index: 10050 !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.28) !important;
+}
+
+@media (max-width: 1050px) {
+  html body #root main.page-shell a.stellar-chat-bubble,
+  body main.page-shell a.stellar-chat-bubble {
+    right: max(16px, calc(env(safe-area-inset-right) + 12px)) !important;
+    bottom: max(16px, calc(env(safe-area-inset-bottom) + 12px)) !important;
+    width: 52px !important;
+    min-width: 52px !important;
+    height: 52px !important;
+  }
+
+  html body #root main.page-shell.route-pricing .price-card .enroll-btn,
+  body main.page-shell.route-pricing .price-card .enroll-btn,
+  body main.page-shell .price-card .enroll-btn,
+  body main.page-shell.route-appointment .enroll-btn,
+  body main.page-shell.route-enroll .enroll-btn,
+  body main.page-shell .contact-btn {
+    box-sizing: border-box !important;
+    width: calc(100% - 76px) !important;
+    max-width: calc(100% - 76px) !important;
+    margin-right: auto !important;
+    align-self: flex-start !important;
+  }
+}
+
+@media (max-width: 1050px) {
+  body main.page-shell.route-home .hero-content,
+  body main.page-shell.route-home .hero-section .hero-content {
+    box-sizing: border-box !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 24px 0 0 !important;
+    padding: 0 16px !important;
+  }
+
+  body main.page-shell.route-home .hero-content,
+  body main.page-shell.route-home .hero-content h1,
+  body main.page-shell.route-home .hero-content h3,
+  body main.page-shell.route-home .hero-content p {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  body main.page-shell.route-home .hero-actions .primary-btn,
+  body main.page-shell.route-home .hero-actions .secondary-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  body main.page-shell nav.navbar .brand,
+  body main.page-shell nav.navbar a.brand {
+    min-width: 0 !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-header-appointment,
+  body main.page-shell nav.navbar .mobile-header-appointment:hover,
+  body main.page-shell nav.navbar .mobile-header-appointment:focus-visible {
+    flex: 0 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding: 0 10px !important;
+    overflow: visible !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0 !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-header-appointment::after {
+    display: none !important;
+  }
+
+  body main.page-shell .home-section-heading,
+  body main.page-shell .home-services-heading,
+  body main.page-shell .reviews-heading,
+  body main.page-shell .about-section-heading,
+  body main.page-shell.route-pricing #pricing > h2,
+  body main.page-shell.route-reviews .reviews-heading h2,
+  body main.page-shell.route-reviews .reviews-heading p {
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  body main.page-shell .home-section-heading h2,
+  body main.page-shell .home-services-heading h2,
+  body main.page-shell .reviews-heading h2,
+  body main.page-shell .about-hero h1,
+  body main.page-shell .about-section-heading h2,
+  body main.page-shell .process-hero h1,
+  body main.page-shell .training-page-hero h1,
+  body main.page-shell .home-path-cta h2,
+  body main.page-shell .home-final-cta h2,
+  body main.page-shell .home-consultation-section h2,
+  body main.page-shell.route-pricing #pricing > h2 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal !important;
+  }
+
+  body main.page-shell .program-book-title,
+  body main.page-shell .program-book-title strong {
+    max-width: 100% !important;
+    overflow-wrap: anywhere;
+  }
+
+  body main.page-shell .cookie-banner {
+    box-sizing: border-box !important;
+    left: max(12px, calc(env(safe-area-inset-left) + 8px)) !important;
+    right: auto !important;
+    bottom: max(12px, calc(env(safe-area-inset-bottom) + 8px)) !important;
+    width: min(420px, calc(100% - 84px)) !important;
+    max-width: min(420px, calc(100% - 84px)) !important;
+    transform: none !important;
+  }
+
+  body main.page-shell .cookie-copy,
+  body main.page-shell .cookie-copy p,
+  body main.page-shell .cookie-copy strong {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  body main.page-shell.route-pricing .price-card.popular {
+    overflow: visible !important;
+  }
+
+  body main.page-shell.route-pricing .price-card .badge {
+    max-width: calc(100% - 12px) !important;
+    white-space: normal !important;
+    line-height: 1.2 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body main.page-shell.route-home .home-offer-grid,
+  body main.page-shell.route-home .home-audience-grid,
+  body main.page-shell.route-home .home-struggle-grid,
+  body main.page-shell.route-home .home-guarantee-grid,
+  body main.page-shell.route-home .home-pathway-grid,
+  body main.page-shell.route-reviews .review-platform-grid,
+  body main.page-shell.route-reviews .testimonial-column-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  body main.page-shell.route-home .home-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  body main.page-shell.route-home .home-stat-item strong {
+    font-size: clamp(1.6rem, 8vw, 2.35rem) !important;
+  }
+
+  body main.page-shell .cookie-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body main.page-shell.route-home .home-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  body main.page-shell nav.navbar .mobile-appointment-word {
+    display: none;
+  }
+}

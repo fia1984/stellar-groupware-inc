@@ -349,6 +349,7 @@ button.appointment-consent-toggle:focus-visible
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
 }
 
 .home-stat-item span {
@@ -1790,6 +1791,7 @@ header {
   line-height: 1 !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
+  font-variant-numeric: tabular-nums;
 }
 
 .route-home .home-stat-item span {

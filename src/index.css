@@ -33,6 +33,7 @@
 @import "./styles/24-account-payment-staff.css";
 @import "./styles/25-text-alignment.css";
 @import "./styles/26-program-book.css";
+@import "./styles/27-mobile-page-safe.css";
 
 /* Keep the accessible logo link visually identical to the original brand
    block after all navigation and responsive overrides have loaded. */
